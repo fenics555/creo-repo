@@ -3,7 +3,7 @@ name: company-config
 system: Creo
 priority: high
 ---
-ПАСПОРТ КОМПАНИИ (сбор 02.09.2026 10:25)
+ПАСПОРТ КОМПАНИИ (сбор 02.09.2026 15:33)
 Единицы, допуски, ключевое:
 pro_unit_sys = MMKS
 pro_unit_length = UNIT_MM
