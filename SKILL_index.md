@@ -45,6 +45,7 @@ priority: critical
 ## ДОМЕН 5: общее (оба агента)
 | Скилл | Назначение |
 |---|---|
+| SKILL_tool_routing | маршрутизация запросов к инструментам (critical) |
 | SKILL_agent_protocol | протокол инженера-напарника (critical) |
 | company_conventions | паспорт КБ: станки, продукция, семантика трейлов |
 | SKILL_web_vision_limits | что WEB и ВИЗИЯ умеют и не умеют |
