@@ -174,6 +174,17 @@ PDF:
     file:open → parameter:list (ОБОЗНАЧЕНИЕ/НАИМЕНОВАНИЕ/MASS) → file:relations_get
     → file:erase, если не была открыта до аудита
     (в агенте — creo_audit_folder)
+	
+== PDF-ГЛАЗА: свежесть и перепечать ==
+Вердикт свежести считается НЕ через Creo: mtime одноимённых pdf и drw из таблицы files
+(та же папка, тот же стем); pdf >= drw → актуален, drw новее → УСТАРЕЛ; mtime prt/asm не учитывается.
+Перепечать: interface:export_pdf {"file": "X.drw", "dirname": "<та же папка>",
+"use_drawing_settings": true, "sheet_range": "all"}; dirname ВСЕГДА равен папке чертежа
+(правило «всё рядом»), чужие папки запрещены. Число листов для миниатюр берётся из кэша
+pdf (fitz), не из Creo. Состав для полосы сборки: bom:get_paths {"file","paths":false,
+"top_level":false} — корень дерева dict, children не списком. Экземпляры семейств для плана
+копии/переименования: file:has_instances / file:list_instances + familytable:list_tree;
+порядок переименования — по SKILL_copy_rename.	
 
 == 5. ТИПИЧНЫЕ ОШИБКИ ==
 
