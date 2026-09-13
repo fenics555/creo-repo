@@ -155,6 +155,16 @@
 - Правки: README.md агента (29→30, 109→113, 94→98), паспорт (те же цифры).
 
 ## ИСТОРИЯ ОБНОВЛЕНИЙ (индекс)
+- 13.09.2026 (ночь, спека 32) — ИНДЕКСАЦИЯ: ошибка "Incorrect number of bindings
+  supplied. The current statement uses 3, and 6928 supplied" найдена и исправлена.
+  Причина: в data/tmp/index_repo.py INSERT использовал условное выражение
+  `(tuple_3) if False else pickle.dumps(emb)`, передавая bytes-объект (6928 байт)
+  вместо кортежа из 3 параметров → SQLite видел 6928 bindings вместо 3. Исправление:
+  `np.array(emb, np.float32).tobytes()` в кортеже из ровно 3 параметров (path, text,
+  emb) — совместимо с reload_matrix() (np.frombuffer(r[2], np.float32)).
+  Индексация запущена через scanner.index_all() фоном. Рост чанков подтверждён:
+  0 → 13115+ (индексация активна). Поиск через tool_search работает (косинусное
+  сходство MAT@qv/norms, не random). Исправленный код закоммичен в agent/index_repo.py.
 - 11.09.2026 (вечер, заход 2) — вынос PAGE в panel_ui.py (agent ~60→37 КБ, сверка
   байтов, рестарт чист); ctl.py: --browser на 127.0.0.1 + \t-escape в copy_err;
   qa\qa_run.py LOG_FILE по HOST; зеркало PASSPORT.md → D:\AI\repo (github-страховка).
