@@ -205,3 +205,38 @@ pdf (fitz), не из Creo. Состав для полосы сборки: bom:g
 - Creo Simulate
 - запись в Windchill (только чтение)
 Для остального — interface:mapkey с готовым mapkey-скриптом.
+# ---
+
+## Manufacturing API (Creo Manufacturing — не Creoson)
+
+- Manufacturing в Creo — модуль NC, Molde, Wire EDM, и т.д., и это не стандартный Creoson API.
+- Manufacturing данные: спецификации, каталоги деталей, параметры — доступны через Creo Toolkit или Creo Manufacturing API.
+- Для Manufacturing используйте Creo-native инструменты (Creo Manufacturing, Creo Simulate).
+- Эти API не входят в Creoson. Если нужно Manufacturing — то это отдельная задача.
+
+## CAE (Creo Simulate / Mechanica — не Creoson)
+
+- CAE (расчёты нагрузок, анализ напряжений) — это модуль Creo Simulate / Mechanica, не Creoson.
+- Для работы с CAE используйте Creo Simulate API или Creo Toolkit.
+- Нагрузки: силы, давления, моменты, тепловые — доступны через Creo Simulate.
+- Если нужно CAE — то это отдельная задача (или Creo Simulate API / Creo Toolkit).
+
+## СОМНИТЕЛЬНЫЕ ОПЕРАЦИИ (требуют перепроверки)
+
+Следующие команды вернули "Unknown function name" или "Invalid command" в живой проверке all_37.py:
+- file:path, file:parents, file:children — не существуют
+- creo:get_title, creo:get_info, credo:rebuild — не существуют
+- bom:copy, bom:list — не существуют
+- group:list — не существует (Invalid command: group)
+- pdf:isinstance, pdf:isprintable — не существуют (Invalid command: pdf)
+- file:rename требует параметр new_name, а не new (живой ответ: "No 'new_name' parameter given")
+- file:rename с new_name возвращает "General Error" — требует проверки условий успеха (модель открыта, нет блокировок)
+
+Следующие команды есть в скилле, но не проверялись в этой сессии:
+- familytable:create_inst, familytable:delete, familytable:replace
+- parameter:get, bom:get_header
+- file:write, file:read
+- familytable:set_cell
+- creo:list, creo:start, creo:stop, credo:delete_session, creo:ps
+- path, parent, children, get_title как отдельные команды (без file:)
+- dict, zip, workdir, list_groups, list_layers
