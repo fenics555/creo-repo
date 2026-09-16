@@ -1,0 +1,3052 @@
+{
+  "status": {
+    "error": false
+  },
+  "data": {
+    "paramlist": [
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ОБОЗНАЧЕНИЕ",
+        "type": "STRING",
+        "value": "LITEIKA_HTS_MM",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": true,
+        "name": "ОБОЗНАЧЕНИЕ1",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "СТАРЫЙ_НОМЕР",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": true,
+        "name": "НАИМЕНОВАНИЕ",
+        "type": "STRING",
+        "description": "имя детали",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": true,
+        "name": "НАИМЕНОВАНИЕ1",
+        "type": "STRING",
+        "description": "Если длинное",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": true,
+        "name": "НАИМЕНОВАНИЕ2",
+        "type": "STRING",
+        "description": "Если очень длинное",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ТИП",
+        "type": "STRING",
+        "value": "Сборка",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ТИП2",
+        "type": "STRING",
+        "value": " ",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": true,
+        "name": "ФОРМАТ",
+        "type": "STRING",
+        "value": "А3",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": true,
+        "name": "РАЗРАБОТАЛ",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ПРОВЕРИЛ",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ТЕХ_КОНТРОЛЬ",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "НАЧ_ОТДЕЛА",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "НОРМО_КОНТРОЛЬ",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "УТВЕРДИЛ",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ПЕРВ_ПРИМЕН",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "СПРАВ_№",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "MASS",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "СТАНДАРТ",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": true,
+        "name": "ПРЕДПРИЯТИЕ",
+        "type": "STRING",
+        "value": "ООО \"ПТО\"",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "КАТАЛОЖНЫЙ_НОМЕР",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "КАТАЛОЖНОЕ_НАИМЕНОВАНИЕ",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "КАТАЛОЖНОЕ_НАИМЕНОВАНИЕ1",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "КАТАЛОЖНОЕ_НАИМЕНОВАНИЕ2",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CATALOG_NUMBER",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CATALOG_NAME",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CATALOG_NAME1",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CATALOG_NAME2",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NAME_1",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NAME_2",
+        "type": "STRING",
+        "value": "",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "РОЛЬ_В_ЛИТЕЙНОЙ_СИСТЕМЕ",
+        "type": "STRING",
+        "value": " ",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ID_SPLAVA",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "MASSA_OTLIVKI",
+        "type": "DOUBLE",
+        "value": 20.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KOL_VO_OTLIVOK",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KOL_VO_PITATELEY",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DELTA_MM",
+        "type": "DOUBLE",
+        "value": 25.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H0_MM",
+        "type": "DOUBLE",
+        "value": 120.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_MM",
+        "type": "DOUBLE",
+        "value": 224.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_MM",
+        "type": "DOUBLE",
+        "value": 50.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "R_SHL_MM",
+        "type": "DOUBLE",
+        "value": 5.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "R_PIT_MM",
+        "type": "DOUBLE",
+        "value": 3.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NAME_SPLAVA",
+        "type": "STRING",
+        "value": "ВЧ50 (Высокопрочный чугун)",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PM",
+        "type": "DOUBLE",
+        "value": 6900.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_USADKI",
+        "type": "DOUBLE",
+        "value": 0.01,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COEF_A",
+        "type": "DOUBLE",
+        "value": 2.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "MR",
+        "type": "DOUBLE",
+        "value": 0.42,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_SHL",
+        "type": "DOUBLE",
+        "value": 1.25,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_ST",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_LPS",
+        "type": "DOUBLE",
+        "value": 0.35,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "D_SH_MM",
+        "type": "DOUBLE",
+        "value": 2.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_LIFT_MIN",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_LIFT_MAX",
+        "type": "DOUBLE",
+        "value": 35.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "Q_GRAV",
+        "type": "DOUBLE",
+        "value": 9.81,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DELTA_M",
+        "type": "DOUBLE",
+        "value": 0.025,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H0_M",
+        "type": "DOUBLE",
+        "value": 0.12,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_M",
+        "type": "DOUBLE",
+        "value": 0.224,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_M",
+        "type": "DOUBLE",
+        "value": 0.05,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "D_SH",
+        "type": "DOUBLE",
+        "value": 0.002,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_TOTAL",
+        "type": "DOUBLE",
+        "value": 20.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "G_ZH",
+        "type": "DOUBLE",
+        "value": 27.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_DET_ODN",
+        "type": "DOUBLE",
+        "value": 20.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TAU_PRIB_VAR3",
+        "type": "DOUBLE",
+        "value": 17.54029701581924,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TAU_PRIB",
+        "type": "DOUBLE",
+        "value": 18.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TAU_DET_VAR3",
+        "type": "DOUBLE",
+        "value": 15.870722501778461,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TAU_DET",
+        "type": "DOUBLE",
+        "value": 16.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "HP",
+        "type": "DOUBLE",
+        "value": 0.11441964285714284,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_SHL",
+        "type": "DOUBLE",
+        "value": 0.0003198669188589779,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_ST",
+        "type": "DOUBLE",
+        "value": 0.00025589353508718234,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "SUM_S_PIT_PRIB",
+        "type": "DOUBLE",
+        "value": 0.0003838403026307735,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_PIT_ODN_PRIB",
+        "type": "DOUBLE",
+        "value": 0.0003838403026307735,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "SUM_S_PIT_DET",
+        "type": "DOUBLE",
+        "value": 0.0004318203404596202,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_PIT_ODN_DET",
+        "type": "DOUBLE",
+        "value": 0.0004318203404596202,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_SHL",
+        "type": "DOUBLE",
+        "value": 18.7175617572612,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "HOT_FACTOR",
+        "type": "DOUBLE",
+        "value": 1.01,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_SHL",
+        "type": "DOUBLE",
+        "value": 19.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_SHL",
+        "type": "DOUBLE",
+        "value": 114.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_PIT_NIZ_PRIB",
+        "type": "DOUBLE",
+        "value": 23.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_PIT_VERH_PRIB",
+        "type": "DOUBLE",
+        "value": 18.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_PIT_PRIB",
+        "type": "DOUBLE",
+        "value": 21.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_PIT_NIZ_DET",
+        "type": "DOUBLE",
+        "value": 24.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_PIT_VERH_DET",
+        "type": "DOUBLE",
+        "value": 20.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_PIT_DET",
+        "type": "DOUBLE",
+        "value": 22.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_S_SHL",
+        "type": "DOUBLE",
+        "value": 316.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_S_PIT_SUM_PRIB",
+        "type": "DOUBLE",
+        "value": 392.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_TRAP_PRIB",
+        "type": "DOUBLE",
+        "value": 430.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_GEOM_PRIB_ODN",
+        "type": "DOUBLE",
+        "value": 426.63,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_TRAP_DET",
+        "type": "DOUBLE",
+        "value": 484.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_GEOM_DET_ODN",
+        "type": "DOUBLE",
+        "value": 480.13,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "SUM_S_GEOM_PRIB_M",
+        "type": "DOUBLE",
+        "value": 0.00042663,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "SUM_S_GEOM_DET_M",
+        "type": "DOUBLE",
+        "value": 0.00048013,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "INPUT_TAU_PRIB",
+        "type": "DOUBLE",
+        "value": 15.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "INPUT_TAU_DET",
+        "type": "DOUBLE",
+        "value": 10.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_LIFT_PRIB",
+        "type": "DOUBLE",
+        "value": 14.933333333333334,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_LIFT_DET",
+        "type": "DOUBLE",
+        "value": 22.4,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "STATUS_PRIB",
+        "type": "STRING",
+        "value": "NORMA",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "STATUS_DET",
+        "type": "STRING",
+        "value": "NORMA",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "RECOMMEND_PRIB",
+        "type": "STRING",
+        "value": "ГИДРАВЛИКА ОК: Теория Дубицкого совпадает с 3D-формой.",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "RECOMMEND_DET",
+        "type": "STRING",
+        "value": "ВНИМАНИЕ! Время заливки улетело! Скорректируйте K_PIT на панели Блока 2.",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_PRIB_ROUND",
+        "type": "DOUBLE",
+        "value": 14.9,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_DET_ROUND",
+        "type": "DOUBLE",
+        "value": 22.4,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "INFO_V_PRIB",
+        "type": "STRING",
+        "value": "НОРМА | V=14.9 (Допуск: 12.0...35.0 мм/с) [Т_факт=15.0 сек]",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "INFO_V_DET",
+        "type": "STRING",
+        "value": "НОРМА | V=22.4 (Допуск: 12.0...35.0 мм/с) [Т_факт=10.0 сек]",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_USADKI_LIQ",
+        "type": "DOUBLE",
+        "value": 0.049999999999999996,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_OTL_M3",
+        "type": "DOUBLE",
+        "value": 0.002898550724637681,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_USADKI_MM3",
+        "type": "DOUBLE",
+        "value": 144927.53623188406,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_VOL_PRIB",
+        "type": "DOUBLE",
+        "value": 2.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PARAM_FORM_UP",
+        "type": "DOUBLE",
+        "value": 2.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H_UZLA_UP_MM",
+        "type": "DOUBLE",
+        "value": 40.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "W_UZLA_UP_MM",
+        "type": "DOUBLE",
+        "value": 120.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KOL_PRIB_UP_TOT",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PARAM_FORM_LAT",
+        "type": "DOUBLE",
+        "value": 2.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H_UZLA_LAT_MM",
+        "type": "DOUBLE",
+        "value": 40.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "W_UZLA_LAT_MM",
+        "type": "DOUBLE",
+        "value": 120.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KOL_PRIB_LAT_TOT",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_OTL_UP",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_D_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 67.53072029470844,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 81.03686435365013,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_NEED_ONE_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 144927.53623188406,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "R_PRIB_C_UP",
+        "type": "DOUBLE",
+        "value": 33.76536014735422,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_REAL_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 249939.2524252678,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_D_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 69.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 82.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_D_SHEIKA_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 69.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_SHEIKA_PRIB_UP",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_M_OTL_UP",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_OTL_LAT",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_D_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 66.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 99.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_NEED_ONE_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 144927.53623188406,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "R_PRIB_C_LAT",
+        "type": "DOUBLE",
+        "value": 33.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_REAL_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 338698.24557616917,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_D_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 67.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 100.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_M_OTL_LAT",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L1_SHEIKA_LAT",
+        "type": "DOUBLE",
+        "value": 57.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L2_SHEIKA_LAT",
+        "type": "DOUBLE",
+        "value": 50.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "RUS_PRIB",
+        "type": "STRING",
+        "value": "НОРМА",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "RUS_DET",
+        "type": "STRING",
+        "value": "НОРМА",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KOL_VO_SHL",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KOL_OTL_NA_SHL",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_THERM_PIT",
+        "type": "DOUBLE",
+        "value": 6.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_ZH_ODN_SHL",
+        "type": "DOUBLE",
+        "value": 27.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_PIT_MAX",
+        "type": "DOUBLE",
+        "value": 126.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_SHL_MAX",
+        "type": "DOUBLE",
+        "value": 114.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_CENTRIF_P",
+        "type": "DOUBLE",
+        "value": 1.7999999999999998,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_D_PRIB_MOD",
+        "type": "DOUBLE",
+        "value": 77.07139547199077,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_PRIB_MOD",
+        "type": "DOUBLE",
+        "value": 72.6,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_D_PRIB_MOD",
+        "type": "DOUBLE",
+        "value": 78.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_PRIB_MOD",
+        "type": "DOUBLE",
+        "value": 74.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_R_BOT_MOD",
+        "type": "DOUBLE",
+        "value": 24.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_BOT_MOD",
+        "type": "DOUBLE",
+        "value": 24.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_PRIB_REQUIRED",
+        "type": "DOUBLE",
+        "value": 289855.0724637681,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_R_BOT_STRAIGHT",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_KARMAN_STR",
+        "type": "DOUBLE",
+        "value": 26.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_CHVORINOV",
+        "type": "DOUBLE",
+        "value": 0.64,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_ZAT_DET_LAT",
+        "type": "DOUBLE",
+        "value": 93.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_SHEIKA_REAL",
+        "type": "DOUBLE",
+        "value": 8.781161770263589,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_FEED_ZONE",
+        "type": "DOUBLE",
+        "value": 110.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_PRIB_MOD_REAL",
+        "type": "DOUBLE",
+        "value": 14.012980994907412,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "W_REAL_WALL_LAT",
+        "type": "DOUBLE",
+        "value": 24.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_KOTLETA",
+        "type": "DOUBLE",
+        "value": 2.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_FILTER_H",
+        "type": "DOUBLE",
+        "value": 0.75,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_THERMAL_BIAS_MAX",
+        "type": "DOUBLE",
+        "value": 1.4,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_THERMAL_BIAS_MIN",
+        "type": "DOUBLE",
+        "value": 1.0999999999999999,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L_ZAZOR_MIN",
+        "type": "DOUBLE",
+        "value": 3.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L_ZAZOR_MAX",
+        "type": "DOUBLE",
+        "value": 8.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H_NAP_SHEIKA_M",
+        "type": "DOUBLE",
+        "value": 0.033,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_FLOW_SHEIKA",
+        "type": "DOUBLE",
+        "value": 0.2011622479492611,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DV_DT_LAT",
+        "type": "DOUBLE",
+        "value": 1.5583606046439147e-06,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_SHEIKA_MIN_MM2",
+        "type": "DOUBLE",
+        "value": 11.62017690096338,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H_SHEIKA_MAX",
+        "type": "DOUBLE",
+        "value": 30.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L_SHEIKA_MAX",
+        "type": "DOUBLE",
+        "value": 60.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "W_FLANGE_LIMIT",
+        "type": "DOUBLE",
+        "value": 95.99999999999999,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_SHEIKA_LAT",
+        "type": "DOUBLE",
+        "value": 26.4,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "D_SHEIKA_MID",
+        "type": "DOUBLE",
+        "value": 52.8,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L1_SHEIKA",
+        "type": "DOUBLE",
+        "value": 55.8,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L2_SHEIKA",
+        "type": "DOUBLE",
+        "value": 49.8,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_SHEIKA_TRAP_NOM",
+        "type": "DOUBLE",
+        "value": 1393.9199999999998,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_SHEIKA_FINAL_MM2",
+        "type": "DOUBLE",
+        "value": 1393.9199999999998,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L_ZAZOR_MM",
+        "type": "DOUBLE",
+        "value": 3.9000000000000004,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L_SHEIKA_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 5.9,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_SHEIKA_LAT",
+        "type": "DOUBLE",
+        "value": 27.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_SHEIKA_LAT",
+        "type": "DOUBLE",
+        "value": 6.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_BIAS_DYNAMIC",
+        "type": "DOUBLE",
+        "value": 1.3459999999999999,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_SHEIKA_EFF",
+        "type": "DOUBLE",
+        "value": 11.819443742774789,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "VERDICT_TEXT",
+        "type": "STRING",
+        "value": "РИСК: Нож заужен! Он перемерзнет раньше фланца детали.",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_D_SHEIKA_PRIB_LAT",
+        "type": "DOUBLE",
+        "value": 50.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_HP_MM",
+        "type": "DOUBLE",
+        "value": 115.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_V_PRIB_UP_CM3",
+        "type": "DOUBLE",
+        "value": 250.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "ОБЪЕМ_ФОРМОВОЧНОЙ_СМЕСИ",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NAME_TO",
+        "type": "STRING",
+        "value": "Высокий графитизирующий отжиг для устранения цементита (700C)",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_HEAT",
+        "type": "DOUBLE",
+        "value": 0.25,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_HOLD",
+        "type": "DOUBLE",
+        "value": 1.2,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_COOL",
+        "type": "DOUBLE",
+        "value": 7.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_AREA_OK",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_THERM_BAD",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_THERM_OVER",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_METALL_RAW",
+        "type": "DOUBLE",
+        "value": 45.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_MELTING_KWH",
+        "type": "DOUBLE",
+        "value": 7.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "POWER_FURNACE_KW",
+        "type": "DOUBLE",
+        "value": 800.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TONS_PER_HOUR",
+        "type": "DOUBLE",
+        "value": 1.2,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_SAND_TONS",
+        "type": "DOUBLE",
+        "value": 3500.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_RESIN_KG",
+        "type": "DOUBLE",
+        "value": 280.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "RESIN_PERCENT",
+        "type": "DOUBLE",
+        "value": 1.2,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "WAGE_M_WORKER",
+        "type": "DOUBLE",
+        "value": 95000.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "WORK_HOURS_M",
+        "type": "DOUBLE",
+        "value": 168.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_FORMING_MIN",
+        "type": "DOUBLE",
+        "value": 25.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_CLEAN_MIN",
+        "type": "DOUBLE",
+        "value": 15.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_HEAT_KWH",
+        "type": "DOUBLE",
+        "value": 7.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "POWER_HEAT_KW",
+        "type": "DOUBLE",
+        "value": 250.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "HEAT_BATCH_KG",
+        "type": "DOUBLE",
+        "value": 3000.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_HEAT_UP",
+        "type": "DOUBLE",
+        "value": 7.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_HOLD_RAW",
+        "type": "DOUBLE",
+        "value": 1.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_HOLD",
+        "type": "DOUBLE",
+        "value": 1.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_COOL_DOWN",
+        "type": "DOUBLE",
+        "value": 7.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "HEAT_TIME_HOURS",
+        "type": "DOUBLE",
+        "value": 16.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COEF_RAD_AREA",
+        "type": "DOUBLE",
+        "value": 0.43,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COEF_RAD_PERI",
+        "type": "DOUBLE",
+        "value": 0.892,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "SLOPE_ANG_RAD",
+        "type": "DOUBLE",
+        "value": 0.087,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L1_SHL",
+        "type": "DOUBLE",
+        "value": 18.7175617572612,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L2_SHL",
+        "type": "DOUBLE",
+        "value": 15.460706011497754,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_SHL_FACT",
+        "type": "DOUBLE",
+        "value": 309.1169188589779,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_SHL_FACT",
+        "type": "DOUBLE",
+        "value": 67.15339128328137,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_PIT_PRIB",
+        "type": "DOUBLE",
+        "value": 20.504061591895994,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L1_PIT_PRIB",
+        "type": "DOUBLE",
+        "value": 22.287914950390945,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L2_PIT_PRIB",
+        "type": "DOUBLE",
+        "value": 18.720208233401042,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_PIT_DET",
+        "type": "DOUBLE",
+        "value": 21.747841490244443,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L1_PIT_DET",
+        "type": "DOUBLE",
+        "value": 23.63990369989571,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_L2_PIT_DET",
+        "type": "DOUBLE",
+        "value": 19.855779280593175,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L1_SHL_NIZ",
+        "type": "DOUBLE",
+        "value": 19.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L2_SHL_VERH",
+        "type": "DOUBLE",
+        "value": 15.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_CYL_UP",
+        "type": "DOUBLE",
+        "value": 169313.6871267943,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_SPH_UP",
+        "type": "DOUBLE",
+        "value": 80625.56529847349,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_OTL_LAT_M3",
+        "type": "DOUBLE",
+        "value": 0.002898550724637681,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_USADKI_LAT_MM3",
+        "type": "DOUBLE",
+        "value": 144927.53623188406,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L_SLOPE_RAW",
+        "type": "DOUBLE",
+        "value": 26.569907790581432,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_SHEIKA_RAW",
+        "type": "DOUBLE",
+        "value": 158.73981558116287,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_ZAT_SHEIKA_RAW",
+        "type": "DOUBLE",
+        "value": 50.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_ZAT_SHEIKA_EFF",
+        "type": "DOUBLE",
+        "value": 90.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_ZAT_PRIB_1",
+        "type": "DOUBLE",
+        "value": 126.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_D_CENTRIF",
+        "type": "DOUBLE",
+        "value": 32.19268266397021,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_CENTRIF",
+        "type": "DOUBLE",
+        "value": 48.28902399595532,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H_IN_NOM",
+        "type": "DOUBLE",
+        "value": 18.7175617572612,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L1_IN_NOM",
+        "type": "DOUBLE",
+        "value": 18.7175617572612,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L2_IN_NOM",
+        "type": "DOUBLE",
+        "value": 15.460706011497754,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "H_OUT_NOM",
+        "type": "DOUBLE",
+        "value": 16.84580558153508,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L1_OUT_NOM",
+        "type": "DOUBLE",
+        "value": 17.60532264306306,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "L2_OUT_NOM",
+        "type": "DOUBLE",
+        "value": 14.674152471875956,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_D_CENTRIF",
+        "type": "DOUBLE",
+        "value": 33.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_CENTRIF",
+        "type": "DOUBLE",
+        "value": 49.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_IN_TRAP",
+        "type": "DOUBLE",
+        "value": 19.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L1_IN_TRAP",
+        "type": "DOUBLE",
+        "value": 19.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L2_IN_TRAP",
+        "type": "DOUBLE",
+        "value": 15.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_S_IN_MM2",
+        "type": "DOUBLE",
+        "value": 327.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_OUT_TRAP",
+        "type": "DOUBLE",
+        "value": 18.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L1_OUT_TRAP",
+        "type": "DOUBLE",
+        "value": 18.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L2_OUT_TRAP",
+        "type": "DOUBLE",
+        "value": 14.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_S_OUT_MM2",
+        "type": "DOUBLE",
+        "value": 278.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_KARMAN_CENTRIF",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_R_BOT_CENTRIF",
+        "type": "DOUBLE",
+        "value": 5.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_TO_T6",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_TO_ZERO",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "VAL_FOR_FLOOR",
+        "type": "DOUBLE",
+        "value": 15.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_ST_3D",
+        "type": "DOUBLE",
+        "value": 30707.224210461874,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_ST_3D",
+        "type": "DOUBLE",
+        "value": 0.21187984705218693,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_SHL_3D",
+        "type": "DOUBLE",
+        "value": 0.24786713264489793,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_CENTRIF_3D",
+        "type": "DOUBLE",
+        "value": 0.271207525955618,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_PIT_3D",
+        "type": "DOUBLE",
+        "value": 0.108192,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_PRIB_UP_3D",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_PRIB_LAT_3D",
+        "type": "DOUBLE",
+        "value": 2.3,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_LPS_FACT",
+        "type": "DOUBLE",
+        "value": 3.1391465056527026,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_POUR_TOTAL",
+        "type": "DOUBLE",
+        "value": 23.139146505652704,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KIM",
+        "type": "DOUBLE",
+        "value": 0.8643361152112574,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_ONE_OTLIVKI_RUB",
+        "type": "DOUBLE",
+        "value": 2400.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "VERDICT_ECONOMY",
+        "type": "STRING",
+        "value": "ЭКОНОМИКА: КИМ куста в НОРМЕ. Себестоимость оптимальна.",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_METAL_ONE",
+        "type": "DOUBLE",
+        "value": 928.2523185508743,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_SAND_ONE",
+        "type": "DOUBLE",
+        "value": 323.9480510791378,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_LABOR_ONE",
+        "type": "DOUBLE",
+        "value": 376.984126984127,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_HEAT_ONE",
+        "type": "DOUBLE",
+        "value": 200.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_PER_KG_RUB",
+        "type": "DOUBLE",
+        "value": 120.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_METAL",
+        "type": "DOUBLE",
+        "value": 38.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_SAND",
+        "type": "DOUBLE",
+        "value": 13.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_LABOR",
+        "type": "DOUBLE",
+        "value": 15.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_HEAT",
+        "type": "DOUBLE",
+        "value": 8.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_RAW_ONE",
+        "type": "DOUBLE",
+        "value": 23.139146505652704,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_SCRAP_ONE",
+        "type": "DOUBLE",
+        "value": 3.1391465056527026,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KW_MELT_TOTAL",
+        "type": "DOUBLE",
+        "value": 15.426097670435137,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KW_MELT_ONE",
+        "type": "DOUBLE",
+        "value": 15.426097670435137,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_MELT_ONE",
+        "type": "DOUBLE",
+        "value": 115.69573252826353,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_SAND_TOTAL",
+        "type": "DOUBLE",
+        "value": 92.55658602261082,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_MIXTURE_M3",
+        "type": "DOUBLE",
+        "value": 0.06,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_SAND_ONE",
+        "type": "DOUBLE",
+        "value": 92.55658602261082,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_RESIN_TOTAL",
+        "type": "DOUBLE",
+        "value": 1.1106790322713298,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_RESIN_ONE",
+        "type": "DOUBLE",
+        "value": 1.1106790322713298,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_RESIN_ONE",
+        "type": "DOUBLE",
+        "value": 310.99012903597236,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KW_HEAT_ONE",
+        "type": "DOUBLE",
+        "value": 26.666666666666668,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TOTAL_KW_ONE",
+        "type": "DOUBLE",
+        "value": 51.092764337101805,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TOTAL_ENERGY_COST_ONE",
+        "type": "DOUBLE",
+        "value": 383.19573252826353,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_MELT",
+        "type": "DOUBLE",
+        "value": 4.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_RESIN",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_MIX_ONE",
+        "type": "DOUBLE",
+        "value": 0.06,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_RESIN_W",
+        "type": "DOUBLE",
+        "value": 1.1,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_RAW_W",
+        "type": "DOUBLE",
+        "value": 23.1,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KW_MELT_W",
+        "type": "DOUBLE",
+        "value": 15.4,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KW_TOT_W",
+        "type": "DOUBLE",
+        "value": 51.1,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_SHL_MM2",
+        "type": "DOUBLE",
+        "value": 319.8669188589779,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_IN_MM2",
+        "type": "DOUBLE",
+        "value": 319.8669188589779,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_OUT_MM2",
+        "type": "DOUBLE",
+        "value": 271.8868810301312,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_D_ST_NIZ_MM",
+        "type": "DOUBLE",
+        "value": 18.050312133452856,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_PIT_PRIB_MM2",
+        "type": "DOUBLE",
+        "value": 383.8403026307735,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_PIT_DET_MM2",
+        "type": "DOUBLE",
+        "value": 431.8203404596202,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_S_PIT_SUM_DET",
+        "type": "DOUBLE",
+        "value": 441.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_S_PIT_ODN_DET",
+        "type": "DOUBLE",
+        "value": 441.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "SXEMA_PITANIYA",
+        "type": "DOUBLE",
+        "value": 3.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_SHOT_BLAST_MIN",
+        "type": "DOUBLE",
+        "value": 12.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_SHOT_KG",
+        "type": "DOUBLE",
+        "value": 85.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "POWER_SHOT_KW",
+        "type": "DOUBLE",
+        "value": 45.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "SHOT_CONSUME_KG_H",
+        "type": "DOUBLE",
+        "value": 4.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KW_SHOT_TOTAL",
+        "type": "DOUBLE",
+        "value": 9.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_SHOT_ENERGY_TOTAL",
+        "type": "DOUBLE",
+        "value": 67.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "KG_SHOT_SPENT_TOTAL",
+        "type": "DOUBLE",
+        "value": 0.9,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_SHOT_ONE",
+        "type": "DOUBLE",
+        "value": 144.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_SHOT",
+        "type": "DOUBLE",
+        "value": 6.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_VOL_UP",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_VOL_LAT",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_MASS_UP",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_MASS_LAT",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_ONE_PRIB_UP_KG",
+        "type": "DOUBLE",
+        "value": 1.7,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_ONE_PRIB_LAT_V1",
+        "type": "DOUBLE",
+        "value": 2.3,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_REAL_MOD_LAT",
+        "type": "DOUBLE",
+        "value": 338698.2455761691,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_ONE_PRIB_LAT_V2",
+        "type": "DOUBLE",
+        "value": 2.3,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "COST_SHOT_MAT_TOTAL",
+        "type": "DOUBLE",
+        "value": 76.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_D_ST_NIZ",
+        "type": "DOUBLE",
+        "value": 19.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_ST_DET",
+        "type": "DOUBLE",
+        "value": 0.00028788022697308016,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_ST_MM2",
+        "type": "DOUBLE",
+        "value": 255.89353508718233,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "MAT_CHILLER",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_CHILL_THICK",
+        "type": "DOUBLE",
+        "value": 0.7999999999999999,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CHILLER_TO_ECO",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DENSITY_STEEL",
+        "type": "DOUBLE",
+        "value": 7850.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DENSITY_COPPER",
+        "type": "DOUBLE",
+        "value": 8960.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DENSITY_GRAPHITE",
+        "type": "DOUBLE",
+        "value": 1750.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_EFF_STEEL",
+        "type": "DOUBLE",
+        "value": 0.75,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_EFF_COPPER",
+        "type": "DOUBLE",
+        "value": 0.6,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_EFF_GRAPHITE",
+        "type": "DOUBLE",
+        "value": 0.7,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CHILL_DENSITY",
+        "type": "DOUBLE",
+        "value": 7850.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CHILL_K_EFF",
+        "type": "DOUBLE",
+        "value": 0.75,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "NOM_H_CHILLER_RAW",
+        "type": "DOUBLE",
+        "value": 19.2,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_H_CHILLER",
+        "type": "DOUBLE",
+        "value": 20.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_S_CHILL_CONT",
+        "type": "DOUBLE",
+        "value": 4848.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_L_CHILLER",
+        "type": "DOUBLE",
+        "value": 122.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "CAD_W_CHILLER",
+        "type": "DOUBLE",
+        "value": 41.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "V_CHILLER_MM3",
+        "type": "DOUBLE",
+        "value": 92160.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_ONE_CHILLER_KG",
+        "type": "DOUBLE",
+        "value": 0.7,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_OTL_LAT_CHILLED",
+        "type": "DOUBLE",
+        "value": 9.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "TIME_ZAT_CHILLED",
+        "type": "DOUBLE",
+        "value": 52.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_CHILLER_TO_ECO",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "K_PIT",
+        "type": "DOUBLE",
+        "value": 1.5,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_UZK_SECH",
+        "type": "DOUBLE",
+        "value": 0.00025589353508718234,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "S_UZK_SECH_DET",
+        "type": "DOUBLE",
+        "value": 0.00028788022697308016,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DELTA_TAU_PRIB",
+        "type": "DOUBLE",
+        "value": -3.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DELTA_TAU_PRIB_ABS",
+        "type": "DOUBLE",
+        "value": 3.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_HYDRO_MISMATCH_PRIB",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DELTA_TAU_DET",
+        "type": "DOUBLE",
+        "value": -6.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "DELTA_TAU_DET_ABS",
+        "type": "DOUBLE",
+        "value": 6.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_HYDRO_MISMATCH_DET",
+        "type": "DOUBLE",
+        "value": 1.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "FLAG_SHEIKA_DEFICIT",
+        "type": "DOUBLE",
+        "value": 0.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_METAL_RAW_TOTAL",
+        "type": "DOUBLE",
+        "value": 1041.2615927543716,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "C_SCRAP_RETURN",
+        "type": "DOUBLE",
+        "value": 113.00927420349727,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "M_SCRAP_W",
+        "type": "DOUBLE",
+        "value": 3.1,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_METAL_RAW",
+        "type": "DOUBLE",
+        "value": 43.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_SCRAP_RET",
+        "type": "DOUBLE",
+        "value": 4.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_KG_DET",
+        "type": "DOUBLE",
+        "value": 86.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_KG_SCRAP",
+        "type": "DOUBLE",
+        "value": 13.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "P_KW_TOT",
+        "type": "DOUBLE",
+        "value": 15.0,
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PTC_UNITS_LENGTH",
+        "type": "STRING",
+        "value": "mm",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PTC_UNITS_MASS",
+        "type": "STRING",
+        "value": "kg",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PTC_UNITS_FORCE",
+        "type": "STRING",
+        "value": "mm kg / sec^2",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PTC_UNITS_TIME",
+        "type": "STRING",
+        "value": "sec",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PTC_UNITS_TEMPERATURE",
+        "type": "STRING",
+        "value": "C",
+        "encoded": false
+      },
+      {
+        "owner_name": "liteika_hts_mm.asm",
+        "designate": false,
+        "name": "PTC_UNITS_SYSTEM_TYPE",
+        "type": "STRING",
+        "value": "Mass length time (MLT)",
+        "encoded": false
+      }
+    ]
+  }
+}

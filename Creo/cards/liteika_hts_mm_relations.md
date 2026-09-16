@@ -1299,9 +1299,31 @@ IF KIM < 0.50
 ENDIF
 
 --- PARAMETERS ---
-параметров нет
+Источник: CreosON parameter:list, 380 параметров, карточка 2026-09-16
+
+ОБОЗНАЧЕНИЕ (STRING) = LITEIKA_HTS_MM
+ОБОЗНАЧЕНИЕ1 (STRING) = 
+СТАРЫЙ_НОМЕР (STRING) = 
+НАИМЕНОВАНИЕ (STRING) = 
+НАИМЕНОВАНИЕ1 (STRING) = 
+НАИМЕНОВАНИЕ2 (STRING) = 
+ТИП (STRING) = Сборка
+ТИП2 (STRING) =  
+ФОРМАТ (STRING) = А3
+РАЗРАБОТАЛ (STRING) = 
+ПРОВЕРИЛ (STRING) = 
+ТЕХ_КОНТРОЛЬ (STRING) = 
+НАЧ_ОТДЕЛА (STRING) = 
+НОРМО_КОНТРОЛЬ (STRING) = 
+УТВЕРДИЛ (STRING) = 
+ПЕРВ_ПРИМЕН (STRING) = 
+СПРАВ_№ (STRING) = 
+MASS (DOUBLE) = 
+СТАНДАРТ (STRING) = 
+ПРЕДПРИЯТИЕ (STRING) = ООО "ПТО"
+... ещё 360 параметров (полный список в liteika_hts_mm_params_raw.json)
 
 --- MASSPROPS ---
 Mass: 0.0 kg
-Volume: 0.0 mm3
+Volume: 0 mm3
 Area: 0.0 mm2
