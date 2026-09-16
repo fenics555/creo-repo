@@ -1,0 +1,36 @@
+---
+name: davydovka_creoson_map
+system: Creo
+description: Use when: перенос операций Давыдовки (переименование, копия сборки, семейства, граф) на CREOSON
+when: Давыдовка, копия сборки, семейства, граф, перенос, bom, familytable, drawing, manufacturing
+priority: high
+---
+# Давыдовка (CreoJS) → CREOSON: карта операций с живыми вердиктами (16.09.2026)
+
+Давыдовка — веб-приложение в встроенном браузере Creo (Creo.JS + свой python-сервер на 8000).
+Дом работает через CREOSON (JSON поверх JLINK, 127.0.0.1:8080/creoson). Проверено живьём:
+
+| Операция Давыдовки (CreoJS) | Аналог в CREOSON | Вердикт |
+|---|---|---|
+| `assembly.ListItems(ITEM_FEATURE)` + `feature.Id` + `pfcCreateComponentPath` | **`bom:get_paths {file, skeletons, paths}`** → BomChild `{file, seq_path, path[], children[]}` | ✅ полный эквивалент: `path` = feature-id компонента |
+| `GetParam` / чтение параметров | `parameter:list {file}` → `paramlist[name,type,value,designate]` | ✅ |
+| `ListRows()` / вложенные семейства / `GetImmediateGenericInfo` | `file:has_instances`, **`file:list_instances`** (отдаёт `generic`, `files`, `dirname`), **`familytable:list_tree`** (иерархия с `total`), `familytable:get_parents` | ✅; у не найденного в путях поиска файла `list_instances` вернул `null` |
+| Связь «чертёж → модель» | **`drawing:list_models {drawing}`** → `{files:[...]}` | ✅ (чертёж должен быть открыт в сессии) |
+| `Rename()` в сессии + `Save()` | **`file:rename {onlysession:true}` → `file:save`** | ✅ (см. Creo/SKILL_creoson_rename_mechanism.md) |
+| `Backup(descriptor)` по каждому файлу | `file:backup {file, target_dir}` (оба параметра обязательны) |  схема подтверждена спекой, проба не сделана |
+| `Copy()` модели/семейства с новым именем | ОС-копия версий + `file:open/regenerate/save/erase`; дерево — `familytable:list_tree` | ✅ частично (в доме: `agent/copy_tools.py`) |
+| Экспорт JPEG для отчётов (`ExportRasterImage`) | `interface:export_image` |  спека есть, проба не сделана |
+| **Мануфактуринг** (`creoRenameManufacturingInfo`, fixture-компоненты) | в каталоге CREOSON **нет ни одной `mfg-*` функции** | ❌ отсутствует: отдельная задача или ручная работа |
+| Граф использования файлов, «не используется» | своя база `usage(child,parent,parent_path)` + `bom:get_paths` | ✅ (в доме `usage_tools.py`, `graph_tools.py`) |
+
+## Что уже перенесено в дом
+- `agent/rename_tools.py` — переименование (план + исполнение, толькоsession-механизм).
+- `agent/copy_tools.py` — копия детали/семейства (ОС-копия + валидация в Creo, `dry_run`).
+- `agent/copy/copy_server.py` — сервер страницы «Копия сборки» на 8000 (каркас, эндпоинты как у Давыдовки).
+- `agent/excel/excel_export.py`, `excel_import.py` — из Давыдовки.
+- Окно: витрина агента → 🧙 МАСТЕР ОПЕРАЦИЙ (копия + переименование).
+
+## Правило переноса
+Сначала гейт-проба механики в CREOSON (Creo/SKILL_creoson_probe_method.md), затем код.
+Не тащить в дом целые модули Давыдовки: она опирается на CreoJS-вызовы, которых в
+агенте нет; переносится МЕХАНИКА (последовательность CREOSON-вызовов), UI собирается заново.

@@ -6,10 +6,15 @@ file:backup БЕЗ параметра target_dir → «No 'target_dir' parameter
 ПРАВИЛЬНО: {"file": <имя>, "target_dir": <путь>}. (dirname — НЕ параметр backup.)
 
 ## rename
-file:rename в async CREOSON → Pro/TOOLKIT General Error. НЕ РАБОТАТ в принципе.
-ПРАВИЛЬНО: переименовывать файлы на уровне ОС (os.rename по версиям .prt.N)
-либо через синхронную сессию CreoJS (схема Давыдовки: rename в сессии + save).
-Для копии: backup(target_dir) → cd → open → правки → save → erase → ОС-rename.
+УТОЧНЕНО 16.09.2026 живой пробой в чистой сессии: падает ДИСКОВЫЙ вызов
+file:rename {file,new_name} → «A Pro/TOOLKIT error has occurred: General Error»,
+и вызов с параметром rename_dependencies (такого параметра в CREOSON НЕТ).
+РАБОТАЕТ сессионный: file:rename {file, new_name, onlysession:true} — ссылки в
+сборках-владельцах переключаются в памяти, диск не тронут; затем file:save пишет
+файл ПОД НОВЫМ ИМЕНЕМ (старая версия остаётся — уводить в backup, не удалять).
+Это и есть схема Давыдовки, воспроизведённая чистым CREOSON (без CreoJS).
+Для копии: backup(target_dir) → cd → open → правки → regenerate → save → erase → ОС-перенос.
+Подробности и ловушки: Creo/SKILL_creoson_rename_mechanism.md.
 
 ## open после backup
 open видит файл только если backup прошёл и сделан cd в ту же папку.
