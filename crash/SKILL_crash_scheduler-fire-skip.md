@@ -1,4 +1,4 @@
-name: scheduler-fire-skip
+name: crash_scheduler-fire-skip
 system: CRASH
 description: Use when: задача планировщика с триггером повторения не стартует в расчётный
   огонь — LASTRUN держится старым, NextRunTime перескакивает на следующую точку сетки,

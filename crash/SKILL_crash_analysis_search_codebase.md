@@ -1,4 +1,4 @@
-name: crash-migration_tool_result_missing
+name: crash_analysis_search_codebase
 system: CRASH
 description: Use when: search_codebase падает с ошибкой миграции контекста или повторяется
   «tool result missing» в длинной сессии

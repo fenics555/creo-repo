@@ -1,4 +1,4 @@
-name: crash-login-stale-memory
+name: crash_login-stale-memory
 system: CRASH
 description: Use when: вход в агента не проходит при верном пароле — три источника правды
   о пароле (secrets.json, users.json, память процесса) разошлись

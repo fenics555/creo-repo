@@ -1,4 +1,4 @@
-name: crash-ctl-inline-stderr-truncated
+name: crash_ctl-inline-stderr-truncated
 system: CRASH
 description: Use when: рестарт или проба агента через инлайн python -c в PowerShell гибнет
 с кодом 1, stderr обрезан на границе кодека, выходной файл пуст

@@ -1,4 +1,4 @@
-name: crash-runcommands-copy-race-fake-parameter
+name: crash_runcommands-copy-race-fake-parameter
 system: CRASH
 description: Use when: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка
 записи и чтения), либо Get-Content с параметром -LineNumber падает NamedParameterNotFound

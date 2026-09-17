@@ -1,4 +1,4 @@
-name: crash-searchcodebase-any-pattern-migration-marker
+name: crash_searchcodebase-any-pattern-migration-marker
 system: CRASH
 description: Use when: search_codebase возвращает маркер миграции
 [missing in legacy conversation history] при любом количестве паттернов (1+),

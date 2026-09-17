@@ -1,4 +1,4 @@
-name: editor-mismatch
+name: crash-editor-mismatch
 system: CRASH
 description: Use when: editor tool fails with "text not found" due to old_text mismatch after a partial update or context change.
 when: editor-mismatch, text not found, mismatch, old_text mismatch

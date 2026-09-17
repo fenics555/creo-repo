@@ -1,4 +1,4 @@
-name: quoted-escape-parse-failure
+name: crash_quoted-escape-parse-failure
 system: CRASH
 description: ParseException «Отсутствует имя типа после знака "["» на \" внутри массива run_commands
 when: run_commands, quoted, escape, parse-failure

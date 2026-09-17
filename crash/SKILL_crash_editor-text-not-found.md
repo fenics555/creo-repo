@@ -1,4 +1,4 @@
-name: editor-text-not-found
+name: crash_editor-text-not-found
 system: CRASH
 description: Use when: editor tool fails to find the exact old_text despite apparent match.
 when: editor, text-not-found, mismatch

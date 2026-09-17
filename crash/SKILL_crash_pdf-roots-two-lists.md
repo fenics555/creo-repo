@@ -1,4 +1,4 @@
-name: pdf-roots-two-lists
+name: crash_pdf-roots-two-lists
 system: CRASH
 description: Поиск PDF пуст при живых парах в базе знаний (сравнение scan_roots и kb_roots)
 when: pdf-search-empty, roots-mismatch, scan_roots

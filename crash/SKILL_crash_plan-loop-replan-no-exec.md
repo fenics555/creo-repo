@@ -1,4 +1,4 @@
-name: plan-loop-replan-no-exec
+name: crash_plan-loop-replan-no-exec
 system: CRASH
 description: один и тот же план три и более раз в рассуждениях без исполнения
 when: plan, loop, replan, no-exec

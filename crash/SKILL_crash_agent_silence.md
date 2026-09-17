@@ -1,4 +1,4 @@
-name: crash-agent-silence
+name: crash_agent_silence
 system: CRASH
 description: Use when: исполнитель «завис» — сообщение кончилось рассуждением без вызова инструмента, IDE видит простой, пользователь спрашивает «что случилось» или «ты стоял»
 when: silence, hang, stall, no tool call, завис, стоял, замирал

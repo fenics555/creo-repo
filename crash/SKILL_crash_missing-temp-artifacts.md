@@ -1,8 +1,10 @@
-# SKILL_crash_missing-temp-artifacts.md
-
-**name**: missing-temp-artifacts
-**executor**: Cline
-**counter**: 1
+name: crash_missing-temp-artifacts
+system: CRASH
+description: Use when: временные артефакты tmp потеряны к моменту, когда нужны следующему шагу
+when: missing temp artifacts, tmp loss, lost files, anchor
+date: 2026-09-17
+executor: Sergio
+ПОВТОРЫ: 1
 
 ## Описание проблемы
 Потеря временных файлов (артефактов), созданных в предыдущих шагах/сессиях (например, `.py` файлы в `data/tmp/`), что приводит к невозможности выполнения запланированных действий (перенос изменений, запуск тестов).

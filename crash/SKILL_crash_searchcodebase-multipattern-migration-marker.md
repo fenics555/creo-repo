@@ -1,4 +1,4 @@
-name: crash-searchcodebase-multipattern-migration-marker
+name: crash_searchcodebase-multipattern-migration-marker
 system: CRASH
 description: Use when: search_codebase с 3+ regex-паттернами возвращает маркер миграции
 [missing in legacy conversation history] вместо результатов
