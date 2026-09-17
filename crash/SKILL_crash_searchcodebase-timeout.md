@@ -1,5 +1,4 @@
-# SKILL_crash_searchcodebase-timeout.md
+name: searchcodebase-timeout
 executor: Cline
-signature: searchcodebase-timeout
-count: 1
-details: Search timed out after 30000ms during regex search across codebase.
+адаптеры: MANIFEST.md
+профилактика: из multipattern/any-pattern

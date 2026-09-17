@@ -73,3 +73,10 @@ FREZER-3, FREZER-4, KONSTRUKTOR-2, VALERIY.
   (netdiag.ps1, вызов в хвосте CREO-START под защитой if exist).
 - hs_err_pid*.log в папке creoson пусты на 15.09.2026: после переезда на локальный путь
   и устранения двойного запуска JVM больше не падает.
+
+## Версия, start-in и папка крахов (17.09.2026)
+- Актуальный общий запуск: **CREO-START v17** (упоминания v15/v16 выше — история).
+- `config.pro` читается Creo из **start-in папки**: cwd старта Creo = `Z:\PTC\CREO-START\START-STD`,
+  поэтому локальные пути (TEMP, trails, last_session) в ней указывают на `D:\PTC\CREO-LOCAL-SETUP` каждой машины.
+- Папка скиллов крахов переименована: теперь `D:\AI\repo\crash\` (папки `ВЫЛЕТЫ` больше нет,
+  проверено 17.09.2026); конституция — `crash\SKILL_crash_constitution.md`.

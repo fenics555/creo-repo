@@ -1,3 +1,10 @@
+---
+name: err-creoson-write-ops
+system: CRASH
+description: Use when: пишущая операция CREOSON упала — backup без target_dir, rename General Error
+when: backup, target_dir, rename, General Error, CREOSON, запись, async
+priority: high
+---
 # ERR_creoson_write_ops — пишущие операции CREOSON в async-соединении
 СТАТУС: ПРАВИЛО (не повторять). Выявлено 01.09.2026 полным тестом.
 

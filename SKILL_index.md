@@ -13,6 +13,10 @@ priority: critical
 | Скилл | Назначение |
 |---|---|
 | SKILL_creoson_complete | полная карта API CREOSON (critical) |
+| SKILL_creoson_sessions_workdirs | сессии Creo, старт Creo/CREOSON, рабочие директории, поиск файлов/сборок/чертежей (critical) |
+| SKILL_creoson_rename_mechanism | переименование модели и чертежа: onlysession + save (critical) |
+| SKILL_creoson_probe_method | методика безопасных проб в CREOSON + справка (critical) |
+| SKILL_davydovka_creoson_map | карта операций Давыдовки на CREOSON (что есть, чего нет) |
 | SKILL_creo_commands | быстрый подбор команды под задачу |
 | SKILL_creo_relations | relations: синтаксис, функции, лимиты, примеры |
 | SKILL_relations_constitution | железные ПРАВИЛА relations (critical) |
@@ -49,6 +53,7 @@ priority: critical
 | SKILL_agent_protocol | протокол инженера-напарника (critical) |
 | company_conventions | паспорт КБ: станки, продукция, семантика трейлов |
 | SKILL_web_vision_limits | что WEB и ВИЗИЯ умеют и не умеют |
+| SKILL_local_agent_cline | выживание локального ИИ в Cline/VS Code: привычки, транспорт, редактор, крахи, карта дома (critical) |
 | strategy | живой журнал направлений развития |
 
 ## ДОМЕН 6: Автогенерируемые (руками не править)
@@ -67,3 +72,4 @@ priority: critical
 - Код проекта → python_standard + test_first_rule.
 - Физика/материалы → Инженерные.
 - «Где деталь / когда комплект / якорь / цикл» → production_mirror.
+- «Почему вылетаю / как работать в Cline / где что лежит» → local_agent_cline.

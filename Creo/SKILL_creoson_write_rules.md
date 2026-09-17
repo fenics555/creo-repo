@@ -24,7 +24,8 @@ functions.html + web\assets\creoson_stuff\jsonSpecs\*.json (по файлу на
 start.html (запуск; порт рекомендован 9056, а 22/80/8080/443 просят избегать) +
 playground.html (тестер из браузера). Эндпоинты: POST /creoson и /server.
 Механика rename и ловушки: Creo/SKILL_creoson_rename_mechanism.md;
-методика безопасных проб: Creo/SKILL_creoson_probe_method.md.
+методика безопасных проб: Creo/SKILL_creoson_probe_method.md;
+сессии, старт Creo/CREOSON и рабочие директории: Creo/SKILL_creoson_sessions_workdirs.md.
 
 
 export_pdf — пишущая операция: только через инструмент с approval (pdf_refresh);
