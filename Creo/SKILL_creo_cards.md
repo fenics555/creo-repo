@@ -21,10 +21,24 @@ priority: high
 Урок 17.09.2026: карточка на 243 байта против сырой простыни на десятки килобайт прошла
 две спеки незамеченной.
 
-## Живой пример (17.09.2026)
-`liteika_hts_mm`: отношения 40 КБ, сырой близнец `liteika_hts_mm_raw.json`, crc32 454521701;
-внутри живые `pow(...,0.3333)` и `rtos(V_PRIB_ROUND)` — из них и подтверждён факт, что
-`pow()` в Creo 12 существует (см. Creo/SKILL_creo_relations.md).
+## Живой пример и сырые близнецы (17.09.2026)
+`liteika_hts_mm` (сборка-шаблон литья, `Z:\PTC\CREO-START\НАСТРОЙКИ\ШАБЛОНЫ\liteika_hts_mm.asm`):
+- близнец **параметров**: `cards\liteika_hts_mm_params_raw.json` (дословный ответ `parameter:list`);
+- близнец **отношений**: `cards\liteika_hts_mm_relations_raw.json` — создан 17.09.2026 read-only
+  пробой `file:relations_get`, файл 73872 б, поле `data` 68640 б, crc32 поля `data` = `74a49c2f`;
+  отношений после нормализации 1292 строки (50677 знаков);
+- внутри живые `pow(...,0.3333)` и `rtos(V_PRIB_ROUND)` — отсюда подтверждён факт, что `pow()`
+  в Creo 12 существует (см. Creo/SKILL_creo_relations.md).
+
+## Дыра в коде дома (закрыта 17.09.2026)
+`file:relations_get` отдаёт отношения **тремя разными формами**: строкой, списком строк и
+словарём `{"relations": [ ... ]}`. Нормализация в `creo_tools.tool_get_relations` умела только
+строку и словарь — список доходил до строковых операций и падал `AttributeError` (та самая
+жалоба «код уравнений есть, а вид не тот»). Лечение: в `tool_get_relations` перед `result`
+стоят ветки `if isinstance(d, dict): d = d.get("relations")` и
+`if isinstance(d, list): d = "\n".join(str(x) for x in d)`; бекап
+`data\backup\pre_relations_list_fix_creo_tools.py.bak`, `py_compile` зелёный, живая проба:
+`type returned: str | len: 50677`.
 
 ## Долг (НА ПАУЗЕ, не начинать без слова пользователя)
 Секция «параметры» карточки `liteika_hts_mm` ждёт добора: долг спеки 52, слит с фазой 1

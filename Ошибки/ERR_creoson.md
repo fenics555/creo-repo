@@ -59,6 +59,21 @@ file:erase, затем rename ОС-файла.
 пустого списка; перед пробой печатать sess_start. Проверено 16.09.2026.
 См. Creo/SKILL_creoson_probe_method.md.
 
+### 1.9 file:relations_get — data бывает строкой, списком И словарём
+Симптом: агент отдаёт отношения в виде python-списка (`['Обозначение=rel_model_name ', ...]`)
+или падает AttributeError: 'list' object has no attribute ... на строковых операциях.
+Причина: `file:relations_get` возвращает `data` тремя разными формами: строкой,
+списком строк и словарём `{"relations": [...]}`; нормализация в коде дома знала только
+строку и словарь. Жалуется на это и человек: «код уравнений есть, а вид не тот».
+Лечение (проверено 17.09.2026, живая проба `type returned: str | len: 50677`):
+в `creo_tools.tool_get_relations` перед `result` стоят ветки
+`if isinstance(d, dict): d = d.get("relations")` и
+`if isinstance(d, list): d = "\n".join(str(x) for x in d)`;
+бекап `data\backup\pre_relations_list_fix_creo_tools.py.bak`, py_compile зелёный,
+агент перезапускается (модуль читается при старте). Сырой близнец отношений:
+`Creo\cards\liteika_hts_mm_relations_raw.json` (73872 б, data 68640 б, crc32 74a49c2f).
+См. Creo/SKILL_creo_cards.md.
+
 ## 2. Creo / CreoJS (переименование, семейства, копия сборки)
 
 ### 2.1 Схема «переименовать в сессии → сохранить → вернуть имена» портит оригинал
