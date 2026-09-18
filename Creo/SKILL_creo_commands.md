@@ -68,7 +68,7 @@ priority: high
 
 ## Типовые сценарии
 
-Умное переименование (в агенте: creo_rename_model):
+Умное переименование:
     file:open деталь+чертёж+сборки
     file:rename деталь (rename_dependencies:true)
     file:rename чертёж (rename_dependencies:true)
@@ -76,10 +76,10 @@ priority: high
     file:regenerate + file:save по каждой сборке
     file:save деталь и чертёж
 
-Чистка склада версий (в агенте: creo_purge_versions):
+Чистка склада версий:
     creo:list_files -> группы имя.prt.N -> удалить все кроме последней
 
-Аудит папки (в агенте: creo_audit_folder):
+Аудит папки:
     creo:pwd -> creo:list_files -> для каждого .prt/.asm:
     file:open -> parameter:list -> file:relations_get -> file:erase
 
