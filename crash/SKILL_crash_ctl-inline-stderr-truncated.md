@@ -29,3 +29,8 @@ restart.out пуст; ParseException на эскейпах [\' ... \'] в PowerS
 прямой write_file, и рождает плейсхолдеры «ХХХХ вместо слов».
 4. Увидел обрезанный stderr — не повторяй попытку вслепую: выведи вывод в файл и прочитай
 его Get-Content (13.10).
+5. Рестарт агента: pid-файл живёт в `core.BASE\agent\agent.pid` (то есть
+   `D:\AI\tools\agent\agent.pid`), а НЕ в `data\agent.pid`; приёмка рестарта — смена PID
+   (`Get-NetTCPConnection -LocalPort 8765`) и StartTime процесса позже mtime правленого файла;
+   сторож и ночной цикл живут в `sched.py`, голова и щит согласований — в `loop.py`
+   (распил агента по спеке 71, фазы Ф3/Ф4 ещё открыты).
