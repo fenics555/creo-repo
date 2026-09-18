@@ -11,7 +11,7 @@ priority: critical
 
 ## НАПРАВЛЕНИЯ (первый указатель, состав по MANIFEST.md)
 - Creo: Creo\SKILL_creo_index.md · PDF: PDF\SKILL_pdf_index.md · Web: Web\SKILL_web_index.md
-- Инженерные: Инженерные\SKILL_eng_index.md · Трейлы: Трейлы\SKILL_trails_index.md
+- Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
 - Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md
 
 ## ДОМЕН 1: Creo (веб-агент, инженер)
