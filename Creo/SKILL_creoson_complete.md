@@ -374,8 +374,6 @@ pdf (fitz), не из Creo. Состав для полосы сборки: bom:g
 
 - file:rename с new_name возвращает "General Error" — требует проверки условий успеха (модель открыта, нет блокировок)
 
-Следующие команды есть в скилле, но не проверялись в этой сессии:
-
 - familytable:create_inst, familytable:delete, familytable:replace
 
 - parameter:get, bom:get_header
