@@ -53,6 +53,7 @@ priority: critical
 
 ## ДОМЕН 5: общее (оба агента)
 | Скилл | Назначение |
+| SKILL_log_management | управление логами и автоуборка (D:\AI\log) |
 |---|---|
 | SKILL_tool_routing | маршрутизация запросов к инструментам (critical) |
 | SKILL_agent_protocol | протокол инженера-напарника (critical) |
