@@ -44,22 +44,21 @@
 ## HANDOFF
 === ПЕРЕДАЧА ЭСТАФЕТЫ, спека 95, нога текущая закрывается, нога следующая стартует ===
 [SPEC 95: Resurrecting Cleaner - Implement atomic version purging with Wizard UI]
-[КОМПАКЦИЙ В НОГЕ]: 0 из 3
+[КОМПАКЦИЙ В НОГЕ]: 1 из 3
 [СДЕЛАНО] (с цитатами):
-- [x] Phase 1 complete (verified).
-- [x] Phase 2 Backend Setup (purge_tools.py, panel.py).
-- [x] Infrastructure: Created 'SKILL_crash_readfiles_outdated_loop.md'.
+- [x] Исправлен `purge_versions.py` (полная перезапись, решение проблемы с `editor`).
+- [x] В `http_handlers.py` добавлены эндпоинты `/wiz_purge_preview` и `/wiz_purge_execute`.
 [НЕ СДЕЛАНО]:
-- [ ] Pattern discovery in 'app.js' (searching for wizard/modal patterns).
-- [ ] API Implementation in 'http_handlers.py'.
-- [ ] UI Implementation in 'app.js'.
+- [ ] Реализация фронтенда в `app.js` (Wizard UI: Preview -> Approval -> Execute).
+- [ ] Конечная проверка E2E.
 [ЯКОРЬ СЛЕДУЮЩЕГО ШАГА]:
-- 'D:\AI\tools\agent\ui\app.js' (analyze for modal/wizard patterns).
-- 'D:\AI\tools\agent\http_handlers.py' (implement endpoints).
+- 'D:\AI\tools\agent\ui\app.js' (анализ паттернов модальных окон).
+- 'D:\AI\tools\agent\ui\index.html' (подготовка UI).
 [ГРАБЛИ]:
-- 'crash_readfiles_outdated_loop' (loop on 'read_files' returning 'outdated').
+- `editor` tool `text not found` (проблема с whitespace/formatting).
+- Синтаксические ошибки PowerShell при запуске Python-кода через `run_commands`.
 [СЧЁТЧИКИ НОГИ]:
-- Вызовов потрачено: ~15
-- Файлов изменено: 3
+- Вызовов потрачено: ~40
+- Файлов изменено: 2
 - Бекапов создано: 0
 === КОНЕЦ ПЕРЕДАЧИ ===
