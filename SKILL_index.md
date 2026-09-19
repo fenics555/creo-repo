@@ -18,6 +18,7 @@ priority: critical
 | Скилл | Назначение |
 |---|---|
 | SKILL_creoson_complete | полная карта API CREOSON (critical) |
+| SKILL_creojs_api | родной API Creo (Creo.JS / pfc*): карта по страницам руководства + сверка с CREOSON (critical) |
 | SKILL_creoson_sessions_workdirs | сессии Creo, старт Creo/CREOSON, рабочие директории, поиск файлов/сборок/чертежей (critical) |
 | SKILL_creoson_rename_mechanism | переименование модели и чертежа: onlysession + save (critical) |
 | SKILL_creoson_probe_method | методика безопасных проб в CREOSON + справка (critical) |
