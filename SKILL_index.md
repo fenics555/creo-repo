@@ -57,14 +57,22 @@ priority: critical
 |---|---|
 | SKILL_tool_routing | маршрутизация запросов к инструментам (critical) |
 | SKILL_agent_protocol | протокол инженера-напарника (critical) |
-| company_conventions | паспорт КБ: станки, продукция, семантика трейлов |
+| SKILL_company_conventions | паспорт КБ: станки, продукция, семантика трейлов |
 | SKILL_web_vision_limits | что WEB и ВИЗИЯ умеют и не умеют |
 | SKILL_local_agent_cline | выживание локального ИИ в Cline/VS Code: привычки, транспорт, редактор, крахи, карта дома (critical) |
-| strategy | живой журнал направлений развития |
+| SKILL_strategy | живой журнал направлений развития |
 | AUDIT_rules_*.md (корень repo) | отчёты аудита правил дома (находки, варианты, вердикты) |
 | SKILL_audit_protocol.md | аудит правил и скиллов (режим RULES, включается тегом «аудит») |
 
-## ДОМЕН 6: Автогенерируемые (руками не править)
+## ДОМЕН 6: Agents (автономные исполнители)
+| Скилл | Назначение |
+|---|---|
+| SKILL_rag_architect | проектирование RAG-пайплайнов (chunking, embedding, evaluation) |
+| SKILL_skill_security_auditor | аудит безопасности скиллов перед установкой |
+| SKILL_zero_hallucination_coder | строгое кодирование без галлюцинаций (Discuss-Map-Decompose-Execute-Verify) |
+
+
+## ДОМЕН 7: Автогенерируемые (руками не править)
 | Файл | Кто пишет |
 |---|---|
 | SKILL_company_config.md (корень репо) | passport_tools (живой паспорт из config.pro) |
