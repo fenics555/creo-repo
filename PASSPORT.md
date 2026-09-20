@@ -1,4 +1,10 @@
-# МОДУЛИ ДОМА
+# PASSPORT.md
+
+## Описание
+Паспорт дома — это актуальное состояние модулей, инструментов и истории развития репозитория D:\AI\repo. 
+Является "источником истины" для всей системы.
+
+## МОДУЛИ ДОМА
 
 | Модуль | Описание |
 |---|---|
@@ -48,228 +54,13 @@
 | DESIGN_davydovka_tokens.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
 | PROGRESS/SPEC/AUDIT | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
 
-# МОДУЛИ ДОМА
+## ИСТОРИЯ И ПРАВКИ
 
-| Модуль | Описание |
-|---|---|
-| agent.py | ЯДРО: тонкий вход, поднимает голову, тело и ночь |
-| loop.py | ЯДРО: голова и разговор: /ask, guide, диспетчер инструментов |
-| http_handlers.py | ЯДРО: тело HTTP: маршруты, токены, щит согласования, раздача витрины |
-| agent_sched.py | ЯДРО: ночной цикл и сторож |
-| core.py | ЯДРО: лог/трейс, boot_report, двухступенчатая проверка здоровья CREOSON |
-| pdf_tools.py | НАПРАВЛЕНИЯ: pdf-глаз: миниатюры fitz, вердикты реестра по mtime |
-| harvest_reader.py | НАПРАВЛЕНИЯ: провод глаза к harvest.db, только чтение (mode=ro) |
-| rename_tools.py | НАПРАВЛЕНИЯ: план переименования (Creo) |
-| creo_ops_tools.py | НАПРАВЛЕНИЯ: делегат (Creo) |
-| scanner.py | НАПРАВЛЕНИЯ: библиотека parse_model_header, донор харвеста |
-| harvest.py | РУКИ БЕЗ ИИ: сканер: память harvest.db, CLI --roots/--text/--bench |
-| harvest_gui.py | РУКИ БЕЗ ИИ: окно сканера (tkinter), работает без агента |
-| purge_versions.py | РУКИ БЕЗ ИИ: чистильщик версий: превью, перенос в backup, PurgeLock |
-| purge_gui.py | РУКИ БЕЗ ИИ: окно чистильщика (tkinter) |
-| ctl.py | СЛУЖЕБНЫЕ: подъём и снятие агента и creoson (только недостающее) |
-| log_clean.py | СЛУЖЕБНЫЕ: автоуборка D:\AI\log по retention.json |
-| house_state.py | СЛУЖЕБНЫЕ: состояние дома на старте задачи, только чтение |
-| STOP_ALL.ps1 | СЛУЖЕБНЫЕ: снятие процессов по маске и night_enable=0 одной кнопкой |
-| GIT_SYNC.bat | СЛУЖЕБНЫЕ: синхронизация двух корней под гит |
-| GIT_SYNC_REPO.bat | СЛУЖЕБНЫЕ: синхронизация двух корней под гит |
-| web\app.js | ВИТРИНА: интерфейс инженера на порту 8765 |
-| index.html | ВИТРИНА: интерфейс инженера на порту 8765 |
-| pdf_refresh_batch.py | в работе |
-| agent.sqlite | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| harvest.db | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| agent.pid | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| kb_roots.txt | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| users.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| secrets.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| purge_gui_settings.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| harvest_gui_settings.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| agent | ЛОГИ: D:\AI\log\agent |
-| harvest | ЛОГИ: D:\AI\log\harvest |
-| purge | ЛОГИ: D:\AI\log\purge |
-| pdfrefresh | ЛОГИ: D:\AI\log\pdfrefresh |
-| reports | ЛОГИ: D:\AI\log\reports |
-| urn | ЛОГИ: D:\AI\log\urn\<имя> |
-| cleaner | ЛОГИ: D:\AI\log\cleaner |
-| MANIFEST.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| SKILL_index.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| SKILL_local_agent_cline.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| crash\ | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| Creo\ | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| DESIGN_davydovka_tokens.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| PROGRESS/SPEC/AUDIT | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
+| Дата | Спека | Описание |
+|---|---|---|
+| 14.09.2026 | 34 | Ремонт эпохи роста: паспорт и ридми обновлены с датами, модули актуализированы. |
+| 17.09.2026 | 66б-66е | Аудит правил дома, crash-скиллы, МАНИФЕСТ в system-промпт. |
+| 20.09.2026 | 100 | Реконструкция PASSPORT.md (восстановление заголовков и структуры). |
 
-# МОДУЛИ ДОМА
-
-| Модуль | Описание |
-|---|---|
-| agent.py | ЯДРО: тонкий вход, поднимает голову, тело и ночь |
-| loop.py | ЯДРО: голова и разговор: /ask, guide, диспетчер инструментов |
-| http_handlers.py | ЯДРО: тело HTTP: маршруты, токены, щит согласования, раздача витрины |
-| agent_sched.py | ЯДРО: ночной цикл и сторож |
-| core.py | ЯДРО: лог/трейс, boot_report, двухступенчатая проверка здоровья CREOSON |
-| pdf_tools.py | НАПРАВЛЕНИЯ: pdf-глаз: миниатюры fitz, вердикты реестра по mtime |
-| harvest_reader.py | НАПРАВЛЕНИЯ: провод глаза к harvest.db, только чтение (mode=ro) |
-| rename_tools.py | НАПРАВЛЕНИЯ: план переименования (Creo) |
-| creo_ops_tools.py | НАПРАВЛЕНИЯ: делегат (Creo) |
-| scanner.py | НАПРАВЛЕНИЯ: библиотека parse_model_header, донор харвеста |
-| harvest.py | РУКИ БЕЗ ИИ: сканер: память harvest.db, CLI --roots/--text/--bench |
-| harvest_gui.py | РУКИ БЕЗ ИИ: окно сканера (tkinter), работает без агента |
-| purge_versions.py | РУКИ БЕЗ ИИ: чистильщик версий: превью, перенос в backup, PurgeLock |
-| purge_gui.py | РУКИ БЕЗ ИИ: окно чистильщика (tkinter) |
-| ctl.py | СЛУЖЕБНЫЕ: подъём и снятие агента и creoson (только недостающее) |
-| log_clean.py | СЛУЖЕБНЫЕ: автоуборка D:\AI\log по retention.json |
-| house_state.py | СЛУЖЕБНЫЕ: состояние дома на старте задачи, только чтение |
-| STOP_ALL.ps1 | СЛУЖЕБНЫЕ: снятие процессов по маске и night_enable=0 одной кнопкой |
-| GIT_SYNC.bat | СЛУЖЕБНЫЕ: синхронизация двух корней под гит |
-| GIT_SYNC_REPO.bat | СЛУЖЕБНЫЕ: синхронизация двух корней под гит |
-| web\app.js | ВИТРИНА: интерфейс инженера на порту 8765 |
-| index.html | ВИТРИНА: интерфейс инженера на порту 8765 |
-| pdf_refresh_batch.py | в работе |
-| agent.sqlite | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| harvest.db | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| agent.pid | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| kb_roots.txt | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| users.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| secrets.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| purge_gui_settings.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| harvest_gui_settings.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| agent | ЛОГИ: D:\AI\log\agent |
-| harvest | ЛОГИ: D:\AI\log\harvest |
-| purge | ЛОГИ: D:\AI\log\purge |
-| pdfrefresh | ЛОГИ: D:\AI\log\pdfrefresh |
-| reports | ЛОГИ: D:\AI\log\reports |
-| urn | ЛОГИ: D:\AI\log\urn\<имя> |
-| cleaner | ЛОГИ: D:\AI\log\cleaner |
-| MANIFEST.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| SKILL_index.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| SKILL_local_agent_cline.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| crash\ | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| Creo\ | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| DESIGN_davydovka_tokens.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| PROGRESS/SPEC/AUDIT | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-
-PASSPORT — паспорт дома CREO-AGENT
-  2 | Дом: CREO-AGENT v16 · Дата паспорта: 18 сентября 2026 · Обновлён: 18 сентября 2026 (спеки 44, 47, 48; 66б–66e; 93: устойчивость крах-культуры) · Рантайм: D:\AI\tools\agent · Git-корень кода: D:\AI\tools · Git-корень знаний: D:\AI\repo · Контракт: D:\AI\.clinerules v6.0
-
-ПАПКИ ДОМА: Creo, PDF, Web, Инженерные, Трейлы, Ошибки, crash; универсальный закон — MANIFEST.md; этот паспорт — знакомство, не закон
-
-
-Дом — это монолитный инженерный агент на базе Ollama для отдела Creo-конструкторов. Он чертит не сам, а помогает инженеру: помнит всё, что было в базе и в фактографической памяти, смотрит чертежи глазами, показывает связи, время и похожие модели, считает на лету, держит флот машин КБ, растёт через инструменты, которые рождаются в его собственных черновиках и проходят апрув человека, и теперь имеет собственные руки для чтения и записи файлов.
-
-Решения и канон
-Монолит: до 17.09.2026 агент был монолитом в одном `agent.py`; самовольные разделения закрыты, воскрешать `engine.py` запрещено. Словом пользователя 17.09.2026 открыт распил (спека 71): `agent.py` → `sched.py` (планировщик+сторож), `loop.py` (стриминг, промпт, run_loop), `http_handlers.py` (класс Hd) — чистый перенос без смены поведения, фазовые бекапы pre71_pN_, каждая фаза = py_compile + рестарт по трёхчастке, красная приёмка = откат фазы, найденный по дороге баг = строка в аудит (P17), не правка в фазе. Спека 71 реализована.
-Кодировка: двойная кодировка cp1251→utf-8 лечится генерическим обратным ходом по не-ASCII прогонам через `encode("cp1251").decode("utf-8")` с валидацией кириллицей. Пейлоад-скрипты с вшитым чистым текстом запрещены (правило 10.10). Контрольные маркеры в тестах — только ASCII, кириллица только через \u-эскейпы (правило 10.11).
-Контракт: `.clinerules` правится только руками пользователя или отдельной задачей с явным разрешением (правило 4.7). После правки загрузка проверяется в новой сессии.
-Мини-спеки: локальному исполнителю выдаются спеки не более пяти шагов. Надпись «Context compacted» в задаче = автоматический СТОП. Крупные спеки — только облачный исполнитель (правило 13.9).
-Инструменты правки: editor с old_text — замена; без old_text — только создание; полная перезапись — через old_text = всему файлу или через временник + copy; insert_line — только вставка (правило 5.9).
-Фактографическая память: таблица facts в agent.sqlite (спека 47, раздел 14 контракта); читающие инструменты пишут факты через save_fact; инструмент memory_facts читает с фильтрацией; ночная mark_facts_stale помечает устаревшие.
-Руки дома: fs_list/fs_write/fs_edit (спека 44, раздел 15 контракта); approval=True для пишущих, предохранители (бекап, py_compile с откатом, политика путей).
-Аудит отношений: методика 7 проверок (спека 48, раздел 16 контракта); карточки моделей в D:\AI\repo\Creo\cards\; пробы в сессии без записи на диск.
-
-Архитектура
-`agent.py` — монолит, все эндпоинты, роутинг, планировщик, сборка системного промпта, вычистка рассуждений
-`core.py` — ядро: БД (включая таблицу facts), embedding (Ollama), логгер; функции save_fact, get_facts, mark_facts_stale
-`settings.py` — настройки с дефолтами, синхронными с живым конфигом
-`users.py` — атомарные пользователи через os.replace, хэш pbkdf2_hmac sha256
-`tools_registry.py` — реестр инструментов, динамическая регистрация модулей
-Модули инструментов: 39 блоков, 136 инструментов (живой реестр, 17.09.2026): creo_ops_tools, creo_tools, vision_audit, graph_tools, timeline_tools, map_tools, similar_tools, calc_tools (угол), memory_facts_tools, file_hand_tools (fs_list/fs_write/fs_edit) и ещё тридцать блоков *_tools.py (backup, behavior, chat, copy, db, diagnostic, draft, find, fleet, git, help, knowledge, learn, memory, nightly, one_c, passport, pdf, plm, predict, rename, role, scanner, settings, spec, sync, trail, usage, users, vision, web)
-`ui/` — витрина: `index.html`, `graph.html`, `timeline.html`, `map.html`
-`dev/` — утилиты разработки: `ui_check.py` и прочие
-`ctl.py` — управление жизненным циклом: up/down/restart/status
-`data/` — данные вне git: база `agent.sqlite` (включая facts), `secrets.json`, `users.json`, `config.json`, бекапы, трейлы, временная папка, черновики скиллов, флот
-`data/kb/CREO-START.bat` — версионная копия общего батника КБ
-`D:\AI\repo\Creo\cards\` — карточки моделей с дампами отношений и результатами аудита
-
-Модели и контекст
-Повседневная: `gemma4:26b-131k` — окно 131072, быстрейший TTFT в замерах (11–14 с), совпадает с окном Cline, без двойной обрезки
-Резерв: `gemma4:26b` — окно 262144 (базовый тег, Modelfile), для редких длинных задач с явным флагом; каждый запрос платит сорок секунд просто за открытую дверь
-Облачные: ~300K токенов, для КРУПНЫХ задач (раздел 13 контракта)
-VPN-режим: сетевое окно 256k+ для длинных ночных спек; требует проверки памяти и якорей между фазами
-Эмбеддинги: `nomic-embed-text:latest` — 768-мерный вектор, индексация по текстовым корням, 34 365 фрагментов и 40 973 модели в живых матрицах (14.09.2026)
-Тест иголки (7717 в середине 131k): пройден, модель читает середину контекста, не только хвост
-
-Режимы и ротация
-Роли: Администратор, Инженер — в `users.json`, атомарная запись
-Ротация моделей по классам задач (правило 13.8): флагман для инженерных ответов, gemma для повседневного чата, Муза для черновиков и креатива
-Auto-approve для безопасных инструментов, запрос подтверждения для Creo-операций и других менящих действий
-
-Ночная вахта
-Состав `night_tasks` = `scan,index,usage,backup,drafts,mark_facts_stale`. Дефолт в коде и живое значение в конфиге синхронизированы.
-scan — скан моделей в корнях
-index — индексация текстовых корней в таблицу chunks с эмбеддингами
-usage — сбор usage-связей между моделями
-backup — бэкапы sqlite с глубиной из настроек + `tool_housekeeping` (уборка мусора, ротация трейлов)
-drafts — `tool_drafts_build` — сбор черновиков скиллов из удачных цепочек в `data/drafts/skills`
-mark_facts_stale — пометка фактов старше 30 дней как устаревших (раздел 14 контракта)
-tool_drift_check — контроль дрейфа индекса (отдельная задача в вахте)
-
-Безопасность
-`secrets.json` вне git (правило 12.3), пароли и токены только из него
-`users.json` пишется атомарно через `os.replace` (правило 12.1)
-Токены в отчётах и логах маскируются — голова 4 символа (правило 12.4), сырой токен не попадает в транскрипт (правило 12.7)
-Белые корни чтения — только разрешённые каталоги (правило 12.2)
-Токеновые гейты: `/fleet/info` и `trails` в `/status` закрыты без валидного токена (спека 23)
-`/login` возвращает `token`, не пароль; вход проверяется через `check_login`
-
-Инструменты роста
-graph — интерактивный граф связей модели (BOM-дерево, usage, links), D3.js, клик по узлу переходит к графу этой модели
-timeline — временная шкала модели: когда правили файл, соседи в окне ±7 дней, упоминания в истории /ask
-vision_audit — сверка PDF-экспорта чертежа с эталонным чек-листом ГОСТ (штамп, обозначение, наименование, масса, материал, шероховатость, масштаб); вердикты passed/failed/not_determined с цитатой увиденного
-audit_batch — пакетный аудит устаревших экспортов по вердикту «УСТАРЕЛ» из реестра, без Creo
-map — карта проекта: корневые каталоги и топ моделей по связям
-find_similar — поиск похожих моделей по эмбеддингам: по имени (усреднение чанков) или по текстовому запросу, косинусное сходство, проценты
-угол — `tool_angle(a, b)` через быстрый роутер: `угол 10x2` → `Углы: 90°, 11.31°, 78.69°; катеты 10, 2; гипотенуза 10.2`
-search_kb — семантический поиск по 34 365 чанкам через косинусное сходство
-drafts_build — ночная сборка черновиков скиллов, ждёт апрув человека через `drafts_approve`
-memory_facts — чтение фактографической памяти с фильтрацией по entity_type/entity_name
-fs_list/fs_write/fs_edit — руки дома для чтения и записи файлов с предохранителями
-
-Знак «?» в витрине и инструмент `help` — показывают новые возможности без чтения паспорта
-
-Флот и CREO-START
-Живой батник: `Z:\PTC\CREO-START\START-STD\CREO-START.bat` — общий для всех машин КБ, на шаре
-Версионная копия: `D:\AI\tools\agent\data\kb\CREO-START.bat` — в репо агента, под контролем версий
-VBS-обёртка: `CREO-START — копия.vbs` — тихий запуск без окон, отладка двойным кликом по батнику
-Две цифры сети: линк адаптера (Мбит/с) и реальное чтение 10 МБ с шары
-Трейлы: прошлая сессия заливается в центр с именем машины, ротация последних 20 в обеих папках
-Идемпотентный подъём стека: Ollama / CREOSON / агент стартуют только если порт молчит
-Аварийный кэш: робокония копирует старт-стандарт локально с config.pro без сетевых путей — сеть легла, инженер продолжает чертить
-Ротация логов до 1000 строк, уборка временных файлов замера сети, защищённый вызов netdiag.ps1 с логированием отсутствия (спека 31)
-
-История спек
-14 — секреты ушли из кода и из git в `secrets.json`, users атомарный
-19+20 — первая чистка кодировок, монолит-канон, engine.py не воскрешать
-21 — vision_audit фаза 2: материал/шероховатость/масштаб читает модель model_vision
-22 — флаг audit_batch (пакетный аудит устаревших экспортов)
-23 — война хвостов: tmp убран, config.json вылечен от двойной кодировки, дефолт вахты синхронизирован, гейты токенов минимальные
-24 — граф связей модели (D3.js)
-25 — хронология модели (D3.js)
-26 — знак «?» показывает новые возможности
-27 — карта проекта + пакетный аудит (flag)
-28 — гигиена 27: паспорт версионирован в D:\AI\repo, коммит «autosave» обоснованно оставлен
-29 — байтовая чистка не состоялась (живая проба показала чисто)
-30 — поиск похожих моделей по эмбеддингам (с фиксом рассинхрона Z:/D:)
-31 — генерическая чистка двойной кодировки обратным ходом по байтам (10.10)
-31-2 — индексация чанков (починка вставки np.float32) + косметика CREO-START
-32 — исправление ошибки `Incorrect number of bindings` в индексаторе
-33 — витрина и справка: кнопка «подробнее», вычистка рассуждений, инвентаризация ключей
-34 — ремонт эпохи роста: agent.py восстановлен от SyntaxError (U+2014, строки-хвосты), scanner.py вычищен от мёртвого except, починен dev/ui_probe.py (ALL PASS), паспорт и ридми обновлены с датами (14.09.2026)
-44 — руки дома: fs_list/fs_write/fs_edit с предохранителями (бекап, py_compile с откатом, политика путей), approval=True для пишущих
-44v — Автономия HTTP-цикла (Phase 3: Login -> fs_edit via /ask -> approve -> verify). Проверка сквозного пути управления инструментами через API. Автономия подтверждена.
-47 — фактографическая память: таблица facts, save_fact/get_facts/mark_facts_stale, memory_facts, ночная пометка устаревших
-48 — аудит отношений: методика 7 проверок, карточки моделей в D:\AI\repo\Creo\cards\, пробы в сессии без записи на диск
-66б — критический пакет: МАНИФЕСТ в system-промпт, /panel восстановлена (401 без токена), ночной skills_check, /pdfthumb отдаёт PNG, purge-предохранитель scanner.py (пропуск чистки при недоступном корне), creoson_check.py удалён
-66c — аудит правил дома: AUDIT_rules_20260917.md (14 находок); crash-скиллы нормализованы (name = имя файла), skills_check: дельта-снапшот и честные проверки; users: TTL токена 24ч, ensure_admin из secrets.json (дефолт admin/admin снят); ctl: pid-путь подтверждён (P10 снята — «смотрели не в той папке»)
-66d — кластеры аудита исполнены: имена/снапшот, карты (SKILL_index: направления), дубли протокола, заглушки заполнены, P12 миграция определена в .clinerules, М2 уточнён (utf-8 голова близнеца, полный текст отчёта в файле после 2000 знаков)
-66e — четыре вердикта: ctl debounce 8с + дедуп по agent.pid; §7.10 трёхчастная приёмка рестарта; P16 skills_check (grep-поле ОШИБКА, оба написания); Н9/Н10 — токен из query в /pdfthumb|/pdfimg (PNG для <img src>), ранний JSON-вариант /pdfimg снят
-71 — распил agent.py (sched/loop/http_handlers): слово пользователя есть, нога не начата
-
-Мини-спека УГОЛ — быстрый угол по двум катетам
-Мини-спека КОНТЕКСТ-ТЕСТ-3 — замеры окна, иголка на 131k пройдена
-КОНТЕКСТ-ИТОГ — повседневный тег `gemma4:26b-131k`, базовый 256k как резерв
-
-Куда положить: `D:\AI\repo\PASSPORT.md`. После правки — `git -C D:\AI\repo add PASSPORT.md && git -C D:\AI\repo commit -m "passport: обновлён 17.09.2026 (спеки 44, 47, 48: руки дома, фактографическая память, аудит отношений)" && git -C D:\AI\repo push`.
-
-Состояние дома после закрытия эпохи ремонтов и открытия эпохи роста: дом говорит по-русски, видит чертежи глазами, помнит 34 365 фрагментов знаний и факты с датами, умеет находить похожие модели, знает связи и время, держит флот машин КБ, растёт через инструменты (39 блоков, 136 инструментов), имеет собственные руки для чтения и записи файлов с предохранителями, и проводит аудит отношений по методике 7 проверок. Спека 33 (витрина) закрыта, спека 34 — ремонт эпохи роста закрыта, спеки 44/47/48 — руки дома, фактографическая память и аудит отношений закрыты, дальше — только аппетит.
-
-17.09.2026: VPN-режим для сетевого окна 256k+; облачные исполнители с лимитом ~300K для КРУПНЫХ задач; якоря между фазами обязательны (data\tmp\spec_anchor.md).
+---
+*Обновлено: 20.09.2026 (Спека 100)*
