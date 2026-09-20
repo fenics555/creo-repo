@@ -24,4 +24,5 @@ STATUS: ЗАВЕРШЕНА
 ЯКОРЬ: everything is committed and synced.
 ПЛАН: —
 
+- Исправлена синтаксическая ошибка в app.js (showlog line 125).
 === END ===
