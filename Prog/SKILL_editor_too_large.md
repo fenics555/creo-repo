@@ -1,4 +1,7 @@
-# SKILL_editor_too_large.md
+# SKILL_editor_too_large
+# Направление: Программирование
+# Priority: normal
+# When: editor, text not found, large file, old_text
 
 ## ОПИСАНИЕ
 Ошибка при использовании инструмента `editor` с параметром `old_text`, когда объем заменяемого текста превышает 6 КБ.
