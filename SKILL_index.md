@@ -89,7 +89,7 @@ priority: critical
 - Код проекта → python_standard + test_first_rule.
 - Физика/материалы → Инженерные.
 - «Где деталь / когда комплект / якорь / цикл» → production_mirror.
-- «Почему вылетаю / как работать в Cline / где что лежит» → local_agent_cline.
+- «Почему вылетаю / как работать в Cline / где что лежит» → SKILL_local_agent_cline (в корне).
 
 ## ИСТОЧНИКИ ПРАВДЫ
 - DESIGN_davydovka_tokens.md: канон дизайна для новых инструментов.
