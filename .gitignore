@@ -1,5 +1,10 @@
-Трейлы/
-Избранное/
+PROGRESS_*
+SPEC_*
+AUDIT_*
+data/
+log/
 *.sqlite
-*.log
-*.bak
+*.db
+secrets.json
+users.json
+backup_db/

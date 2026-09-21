@@ -3,7 +3,7 @@ system: CRASH
 description: Use when: search_codebase зависает/таймаут или возвращает маркер миграции вместо результатов
 when: search_codebase, timeout, migration marker, result missing, hang
 date: 17.09.2026
-executor: Sergio
+executor: <имя_пользователя>
 task: серия спек 57, поиск по репо
 ПОВТОРЫ: 1
 ОШИБКА (дословно, для grep):

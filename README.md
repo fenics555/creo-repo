@@ -1,6 +1,31 @@
-# Репозиторий знаний КБ — D:\AI\repo
+# Creo-Repo (Agent Knowledge Base)
 
-Центralное хранилище знаний, стандартов и документации дома CREO-AGENT.
+A structured knowledge base and skill set for an AI coding agent (Cline) to work with Creo Parametric and engineering tasks.
+
+## Quick Start
+
+1.  **Clone the repository**:
+    ```bash
+    git clone <repository-url>
+    ```
+
+2.  **Setup environment**:
+    - Copy `.clinerules` from this repository to your `D:\AI` directory (or your agent's root).
+    - Ensure your agent has access to the workspace.
+
+3.  **First Message**:
+    Start your session by providing the agent with the `.clinerules` and the `MANIFEST.md`.
+
+## Structure
+
+- `D:\AI\repo\`: Main knowledge base, skills, and conventions.
+- `D:\AI\tools\agent\`: Agent implementation and tools.
+- `D:\AI\log\`: Logs and reports (not part of the repo).
+
+## License
+
+This project is licensed under the MIT License.
+
 **Обновлено:** 17.09.2026 · **Источник истины:** `PASSPORT.md`
 
 ## Состав
