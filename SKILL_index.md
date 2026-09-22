@@ -14,31 +14,43 @@ priority: critical
 - Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
 - Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md
 
-## ДОМЕН 1: Creo (веб-агент, инженер)
-| Скилл | Назначение |
-|---|---|
-| SKILL_creoson_complete | полная карта API CREOSON (critical) |
-| SKILL_creojs_api | родной API Creo (Creo.JS / pfc*): карта по страницам руководства + сверка с CREOSON (critical) |
-| SKILL_creoson_sessions_workdirs | сессии Creo, старт Creo/CREOSON, рабочие директории, поиск файлов/сборок/чертежей (critical) |
-| SKILL_creoson_rename_mechanism | переименование модели и чертежа: onlysession + save (critical) |
-| SKILL_creoson_probe_method | методика безопасных проб в CREOSON + справка (critical) |
-| SKILL_davydovka_creoson_map | карта операций Давыдовки на CREOSON (что есть, чего нет) |
-| SKILL_creo_commands | быстрый подбор команды под задачу |
-| SKILL_creo_relations | relations: синтаксис, функции, лимиты, примеры |
-| SKILL_relations_constitution | железные ПРАВИЛА relations (critical) |
-| SKILL_creo_company | паспорт: единицы, шаблоны, шифры, обязательные параметры, чертежи ЕСКД |
-| SKILL_creo_templates | канон-шаблоны моделей, свидетельство о рождении TPL_SOURCE |
-| SKILL_curves_from_equation | кривые из уравнения (теория) |
-| SKILL_curves_examples | готовые рецепты кривых |
-| SKILL_spring_compression_generator | генератор пружины сжатия |
-| SKILL_spring_tension_master | эталон пружины растяжения |
+### 1. Creo (Веб-агент, Инженер)
+*Специализация на работе с CAD-системой через API и интерфейсы.*
+- **API & Механизмы**: 
+    - `SKILL_creoson_complete` (API CREOSON) — **critical**
+    - `SKILL_creojs_api` (Creo.JS / pfc*) — **critical**
+    - `SKILL_creoson_sessions_workdirs` (Сессии, директории) — **critical**
+    - `SKILL_creoson_rename_mechanism` (Переименование) — **critical**
+    - `SKILL_creoson_probe_method` (Безопасные пробы) — **critical**
+    - `Creo\SKILL_object_creoson` (Объектные пробы CREOSON) — **normal**
+    - `SKILL_creo_commands` (Подбор команд)
+    - `SKILL_creo_relations` & `SKILL_relations_constitution` (Relations/Связи) — **critical**
+    - `SKILL_curves_from_equation` & `SKILL_curves_examples` (Кривые)
+- **Стандарты КБ**:
+    - `SKILL_creo_company` (Паспорт: единицы, шаблоны, чертежи ЕСКД)
+    - `SKILL_creo_templates` (Канон-шаблоны моделей)
+- **Пробы и тесты** (интеграция «диких» 22.09):
+    - `SKILL_object_creoson_tests-01_asm` (Объектные пробы CREOSON на сборках;
+      пробы гонять по SKILL_creoson_probe_method)
+- **Генераторы**:
+    - `SKILL_spring_compression_generator` / `SKILL_spring_tension_master` (Пружины)
 
-## ДОМЕН 2: Python / VS Code (Continue, программист)
-| Скилл | Назначение |
-|---|---|
-| SKILL_python_standard | стандарт расчётных Python-скриптов (блоки, суффиксы, аудит A1–A15) |
-| SKILL_test_first_rule | правило TEST-first для новых связок |
-
+### 2. Python / VS Code (Программист, папка Prog\)
+*Стандарты кода, тестов и памяти агента; вход направления = эта секция,
+собственный индекс-файл Prog\ = долг (см. секцию 7).*
+- `Prog\SKILL_python_standard` (Стандарт расчётных скриптов: блоки, суффиксы, аудит) — **critical**
+- `Prog\SKILL_test_first_rule` (Правило TEST-first) — **critical**
+- `Prog\SKILL_tool_routing` (Маршрутизация запросов; единственная прописка здесь,
+  из Core не дублировать) — **critical**
+- `Prog\SKILL_agent_memory` (Память агента: что помнить, куда класть)
+- `Prog\SKILL_automated_validation` (Автоматические пробы и гейты)
+- `Prog\SKILL_code_parsing` (Разбор кода: ast, не regex)
+- `Prog\SKILL_cursor_rules_format` (Форматы внешних правил cursor/cline)
+- `Prog\SKILL_diff_and_apply` (Диффы и их применение)
+- `Prog\SKILL_repo_mapping` (Карта репо и указатели)
+- `Prog\SKILL_unit_testing` (Юнит-пробы на копиях)
+- `STANDARD Engineering Calculation Script Architecture.md` (Архитектура расчётных
+  скриптов; прописан под живым именем из корня, переименование = долг секции 7)
 ## ДОМЕН 3: Инженерные (оба агента)
 | Скилл | Назначение |
 |---|---|
@@ -52,26 +64,29 @@ priority: critical
 |---|---|
 | SKILL_production_mirror | производственный контур: склад, входящие, запуск, отгрузки, якорь, время цикла |
 
-## ДОМЕН 5: общее (оба агента)
-| Скилл | Назначение |
-| SKILL_log_management | управление логами и автоуборка (D:\AI\log) |
-|---|---|
-| SKILL_tool_routing | маршрутизация запросов к инструментам (critical) |
-| SKILL_agent_protocol | протокол инженера-напарника (critical) |
-| SKILL_company_conventions | паспорт КБ: станки, продукция, семантика трейлов |
-| SKILL_web_vision_limits | что WEB и ВИЗИЯ умеют и не умеют |
-| SKILL_local_agent_cline | выживание локального ИИ в Cline/VS Code: привычки, транспорт, редактор, крахи, карта дома (critical) |
-| SKILL_strategy | живой журнал направлений развития |
-| AUDIT_rules_*.md (корень repo) | отчёты аудита правил дома (находки, варианты, вердикты) |
-| SKILL_audit_protocol.md | аудит правил и скиллов (режим RULES, включается тегом «аудит») |
+### 5. Общее (Core)
+*Фундаментальные правила работы агента.*
+- **Управление**: 
+    - `SKILL_log_management` (Логи и автоуборка)
+    - `SKILL_agent_protocol` (Протокол инженера-напарника; живёт в корне репо) — **critical**
+    - маршрутизация запросов — см. `Prog\SKILL_tool_routing` — **critical**
+- **Контекст**: 
+    - `SKILL_company_conventions` (Паспорт КБ: станки, семантика)
+    - `SKILL_web_vision_limits` (Возможности WEB/Vision)
+    - `SKILL_local_agent_cline` (**Выживание в Cline/VS Code**; корень репо) — **critical**
+    - `SKILL_strategy` (Журнал развития)
+    - `SKILL_skill_craft` (Ремесло промтов и скиллов; мета-скилл, priority high,
+      подгружается по надобности: задача о промтах, скиллах, правилах, шаблонах)
+    - `SKILL_parameters` (Справочник параметров; «дикий», интегрирован 22.09)
+    - `DESIGN_davydovka_tokens.md` (токены дизайна Давыдовки для окон и витрины;
+      не скилл, а закон дизайна, цитируется .clinerules)
+- **Аудит**: `AUDIT_rules_*.md` и `SKILL_audit_protocol.md`
 
-## ДОМЕН 6: Agents (автономные исполнители)
-| Скилл | Назначение |
-|---|---|
-| SKILL_rag_architect | проектирование RAG-пайплайнов (chunking, embedding, evaluation) |
-| SKILL_skill_security_auditor | аудит безопасности скиллов перед установкой |
-| SKILL_zero_hallucination_coder | строгое кодирование без галлюцинаций (Discuss-Map-Decompose-Execute-Verify) |
-
+### 6. Agents (Автономные исполнители)
+*Внешние источники; priority normal; до первой пробы — внешний источник, не закон дома.*
+- `agents\automation\SKILL_auto_engine.md`
+- `agents\logic\SKILL_logic_flow.md`
+- `agents\data\SKILL_data_harvest.md`
 
 ## ДОМЕН 7: Автогенерируемые (руками не править)
 | Файл | Кто пишет |
@@ -94,6 +109,16 @@ priority: critical
 ## ИСТОЧНИКИ ПРАВДЫ
 - DESIGN_davydovka_tokens.md: канон дизайна для новых инструментов.
 - SKILL_tool_template.md: шаблон создания трёхрукого инструмента.
+
+### 7. ДОЛГИ И ИДЕИ КАРТЫ (честность: нет файла = нет скилла)
+- **PDF**: домен пуст; скиллы перепечати, миниатюр и реестра родятся из практики
+  pdf_tools.py и спеки 104 — долг оживления направления.
+- **Web**: в папке один сырой файл `260826_1610.md`; довести до Золотого стандарта = долг.
+- **Трейлы**: папка не найдена аудитором; сверить путь индекса Трейлов с диском = долг цитаты.
+- **Prog\SKILL_prog_index.md**: собственный индекс направления = долг; до рождения
+  вход в Prog = секция 2 этой карты.
+- **Переименование**: `STANDARD Engineering Calculation Script Architecture.md` →
+  `Prog\SKILL_calc_script_architecture.md` — по слову пользователя, со сверкой ссылок.
 
 ## ЗОЛОТОЙ СТАНДАРТ (Golden Standard Template)
 
