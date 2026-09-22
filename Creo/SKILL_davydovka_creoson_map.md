@@ -34,3 +34,33 @@ priority: high
 Сначала гейт-проба механики в CREOSON (Creo/SKILL_creoson_probe_method.md), затем код.
 Не тащить в дом целые модули Давыдовки: она опирается на CreoJS-вызовы, которых в
 агенте нет; переносится МЕХАНИКА (последовательность CREOSON-вызовов), UI собирается заново.
+
+## ИНВЕНТАРЬ КОДА ДАВЫДОВКИ + ЖИВЫЕ ФАКТЫ (22.09.2026)
+Источник: `D:\AI\ИЗУЧИТЬ\ДАВЫДОВКА\creoJS\creo_bom_js\`; полный конспект —
+`D:\AI\ИЗУЧИТЬ\ДАВЫДОВКА\STUDY_NOTES.md`. Приложение = CreoJS во ВСТРОЕННОМ браузере Creo
+плюс локальный python-сервер на порту **8000** (в доме 8000 занят `copy-server`).
+
+| Файл | Байт | Роль |
+|---|---|---|
+| `creojs.js` = `_creojs.js` | 46 714 | браузерный мост CreoJS (Promise-полифилл + `connector`, сокет-RPC; текст `Connection to Creo session lost`) |
+| `index.creojs` | 50 270 | CreoJS-скрипт СПЕЦИФИКАЦИИ (компоненты, параметры, основная надпись, изображения) |
+| `index_rename.creojs` | 134 111 | CreoJS-скрипт ПЕРЕИМЕНОВАНИЯ (семейства, mfg, `Rename`→`Save`, backup) |
+| `index_report.creojs` | 53 181 | CreoJS-скрипт ОТЧЁТОВ (batch-съёмка окон, фон, конфиг, восстановление сессии) |
+| `rename.js` | 312 813 | UI графа ссылок страницы «Переименование» |
+| `server.py` | 79 461 | HTTP-сервер 8000, эндпоинты `/api/*` (graph, family-table, copy-workspace, excel, pdf) |
+| `excel_export.py` / `excel_import.py` | 26 248 / 5 398 | XLSX-спецификация без внешних зависимостей (zip+xml) |
+| `family_table_file.py` | 9 741 | дерево семейств ПРЯМО ИЗ ФАЙЛА модели (секция `FamilyInf`, теги `e3`/`1f`) |
+| `python\` / `vendor\` | — | портативный CPython 3.13; Pillow, pypdf, reportlab |
+
+Новое (в скиллах не было):
+1. `family_table_file.py` — строки семейств читаются из файла generic БЕЗ сессии Creo и без
+   загрузки исполнений (проверено на Pro/E-, Creo 8, Creo 13); дешёвая альтернатива
+   `familytable:list_tree`/`file:list_instances`.
+2. Паттерн гигиены сессии (`index_report.creojs`): сохранить `originalDirectory` → сменить
+   папку/фон/конфиг → снять → ВОССТАНОВИТЬ фон/конфиг → вернуть папку → активировать окно
+   (не оставлять сессию инженера в чужом состоянии; ср. правило 16.5, `SKILL_creo_cards.md`).
+3. Давыдовка ОДНОсессионная: всё через `pfcGetCurrentSession()`; выбора инстанса Creo и работы
+   с несколькими сессиями НЕТ; «batch» = съёмка окон в ТОЙ ЖЕ сессии.
+4. Записи о нескольких сессиях, переключении и закрытии Creo — `SKILL_creoson_sessions_workdirs.md`
+   (один creoson = один Creo; sessionId — ручка сервера, а не выбор инстанса; `stop_creo` — только
+   прицепленный; `kill_creo` запрещён; адресно — `Stop-Process -Id <pid>`).
