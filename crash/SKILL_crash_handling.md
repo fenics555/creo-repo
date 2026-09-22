@@ -1,3 +1,13 @@
+name: crash_handling
+system: CRASH
+description: Use when: петля или зависание из-за лимитов инструментов (editor too large, длинные цепочки run_commands, editor без old_text)
+when: crash handling, tool limits, editor too large, run_commands chain, loop, hang
+date: 17.09.2026
+executor: Cline
+task: спека 60
+ОШИБКА (дословно, для grep):
+Editor input too large / Invalid input: expected string, received undefined
+
 # SKILL: Обработка критических сбоев (КРАХ)
 
 ## Природа сбоя

@@ -5,6 +5,9 @@
 # date: 19.09.2026
 # executor: Cline (локальная модель)
 
+ОШИБКА (дословно, для grep):
+curl/requests к 8765 → «Connection reset by peer» / «Remote end closed connection without response»
+
 ## СИМПТОМ:
 - `netstat` показывает `LISTENING` на 8765.
 - `curl` или `requests` получают `Connection reset by peer` или `Remote end closed connection without response`.

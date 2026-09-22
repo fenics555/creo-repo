@@ -1,4 +1,12 @@
-﻿# CRASH: appjs-syntaxerror-no-uicheck
+﻿name: crash_appjs-syntaxerror-no-uicheck
+system: CRASH
+description: Use when: правка app.js/index.html ушла без пробы консоли — синтаксическая ошибка живёт до первой проверки
+when: appjs, syntaxerror, ui_check, console, javascript
+date: 20.09.2026
+executor: Cline
+task: правка app.js витрины
+
+# CRASH: appjs-syntaxerror-no-uicheck
 
 ОШИБКА: `app.js:125 Uncaught SyntaxError: missing ) after argument list`
 
