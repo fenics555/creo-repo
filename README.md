@@ -1,44 +1,30 @@
-# Репозиторий знаний КБ — D:\AI\repo
+# Creo Agent — Knowledge Base and Skills
 
-Центralное хранилище знаний, стандартов и документации дома CREO-AGENT.
-**Обновлено:** 17.09.2026 · **Источник истины:** `PASSPORT.md`
+A structured knowledge base, rule set and skill library that lets an AI coding agent
+work with **PTC Creo Parametric** in a reproducible, evidence-based way: CREOSON automation,
+model rename and copy operations, PDF/drawing pairing, crash precedents and a survival guide
+for local LLMs running in the IDE.
 
-## Состав
-- **PASSPORT.md** — состояние и история дома
-- **MANIFEST.md** — универсальный закон дома (правила 1-17, читается первым)
-- **SKILL_*.md** — скиллы-компетенции по доменам (карта: `SKILL_index.md`)
-- **crash/** — прецеденты крахов по шаблону конституции (`SKILL_crash_constitution.md` — документ рамок)
-- **AUDIT_rules_*.md** — отчёты аудита правил дома (находки, варианты, вердикты)
-- **Creo/**, **Инженерные/**, **Web/**, **1C/**, **Vericut/**, **PDF/** — отраслевые справочники
-- **GUIDE/** — руководства по модулям агента
-- **Ошибки/ERR_*.md**, **Трейлы/** — журналы ошибок и трейлов
+## What is inside
+| Path | Purpose |
+|---|---|
+| `MANIFEST.md` | universal rules for any executor (the law layer) |
+| `.clinerules` | environment delta for the Cline agent (transport, editor, search, crashes) |
+| `SKILL_index.md` | map of all skills by domain |
+| `Creo/`, `PDF/`, `Web/`, `Инженерные/`, `Трейлы/`, `Ошибки/` | domain entries and skills |
+| `crash/` | crash constitution plus precedent skills with repeat counters |
+| `PASSPORT.md` | current state of modules, data and history |
+| `tools/agent/` | the agent itself (see its own README) |
 
-## Структура и права
-- Скиллы вносятся только через `write_file` исполнителя или git (правило 10.7); буфер обмена — нет.
-- Новые знания рождаются в `D:\AI\tools\agent\data\drafts` и проходят апрув через `drafts_approve`.
-- Автогенерируемые файлы руками не правятся: `SKILL_company_config.md` (passport_tools), `Трейлы/TRAIL_JOURNAL.md` (trail_tools), `Ошибки/ERR_*.md`.
+## Quick start
+1. Clone the repository and keep `MANIFEST.md` at the root of your knowledge base.
+2. Copy `.clinerules` to your agent root (default `D:\AI`) — it loads automatically on session start.
+3. Start a task: the agent reads the manifest, the survival skill and the domain entry it needs.
 
-## Поиск по знаниям
-- `search_kb` — семантический поиск по индексу (34 365 фрагментов на 14.09.2026)
-- `find_similar` — поиск похожих моделей по эмбеддингам (40 973 модели)
-- `read_file` — чтение файлов в белых корнях
+## Conventions
+- Verbatim Russian content enters files only through the editor; the console does not carry Cyrillic.
+- Every irreversible edit is preceded by a backup; external dumps are stored as raw twins with size and hash.
+- A crash is never silent: report in the task, then a skill in `crash/` with a repeat counter.
 
-## История правок
-- **14.09.2026 — спека 34:** паспорт актуализирован (38 блоков / 133 инструмента, живые цифры матриц), ридми приведены с датами.
-
-## МОДУЛИ ДОМА
-
-[см. PASSPORT.md для полного списка модулей дома]
-
-## ОПЕРАЦИОННЫЙ БЛОК (ПУСК, СТОП, ВЗГЛЯД)
-
-| Действие | Команда / Место | Описание |
-|---|---|---|
-| **ПУСК** (START) | `python D:\AI\tools\agent\agent.py` | Подъём ядра, HTTP-сервера (8765) и ночного цикла. |
-| **СТОП** (STOP) | `powershell D:\AI\STOP_ALL.ps1` | Мгновенная остановка всех процессов агента и Creoson. |
-| **ВЗГЛЯД** (VIEW) | `http://localhost:8765` | Витрина: статус агента, логи, управление. |
-
----
-*Обновлено: 19.09.2026 (Спека 100)*
-
-- **17.09.2026 — спеки 66б–66e:** МАНИФЕСТ вошёл в system-промпт агента; аудит правил дома (`AUDIT_rules_20260917.md`) и исполнение его кластеров; crash-скиллы приведены к шаблону конституции; `skills_check.py` — дельта-снапшот, честные проверки, grep-поле ОШИБКА; вход дома: `ensure_admin` из `secrets.json` (дефолт admin/admin снят), TTL токена 24ч; `.clinerules` v5.10 (определение «миграции», протокол ожидания детач-процесса в SKILL_local_agent_cline); М2 уточнён (utf-8 голова близнеца, отчёт задачи — выжимка в чате, полный текст в файле после 2000 знаков).
+## License
+MIT
