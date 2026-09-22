@@ -95,3 +95,16 @@ PTC Creo Parametric TOOLKIT + Creo JS API Wizard).
 - `Common Files\apps\learning_conn\html` — **Learning Connector**
 - `Common Files\weblink\weblinkexamples\html` — примеры Web.Link
 Все пути — внутри `D:\PTC\CREO12\Creo 12.4.2.0\` (только чтение).
+
+## 11. ОСТАЛЬНЫЕ НАПРАВЛЕНИЯ (кратко, с составом)
+- **`mfg_cmdsyn\`** (24 файла) — синтаксис ЧПУ, пары `.syn`+`.def`: `air-clrsrf`, `coolnt-from`,
+  `cycles`, `gohome-lintol`, `loadtl-opstop`, `origin-postn`, `ppfun-rotabl`, `probe_cycles`,
+  `probe_setup`, `selctl-tmark`, `sync_pt`, `toolno-units` + `cmdsyn.ndx`.
+- **`mfg_cmdsyn_ai\`** (22 файла) — `cl_file`, `cycle`, `cycle_auto`, `feeds`, `machine`, `motion`,
+  `probe_cyc`, `probe_setup`, `sync_pt`, `tool` + `cmdsyn.ndx` (AI-вариант синтаксиса).
+- **`applications\gdt_home\text\resource\html\`** — **215 файлов** (справка **GD&T Advisor**).
+- Мелкие оболочки: `modchk\text\russian\html\` (2), `applications\EZTOL\text\report\html\` (5),
+  `applications\simulate\html\` (5), `apps\learning_conn\html\` (5).
+- **DSM**: `Distributed Services Manager\html` + `Common Files\html\russian\dsm`.
+- **PDF-руководства**: GPost/FIL (постпроцессор), `dbatch.pdf` (Distributed Batch),
+  `METIS_manual` — см. §5; Toolkit/OTK — см. §2–3.

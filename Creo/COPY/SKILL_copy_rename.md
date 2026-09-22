@@ -8,8 +8,8 @@ priority: high
 # КОПИРОВАНИЕ И ПЕРЕИМЕНОВАНИЕ МОДЕЛЕЙ CREO (рабочая методика КБ)
 > Механика через CREOSON доказана 16.09.2026: дисковый `file:rename` падает General Error,
 > работает сессионный `onlysession:true` → `file:save` (старые версии — в backup).
-> См. Creo/SKILL_creoson_rename_mechanism.md; методика проб — Creo/SKILL_creoson_probe_method.md;
-> карта операций Давыдовки — Creo/SKILL_davydovka_creoson_map.md.
+> См. Creo/CREOSON/SKILL_creoson_rename_mechanism.md; методика проб — Creo/CREOSON/SKILL_creoson_probe_method.md;
+> карта операций Давыдовки — Creo/DAVYDOVKA/SKILL_davydovka_creoson_map.md.
 1. Никогда не переименовывать в рабочей папке: Rename переименовывает файл на диске,
    схема «переименовать→сохранить→вернуть имя» уносит копию обратно в оригинал. Только временная папка.
 2. Перед переименованием во временной папке оригиналы должны выйти из сессии,

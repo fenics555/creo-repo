@@ -19,7 +19,7 @@ priority: high
 | Файл | Симптом | Суть | Лечение / правило |
 |---|---|---|---|
 | ERR_260819_stdlib_code.md | блок «загрузился», но первая команда даёт AttributeError | имя блока совпало с модулем стандартной библиотеки Python (`code`) | блоки НЕ называть именами stdlib (code, json, random, mail, types, time, os, re, sys, math); проверять до создания файла |
-| ERR_creoson_write_ops.md | backup: «No 'target_dir' parameter given»; rename: Pro/TOOLKIT General Error | async CREOSON: backup требует `target_dir`; у `file:rename` падает ДИСКОВЫЙ вызов, а параметра `rename_dependencies` в API нет | backup: `{"file":…, "target_dir":…}`; rename: `{file,new_name,onlysession:true}` → `file:save` (диск получает новое имя), старые версии — в backup; подробности: Creo/SKILL_creoson_rename_mechanism.md |
+| ERR_creoson_write_ops.md | backup: «No 'target_dir' parameter given»; rename: Pro/TOOLKIT General Error | async CREOSON: backup требует `target_dir`; у `file:rename` падает ДИСКОВЫЙ вызов, а параметра `rename_dependencies` в API нет | backup: `{"file":…, "target_dir":…}`; rename: `{file,new_name,onlysession:true}` → `file:save` (диск получает новое имя), старые версии — в backup; подробности: Creo/CREOSON/SKILL_creoson_rename_mechanism.md |
 
 ## Правила ERR-файла
 - Имя: `ERR_ГГММДД_короткое_имя.md`.

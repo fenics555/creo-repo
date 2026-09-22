@@ -71,5 +71,41 @@ pfcAssembly, pfcFamily, pfcDrawing, pfcFeature, …):
 3. **Итог пробы:** CREOSON = свой слой `com.simplifiedlogic.nitro.jlink` ПОВЕРХ PTC JLINK
    (`pfcasync.jar`); функции CREOSON отвечают методам `com.ptc.pfc.*` (примеры `jlinkexamples`).
 4. Family/mfg-пробы через CREOSON (`familytable:*`, `bom:get_paths`, копия) — фактическая проверка
-   pfc-слоя (см. `SKILL_copy_assembly_project.md`).
+   pfc-слоя (см. `..\COPY\SKILL_copy_assembly_project.md`).
 Файл пробы: `D:\AI\PROBA\creoson_jar_probe.txt`.
+
+## ПРЯМОЕ УПРАВЛЕНИЕ CREO (без CREOSON) — ЖИВАЯ ПРОБА 22.09.2026
+Проба в `D:\AI\PROBA\jlink_probe` (`DirectProbe.java`): Java-программа напрямую подключилась к
+запущенному Creo через JLINK, без CREOSON:
+```
+OK: JLINK lib pfcasyncmt loaded
+OK: connected, connection=com.ptc.pfc.Implementation.pfcAsyncConnection$AsyncConnection@...
+OK: session=com.ptc.pfc.Implementation.pfcSession$Session@...
+OK: cwd=D:\AI\PROBA\famcopy2\
+OK: disconnected (Creo left running)
+```
+### Рецепт (Java / JLINK)
+1. Класс `com.ptc.pfc.pfcAsyncConnection.pfcAsyncConnection` (из `pfcasync.jar`), нативная либа `pfcasyncmt`.
+2. Среда (иначе `UnsatisfiedLinkError: ... Can't find dependent libraries`):
+   - **`PATH`** += Creo `Common Files\x86e_win64\lib` и `\obj` (как делает `creoson_run.bat`);
+   - `-Djava.library.path` = те же папки;
+   - `PRO_COMM_MSG_EXE` = `...\x86e_win64\obj\pro_comm_msg.exe`;
+   - classpath: `pfcasync.jar` (Creo `Common Files\text\java`).
+3. API `pfcAsyncConnection`: `AsyncConnection_Start(cmd, textpath)` — запустить Creo
+   (`"pro -g:no_graphics -i:rpc_input"` — те же скрытые ключи, что в домовой обёртке);
+   `AsyncConnection_Connect(Display, UserID, TextPath, TimeoutSec)` — **подключиться к запущенному**;
+   `ConnectById`, `ConnectWS`, `GetActiveConnection`; `GetSession()`; `EventProcess()` (цикл событий);
+   `Disconnect(timeout)` — отцепиться (Creo жив); `End()` — закрыть Creo.
+4. Дальше — весь `pfc*`: `session.GetCurrentDirectory()`, `session.RetrieveModel(descr)`, …
+### Давыдовка как пример прямого управления
+Давыдовка идёт ДРУГИМ прямым каналом — **Creo.JS** (JS во встроенном браузере Creo): мост `creojs.js`
++ серверные `*.creojs` зовут `pfcGetCurrentSession()` и тот же `pfc*`; свой Python-сервер на 8000
+делает не-Creo работу (BOM, XLSX, PDF). То есть «прямое управление + свой сервер» — уже
+реализованный образец (см. `..\DAVYDOVKA\SKILL_davydovka_creoson_map.md`).
+### Сравнение каналов (итог)
+| Канал | Как | Плюс | Минус |
+|---|---|---|---|
+| **JLINK (Java)** | своя программа: `pfcasync.jar` + `pfcasyncmt` | все `pfc*`, attach/start, колбэки | нужен Java + PATH/classpath |
+| **Creo.JS** | JS в браузере Creo | без внешнего процесса, UI внутри Creo | привязка к браузеру Creo |
+| **Pro/TOOLKIT (C)** | DLL (`protk.dat`) | внутри процесса Creo, скорость | C/C++, сборка |
+| **CREOSON** | JSON поверх JLINK | любой язык, без сборки | только завернутые функции |

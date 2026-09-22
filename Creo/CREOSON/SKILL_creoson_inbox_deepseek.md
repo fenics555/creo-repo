@@ -18,9 +18,9 @@ executor: DeepSeek4 (разборщик), создан ногой спеки 59
     (спутники <имя>_mfg.asm, <имя>_mfg.drw, <имя>_wp.prt — файловый уровень).
 
 ## ЗАКРЫТО (перенесено в скиллы темы)
-- п.2 pow/rtos → Creo/SKILL_creo_relations.md: «pow подтверждён живыми отношениями 17.09.2026
+- п.2 pow/rtos → Creo/RELATIONS/SKILL_creo_relations.md: «pow подтверждён живыми отношениями 17.09.2026
   (liteika_hts_mm, близнец crc32 454521701)»; строка «функции pow() НЕТ» удалена. СДЕЛАНО 17.09.
-- п.4 правило 16.5 → Creo/SKILL_creo_cards.md: «ЧТЕНИЕ на модели в сессии инженера РАЗРЕШЕНО
+- п.4 правило 16.5 → Creo/STANDARDS/SKILL_creo_cards.md: «ЧТЕНИЕ на модели в сессии инженера РАЗРЕШЕНО
   (file:list, parameter:list, file:massprops, file:relations_get, bom:get_paths); ЗАПРЕЩЕНЫ
   изменяющие (parameter:set, relations_set, regenerate, erase, save, rename, backup)». СДЕЛАНО 17.09.
 - п.5 крах входа → crash\SKILL_crash_login-stale-memory.md: причина Б + профилактики 4-6 +
@@ -41,6 +41,6 @@ executor: DeepSeek4 (разборщик), создан ногой спеки 59
 - Д3 (pid-файл и приёмка рестарта) → СДЕЛАНО 17.09.2026: пункт 5 в
   crash\SKILL_crash_ctl-inline-stderr-truncated.md (core.BASE\agent\agent.pid,
   смена PID + StartTime против mtime правленого файла, попутно sched.py/loop.py).
-- п.10 факты дома → Creo/SKILL_creoson_probe_method.md: порт 9056 рекомендован / дом живёт на
+- п.10 факты дома → Creo/CREOSON/SKILL_creoson_probe_method.md: порт 9056 рекомендован / дом живёт на
   8080 («менять только после пробы на всём флоте»), JRE Java 25 (RELEASE_NOTES 3.0.2),
   эндпоинты /creoson и /server. СДЕЛАНО 17.09.

@@ -28,7 +28,7 @@ priority: high
   пробой `file:relations_get`, файл 73872 б, поле `data` 68640 б, crc32 поля `data` = `74a49c2f`;
   отношений после нормализации 1292 строки (50677 знаков);
 - внутри живые `pow(...,0.3333)` и `rtos(V_PRIB_ROUND)` — отсюда подтверждён факт, что `pow()`
-  в Creo 12 существует (см. Creo/SKILL_creo_relations.md).
+  в Creo 12 существует (см. Creo/RELATIONS/SKILL_creo_relations.md).
 
 ## Дыра в коде дома (закрыта 17.09.2026)
 `file:relations_get` отдаёт отношения **тремя разными формами**: строкой, списком строк и

@@ -21,7 +21,7 @@ file:rename {file,new_name} → «A Pro/TOOLKIT error has occurred: General Erro
 файл ПОД НОВЫМ ИМЕНЕМ (старая версия остаётся — уводить в backup, не удалять).
 Это и есть схема Давыдовки, воспроизведённая чистым CREOSON (без CreoJS).
 Для копии: backup(target_dir) → cd → open → правки → regenerate → save → erase → ОС-перенос.
-Подробности и ловушки: Creo/SKILL_creoson_rename_mechanism.md.
+Подробности и ловушки: Creo/CREOSON/SKILL_creoson_rename_mechanism.md.
 
 ## open после backup
 open видит файл только если backup прошёл и сделан cd в ту же папку.
