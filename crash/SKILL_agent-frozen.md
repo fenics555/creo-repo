@@ -1,4 +1,4 @@
-# name: agent_frozen
+# name: agent-frozen
 # system: CRASH
 # description: Use when: Агент (HTTP-сервис) «застыл» — порт 8765 слушает (LISTENING), но curl/requests возвращают «Connection closed without response» или «Timeout»; процесс есть, но не реагирует на запросы.
 # when: frozen, hang, service stall, connection reset, port listening but no response, застыл, завис сервис

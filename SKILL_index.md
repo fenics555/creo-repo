@@ -22,7 +22,7 @@ priority: critical
     - `SKILL_creoson_sessions_workdirs` (Сессии, директории) — **critical**
     - `SKILL_creoson_rename_mechanism` (Переименование) — **critical**
     - `SKILL_creoson_probe_method` (Безопасные пробы) — **critical**
-    - `Creo\SKILL_object_creoson` (Объектные пробы CREOSON) — **normal**
+    - `Creo\SKILL_object_creoson_tests-01_asm` (Объектные пробы CREOSON на сборках) — **normal**
     - `SKILL_creo_commands` (Подбор команд)
     - `SKILL_creo_relations` & `SKILL_relations_constitution` (Relations/Связи) — **critical**
     - `SKILL_curves_from_equation` & `SKILL_curves_examples` (Кривые)
@@ -67,34 +67,36 @@ priority: critical
 ### 5. Общее (Core)
 *Фундаментальные правила работы агента.*
 - **Управление**: 
-    - `SKILL_log_management` (Логи и автоуборка)
+    - `SKILL_log_management` (Логи и автоуборка) — **долг: файла нет** (аудит 22.09; механику держит tools\agent\log_clean.py)
     - `SKILL_agent_protocol` (Протокол инженера-напарника; живёт в корне репо) — **critical**
     - маршрутизация запросов — см. `Prog\SKILL_tool_routing` — **critical**
 - **Контекст**: 
-    - `SKILL_company_conventions` (Паспорт КБ: станки, семантика)
+    - `company_conventions.md` (Паспорт КБ: станки, семантика; живое имя без префикса SKILL_)
     - `SKILL_web_vision_limits` (Возможности WEB/Vision)
     - `SKILL_local_agent_cline` (**Выживание в Cline/VS Code**; корень репо) — **critical**
-    - `SKILL_strategy` (Журнал развития)
-    - `SKILL_skill_craft` (Ремесло промтов и скиллов; мета-скилл, priority high,
+    - `strategy.md` (Журнал развития; живое имя без префикса SKILL_)
+    - `SKILL_skill_craft` — **долг: файла нет** (аудит 22.09); был задуман как мета-скилл (Ремесло промтов и скиллов; priority high,
       подгружается по надобности: задача о промтах, скиллах, правилах, шаблонах)
     - `SKILL_parameters` (Справочник параметров; «дикий», интегрирован 22.09)
     - `DESIGN_davydovka_tokens.md` (токены дизайна Давыдовки для окон и витрины;
       не скилл, а закон дизайна, цитируется .clinerules)
 - **Аудит**: `AUDIT_rules_*.md` и `SKILL_audit_protocol.md`
+- **Справочники и управленческие файлы** (не скиллы, в маршрутизацию не входят): `GUIDE\db.md`, `GUIDE\models.md`, `GUIDE\plm.md`, `Vericut\VERICUT_отложи_в_Vericut_260820.md`, `Ошибки\ERR_260902_web_fetch.md`, `BACKLOG_tools.md`
 
 ### 6. Agents (Автономные исполнители)
-*Внешние источники; priority normal; до первой пробы — внешний источник, не закон дома.*
-- `agents\automation\SKILL_auto_engine.md`
-- `agents\logic\SKILL_logic_flow.md`
-- `agents\data\SKILL_data_harvest.md`
+*Семь живых файлов, происхождение внешнее; priority normal; подгружаются по надобности; до первой пробы — внешний источник, не закон дома.*
+- `agents\rag-architect\SKILL_rag_architect.md` + `agents\rag-architect\references\` (chunking_strategies_comparison.md, embedding_model_benchmark.md, rag_evaluation_framework.md)
+- `agents\skill-security-auditor\SKILL_skill_security_auditor.md` + `agents\skill-security-auditor\references\threat-model.md`
+- `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md`
+- `agents\SKILL-AUTHORING-STANDARD.md` (стандарт авторства скиллов)
 
 ## ДОМЕН 7: Автогенерируемые (руками не править)
 | Файл | Кто пишет |
 |---|---|
-| SKILL_company_config.md (корень репо) | passport_tools (живой паспорт из config.pro) |
+| Creo/SKILL_company_config.md | passport_tools (живой паспорт из config.pro) |
 | Трейлы/TRAIL_JOURNAL.md | trail_tools |
 | Ошибки/ERR_*.md | каталог ошибок |
-| Избранное/SKILL_favorites_<user>.md | избранное пользователя |
+| Избранное/SKILL_favorites_<user>.md | избранное пользователя (папка gitignored, решение 22.09) |
 
 ## ПРАВИЛА МАРШРУТИЗАЦИИ
 - Команда CREOSON → creo_commands, детали API → creoson_complete.
@@ -108,14 +110,17 @@ priority: critical
 
 ## ИСТОЧНИКИ ПРАВДЫ
 - DESIGN_davydovka_tokens.md: канон дизайна для новых инструментов.
-- SKILL_tool_template.md: шаблон создания трёхрукого инструмента.
+- SKILL_tool_template.md: шаблон создания трёхрукого инструмента — **долг: файла нет** (аудит 22.09).
 
 ### 7. ДОЛГИ И ИДЕИ КАРТЫ (честность: нет файла = нет скилла)
 - **PDF**: домен пуст; скиллы перепечати, миниатюр и реестра родятся из практики
   pdf_tools.py и спеки 104 — долг оживления направления.
 - **Web**: в папке один сырой файл `260826_1610.md`; довести до Золотого стандарта = долг.
-- **Трейлы**: папка не найдена аудитором; сверить путь индекса Трейлов с диском = долг цитаты.
+- **Трейлы**: индекс создан 22.09 — `Трейлы\SKILL_trails_index.md` (в гите); журнал `Трейлы/TRAIL_JOURNAL.md` gitignored как операционный поток (пишет trail_tools).
 - **Prog\SKILL_prog_index.md**: закрыт решением 22.09: вход = секция 2, индекс не создаётся.
+- **Избранное/**: gitignored решением 22.09: личное автогенерируемое пользователя, не память дома; `Трейлы/TRAIL_JOURNAL.md` gitignored как операционный поток, индекс направления в гите.
+- **crash\SKILL_crash_reasoning-loop.md**: указатель вместо двойника (тело = plan-loop); удаление только по слову пользователя (22.09).
+- **SKILL_architect_reviewer** (идея ниже): **долг: файла нет** (аудит 22.09).
 - **Переименование**: `STANDARD Engineering Calculation Script Architecture.md` →
   `Prog\SKILL_calc_script_architecture.md` — по слову пользователя, со сверкой ссылок.
 

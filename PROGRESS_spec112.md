@@ -139,4 +139,12 @@ YAML_OPEN=True и «пять точек» = 1 (anchor: заголовок стр
 - Следствие: MANIFEST.md (стр. 57) и .clinerules ссылаются на путь, который git не хранит; в клоне и на remote файла не будет.
 - Предложение (ждёт слова): исключение в .gitignore «!Трейлы/SKILL_trails_index.md»; отдельно решить судьбу «Избранное/».
 - ГРАБЛЯ: `git add -A` в коммите 6346d73 подмёл три ЧУЖИХ незакоммиченных правки (Creo\SKILL_creoson_sessions_workdirs.md +28, Creo\SKILL_davydovka_creoson_map.md +30, crash\SKILL_crash_cline_longsession_context_death.md +17) — контент не потерян, но ноге 2 добавлять адресно.
+
+## НОГА 2 ВЫПОЛНЕНА (Cline, 22.09.2026): шаг 0 + Э2 + Э4 + закон
+ШАГ 0 (gitignore): строка «Трейлы/» → «Трейлы/TRAIL_JOURNAL.md»; «Избранное/» не тронута. Цитата .gitignore: «Трейлы/TRAIL_JOURNAL.md | Избранное/ | *.sqlite».
+Э4 (crash): name-правки — SKILL_agent-frozen (agent-frozen), SKILL_crash_destructive-probe-rerun (crash_destructive-probe-rerun), SKILL_crash_execution-loop (crash_execution-loop), SKILL_crash_regex_extraction_triple_quote_loop (crash_regex_...); SKILL_crash_reasoning-loop.md → 1799 → 181 Б указатель на SKILL_crash_plan-loop-replan-no-exec.md; crash_loop_perception.md → 1703 → 2265 Б полный паспорт (name/system/description/when/date/executor/task + ОШИБКА дословно + СИМПТОМ/ПРИЧИНА/ПРОФИЛАКТИКА + РОДСТВО + ПОВТОРЫ: 1); РОДСТВО ×1 в crash_reasoning-loop.md и SKILL_crash-plan-loop-replan-no-exec.md.
+Э4 (механизм): skills_check.py расширен (crash\ + корень/Prog; вне crash\ проверка только «шапка name: есть и равна имени файла»; указателям в crash\ льгота; отчёт питоном в UTF-8 D:\AI\log\skills_check\skills_check_report.txt). Прогон: violations=14 notes=17; py_compile exit=0.
+Э2 (карта): живые имена (Creo\SKILL_object_creoson_tests-01_asm, company_conventions.md, strategy.md); долги строками (SKILL_log_management, SKILL_skill_craft, SKILL_tool_template, SKILL_architect_reviewer); секция 6 — семь живых файлов agents; строка «Справочники и управленческие файлы (не скиллы)»; секция 7 — Трейлы/Избранное решением 22.09, указатель reasoning-loop; домен 7 — путь Creo/SKILL_company_config.md.
+ЗАКОН: .clinerules строка 144 (verbatim) про запрет git add -A при параллельных ногах.
+ГРАБЛИ НОГИ 2: мой баг формат-строки («" (grep field)" % fn» → TypeError) поймал py_compile + прогон, не глаз; переадресация `>` в PowerShell снова отдала пустой файл при traceback (читать вывод процессом без переадресации); кириллический путь в git-команде передан питоном.
 === END ===

@@ -1,4 +1,4 @@
-name: execution-loop
+name: crash_execution-loop
 system: CRASH
 description: Use when: агент зацикливается в попытках исправить ошибку, повторяя одну и ту же неудачную команду или используя несоответствующий инструмент (например, слишком сложный python -c в PowerShell).
 when: "зациклился", "execution loop", "repeating failed command", "tooling loop"
