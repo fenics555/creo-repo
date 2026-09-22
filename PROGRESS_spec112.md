@@ -131,6 +131,12 @@ YAML_OPEN=True и «пять точек» = 1 (anchor: заголовок стр
 СТРАХОВКА (слово пользователя: архив не нужен): бекапы в data\backup — pre_spec112_SKILL_local_agent_cline.md.bak (20175), pre_spec112_SKILL_index.md.bak (10194), pre_spec112_Prog_SKILL_agent_protocol.md.bak (162), pre_spec112_Creo_SKILL_creo_index.md.bak (1193) — все Test-Path True; git HEAD до правок 98c5707.
 Ф-ДОП: писатель spec112_leg1_frontmatter.py + verbatim spec112_frontmatter.txt → «body_before=20175 frontmatter=438 body_after=20614 delta=439» (тело побайтно). Проверка: LEN=20614, YAML_OPEN=True, «пять точек»=1, строк 189 (182+7).
 Э1: Prog\SKILL_agent_protocol.md → LEN=159, указатель ×1, целит «в D:\AI\repo\SKILL_agent_protocol.md» (было — в чужой закон); SKILL_index.md: норма @131 («одноимённость» ×1), долг Prog-индекса закрыт @118.
-Э3: Трейлы\SKILL_trails_index.md создан (572 Б, YAML_OPEN=True, name trails-index, priority critical); Creo-индекс строка 8 = «CRASH триггеры: SKILL_creoson_probe_method, Ошибки\ERR_creoson_write_ops.md» (оба адреса живы, Test-Path True); Избранное\ НЕ создавали (git не трекает пустые каталоги, папка родится memory_tools — строка обоснования в отчёте).
+Э3: Трейлы\SKILL_trails_index.md создан (572 Б, YAML_OPEN=True, name trails-index, priority critical); Creo-индекс строка 8 = «CRASH триггеры: SKILL_creoson_probe_method, Ошибки\ERR_creoson_write_ops.md» (оба адреса живы, Test-Path True); Избранное\ НЕ создавали (.gitignore строка 2 «Избранное/» — папка вне гита по замыслу; родит memory_tools; обоснование в отчёте §10).
 ГРАБЛИ НОГИ 1: правка плана съела терминатор «=== END ===» (возвращён этим блоком) — при правках PROGRESS проверять терминатор цитатой; «>» в PowerShell даёт UTF-16 в части запусков, надёжнее читать оба кодирования или писать вывод питоном.
+
+## УТОЧНЕНИЕ НОГИ 1: .gitignore прячет Трейлы (найдено коммитом)
+- Факт: .gitignore строки 1-2 = «Трейлы/» и «Избранное/» → созданный Трейлы\SKILL_trails_index.md (572 Б) НЕ вошёл в коммит 6346d73: `git ls-files | Select-String 'trails-index'` пуст, `status --porcelain -uall` пуст (файл игнорируется).
+- Следствие: MANIFEST.md (стр. 57) и .clinerules ссылаются на путь, который git не хранит; в клоне и на remote файла не будет.
+- Предложение (ждёт слова): исключение в .gitignore «!Трейлы/SKILL_trails_index.md»; отдельно решить судьбу «Избранное/».
+- ГРАБЛЯ: `git add -A` в коммите 6346d73 подмёл три ЧУЖИХ незакоммиченных правки (Creo\SKILL_creoson_sessions_workdirs.md +28, Creo\SKILL_davydovka_creoson_map.md +30, crash\SKILL_crash_cline_longsession_context_death.md +17) — контент не потерян, но ноге 2 добавлять адресно.
 === END ===
