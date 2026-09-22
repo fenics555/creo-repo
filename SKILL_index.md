@@ -118,7 +118,8 @@ priority: critical
 - **Web**: в папке один сырой файл `260826_1610.md`; довести до Золотого стандарта = долг.
 - **Трейлы**: индекс создан 22.09 — `Трейлы\SKILL_trails_index.md` (в гите); журнал `Трейлы/TRAIL_JOURNAL.md` gitignored как операционный поток (пишет trail_tools).
 - **Prog\SKILL_prog_index.md**: закрыт решением 22.09: вход = секция 2, индекс не создаётся.
-- **Избранное/**: gitignored решением 22.09: личное автогенерируемое пользователя, не память дома; `Трейлы/TRAIL_JOURNAL.md` gitignored как операционный поток, индекс направления в гите.
+- **.gitignore (решение 22.09)**: сведены два поколения; память дома (PROGRESS_*, SPEC_*, AUDIT_*, crash/, Трейлы/TRAIL_JOURNAL.md) под гитом не игнорируется; вне гита — secrets.json, users.json, data/, log/, *.db, backup_db/, *.log, *.bak, Избранное/.
+- **Журнал Трейлов (решение 22.09)**: `Трейлы/TRAIL_JOURNAL.md` — память дома о том, кто и когда работал в железе; из игнора убран (в remote уже трекается, а ignore против трекнутого файла бессилен).
 - **crash\SKILL_crash_reasoning-loop.md**: указатель вместо двойника (тело = plan-loop); удаление только по слову пользователя (22.09).
 - **SKILL_architect_reviewer** (идея ниже): **долг: файла нет** (аудит 22.09).
 - **Переименование**: `STANDARD Engineering Calculation Script Architecture.md` →

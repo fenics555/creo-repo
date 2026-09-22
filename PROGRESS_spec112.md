@@ -171,3 +171,12 @@ STATUS: В РАБОТЕ (ЗАВЕРШЕНА — после успешного п
 - STATUS: В РАБОТЕ — отклонение от слова (там «ЗАВЕРШЕНА» после пуша): пуш заблокирован конфликтом файла закона, авторазрешение словом запрещено.
 - Строка-предохранитель (вербатим): «Э5 не запускается на dirty-дереве с чужими правками; autostash запрещён решением 22.09».
 - НУЖНО РЕШЕНИЕ: чей .gitignore побеждает (remote-генерация с PROGRESS_*/SPEC_*/AUDIT_*/data/log или наш с Трейлы/TRAIL_JOURNAL.md и Избранное/); что делать с add/add `Трейлы/SKILL_trails_index.md` (в remote своя версия от 21.09).
+
+### Э5 ЗАКРЫТА (решения 22.09, добивка из клона)
+- СЕКРЕТЫ: `git ls-files -- '*secrets*' '*users*'` в клоне — пусто; `git ls-tree origin/master -- secrets.json users.json` — пусто; `rm --cached` не потребовался.
+- .GITIGNORE: сведённое содержимое verbatim — в живом репо (коммит 96fdf51, 74 → 593 Б) и в клоне; конфликт rebase снят этим содержимым.
+- ТРЕЙЛЫ-ИНДЕКС: сведение = наш текст базой (11 строк) + раздел «дополнения поколения remote (цитата 22.09)» (8 уникальных строк remote, снятых через `git show :2:`).
+- REBASE + PUSH: «Successfully rebased and updated refs/heads/master»; push «73be39c..91556ce master -> master» exit=0; клон `## master...origin/master` (0/0).
+- README: локальная версия возвращена отдельным коммитом 91556ce «README: return local edition after merge» — 1566 Б байт-в-байт из git (файл README_ours_d1bc7fd.md = 1599 Б, это тот же текст с BOM+CRLF от Out-File; коммитить его = менять переводы строк).
+- ЖИВОЕ РЕПО (шаг 5): входная цитата не чистая — чужие правки живы (M Creo/SKILL_creo_index.md, M Creo/SKILL_creoson_write_rules.md, ?? Creo/SKILL_copy_assembly_project.md, ?? Creo/SKILL_creoson_workflow.md) → по слову СТОП: rebase живого дерева НЕ запускался, reset --hard запрещён; живой мастер остаётся ahead/behind относительно origin до слова его ноги.
+- STATUS: ЗАВЕРШЕНА (карта, crash, закон, мини-репо, push из клона); открытый хвост один — синхронизация живого репо с origin, ждёт чужую ногу.
