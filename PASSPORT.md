@@ -1,66 +1,49 @@
 # PASSPORT.md
 
 ## Описание
-Паспорт дома — это актуальное состояние модулей, инструментов и истории развития репозитория D:\AI\repo. 
-Является "источником истины" для всей системы.
+Паспорт дома — актуальное состояние модулей, инструментов и истории развития репозитория.
+Служит «источником истины» по составу: что где лежит и зачем. Читается один раз при знакомстве.
 
-## МОДУЛИ ДОМА
-
-| Модуль | Описание |
-|---|---|
-| agent.py | ЯДРО: тонкий вход, поднимает голову, тело и ночь |
-| loop.py | ЯДРО: голова и разговор: /ask, guide, диспетчер инструментов |
-| http_handlers.py | ЯДРО: тело HTTP: маршруты, токены, щит согласования, раздача витрины |
-| agent_sched.py | ЯДРО: ночной цикл и сторож |
-| core.py | ЯДРО: лог/трейс, boot_report, двухступенчатая проверка здоровья CREOSON |
-| pdf_tools.py | НАПРАВЛЕНИЯ: pdf-глаз: миниатюры fitz, вердикты реестра по mtime |
-| harvest_reader.py | НАПРАВЛЕНИЯ: провод глаза к harvest.db, только чтение (mode=ro) |
-| rename_tools.py | НАПРАВЛЕНИЯ: план переименования (Creo) |
-| creo_ops_tools.py | НАПРАВЛЕНИЯ: делегат (Creo) |
-| scanner.py | НАПРАВЛЕНИЯ: библиотека parse_model_header, донор харвеста |
-| harvest.py | РУКИ БЕЗ ИИ: сканер: память harvest.db, CLI --roots/--text/--bench |
-| harvest_gui.py | РУКИ БЕЗ ИИ: окно сканера (tkinter), работает без агента |
-| purge_versions.py | РУКИ БЕЗ ИИ: чистильщик версий: превью, перенос в backup, PurgeLock |
-| purge_gui.py | РУКИ БЕЗ ИИ: окно чистильщика (tkinter) |
-| ctl.py | СЛУЖЕБНЫЕ: подъём и снятие агента и creoson (только недостающее) |
-| log_clean.py | СЛУЖЕБНЫЕ: автоуборка D:\AI\log по retention.json |
-| house_state.py | СЛУЖЕБНЫЕ: состояние дома на старте задачи, только чтение |
-| STOP_ALL.ps1 | СЛУЖЕБНЫЕ: снятие процессов по маске и night_enable=0 одной кнопкой |
-| GIT_SYNC.bat | СЛУЖЕБНЫЕ: синхронизация двух корней под гит |
-| GIT_SYNC_REPO.bat | СЛУЖЕБНЫЕ: синхронизация двух корней под гит |
-| web\app.js | ВИТРИНА: интерфейс инженера на порту 8765 |
-| index.html | ВИТРИНА: интерфейс инженера на порту 8765 |
-| pdf_refresh_batch.py | в работе |
-| agent.sqlite | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| harvest.db | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| agent.pid | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| kb_roots.txt | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| users.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| secrets.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| purge_gui_settings.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| harvest_gui_settings.json | БАЗЫ И СОСТОЯНИЕ (data\): agent.sqlite, harvest.db, harvest.lock, agent.pid, kb_roots.txt, users.json, secrets.json, purge_gui_settings.json, harvest_gui_settings.json |
-| agent | ЛОГИ: D:\AI\log\agent |
-| harvest | ЛОГИ: D:\AI\log\harvest |
-| purge | ЛОГИ: D:\AI\log\purge |
-| pdfrefresh | ЛОГИ: D:\AI\log\pdfrefresh |
-| reports | ЛОГИ: D:\AI\log\reports |
-| urn | ЛОГИ: D:\AI\log\urn\<имя> |
-| cleaner | ЛОГИ: D:\AI\log\cleaner |
-| MANIFEST.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| SKILL_index.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| SKILL_local_agent_cline.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| crash\ | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| Creo\ | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| DESIGN_davydovka_tokens.md | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-| PROGRESS/SPEC/AUDIT | ПАМЯТЬ ДОМА (D:\AI\repo): MANIFEST.md, SKILL_index.md, SKILL_local_agent_cline.md, crash\, Creo\, DESIGN_davydovka_tokens.md, PROGRESS/SPEC/AUDIT — под гитом, не чистится. |
-
-## ИСТОРИЯ И ПРАВКИ
-
-| Дата | Спека | Описание |
+## Слои знания
+| Слой | Файл | Назначение |
 |---|---|---|
-| 14.09.2026 | 34 | Ремонт эпохи роста: паспорт и ридми обновлены с датами, модули актуализированы. |
-| 17.09.2026 | 66б-66е | Аудит правил дома, crash-скиллы, МАНИФЕСТ в system-промпт. |
-| 20.09.2026 | 100 | Реконструкция PASSPORT.md (восстановление заголовков и структуры). |
+| Закон | `MANIFEST.md` | универсальные правила для любого исполнителя |
+| Адаптер Cline | `.clinerules` | дельта среды: транспорт, редактор, поиск, крахи, рестарты |
+| Скилл выживания | `SKILL_local_agent_cline.md` | привычки против вылетов, чек-лист хода |
+| Карта скиллов | `SKILL_index.md` | домены и навигация |
+| Направления | `Creo\`, `PDF\`, `Web\`, `Инженерные\`, `Трейлы\`, `Ошибки\` | входы тем и скиллы |
+| Прецеденты | `crash\` | конституция вылетов, экземпляры со счётчиками |
+| Память | `PROGRESS/SPEC/AUDIT`, `DESIGN_*.md` | журналы ног, спеки, дизайн-токены |
 
----
-*Обновлено: 20.09.2026 (Спека 100)*
+## Модули агента (`D:\AI\tools\agent`)
+| Модуль | Назначение |
+|---|---|
+| `agent.py` | тонкий вход: поднимает голову, тело и ночь |
+| `loop.py` | голова и диалог: `/ask`, диспетчер инструментов |
+| `http_handlers.py` | тело HTTP: маршруты, токены, щит согласования, витрина |
+| `sched.py` | ночной цикл и сторож |
+| `core.py` | лог/трейс, boot_report, проверка здоровья Creo-моста |
+| `tools_registry.py` | автоподключение блоков `*_tools.py` |
+| `creo_tools.py`, `creo_ops_tools.py` | чтение Creo через CREOSON; пишущие операции под щитом |
+| `rename_tools.py`, `copy_tools.py` | переименование и копирование моделей |
+| `scanner.py`, `harvest.py` | индекс памяти (SQLite), CLI и окно без ИИ |
+| `pdf_tools.py` | миниатюры и вердикты свежести пар PDF/чертёж |
+| `purge_versions.py` | чистка склада версий с предохранителем |
+| `ctl.py` | идемпотентный подъём стека (11434, 8080, 8000, 8765) |
+| `log_clean.py`, `house_state.py` | уборка логов по retention, состояние дома на старте |
+| `STOP_ALL.ps1`, `GIT_SYNC*.bat` | служебные сценарии |
+
+## Данные и логи
+- Данные: `data\` — база памяти, pid-файл, корни чтения, пользователи; секреты вне git.
+- Логи: `D:\AI\log\<программа>\`; отчёты ног — `D:\AI\log\reports\`;
+  временные файлы исполнителей — `D:\AI\log\urn\<исполнитель>\`.
+
+## История
+| Дата | Что сделано |
+|---|---|
+| 14.09.2026 | ремонт эпохи роста: восстановление модулей, обновление паспорта и ридми |
+| 17.09.2026 | аудит правил дома, крах-скиллы, манифест в системный промпт |
+| 20.09.2026 | реконструкция паспорта (заголовки и структура) |
+| 21.09.2026 | паспорт и ридми приведены к нейтральному виду для публикации |
+
+*Обновлено: 21.09.2026*
