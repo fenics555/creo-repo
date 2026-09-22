@@ -1,6 +1,6 @@
 name: crash_deleted-house-file-without-word
 system: CRASH
-description: Use when a home file (like harvest_gui.py) is deleted outside data\\tmp or data\\backup without direct user instruction.
+description: Use when: домовой файл (напр. harvest_gui.py) удалён вне data\tmp и data\backup без прямого слова пользователя
 when: delete, harvest_gui, house-file, manual-deletion
 date: 20.09.2026
 executor: Cline

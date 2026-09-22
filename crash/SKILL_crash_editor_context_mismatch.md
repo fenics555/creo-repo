@@ -1,6 +1,6 @@
 name: crash_editor_context_mismatch
 system: CRASH
-description: Use when editor fails due to text mismatch or size limits in large refactors.
+description: Use when: editor падает из-за несовпадения текста или лимита размера при крупных правках
 when: editor, mismatch, large, text, too_large
 date: 20.09.2026
 executor: Cline

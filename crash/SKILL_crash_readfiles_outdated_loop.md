@@ -1,6 +1,6 @@
 name: crash_readfiles_outdated_loop
 system: CRASH
-description: Use when `read_files` returns `[outdated - see the latest file content]` repeatedly in a loop.
+description: Use when: `read_files` в цикле возвращает `[outdated - see the latest file content]`
 when: readfiles, outdated, loop, tool-loop
 date: 19.09.2026
 executor: Cline

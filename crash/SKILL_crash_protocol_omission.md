@@ -1,14 +1,16 @@
-# SKILL: crash_protocol_omission
-
 name: crash_protocol_omission
+system: CRASH
+description: Use when: пропуск обязательной записи крах-скилла — ритуал краха выполнен частично
+when: protocol_omission, пропуск скилла, ритуал краха, диагностика без скилла
+date: 17.09.2026
 executor: Cline
-
-## Description
-Incident: omission of skill writing.
-
-## Prevention
-1. Diagnosis
-2. Anchor
-3. Write skill
-
-ОШИБКА: omission of skill writing
+task: <текущая задача>
+ОШИБКА (дословно, для grep):
+omission of skill writing
+СИМПТОМ: после инцидента сделана диагностика/отчёт, но крах-скилл не создан (ритуал разорван).
+ПРИЧИНА: крах-протокол воспринят как «диагностика», а не как единый ритуал «отчёт + скилл».
+ПРОФИЛАКТИКА:
+1. Диагностика (5 вопросов).
+2. Якорь — что уже на диске.
+3. Записать крах-скилл по шаблону конституции — тем же сообщением, что и отчёт.
+ПОВТОРЫ: 1

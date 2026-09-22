@@ -1,6 +1,6 @@
 name: crash_editor-text-not-found
 system: CRASH
-description: Use when: editor tool fails to find the exact old_text despite apparent match.
+description: Use when: editor не находит точный old_text, хотя при чтении текст совпадает
 when: editor, text-not-found, mismatch
 date: 16.09.2026
 executor: Cline
