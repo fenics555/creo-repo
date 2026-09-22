@@ -161,3 +161,13 @@ YAML_OPEN=True и «пять точек» = 1 (anchor: заголовок стр
 STATUS: В РАБОТЕ (ЗАВЕРШЕНА — после успешного пуша ноги 3).
 УТОЧНЕНИЕ НОГИ 3: канон дефис/подчёркивание снял три ложных (violations 14 → 3), BOM-фикс чтения (utf-8-sig) снял ещё два (`SKILL_editor_too_large.md`, `crash_appjs-syntaxerror-no-uicheck.md` — файлы начинаются с \ufeff, шапка name: не читалась); остаётся ОДИН: repo/SKILL_index.md (found skill-index, expected index) — канон дефисов его не лечит, нужен решение-слово. Коммит ноги 3: bfa2e38.
 === END ===
+
+### Э5 (возобновление): запасной путь (в) выполнен, СТОП на конфликте ЗАКОНА
+- Входная цитата: чужие правки живы (M Creo/SKILL_creo_index.md, M Creo/SKILL_creoson_write_rules.md, ?? Creo/SKILL_copy_assembly_project.md, три чужих .bak) → штатный pull --rebase запрещён словом; работа из клона D:\AI\log\urn\cline\repo_clone (`git clone --local`, origin → GitHub, `fetch origin master`).
+- remote = 21.09 09:30–10:30, чужая машина: 73be39c, 0cfd3be, 0212b62; fetch дал «forced update»; в remote УЖЕ есть папка Трейлы (индекс + TRAIL_JOURNAL.md).
+- rebase в клоне: шаг 14/21 — конфликт README.md (ВНЕ закона) → разрешён в пользу remote, наша версия сохранена `D:\AI\log\urn\cline\README_ours_d1bc7fd.md` (1599 Б) — вернуть отдельным коммитом; шаг 18/21 — конфликт `.gitignore` (ЗАКОН по перечню слова) + add/add `Трейлы/SKILL_trails_index.md` → СТОП, `rebase --abort` выполнен (клон вернулся: master 22d65f1, ahead 21, behind 3).
+- ЦИТАТА конфликта .gitignore: HEAD(remote) добавляет `PROGRESS_*`, `SPEC_*`, `AUDIT_*`, `data/`, `log/`; наша сторона — `Трейлы/TRAIL_JOURNAL.md`, `Избранное/`. Полный remote .gitignore: PROGRESS_*, SPEC_*, AUDIT_*, data/, log/, *.sqlite, *.db, secrets.json, users.json, backup_db/.
+- РАССИНХРОН: живой мастер (ahead 21, behind 3) с origin не сведён, push НЕ выполнен.
+- STATUS: В РАБОТЕ — отклонение от слова (там «ЗАВЕРШЕНА» после пуша): пуш заблокирован конфликтом файла закона, авторазрешение словом запрещено.
+- Строка-предохранитель (вербатим): «Э5 не запускается на dirty-дереве с чужими правками; autostash запрещён решением 22.09».
+- НУЖНО РЕШЕНИЕ: чей .gitignore побеждает (remote-генерация с PROGRESS_*/SPEC_*/AUDIT_*/data/log или наш с Трейлы/TRAIL_JOURNAL.md и Избранное/); что делать с add/add `Трейлы/SKILL_trails_index.md` (в remote своя версия от 21.09).
