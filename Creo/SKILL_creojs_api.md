@@ -92,3 +92,24 @@ priority: critical
   их удобно сопоставлять с ответом `drawing:create` в CREOSON.
 - Web.Link и VB API (`weblinkug.pdf`, `vbug.pdf`) — родственные API того же pfc-слоя:
   полезны, когда Creo.JS молчит, но в доме канал один — CREOSON.
+
+## Трёхслойное устройство SDK (разбор 22.09.2026, из `D:\PTC\CREO12\…\apps\creojs\creojsweb`)
+Движок — **Chrome V8 внутри процесса Creo**, ECMAScript 2018. Слои:
+1. **Core `creojs.js`** — глобальный объект `CreoJS`, регистрация приложения в сессии через
+   `creojs_id`, жизненный цикл (Connect/Disconnect), собственная реализация `Promise`.
+2. **Abstraction `browser.creojs`** — developer-API через **JS `Proxy`**: любое обращение
+   `CreoJS.method()` перехватывается, имя+аргументы упаковываются в запрос (можно писать
+   «родным» JS, не думая о протоколе).
+3. **Bridge `creojsbridge.js`** — IPC-драйвер: `$CALLCreoModule` передаёт запрос в движок Creo
+   и разрешает `CallPromise` при ответе; ошибки Creo приходят в JS.
+Итог: высокоуровневый веб-API над низкоуровневым IPC; в доме канал — CREOSON, а Creo.JS
+остаётся родным путём для механизмов Давыдовки (см. `SKILL_davydovka_creoson_map.md`).
+
+## Где лежат SDK и справка
+- Родной SDK: `D:\PTC\CREO12\Creo 12.4.2.0\Common Files\apps\creojs\creojsweb`
+  (`creojs.js`, `browser.creojs`, `creojsbridge.js`) + примеры `…\creojsexamples\`
+  (в т.ч. `otk\` — Object TOOLKIT: `test_parameters.js`, `assembly_structure.js`, `feature_tree_explore.js`).
+- Веб-справка PTC (Creo Parametric TOOLKIT `api/`+`user_guide/` + Creo JS API Wizard) —
+  `D:\AI\ИЗУЧИТЬ\CREO\creo_toolkit_online_help` (2950 файлов, 27.8 МБ; перенесена из репо 22.09.2026).
+- **Нативная справка PTC TOOLKIT/OTK и Creo.JS SDK**: `D:\AI\ИЗУЧИТЬ\CREO\creo_toolkit_online_help` (2950 файлов, 27.8 МБ) и `D:\PTC\CREO12\Creo 12.4.2.0\Common Files\apps\creojs` (creojsexamples, creojsweb, otk_api_spec); читать по надобности диапазонами и grep, в гит не входить, в репо не копировать.
+- PDF PTC (`creojsug.pdf`, `vbug.pdf`, `weblinkug.pdf`, `RUS_configoptions.pdf` и релиз-ноты, 7 файлов) остаются в `Creo\CREO_DOCS\` — они уже в истории гита, повторно не переносятся.
