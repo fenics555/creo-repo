@@ -147,4 +147,16 @@ YAML_OPEN=True и «пять точек» = 1 (anchor: заголовок стр
 Э2 (карта): живые имена (Creo\SKILL_object_creoson_tests-01_asm, company_conventions.md, strategy.md); долги строками (SKILL_log_management, SKILL_skill_craft, SKILL_tool_template, SKILL_architect_reviewer); секция 6 — семь живых файлов agents; строка «Справочники и управленческие файлы (не скиллы)»; секция 7 — Трейлы/Избранное решением 22.09, указатель reasoning-loop; домен 7 — путь Creo/SKILL_company_config.md.
 ЗАКОН: .clinerules строка 144 (verbatim) про запрет git add -A при параллельных ногах.
 ГРАБЛИ НОГИ 2: мой баг формат-строки («" (grep field)" % fn» → TypeError) поймал py_compile + прогон, не глаз; переадресация `>` в PowerShell снова отдала пустой файл при traceback (читать вывод процессом без переадресации); кириллический путь в git-команде передан питоном.
+
+## НОГА 3 (Cline, 22.09.2026): Э4-остаток + нормализация + мини-репо; Э5 — СТОП по цитате
+Э4-ОСТАТОК (ОШИБКА только цитатами, не сочинена):
+- SKILL_crash_handling.md — паспорт: name: crash_handling, system CRASH, executor Cline, ОШИБКА «Editor input too large / Invalid input: expected string, received undefined» (цитата из закона SKILL_local_agent_cline.md, образец диагностики).
+- crash\SKILL_editor_too_large.md — name: editor_too_large, executor Cline, ОШИБКА «Editor input too large» (цитата из тела самого файла, строка 4).
+- crash_appjs-syntaxerror-no-uicheck.md — name/executor добавлены; ОШИБКА уже была в теле (app.js:125 Uncaught SyntaxError: missing ) after argument list).
+- SKILL_agent-frozen.md — поле ОШИБКА добавлено цитатой из своего же СИМПТОМ («Connection reset by peer» / «Remote end closed connection without response»).
+- SKILL_crash_execution-loop.md — поле ОШИБКА добавлено цитатой из своего же ОБЪЯСНЕНИЕ («зациклился (или "повторяет неудачную команду", "tooling loop")»).
+НОРМАЛИЗАЦИЯ: skills_check.py — canon() приводит дефис/подчёркивание к одному канону; в шапку отчёта внесены вербатим-строка решения и грабли ноги 2. Прогон обязателен (грабля: прогон ловит то, что py_compile не ловит).
+МИНИ-РЕПО: D:\AI\.gitignore (/*, !/.gitignore, !/.clinerules), git init + адресный add + коммит «outer mini-repo: clinerules under git (decision 22.09)». Цитаты: ls-files = 2 строки, status пуст.
+Э5 — СТОП-ОТЧЁТ (цитаты): ветка «## master...origin/master [ahead 18, behind 3]» — локально 18 коммитов, на remote 3 чужих; в worktree ЧУЖИЕ незакоммиченные правки (Creo/SKILL_creoson_sessions_workdirs.md, Creo/SKILL_creoson_write_rules.md — состав меняется между проверками = параллельная нога работает прямо сейчас). `git pull --rebase` на грязном дереве откажет («cannot pull with rebase»), а autostash/rebase 18 коммитов поверх чужих 3 при живой чужой ноге = риск сломать дом. Жду слова: ждать чужую ногу, либо --autostash, либо pull в отдельном клоне.
+STATUS: В РАБОТЕ (ЗАВЕРШЕНА — после успешного пуша ноги 3).
 === END ===
