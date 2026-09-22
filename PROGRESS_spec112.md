@@ -60,4 +60,77 @@ baseline skills_check обновлён прогоном.
 ЯКОРЬ: см. выше; git HEAD d1bc7fd.
 ГРАБЛИ: переадресация `>` в PowerShell пишет UTF-16 → чужой вывод читать
 `-Encoding unicode` или писать файл питоном; skills_check проверяет ТОЛЬКО crash\.
+## ПЛАН ЭТАПОВ (редакция напарника, принята ногой 1; STATUS: В РАБОТЕ)
+НОРМА Э1 (слово пользователя, вариант D): удалений и переименований нет вовсе; одноимённый
+указатель (162-167 Б) при живом теле = домовая норма; два одноимённых ТЕЛА = нарушение.
+Э1 (2 правки): (1) Prog\SKILL_agent_protocol.md — ПОЛНАЯ перезапись одной строкой
+«Закон живёт в D:\AI\repo\SKILL_agent_protocol.md; этот файл — указатель, дублирование закона
+запрещено» (сейчас целит в чужой закон, SHA 3D6C049A…); (2) SKILL_index.md, секция «ЗОЛОТОЙ
+СТАНДАРТ» — добавить строку нормы про указатель (verbatim из слова). Три указателя оставить.
+Prog-индекс не создавать; строку долга в секции 7 заменить.
+Э2 (≈8 правок SKILL_index.md): мёртвые 13 ссылок по карте ноги: живые имена —
+company_conventions.md (было SKILL_company_conventions), strategy.md (было SKILL_strategy),
+Creo\SKILL_object_creoson_tests-01_asm.md (было SKILL_object_creoson), Трейлы\SKILL_trails_index.md
+(заживёт в Э3), SKILL_calc_script_architecture (долг переименования STANDARD…); долговые строки —
+SKILL_log_management, SKILL_skill_craft, SKILL_tool_template, SKILL_architect_reviewer,
+SKILL_favorites_ (родятся от memory_tools); SKILL_auto_engine/logic_flow/data_harvest —
+заменить фактическим списком 7 живых файлов agents. Плюс строка регистрации
+«справочники и управленческие файлы (GUIDE\db|models|plm, Vericut\, Ошибки\ERR_260902_web_fetch.md,
+BACKLOG_tools.md), не скиллы, в маршрутизацию не входят».
+Якоря (свежее чтение): секция 2 шапка («*Стандарты кода, тестов и памяти агента; вход
+направления = эта секция,»), секция 5 строки 70-82, секция 6 строки 85-89, долги строки 113-121,
+ЗОЛОТОЙ СТАНДАРТ строки 123-131, ИСТОЧНИКИ ПРАВДЫ 109-111.
+Э3 (2-3 правки + команды): создать Трейлы\ и Трейлы\SKILL_trails_index.md (фронтматтер
+name trails-index, system трейлы, priority critical, when: трейл, журнал, сессия, кто открывал;
+три строки: живой журнал Трейлы\TRAIL_JOURNAL.md пишет trail_tools.py, руками не править;
+разбор = trail_analyze/trail_diagnose; накопленные проблемы = trail_problems); папку Избранное\
+создать; Creo-индекс строка 8 — мёртвый SKILL_crash_creoson-write-rules → SKILL_creoson_probe_method.
+Э4 (≈10 правок): четвёрку loop НЕ сливать; добить поля по §6 конституции (ОШИБКА дословно,
+executor) в SKILL_crash_reasoning-loop.md, crash_reasoning-loop.md, SKILL_crash_plan-loop-replan-no-exec.md,
+crash_loop_perception.md + строку «РОДСТВО: семья loop, см. также …» перекрёстно; те же поля —
+SKILL_crash_handling.md и crash\SKILL_editor_too_large.md; skills_check.py расширить на корень и
+Prog с отчётом в UTF-8; после правки .py — py_compile.
+Э5 (2-3 команды): git pull --rebase origin master, затем push; конфликт на файле закона
+(MANIFEST, .clinerules, корневые SKILL_, crash\) = СТОП-отчёт с цитатой, авторазрешение запрещено;
+конфликт вне закона — решать в пользу remote, своё поверх отдельным коммитом.
+Ф-ДОП (1 правка): в корень SKILL_local_agent_cline.md вставить yaml-фронтматтер (verbatim слова:
+name: local-agent-cline, system: общее, description «Use when: локальная модель ИИ работает в
+VS Code / Cline…», when «Cline, локальная модель, gemma, выживание, вылет, контекст, транспорт,
+редактор, run_commands, крах», priority: critical), тело не трогать ни символом; приёмка
+YAML_OPEN=True и «пять точек» = 1 (anchor: заголовок строки 2, insert не по номеру).
+Бумаги: этапные блоки перед «=== END ===»; STATUS В РАБОТЕ → ЗАВЕРШЕНА после Э5; отчёт
+дополняется таблицей «этап → цитата»; коммит и пуш внутри Э5.
+
+### УТОЧНЕНИЯ НОГИ К ПЛАНУ (требуют слова или подтверждения)
+1. name-mismatch остаются: Э4 добивает ОШИБКА/executor, но 5 файлов сохранят расхождение
+   `name:` с именем файла (SKILL_agent-frozen.md: agent_frozen/agent-frozen;
+   SKILL_crash_destructive-probe-rerun.md; SKILL_crash_execution-loop.md:
+   execution-loop/crash_execution-loop; SKILL_crash_reasoning-loop.md; SKILL_crash_regex_…).
+   Правка поля `name:` внутри файла — не переименование, но у reasoning-loop получится имя,
+   совпадающее с name в соседнем crash_reasoning-loop.md. Нужно решение: править `name:`
+   или признать долг строкой.
+2. Пустая папка Избранное\ в git не хранится (git не трекает пустые каталоги) — после клона её
+   не будет; memory_tools создаёт её по потребности. Предложение: не создавать вовсе либо
+   положить файл-заглушку.
+3. Отчёт расширенного skills_check: у инструмента нет понятия исполнителя — предлагаю
+   D:\AI\log\skills_check\skills_check_report.txt (правило «каждая программа пишет лог в свою
+   подпапку»), а не log\urn\<исполнитель>\.
+4. Проверка корня и Prog в skills_check: правила конституции (executor, ОШИБКА) к ним не
+   применимы — иначе 100% ложных срабатываний (например GUIDE\*.md без фронтматтера).
+   Предложение: вне crash\ проверять только наличие шапки `name:` и равенство её имени файла
+   без SKILL_/.md.
+5. Creo-индекс: живая замена мёртвого триггера — есть и точнее SKILL_creoson_probe_method:
+   Ошибки\ERR_creoson_write_ops.md (реальный разбор ошибок записи). Предлагаю указать оба.
+6. Э5: rebase при конфликте оставляет репо в состоянии rebase — план Б: `git rebase --abort`
+   и СТОП-отчёт. Пуш в сеть ≤25 с не гарантирован (первая попытка отклонена по
+   non-fast-forward, не по авторизации).
+7. ОБЪЁМ: ≈25-30 вызовов на все этапы (>20 = передача). Предложение: нога 1 = Ф-ДОП + Э1 + Э3
+   (закон и пустоты), нога 2 = Э2 + Э4, нога 3 = Э5 (синк).
+
+## Э1 + Э3 + Ф-ДОП ВЫПОЛНЕНО (нога 1, Cline, 22.09.2026)
+СТРАХОВКА (слово пользователя: архив не нужен): бекапы в data\backup — pre_spec112_SKILL_local_agent_cline.md.bak (20175), pre_spec112_SKILL_index.md.bak (10194), pre_spec112_Prog_SKILL_agent_protocol.md.bak (162), pre_spec112_Creo_SKILL_creo_index.md.bak (1193) — все Test-Path True; git HEAD до правок 98c5707.
+Ф-ДОП: писатель spec112_leg1_frontmatter.py + verbatim spec112_frontmatter.txt → «body_before=20175 frontmatter=438 body_after=20614 delta=439» (тело побайтно). Проверка: LEN=20614, YAML_OPEN=True, «пять точек»=1, строк 189 (182+7).
+Э1: Prog\SKILL_agent_protocol.md → LEN=159, указатель ×1, целит «в D:\AI\repo\SKILL_agent_protocol.md» (было — в чужой закон); SKILL_index.md: норма @131 («одноимённость» ×1), долг Prog-индекса закрыт @118.
+Э3: Трейлы\SKILL_trails_index.md создан (572 Б, YAML_OPEN=True, name trails-index, priority critical); Creo-индекс строка 8 = «CRASH триггеры: SKILL_creoson_probe_method, Ошибки\ERR_creoson_write_ops.md» (оба адреса живы, Test-Path True); Избранное\ НЕ создавали (git не трекает пустые каталоги, папка родится memory_tools — строка обоснования в отчёте).
+ГРАБЛИ НОГИ 1: правка плана съела терминатор «=== END ===» (возвращён этим блоком) — при правках PROGRESS проверять терминатор цитатой; «>» в PowerShell даёт UTF-16 в части запусков, надёжнее читать оба кодирования или писать вывод питоном.
 === END ===

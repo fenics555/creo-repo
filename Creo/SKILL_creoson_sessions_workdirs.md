@@ -174,3 +174,29 @@ priority: critical
    в потоке `HTTP-Dispatcher`; после падения лечится `ctl.py up` (8080 → новый PID).
 7. Наблюдение: `Get-Process xtop` в моей сессии отдавал RAM 18-19 МБ вместо ~530 МБ
    (урезанные права) — честные цифры брать из `tasklist`/`Get-CimInstance`.
+
+## 10. ВТОРОЙ CREOSON ПРИ ДВУХ CREO — ОТКАЗ И ПАДЕНИЕ JVM (22.09.2026)
+Полигон `D:\AI\PROBA`. Живой факт: при **двух** запущенных Creo (инженер `xtop 1044` +
+полигон `xtop 5732`) свежий creoson2 (`D:\PTC\CREO-LOCAL-SETUP\creoson2`, `setvars.bat`
+`JSON_PORT=8081`) на `connection:connect` вернул дословно
+`{"status":{"error":true,"message":"Unable to connect to Creo; more than one instance of Creo is running"}}`,
+затем HTTP-соединение оборвалось, а **JVM упал нативно** (`hs_err_pid16084.log`, 22.09 14:55:40).
+При этом УЖЕ привязанный creoson (8080) продолжал отвечать на своём инстансе.
+ВЫВОД: CREOSON не выбирает инстанс Creo; новый creoson при 2+ Creo не подключается и падает.
+Полигонные пробы допустимы только при РОВНО ОДНОМ Creo в системе.
+
+### Полигонный Creo с конфигом (проверенный приём)
+1. `config.pro` кладётся в **start-in папку** — туда, куда делает `cd /d` обёртка запуска
+   (`D:\AI\PROBA\23-1017GRI\nitro_proe_remote.bat`); источник — локальный КБ-конфиг
+   `D:\PTC\CREO-LOCAL-SETUP\CREO-LOCAL-START\config.pro` (строки `Z:` уже вырезаны).
+2. Запуск: `cmd /c "D:\AI\PROBA\23-1017GRI\nitro_proe_remote.bat"` (внутри `start "" parametric.exe`).
+3. ПРИЗНАК, ЧТО КОНФИГ ПРОЧИТАН (read-only проверка): новый трейл появляется в `trail_dir`
+   из конфига (`D:\PTC\CREO-LOCAL-SETUP\TEMP\trails\trail.txt.N`), а НЕ в папке старта; в трейле
+   видна загрузка модулей из конфига (Vericut `cgtproev` по `protkdat`, AFX по `afx_enabled`).
+   Живая проба 22.09.2026: `trail.txt.1069` от PID 5732, start 14:54:49 — Vericut/AFX на месте.
+4. Ограничение «полного совпадения»: КБ-шаблоны (`mm_part.prt`, `sborka_mm.asm`, `mm_sheet.prt`)
+   и `MY_ESKD.dtl` лежат ТОЛЬКО на `Z:`; локальный конфиг несёт лишь `template_drawing
+   $PRO_DIRECTORY\ШАБЛОНЫ/c_drawing.drw`. Полный матч шаблонов требует копии с `Z:` — отдельно
+   по слову пользователя (на 22.09 запрет «на `Z:` не ходить» действует).
+5. Закрытие СВОЕГО лишнего инстанса — адресно `Stop-Process -Id <pid>` (по `Get-Process xtop`);
+   после закрытия система возвращается к одному Creo, и creoson снова связывается штатно.
