@@ -12,23 +12,37 @@ priority: critical
 ## НАПРАВЛЕНИЯ (первый указатель, состав по MANIFEST.md)
 - Creo: Creo\SKILL_creo_index.md · PDF: PDF\SKILL_pdf_index.md · Web: Web\SKILL_web_index.md
 - Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
-- Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md
+- Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md (закон) + crash\SKILL_crash_index.md (список крах-скиллов)
 
 ### 1. Creo (Веб-агент, Инженер)
 *Специализация на работе с CAD-системой через API и интерфейсы.*
 - **API & Механизмы**: 
     - `SKILL_creoson_complete` (API CREOSON) — **critical**
     - `SKILL_creojs_api` (Creo.JS / pfc*) — **critical**
+    - `SKILL_creo_docs_map` (Карта документации Creo: хелпы, PDF, API-руководства) — **high**
+    - `SKILL_creo_api_ecosystem` (Экосистема API: один pfc* у Creo.JS/OTK/VB/Web.Link/JLINK/CREOSON) — **high**
     - `SKILL_creoson_sessions_workdirs` (Сессии, директории) — **critical**
     - `SKILL_creoson_rename_mechanism` (Переименование) — **critical**
     - `SKILL_creoson_probe_method` (Безопасные пробы) — **critical**
     - `Creo\SKILL_object_creoson_tests-01_asm` (Объектные пробы CREOSON на сборках) — **normal**
+    - `SKILL_creoson_workflow` (Полный цикл работы в CREOSON: подключение, папки/переключение, чтение/запись) — **critical**
+    - `SKILL_copy_assembly_project` (Умная копия проекта: сборка+детали+чертежи+спутники+семейства) — **critical**
+    - `SKILL_copy_rename` (Методика копии/переименования моделей)
+    - `SKILL_creoson_write_rules` (Пишущие операции CREOSON)
+    - `SKILL_davydovka_creoson_map` (Карта Давыдовка ↔ CREOSON)
+    - `SKILL_creostart_fleet` (Старт машин КБ, флот, логи)
     - `SKILL_creo_commands` (Подбор команд)
     - `SKILL_creo_relations` & `SKILL_relations_constitution` (Relations/Связи) — **critical**
     - `SKILL_curves_from_equation` & `SKILL_curves_examples` (Кривые)
 - **Стандарты КБ**:
     - `SKILL_creo_company` (Паспорт: единицы, шаблоны, чертежи ЕСКД)
     - `SKILL_creo_templates` (Канон-шаблоны моделей)
+    - `SKILL_company_config` (Живые значения config.pro)
+    - `SKILL_naming_spec` (Имена, шифры, обязательные параметры)
+    - `SKILL_drawings_eskd` (Чертежи ЕСКД)
+    - `SKILL_parameters_guide` / `SKILL_reference_limits` (Параметры и лимиты)
+    - `SKILL_relations_basics` / `SKILL_relations_examples` (Relations: база и примеры)
+    - `SKILL_creo_cards` (Карточки моделей, сырые близнецы)
 - **Пробы и тесты** (интеграция «диких» 22.09):
     - `SKILL_object_creoson_tests-01_asm` (Объектные пробы CREOSON на сборках;
       пробы гонять по SKILL_creoson_probe_method)

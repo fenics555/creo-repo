@@ -6,7 +6,9 @@ when: creoson, backup, rename, копия, async
 priority: critical
 ---
 # CREOSON: пишущие операции (async-мост)
-1. backup: только с "target_dir". Без него ошибка параметра.
+1. backup: только с "target_dir" (без него — ошибка параметра) И файл обязан быть ОТКРЫТ
+   в сессии, иначе `File '<name>' was not open.` (проба полигона 22.09.2026). Порядок:
+   `file:open {display:false}` → `file:backup {file, target_dir}`.
 2. rename: дисковый вызов file:rename {file,new_name} в async ПАДАЕТ (Pro/TOOLKIT
    General Error), а параметра rename_dependencies в CREOSON НЕТ вовсе. Рабочий путь —
    сессионный: file:rename {file,new_name,onlysession:true} (ссылки сборок-владельцев

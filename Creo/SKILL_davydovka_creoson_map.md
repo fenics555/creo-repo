@@ -17,9 +17,9 @@ priority: high
 | `ListRows()` / вложенные семейства / `GetImmediateGenericInfo` | `file:has_instances`, **`file:list_instances`** (отдаёт `generic`, `files`, `dirname`), **`familytable:list_tree`** (иерархия с `total`), `familytable:get_parents` | ✅; у не найденного в путях поиска файла `list_instances` вернул `null` |
 | Связь «чертёж → модель» | **`drawing:list_models {drawing}`** → `{files:[...]}` | ✅ (чертёж должен быть открыт в сессии) |
 | `Rename()` в сессии + `Save()` | **`file:rename {onlysession:true}` → `file:save`** | ✅ (см. Creo/SKILL_creoson_rename_mechanism.md) |
-| `Backup(descriptor)` по каждому файлу | `file:backup {file, target_dir}` (оба параметра обязательны) |  схема подтверждена спекой, проба не сделана |
-| `Copy()` модели/семейства с новым именем | ОС-копия версий + `file:open/regenerate/save/erase`; дерево — `familytable:list_tree` | ✅ частично (в доме: `agent/copy_tools.py`) |
-| Экспорт JPEG для отчётов (`ExportRasterImage`) | `interface:export_image` |  спека есть, проба не сделана |
+| `Backup(descriptor)` по каждому файлу | `file:backup {file, target_dir}` (оба обязательны) | ✅ проба 22.09.2026 (полигон): `error:false`, в `target_dir` лёг `23-1017gri-01r.prt.1` |
+| `Copy()` модели/семейства с новым именем | ОС-копия версий + `file:open/regenerate/save/erase`; дерево — `familytable:list_tree` | ✅ реализовано: Creo/SKILL_copy_assembly_project.md (умная копия проекта) + `agent/copy_tools.py` |
+| Экспорт JPEG для отчётов (`ExportRasterImage`) | `interface:export_image` | ✅ проба 22.09.2026: `{file,type:"JPEG",filename,height,width}` → `{filename,dirname}`; `filename` БЕЗ пути с `:` (иначе «invalid character: :»); модель должна быть показана (`file:display`) |
 | **Мануфактуринг** (`creoRenameManufacturingInfo`, fixture-компоненты) | в каталоге CREOSON **нет ни одной `mfg-*` функции** | ❌ отсутствует: отдельная задача или ручная работа |
 | Граф использования файлов, «не используется» | своя база `usage(child,parent,parent_path)` + `bom:get_paths` | ✅ (в доме `usage_tools.py`, `graph_tools.py`) |
 

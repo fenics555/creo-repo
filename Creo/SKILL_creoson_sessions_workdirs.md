@@ -194,9 +194,13 @@ priority: critical
    из конфига (`D:\PTC\CREO-LOCAL-SETUP\TEMP\trails\trail.txt.N`), а НЕ в папке старта; в трейле
    видна загрузка модулей из конфига (Vericut `cgtproev` по `protkdat`, AFX по `afx_enabled`).
    Живая проба 22.09.2026: `trail.txt.1069` от PID 5732, start 14:54:49 — Vericut/AFX на месте.
-4. Ограничение «полного совпадения»: КБ-шаблоны (`mm_part.prt`, `sborka_mm.asm`, `mm_sheet.prt`)
-   и `MY_ESKD.dtl` лежат ТОЛЬКО на `Z:`; локальный конфиг несёт лишь `template_drawing
-   $PRO_DIRECTORY\ШАБЛОНЫ/c_drawing.drw`. Полный матч шаблонов требует копии с `Z:` — отдельно
-   по слову пользователя (на 22.09 запрет «на `Z:` не ходить» действует).
+4. ПОЛНЫЙ МАТЧ БЕЗ КОПИРОВАНИЯ (22.09.2026): положить в start-in папку полигона БОЕВОЙ
+   `config.pro` (`Z:\PTC\CREO-START\START-STD\config.pro`, 17 КБ) — он ссылается на общие
+   `Z:`-ассеты (шаблоны, `MY_ESKD.dtl`, шрифты, форматы), а TEMP/trails у него уже локальные
+   (`D:\PTC\CREO-LOCAL-SETUP\TEMP`). Тяжёлые ассеты (`НАСТРОЙКИ` 431 МБ, `Libraries` 14 ГБ)
+   НЕ копировать — читаются с `Z:` напрямую. Проверено: `template_solidpart` =
+   `Z:\...\НАСТРОЙКИ\ШАБЛОНЫ/mm_part.prt`, `drawing_setup_file` = `Z:\...\configs/MY_ESKD.dtl`,
+   `pro_font_dir` = `Z:\...\ШРИФТЫ_CREO\text\russian\`. Правило пользователя 22.09:
+   `Z:\PTC\CREO-START` — читать можно, писать нельзя.
 5. Закрытие СВОЕГО лишнего инстанса — адресно `Stop-Process -Id <pid>` (по `Get-Process xtop`);
    после закрытия система возвращается к одному Creo, и creoson снова связывается штатно.

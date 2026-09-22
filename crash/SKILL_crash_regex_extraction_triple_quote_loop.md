@@ -1,6 +1,6 @@
 name: crash_regex_extraction_triple_quote_loop
 system: CRASH
-description: Infinite loop during regex-based extraction of triple-quoted code blocks in agent.py logic.
+description: Use when: бесконечный цикл при regex-извлечении блоков кода в тройных кавычках (agent.py)
 when: regex, extraction, loop, triple_quote, regex_extraction
 date: 17.09.2026
 executor: Cline

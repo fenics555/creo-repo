@@ -1,15 +1,17 @@
-# SKILL: crash_omission_of_revive_protocol
-
 name: crash_omission_of_revive_protocol
+system: CRASH
+description: Use when: пропуск обязательных шагов ритуала (чтение скилла и строка-доказательство) при REVIVE или крахе
+when: revive, omission, ритуал, строка-доказательство
+date: 17.09.2026
 executor: Cline
-
-## Description
-Incident: omission of mandatory ritual steps (reading skill and providing proof string) during a REVIVE or Crash event.
-
-## Prevention
-1. Treat REVIVE/Crash as an atomic ritual, not just a diagnostic task.
-2. Always include the mandatory proof string: «скилл выживания прочитан; крах-скил: <имя или нет>».
-3. Always re-read `SKILL_local_agent_cline.md` in the same response as the diagnostics.
-4. If the response lacks the ritual, it is a violation.
-
-ОШИБКА: omission of ritual steps during REVIVE/Crash
+task: <текущая задача>
+ОШИБКА (дословно, для grep):
+omission of ritual steps during REVIVE/Crash
+СИМПТОМ: ответ на REVIVE/крах не содержит обязательной строки-доказательства и перечитывания скилла выживания.
+ПРИЧИНА: ритуал REVIVE/краха воспринят как обычная диагностика, а не как единый обряд.
+ПРОФИЛАКТИКА:
+1. REVIVE/крах — атомарный ритуал, а не просто диагностика.
+2. Всегда включать строку-доказательство: «скилл выживания прочитан; крах-скил: <имя или нет>».
+3. Перечитывать `SKILL_local_agent_cline.md` тем же сообщением, что и диагностику.
+4. Ответ без ритуала — нарушение.
+ПОВТОРЫ: 1
