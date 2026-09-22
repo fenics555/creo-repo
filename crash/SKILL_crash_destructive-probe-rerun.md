@@ -1,4 +1,4 @@
-name: crash-destructive-probe-rerun
+name: crash_destructive-probe-rerun
 system: CRASH
 description: Use when: разрушительная проба (kill_creo, delete, erase, перезапись) исполнена ПОВТОРНО из оставшегося в tmp скрипта
 when: kill_creo, destructive, probe, rerun, tmp, повтор, разрушительная проба, Creo
