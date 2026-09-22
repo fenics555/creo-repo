@@ -110,6 +110,6 @@ priority: critical
   (`creojs.js`, `browser.creojs`, `creojsbridge.js`) + примеры `…\creojsexamples\`
   (в т.ч. `otk\` — Object TOOLKIT: `test_parameters.js`, `assembly_structure.js`, `feature_tree_explore.js`).
 - Веб-справка PTC (Creo Parametric TOOLKIT `api/`+`user_guide/` + Creo JS API Wizard) —
-  `D:\AI\ИЗУЧИТЬ\CREO\creo_toolkit_online_help` (2950 файлов, 27.8 МБ; перенесена из репо 22.09.2026).
-- **Нативная справка PTC TOOLKIT/OTK и Creo.JS SDK**: `D:\AI\ИЗУЧИТЬ\CREO\creo_toolkit_online_help` (2950 файлов, 27.8 МБ) и `D:\PTC\CREO12\Creo 12.4.2.0\Common Files\apps\creojs` (creojsexamples, creojsweb, otk_api_spec); читать по надобности диапазонами и grep, в гит не входить, в репо не копировать.
-- PDF PTC (`creojsug.pdf`, `vbug.pdf`, `weblinkug.pdf`, `RUS_configoptions.pdf` и релиз-ноты, 7 файлов) остаются в `Creo\CREO_DOCS\` — они уже в истории гита, повторно не переносятся.
+  `D:\AI\ИЗУЧИТЬ\CREO\creo_toolkit_online_help` (2950 файлов, 27.8 МБ) снята пользователем 22.09.2026 — в скиллах на неё не опираться; источник — установка `D:\PTC\CREO12` и онлайн-справка PTC.
+- **Нативная справка PTC TOOLKIT/OTK и Creo.JS SDK**: `D:\PTC\CREO12\Creo 12.4.2.0\Common Files\apps\creojs` (creojsexamples, creojsweb, otk_api_spec); читать по надобности диапазонами и grep, в гит не входить, в репо не копировать.
+- PDF-копии PTC (7 файлов: `creojsug.pdf`, `vbug.pdf`, `weblinkug.pdf`, `RUS_configoptions.pdf`, релиз-ноты) удалены из репо словом пользователя 22.09.2026 — в гит не возвращать; восстанавливать из установки PTC при задаче.
