@@ -179,4 +179,12 @@ STATUS: В РАБОТЕ (ЗАВЕРШЕНА — после успешного п
 - README: локальная версия возвращена отдельным коммитом 91556ce «README: return local edition after merge» — 1566 Б байт-в-байт из git (файл README_ours_d1bc7fd.md = 1599 Б, это тот же текст с BOM+CRLF от Out-File; коммитить его = менять переводы строк).
 - ЖИВОЕ РЕПО (шаг 5): входная цитата не чистая — чужие правки живы (M Creo/SKILL_creo_index.md, M Creo/SKILL_creoson_write_rules.md, ?? Creo/SKILL_copy_assembly_project.md, ?? Creo/SKILL_creoson_workflow.md) → по слову СТОП: rebase живого дерева НЕ запускался, reset --hard запрещён; живой мастер остаётся ahead/behind относительно origin до слова его ноги.
 - STATUS: ЗАВЕРШЕНА (карта, crash, закон, мини-репо, push из клона); открытый хвост один — синхронизация живого репо с origin, ждёт чужую ногу.
+
+### CREO-НОГА (22.09.2026, отдельная задача, Cline): справка из репо в библиотеку
+- ПЕРЕНОС: `repo\Creo\CREO_DOCS\creo_toolkit_online_help` → `D:\AI\ИЗУЧИТЬ\CREO\creo_toolkit_online_help`; было 27 807 333 Б / 2950 файлов, стало 27 807 333 Б / 2950 файлов, источника на старом месте нет; `git status` не содержит строк CREO_DOCS; 7 PDF PTC (`creojsug.pdf`, `vbug.pdf`, `weblinkug.pdf`, `RUS_configoptions.pdf`, релиз-ноты) остаются в гите — они уже в истории и не переписываются.
+- ОБОСНОВАНИЕ: vendor-документация PTC не redistributится через гит и remote; вес репо не растёт; дом читает библиотеку по надобности.
+- УКАЗАТЕЛИ verbatim: `Creo\SKILL_creojs_api.md` (строка 114) и `Creo\SKILL_creo_index.md` (раздел «БИБЛИОТЕКА ИЗУЧИТЬ\CREO (указатели, чтение по надобности)»); SDK-путь подтверждён Test-Path: `D:\PTC\CREO12\Creo 12.4.2.0\Common Files\apps\creojs` (creojsexamples, creojsweb, otk_api_spec).
+- ИНВЕНТАРЬ: 11 папок библиотеки + перенесённая справка, итого 1 206 544 066 Б / 17 963 файла (таблица с размерами и головами README/индексов — в индексе направления).
+- ДОЛГ И ЗАКОН (вербатим): «удаление D:\AI\ИЗУЧИТЬ\CREO\creojs и PDF без прямого слова пользователя = нарушение п.5 манифеста; смягчение: KB-маркдауны в data\backup\pre_delete_creojs, PDF-дубли в библиотеке». В `.clinerules` строка 145: «изучение = чтение и перенос; удаление источников вне data\tmp и data\backup = только прямое слово пользователя, даже при доказанных дублях».
+- ФАКТ ДИСКА: папки `creojs` в `D:\AI\ИЗУЧИТЬ\CREO` нет (проба 22.09), SDK живёт в установке PTC (путь выше).
 === END ===
