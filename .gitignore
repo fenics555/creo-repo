@@ -9,6 +9,8 @@ data/
 log/
 *.db
 backup_db/
+# *.sqlite (решение 22.09): единственный .sqlite в репо живёт в backup_db/; правило держим против новых
+*.sqlite
 *.log
 *.bak
 # Личное вне гита:
