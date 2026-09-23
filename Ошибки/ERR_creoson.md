@@ -57,7 +57,7 @@ file:erase, затем rename ОС-файла.
 даже если в другой папке лежит одноимённый файл.
 Лечение: чистить циклом file:erase по каждому имени из file:list, повторять до
 пустого списка; перед пробой печатать sess_start. Проверено 16.09.2026.
-См. Creo/SKILL_creoson_probe_method.md.
+См. Creo/CREOSON/SKILL_creoson_probe_method.md.
 
 ### 1.9 file:relations_get — data бывает строкой, списком И словарём
 Симптом: агент отдаёт отношения в виде python-списка (`['Обозначение=rel_model_name ', ...]`)
@@ -72,7 +72,7 @@ file:erase, затем rename ОС-файла.
 бекап `data\backup\pre_relations_list_fix_creo_tools.py.bak`, py_compile зелёный,
 агент перезапускается (модуль читается при старте). Сырой близнец отношений:
 `Creo\cards\liteika_hts_mm_relations_raw.json` (73872 б, data 68640 б, crc32 74a49c2f).
-См. Creo/SKILL_creo_cards.md.
+См. Creo/STANDARDS/SKILL_creo_cards.md.
 
 ## 2. Creo / CreoJS (переименование, семейства, копия сборки)
 

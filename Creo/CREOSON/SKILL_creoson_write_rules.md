@@ -14,7 +14,7 @@ priority: critical
    сессионный: file:rename {file,new_name,onlysession:true} (ссылки сборок-владельцев
    переключаются в памяти, диск не тронут) → file:save пишет файл ПОД НОВЫМ ИМЕНЕМ;
    старые версии уводить в backup, не удалять. Чертёж и владельцев грузить ДО rename,
-   сохранять снизу вверх, чертёж последним. См. Creo/SKILL_creoson_rename_mechanism.md.
+   сохранять снизу вверх, чертёж последним. См. Creo/CREOSON/SKILL_creoson_rename_mechanism.md.
 3. Копия модели: backup(target_dir=temp) → creo:cd temp → file:open →
    parameter/set, relations_set, regenerate → file:save → file:erase →
    ОС-rename/перенос файлов → creo:cd обратно.
@@ -25,9 +25,9 @@ priority: critical
 functions.html + web\assets\creoson_stuff\jsonSpecs\*.json (по файлу на функцию) +
 start.html (запуск; порт рекомендован 9056, а 22/80/8080/443 просят избегать) +
 playground.html (тестер из браузера). Эндпоинты: POST /creoson и /server.
-Механика rename и ловушки: Creo/SKILL_creoson_rename_mechanism.md;
-методика безопасных проб: Creo/SKILL_creoson_probe_method.md;
-сессии, старт Creo/CREOSON и рабочие директории: Creo/SKILL_creoson_sessions_workdirs.md.
+Механика rename и ловушки: Creo/CREOSON/SKILL_creoson_rename_mechanism.md;
+методика безопасных проб: Creo/CREOSON/SKILL_creoson_probe_method.md;
+сессии, старт Creo/CREOSON и рабочие директории: Creo/CREOSON/SKILL_creoson_sessions_workdirs.md.
 
 
 export_pdf — пишущая операция: только через инструмент с approval (pdf_refresh);

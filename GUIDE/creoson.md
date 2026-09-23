@@ -7,4 +7,4 @@ CREOSON — Java-сервер на порту 8080, переводит JSON-ко
 Проверка: creo_status (чип «статус Creo и открытые модели»), ctl status по портам.
 Болезни: BOM в начале тела = «Invalid JSON input»; Creo выключен = ошибка connect и мёртвые трейлы;
 протухшая сессия = переподключись и повтори; пишущая без согласования = нарушение контракта (approval-защита).
-Полный справочник команд: D:\AI\repo\Creo\SKILL_creoson_complete.md; правила записи: SKILL_creoson_write_rules.md.
+Полный справочник команд: D:\AI\repo\Creo\CREOSON\SKILL_creoson_complete.md; правила записи: SKILL_creoson_write_rules.md.

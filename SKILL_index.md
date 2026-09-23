@@ -16,38 +16,24 @@ priority: critical
 
 ### 1. Creo (Веб-агент, Инженер)
 *Специализация на работе с CAD-системой через API и интерфейсы.*
-- **API & Механизмы**: 
-    - `SKILL_creoson_complete` (API CREOSON) — **critical**
-    - `SKILL_creojs_api` (Creo.JS / pfc*) — **critical**
-    - `SKILL_creo_docs_map` (Карта документации Creo: хелпы, PDF, API-руководства) — **high**
-    - `SKILL_creo_api_ecosystem` (Экосистема API: один pfc* у Creo.JS/OTK/VB/Web.Link/JLINK/CREOSON) — **high**
-    - `SKILL_creoson_sessions_workdirs` (Сессии, директории) — **critical**
-    - `SKILL_creoson_rename_mechanism` (Переименование) — **critical**
-    - `SKILL_creoson_probe_method` (Безопасные пробы) — **critical**
-    - `Creo\SKILL_object_creoson_tests-01_asm` (Объектные пробы CREOSON на сборках) — **normal**
-    - `SKILL_creoson_workflow` (Полный цикл работы в CREOSON: подключение, папки/переключение, чтение/запись) — **critical**
-    - `SKILL_copy_assembly_project` (Умная копия проекта: сборка+детали+чертежи+спутники+семейства) — **critical**
-    - `SKILL_copy_rename` (Методика копии/переименования моделей)
-    - `SKILL_creoson_write_rules` (Пишущие операции CREOSON)
-    - `SKILL_davydovka_creoson_map` (Карта Давыдовка ↔ CREOSON)
-    - `SKILL_creostart_fleet` (Старт машин КБ, флот, логи)
-    - `SKILL_creo_commands` (Подбор команд)
-    - `SKILL_creo_relations` & `SKILL_relations_constitution` (Relations/Связи) — **critical**
-    - `SKILL_curves_from_equation` & `SKILL_curves_examples` (Кривые)
-- **Стандарты КБ**:
-    - `SKILL_creo_company` (Паспорт: единицы, шаблоны, чертежи ЕСКД)
-    - `SKILL_creo_templates` (Канон-шаблоны моделей)
-    - `SKILL_company_config` (Живые значения config.pro)
-    - `SKILL_naming_spec` (Имена, шифры, обязательные параметры)
-    - `SKILL_drawings_eskd` (Чертежи ЕСКД)
-    - `SKILL_parameters_guide` / `SKILL_reference_limits` (Параметры и лимиты)
-    - `SKILL_relations_basics` / `SKILL_relations_examples` (Relations: база и примеры)
-    - `SKILL_creo_cards` (Карточки моделей, сырые близнецы)
-- **Пробы и тесты** (интеграция «диких» 22.09):
-    - `SKILL_object_creoson_tests-01_asm` (Объектные пробы CREOSON на сборках;
-      пробы гонять по SKILL_creoson_probe_method)
-- **Генераторы**:
-    - `SKILL_spring_compression_generator` / `SKILL_spring_tension_master` (Пружины)
+**Вход темы — `Creo\SKILL_creo_index.md`** (главный индекс Creo: открытие + структура + карта).
+ГЛАВНОЕ (22.09.2026): один `pfc*` — много каналов; управлять Creo можно напрямую (Creo.JS / OTK-JLINK /
+Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**; Давыдовка — канал Creo.JS + свой сервер 8000.
+Подразделы `Creo\` (в каждом свой `_INDEX.md`):
+- `API\` — `SKILL_creojs_api` (Creo.JS/`pfc*`), `SKILL_creo_api_ecosystem` (каналы API) — **critical**
+- `DOCS\` — `SKILL_creo_docs_map` (карта документации: хелпы/PDF/API) — **high**
+- `CREOSON\` — `SKILL_creoson_workflow`, `SKILL_creoson_complete`, `SKILL_creoson_sessions_workdirs`,
+  `SKILL_creo_commands`, `SKILL_creoson_write_rules`, `SKILL_creoson_rename_mechanism`,
+  `SKILL_creoson_probe_method`, `SKILL_creoson_inbox_deepseek` — **critical**
+- `COPY\` — `SKILL_copy_assembly_project` (умная копия проекта), `SKILL_copy_rename` — **critical**
+- `STANDARDS\` — `SKILL_creo_company`, `SKILL_company_config`, `SKILL_naming_spec`, `SKILL_drawings_eskd`,
+  `SKILL_creo_templates`, `SKILL_parameters_guide`, `SKILL_reference_limits`, `SKILL_creo_cards`
+- `RELATIONS\` — `SKILL_creo_relations`, `SKILL_relations_constitution`, `SKILL_relations_basics`,
+  `SKILL_relations_examples`, `SKILL_curves_from_equation`, `SKILL_curves_examples`,
+  `SKILL_spring_compression_generator`, `SKILL_spring_tension_master` — **critical**
+- `DAVYDOVKA\` — `SKILL_davydovka_creoson_map` (карта Давыдовка ↔ CREOSON)
+- `INFRA\` — `SKILL_creostart_fleet` (флот/старт), `SKILL_object_creoson_tests-01_asm` (объектные пробы)
+Карточки моделей — `Creo\cards\`.
 
 ### 2. Python / VS Code (Программист, папка Prog\)
 *Стандарты кода, тестов и памяти агента; вход направления = эта секция,
@@ -107,7 +93,7 @@ priority: critical
 ## ДОМЕН 7: Автогенерируемые (руками не править)
 | Файл | Кто пишет |
 |---|---|
-| Creo/SKILL_company_config.md | passport_tools (живой паспорт из config.pro) |
+| Creo/STANDARDS/SKILL_company_config.md | passport_tools (живой паспорт из config.pro) |
 | Трейлы/TRAIL_JOURNAL.md | trail_tools |
 | Ошибки/ERR_*.md | каталог ошибок |
 | Избранное/SKILL_favorites_<user>.md | избранное пользователя (папка gitignored, решение 22.09) |
