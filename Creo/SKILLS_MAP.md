@@ -47,6 +47,7 @@ date: 23.09.2026
 | `SKILL_copy_assembly_project.md` *(в stash)* | умная копия проекта: сборка+детали, деталь+чертёж, семейство, mfg |
 | `SKILL_object_creoson_tests-01_asm.md` | протокол объектных испытаний на сборке |
 | `SKILL_creo_templates.md` | шаблоны моделей/чертежей дома |
+| `SKILL_creo_model_nature.md` | природа модели: деталь / сборка / **ПРОИЗВОДСТВО** (мануфакчуринг, `ПАРТИЯ`) |
 | `SKILL_naming_spec.md` | правила обозначений/имён (шифры) |
 | `SKILL_creo_company.md`, `SKILL_company_config.md` | стандарты предприятия, `config.pro` |
 | `SKILL_creostart_fleet.md` | парк запусков Creo (старт, флот, папки) |

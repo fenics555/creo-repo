@@ -27,7 +27,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
   `SKILL_creoson_probe_method`, `SKILL_creoson_inbox_deepseek` — **critical**
 - `COPY\` — `SKILL_copy_assembly_project` (умная копия проекта), `SKILL_copy_rename` — **critical**
 - `STANDARDS\` — `SKILL_creo_company`, `SKILL_company_config`, `SKILL_naming_spec`, `SKILL_drawings_eskd`,
-  `SKILL_creo_templates`, `SKILL_parameters_guide`, `SKILL_reference_limits`, `SKILL_creo_cards`
+  `SKILL_creo_templates`, `SKILL_creo_model_nature` (деталь/сборка/производство — `ПАРТИЯ`, мануфакчуринг),
+  `SKILL_parameters_guide`, `SKILL_reference_limits`, `SKILL_creo_cards`
 - `RELATIONS\` — `SKILL_creo_relations`, `SKILL_relations_constitution`, `SKILL_relations_basics`,
   `SKILL_relations_examples`, `SKILL_curves_from_equation`, `SKILL_curves_examples`,
   `SKILL_spring_compression_generator`, `SKILL_spring_tension_master` — **critical**
