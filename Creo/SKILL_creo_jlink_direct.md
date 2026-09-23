@@ -215,6 +215,29 @@ creo_pdf.bat config-load "Z:\PTC\CREO-START\START-STD\config.pro"   # приме
 и обновляется при работе с чертежом. Поэтому «обновить настройки MY_ESKD.dtl в готовом чертеже» и
 «настройки внутри форматки» — две разные операции, и в PDF видно результат обеих.
 
+## DETAIL-ОПЦИИ ЧЕРТЕЖА (.dtl): ЧТО МОЖЕТ JLINK — ПРОВЕРЕНО 23.09.2026
+
+Вопрос: можно ли программой прочитать/дописать настройки чертежа (detail-опции) и сохранить их в `.drw`?
+Ответ по фактам API (перебран весь `pfcasync.jar`, живой Creo 12):
+
+| Что искали | Что есть на самом деле | Вывод |
+|---|---|---|
+| классы `*Option` для чертежа | `pfcExport$PDFOption`, `LayerExportOptions`, `DrawingCreateOptions`, `pfcSession$RetrieveModelOptions` | detail-опций чертежа в JLink НЕТ |
+| `pfcDrawing.Drawing` | только размеры (`IsDimensionAssociative`, `SetDimensionLocation`, `EraseDimension`…) + наследует `Model2D` | ни чтения, ни записи `.dtl` |
+| `Model.Import(path, instructions)` | это 3D-интерфейсы (STEP/IGES и т.п.) | не про `.dtl` |
+| `Session.GetConfigOption` / `SetConfigOption` | это опции **config.pro**, а не detail-набор | detail-набор недоступен |
+| выполнить запись mapkey из API | в jar нет ни одного класса/метода `Mapkey` | записать опции mapkey'ем нельзя |
+
+**Итог:** JLink не умеет ни читать, ни писать detail-опции чертежа. Это умеет только C-API TOOLKIT
+(`ProMdlDetailOptionSet` и родственные; у нас есть protoolkit + `creo_help_pma`), то есть отдельная
+C-программа, а не JLink.
+
+**Почему PDF-рутина дома всё равно работает:** оформление приходит в чертёж **из сессии** —
+`drawing_setup_file = …\НАСТРОЙКИ\configs/MY_ESKD.dtl` применяется к открытому чертежу (тексты, стрелки,
+допуски), а `format_setup_file` — к самой форматке. Поэтому правильный путь: печатать PDF из Creo,
+**запущенного из папки боевого `config.pro`** (так и делает `creo_pdf`, см. `creo-find`/`creo-start`),
+а не «починить каждый готовый `.drw`». Проверка настроек живой сессии — `creo_pdf.bat config-read`.
+
 **Как программа сама узнаёт каталог Creo** — режим `config-find`:
 ```
 creo_pdf.bat config-find
