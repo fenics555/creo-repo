@@ -195,3 +195,15 @@ STATUS: В РАБОТЕ (ЗАВЕРШЕНА — после успешного п
 - НАХОДКА ВНЕ СЛОВА: **папки `D:\AI\ИЗУЧИТЬ\CREO` на диске нет** (в `ИЗУЧИТЬ` только ДАВЫДОВКА и «Новые правила»/«Новые правила2»); параллельная Creo-нога подтвердила дословно: «Временная папка разбора `D:\AI\ИЗУЧИТЬ\CREO` разбирается и удаляется пользователем — на неё в скиллах не опираться». Утренний замер 1 206 544 066 Б / 17 963 файла и перенос справки аннулированы хозяином.
 - КАРТА ПОЧИНЕНА: `SKILL_index.md` секция 7 — строка про удалённые PDF и строка про отсутствующую библиотеку; `Creo\SKILL_creo_index.md` строка 46 переписана (справка живёт в установке PTC, дубли в репо удалены).
 - Ф2 СТОП (цитата): `git fetch origin` ок; `git rebase origin/master` → `error: cannot rebase: You have unstaged changes.` / `Please commit or stash them.` (чужие `M Creo/SKILL_creo_docs_map.md`, `M Creo/SKILL_creo_index.md`). Автостэш отклонён словом, `reset --hard` и `push --force` запрещены, чужое не коммитил → синхронизация ждёт чужую ногу/слово.
+
+### ЖИВОЙ РЕПО СВЕДЁН С GITHUB (22.09.2026, нога Cline)
+- ВХОД: `## HEAD (no branch)` (чужой rebase), незамерженные `UU SKILL_index.md`, `AA Трейлы/SKILL_trails_index.md`, `stash@{0}: On master: parallel-leg-creo-reorg-2209`, `rebase-merge: True`.
+- ДОКАЗАТЕЛЬСТВО ПУБЛИКАЦИИ СТЭША (перед drop): `git show origin/master:Creo/CREOSON/SKILL_creoson_routine.md` → `name: creoson-routine`; `…Creo/API/_INDEX.md` → `name: api-index`; `…Creo/STANDARDS/_INDEX.md` → `name: standards-index` — содержимое стэша уже на remote.
+- Ф1: `git rebase --abort` → `HEAD = 0d24a65`, `rebase-merge = False`.
+- Ф2: `git rebase origin/master` — 8 автосейвов сняты сами (`skipped previously applied commit` ×8); конфликты решены правилом «устаревший накат → origin»: `.gitignore`, `Трейлы/SKILL_trails_index.md`, `SKILL_index.md` (×2; `:2:` = `name: index`, `:3:` = `name: skill-index`), `Creo/SKILL_creo_index.md` (`:2:` = «см. раздел СТРУКТУРА И КАРТА СКИЛЛОВ — 8 подразделов», `:3:` = старая плоская простыня); `PROGRESS_spec112.md` — объединение (origin базой + уникальные строки наката, extra = 0).
+- ИТОГ: `Successfully rebased and updated refs/heads/master`; ветка `master`; `HEAD = 80eefd9`; `diff --stat origin/master` → пусто; `## master...origin/master` (0/0); `ls-remote origin master` → `80eefd9`.
+- Ф3: три чужих файла и мой крах-скил совпали с remote по содержимому (разница размеров = CRLF против LF); `.gitignore` `*.sqlite` — 2 попадания.
+- Ф4: `git stash drop stash@{0}` → `Dropped stash@{0} (eab181500fbfc6e76858ca6e6f8808b27686b647)`; `stash list` пуст.
+- ЗАМЕЧАНИЕ: файл журнала в версии origin шёл БЕЗ терминатора — возвращён этой правкой.
+- ОСТАЛОСЬ ВНЕ ГИТА: два untracked файла чужой ноги — `PDF/SKILL_pdf_control.md`, `PDF/SKILL_pdf_routine.md` (ждут слова на публикацию).
+=== END ===
