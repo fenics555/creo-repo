@@ -50,5 +50,8 @@ date: 22.09.2026
 - `crash_deleted-house-file-without-word` — Use when: домовой файл (напр. harvest_gui.py) удалён вне data	mp и dataackup без прямого слова пользователя
 - `crash_loop_perception` — Use when: исполнитель принимает череду мелких нужных шагов (инвентаризация, Select-String, проверки путей) за цикл и встаёт в REVIVE без реального зависания
 - `crash_reasoning-loop` — Use when: исполнитель зацикливается на повторяющихся неудачных вызовах/рассуждениях без продвижения
+- `SKILL_crash_editor-create-overwrote` — Use when: create/полная перезапись существующего файла убила тело (файл усох, 4256 → 1100 байт)
+- `SKILL_crash_git_commit-sweeps-foreign-staged` — Use when: git commit без pathspec подметает чужой staged параллельной ноги
+- `SKILL_crash_git_parallel-leg-rebase-reverts-worktree` — Use when: параллельная нога сделала rebase — рабочее дерево откатилось, своя работа в stash
 
-Всего крах-скиллов: 40 (без учёта конституции и этого списка).
+Всего крах-скиллов: 42 (без учёта конституции и этого списка; один из них — указатель `SKILL_crash_reasoning-loop`).

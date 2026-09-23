@@ -135,6 +135,7 @@ write_file по методу спеки, а не editor с old_text во вес�
 8. Шаг дольше 60 с? Оценил ли длительность ДО запуска? Есть ли план Б?
 9. Это уже 2-я попытка того же хода? Если да — смена метода или отчёт (М7).
 10. После рестарта — трёхчастная приёмка: netstat «один LISTENING на 8765», agent.pid равен живому PID, StartTime больше mtime правленых файлов (crash_agent-duplicate-restart-race).
+11. После обморока/вылета окна Cline первым делом — цитата hooks.jsonl (session_shutdown, reason, source): причина смерти читается до диагностики, не по памяти (crash_cline_longsession_context_death, ПОВТОРЫ: 3).
 
 ## 8. ЖУРНАЛ СПЕКИ: ШАБЛОМ PROGRESS_spec<NN>.md (файл кончается строкой «=== END ===»):
 # PROGRESS SPEC <NN> «<имя>»

@@ -34,3 +34,4 @@ restart.out пуст; ParseException на эскейпах [\' ... \'] в PowerS
    (`Get-NetTCPConnection -LocalPort 8765`) и StartTime процесса позже mtime правленого файла;
    сторож и ночной цикл живут в `sched.py`, голова и щит согласований — в `loop.py`
    (распил агента по спеке 71, фазы Ф3/Ф4 ещё открыты).
+ПОВТОРЫ: 1
