@@ -90,9 +90,10 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `agents\skill-security-auditor\SKILL_skill_security_auditor.md` + `agents\skill-security-auditor\references\threat-model.md`
 - `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md`
 - `agents\SKILL-AUTHORING-STANDARD.md` (стандарт авторства скиллов)
-- `SKILL_parallel_local_leg.md` (**Правила параллельной локальной ноги**: Ollama gemma4:26b-131k —
-  как читать спеку, что изучить первым, как отчитаться и как принимается) — priority high;
-  первая спека для ноги: `SPEC_113_orphan_drawings.md`; пополняется после каждого отчёта (раздел «Уроки»)
+- `SKILL_parallel_local_leg.md` — **удалён по слову пользователя 23.09.2026** (спека 113 не оправдала
+  формы: правила ноги = долг, если параллельные ноги вернутся). Уроки спеки 113 сироты не потеряны:
+  живут в `PROGRESS_spec113.md`, раздел «ЧЕМУ УЧИТЬ НОГУ»; в `SPEC_113_orphan_drawings.md` (строки 43, 71)
+  ссылки на удалённый скилл — висячие, сама спека по закону не правится.
 
 ## ДОМЕН 7: Автогенерируемые (руками не править)
 | Файл | Кто пишет |
@@ -111,6 +112,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - Физика/материалы → Инженерные.
 - «Где деталь / когда комплект / якорь / цикл» → production_mirror.
 - «Почему вылетаю / как работать в Cline / где что лежит» → SKILL_local_agent_cline (в корне).
+- «Запетлял / встал / повторяю одно и то же» mid-task → §9.3 SKILL_local_agent_cline:
+  СТОП → вслух назвать подпись краха → смена метода ИЛИ стоп-отчёт пользователю (помощь снаружи).
 
 ## ИСТОЧНИКИ ПРАВДЫ
 - DESIGN_davydovka_tokens.md: канон дизайна для новых инструментов.
