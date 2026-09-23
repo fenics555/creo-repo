@@ -89,6 +89,9 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `agents\skill-security-auditor\SKILL_skill_security_auditor.md` + `agents\skill-security-auditor\references\threat-model.md`
 - `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md`
 - `agents\SKILL-AUTHORING-STANDARD.md` (стандарт авторства скиллов)
+- `SKILL_parallel_local_leg.md` (**Правила параллельной локальной ноги**: Ollama gemma4:26b-131k —
+  как читать спеку, что изучить первым, как отчитаться и как принимается) — priority high;
+  первая спека для ноги: `SPEC_113_orphan_drawings.md`; пополняется после каждого отчёта (раздел «Уроки»)
 
 ## ДОМЕН 7: Автогенерируемые (руками не править)
 | Файл | Кто пишет |
