@@ -14,7 +14,7 @@ for local LLMs running in the IDE.
 | `Creo/`, `PDF/`, `Web/`, `Инженерные/`, `Трейлы/`, `Ошибки/` | domain entries and skills |
 | `crash/` | crash constitution plus precedent skills with repeat counters |
 | `PASSPORT.md` | current state of modules, data and history |
-| `tools/agent/` | the agent itself (see its own README) |
+| `D:\AI\tools\agent\` (вне репо; агент сам и его README) | the agent itself (see its own README) |
 
 ## Quick start
 1. Clone the repository and keep `MANIFEST.md` at the root of your knowledge base.

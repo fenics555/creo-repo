@@ -90,6 +90,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `agents\skill-security-auditor\SKILL_skill_security_auditor.md` + `agents\skill-security-auditor\references\threat-model.md`
 - `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md`
 - `agents\SKILL-AUTHORING-STANDARD.md` (стандарт авторства скиллов)
+- `AGENT_MAP.md` (**Карта строения агента** `D:\AI\tools\agent`: модули, порт 8765, инструменты,
+  данные, ночи и сторож — high; вход по тегам «агент/agent.py/loop/tools_registry/8765»)
 - `SKILL_parallel_local_leg.md` — **удалён по слову пользователя 23.09.2026** (спека 113 не оправдала
   формы: правила ноги = долг, если параллельные ноги вернутся). Уроки спеки 113 сироты не потеряны:
   живут в `PROGRESS_spec113.md`, раздел «ЧЕМУ УЧИТЬ НОГУ»; в `SPEC_113_orphan_drawings.md` (строки 43, 71)
