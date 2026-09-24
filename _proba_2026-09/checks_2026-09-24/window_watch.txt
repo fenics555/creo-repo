@@ -1,0 +1,7 @@
+старт наблюдения 13:59:50 (окон сейчас: 16)
+14:00:14 ПОЯВИЛОСЬ окно: ConsoleWindowClass       'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
+14:00:14 ЗАКРЫЛОСЬ окно: ConsoleWindowClass       'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
+14:01:26 ПОЯВИЛОСЬ окно: Shell_TrayWnd            ''
+14:01:26 ПОЯВИЛОСЬ окно: EdgeUiInputTopWndClass   ''
+14:01:32 ПОЯВИЛОСЬ окно: tooltips_class32         ''
+14:01:32 ЗАКРЫЛОСЬ окно: tooltips_class32         ''

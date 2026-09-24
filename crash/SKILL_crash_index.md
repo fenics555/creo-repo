@@ -54,5 +54,6 @@ date: 22.09.2026
 - `SKILL_crash_git_commit-sweeps-foreign-staged` — Use when: git commit без pathspec подметает чужой staged параллельной ноги
 - `SKILL_crash_git_parallel-leg-rebase-reverts-worktree` — Use when: параллельная нога сделала rebase — рабочее дерево откатилось, своя работа в stash
 - `SKILL_crash_loop_economy_failure` — Use when: исполнитель зацикливается из-за попыток «оптимизировать» (экономить) токены вместо полноценного чтения скиллов или соблюдения лимитов инструментов (например, editor too large), что приводит к ложным выводам и краху сессии.
+- `SKILL_crash_editor-studycheck-halfedit-undefined-name` — Use when: файл после правки ссылается на необъявленное имя (NameError) — правка оборвана до объявления имени и до прогона проверки; и сопутствующее: вывод проверки с эмодзи роняет консоль cp1251 (UnicodeEncodeError 'charmap').
 
-Всего крах-скиллов: 43 (без учёта конституции и этого списка; один из них — указатель `SKILL_crash_reasoning-loop`).
+Всего крах-скиллов: 44 (без учёта конституции и этого списка; один из них — указатель `SKILL_crash_reasoning-loop`).

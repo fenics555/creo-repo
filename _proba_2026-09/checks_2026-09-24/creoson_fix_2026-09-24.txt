@@ -1,0 +1,3 @@
+settings.py: добавлена настройка creo_allow_start (по умолчанию выкл)
+crash-логов CREOSON: было 1052; 3 свежих сохранены в D:\AI\log\reports\creoson_crashes; удалено 1049
+причина падений JVM CREOSON: C  [rtlcoremtz.dll+0x1f820] (нативная DLL Creo — отсюда нестабильность)

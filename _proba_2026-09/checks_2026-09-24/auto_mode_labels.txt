@@ -1,0 +1,3 @@
+creativity: заменено 1
+auto_temperature: заменено 1
+auto_mode: заменено 1

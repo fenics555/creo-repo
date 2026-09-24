@@ -1,0 +1,5 @@
+=== D:\AI\tools\agent\data\harvest.db / models_raw (колонки: name,ext,path,mtime,size,sha256head) ===
+  Z:\PTC\Work\000_55 Inserts Губки\00_6 ОТЛИВКИ НА ГУБКИ\insert-nalojeniya-bdf-1.asm.1   (mtime 1789556173.6422904)
+  всего строк: 1
+=== D:\AI\tools\agent\data\agent.sqlite / files (колонки: path,mtime,size) ===
+  всего строк: 0

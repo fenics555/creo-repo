@@ -1,0 +1,33 @@
+{
+ "backup": [
+  true,
+  null
+ ],
+ "open_copy": [
+  true,
+  {
+   "revision": 1,
+   "files": [
+    "PIN_SPLIT.prt"
+   ],
+   "dirname": "D:D:/AI/PROBA/famcopy2/"
+  }
+ ],
+ "rename": [
+  true,
+  {
+   "file": "pin_splitk.prt"
+  }
+ ],
+ "save": [
+  true,
+  null
+ ],
+ "has_copy": [
+  true,
+  {
+   "exists": true
+  }
+ ],
+ "instances_count": 3
+}

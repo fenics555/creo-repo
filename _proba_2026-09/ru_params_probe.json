@@ -1,0 +1,66 @@
+{
+ "total": 47,
+ "cyrillic": 23,
+ "sample": [
+  {
+   "name": "НАИМЕНОВАНИЕ",
+   "type": "STRING",
+   "value": "Штифт разрезной"
+  },
+  {
+   "name": "НАЧ_ОТДЕЛА",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "НОРМО_КОНТРОЛЬ",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "ПЕРВ_ПРИМЕН",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "ПРЕДПРИЯТИЕ",
+   "type": "STRING",
+   "value": " "
+  },
+  {
+   "name": "ПРОВЕРИЛ",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "РАЗРАБОТАЛ",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "СПРАВ_№",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "СТАНДАРТ",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "ТЕХ_КОНТРОЛЬ",
+   "type": "STRING",
+   "value": ""
+  },
+  {
+   "name": "ТИП",
+   "type": "STRING",
+   "value": "Стандарт"
+  },
+  {
+   "name": "ТИП2",
+   "type": "STRING",
+   "value": " "
+  }
+ ]
+}
