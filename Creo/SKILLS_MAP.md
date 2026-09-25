@@ -129,7 +129,7 @@ D:\AI\log\reports\REPORT_creo_full_cline_2026-09-23.md      полный отч�
 * `SKILL_creo_file_reading.md` — большой скилл: история изменений (раскладки A/B, время UTC),
   **формула упакованного числа** (3/8/1-байтные формы), оглавление `#UGC_TOC` и секции, параметры `e0/e2`,
   `BasicText` (объём/масса), производные роли (`MERGE_BASE_PART`, `ref_part_tab`), §8.25–8.28 про инструмент.
-* Инструмент дома **`plm_reader`**: `D:\AI\tools\plm_reader\plm_reader.py` (+ `README.md`, `settings.json`) —
+* Инструмент дома **`plm_reader`**: `D:\AI\tools\agent\plm_reader\plm_reader.py` (+ `README.md`, `settings.json`) —
   окно (папка, фильтр, сортировка, выбор столбцов/имён параметров, CSV) и CLI (`--folder`, `--history`).
 * Конспект: `repo\ИЗУЧЕНО\Разбор файлов Creo в лоб\STUDY_NOTES.md` (55+ кусков).
 
