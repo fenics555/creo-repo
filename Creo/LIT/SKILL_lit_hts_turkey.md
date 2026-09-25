@@ -33,18 +33,18 @@ HOT_FACTOR = 1 - (USADKA_P / 100)
 ```
 Стандартная формула, но с Turkish material properties.
 
-## 📊 ТИПИЧЕСКИЕ ЗНАЧЕНИЯ
+## 📊 ТИПИЧЕСКИЕ ЗНАЧЕНИЯ (улучшенная таблица)
 
-| Параметр | Значение |
-|----------|----------|
-| Коэффициент k (рисер/ moulage) | 1.3–1.6 |
-| Модуль охлаждения (B) | Расчет с турецкими коэффициентами коррекции |
-| HOT_FACTOR | 1 - (USADKA_P/100), USADKA_P адаптирован под Turkish steel |
-| Изоляция рисеров | 50–120 mm (в зависимости от типа печи и стали) |
-| Допуски на размеры | Адаптация ГОСТа 14953-80 под Turkish foundry practices |
-| Коэффициент возврата металла (MRR) | > 88% (малые), > 85% (средние), > 82% (большие) |
-| Шаг standing (ST_STEP) | По Turkish standards: 5–12 mm (больше вариативности) |
-| Направленное затверждение | Turkish foundry experience: peripheral → center с учетом типа печи |
+| Параметр | Значение | remark |
+|----------|----------|--------|
+| Коэффициент k (рисер/ moulage) | 1.3–1.6 | 1.3 (low C steel), 1.4–1.5 (mid C steel), 1.5–1.6 (high C steel,tool steel) |
+| Модуль охлаждения (B) | Расчет с турецкими коэффициентами коррекции | B = V/A с коэффициентом коррекции per steel grade per furnace type |
+| HOT_FACTOR | 1 - (USADKA_P/100), USADKA_P адаптирован под Turkish steel | USADKA_P: 0.85–1.00% (угл.), 0.90–1.05% (легк.), 0.95–1.10% (тяжел.) |
+| Изоляция рисеров | 50–120 mm (в зависимости от типа печи и стали) | 50–70 mm (BOF, EAF), 70–120 mm (open hearth), зависит от стали |
+| Допуски на размеры | Адаптация ГОСТа 14953-80 под Turkish foundry practices | tighter tolerances per steel grade per furnace type |
+| Коэффициент возврата металла (MRR) | > 88% (малые), > 85% (средние), > 82% (большие) | per Turkish foundry practice per steel grade per furnace type |
+| Шаг standing (ST_STEP) | По Turkish standards: 5–12 mm (больше вариативности) | 5–7 мм (малые), 7–10 мм (средние), 10–12 мм (крупные) |
+| Направленное затверждение | Turkish foundry experience: peripheral → center с учетом типа печи | per experience per foundry per furnace type (BOF, EAF, open hearth) |
 
 ## 🔧 ПРИМЕР РАСЧЕТА
 
