@@ -937,3 +937,18 @@ CREO-START + CREOSON и щит согласования (в доме уже ес
   (`<имя>\0 27 88 00 e3 32 <байты>`, плюс `f7 1d e3 32 <байты>`).
 * Батч-установка параметров даёт `Pro/TOOLKIT General Error` — ставить по одному с паузой ≈1.5 с.
 
+### 8.36. ЖИВОЕ ПЕРЕИМЕНОВАНИЕ ПРОВЕРЕНО (25.09.2026)
+
+Прогон на **КОПИИ** (`D:\AI\PROBA\rename_test\insert-stp-s3.prt.1`). Creo поднят `CREO-START.bat`
+(cwd `Z:\PTC\CREO-START\START-STD`), CREOSON — `creoson_run.bat` (`JAVA_HOME=D:\AI\Java`).
+Цепочка через `http://127.0.0.1:8080/creoson` (`sessionId` — **верхний уровень** запроса):
+`connection:is_creo_running` → `connection:connect` → `creo:cd {dirname}` → `file:erase {file}` →
+`file:open {dirname, file}` → **сверка `data.dirname`** →
+`file:rename {file, new_name, onlysession:true}` → `file:save {new_name.prt}`.
+
+Результат: `rename → {"file": "zzz_renamed.prt"}` без ошибок; на диске появился **`zzz_renamed.prt.1`**
+(247 107 б), старая `insert-stp-s3.prt.1` осталась. **Механизм §rename подтверждён живьём.**
+Грабли пробы: `dirname` в ответе `file:open` лежит в **`data.dirname`** и с «двойным диском»
+(`D:D:/AI/PROBA/rename_test/`) — сверять по вхождению имени папки, а не равенством.
+**Не покрыто пробой:** чертёж и сборки-владельцы (порядок save снизу вверх) — на одном файле не проверить.
+
