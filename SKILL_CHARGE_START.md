@@ -3,12 +3,12 @@ name: CHARGE_START
 system: ЗНАНИЯ
 description: Use when: стартовый набор знаний Creo/CREOSON — полные тексты главных скиллов (уже в промпте агента)
 when: стартовый набор, Creo, CREOSON, с чего начать задачу, индекс Creo
-date: 24.09.2026 16:51
+date: 25.09.2026 14:48
 ---
 
 # СТАРТОВЫЙ НАБОР ЗНАНИЙ (читать сразу, это в промпте агента)
 
-**Собрано:** 24.09.2026 16:51
+**Собрано:** 25.09.2026 14:48
 Порядок чтения: индекс Creo → индекс CREOSON → рутина CREOSON → природа модели → общая карта скиллов.
 
 
@@ -48,7 +48,7 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | `RELATIONS\` | `SKILL_creo_relations.md`, `SKILL_relations_constitution.md`, `SKILL_relations_basics.md`, `SKILL_relations_examples.md`, `SKILL_curves_from_equation.md`, `SKILL_curves_examples.md`, `SKILL_spring_compression_generator.md`, `SKILL_spring_tension_master.md` |
 | `DAVYDOVKA\` | `SKILL_davydovka_creoson_map.md` (карта Давыдовка ↔ CREOSON) |
 | `INFRA\` | `SKILL_creostart_fleet.md` (флот, старт машин), `SKILL_object_creoson_tests-01_asm.md` (объектные пробы) |
-| корень | этот индекс + `cards\` (карты моделей, сырые близнецы) |
+| корень | этот индекс + `cards\` (карты моделей, сырые близнецы) + `SKILL_creo_file_reading.md` (чтение файлов «в лоб»: история, упакованные числа, оглавление; инструмент `plm_reader`) + `CREO_MAP.md`, `SKILLS_MAP.md` |
 
 ## КАК ИИ НАХОДИТ СКИЛЛ (правило поиска)
 1. Вход — корневой `SKILL_index.md` (домен Creo) → **этот файл**.
@@ -327,6 +327,9 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
   `SKILL_spring_compression_generator`, `SKILL_spring_tension_master` — **critical**
 - `DAVYDOVKA\` — `SKILL_davydovka_creoson_map` (карта Давыдовка ↔ CREOSON)
 - `INFRA\` — `SKILL_creostart_fleet` (флот/старт), `SKILL_object_creoson_tests-01_asm` (объектные пробы)
+- корень `Creo\` — `CREO_MAP` (строение Creo), `SKILLS_MAP` (карта скиллов ветки),
+  `SKILL_creo_file_reading` (**чтение файлов Creo «в лоб»**: история изменений, упакованные числа, секции/параметры;
+  там же инструмент дома `plm_reader`), `README_jlink_direct`
 Карточки моделей — `Creo\cards\`.
 
 ### 2. Python / VS Code (Программист, папка Prog\)
@@ -411,7 +414,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
   СТОП → вслух назвать подпись краха → смена метода ИЛИ стоп-отчёт пользователю (помощь снаружи).
 
 ## ИСТОЧНИКИ ПРАВДЫ
-- DESIGN_davydovka_tokens.md: канон дизайна для новых инструментов.
+- DESIGN_davydovka_tokens.md: канон дизайна для новых инструментов. **Долг/проверить: файла в репо нет**
+  (аудит 25.09: найден только в копии `D:\AI\log\urn\cline\repo_clone\`), окна дома сейчас строятся без токенов.
 - SKILL_tool_template.md: шаблон создания трёхрукого инструмента — **долг: файла нет** (аудит 22.09).
 
 ### 7. ДОЛГИ И ИДЕИ КАРТЫ (честность: нет файла = нет скилла)

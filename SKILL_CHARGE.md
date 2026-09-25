@@ -3,19 +3,19 @@ name: CHARGE
 system: ЗНАНИЯ
 description: Use when: карта скиллов репо — что есть и когда брать (сборка dev\skills_charge.py)
 when: карта скиллов, заряд знаний, какие скиллы есть, индекс скиллов
-date: 24.09.2026 16:51
+date: 25.09.2026 14:48
 ---
 
 # ЗАРЯД ЗНАНИЙ АГЕНТА (карта скиллов репо)
 
-**Собрано:** 24.09.2026 16:51 · скиллов: 136
+**Собрано:** 25.09.2026 14:48 · скиллов: 145
 
 **Как этим пользоваться (агенту).** Это КАРТА: здесь каждый скилл одной строкой — «что это и когда брать».
 Тела скиллов в промпт не грузятся: нужный открывается `search_kb` (поиск) или `read_file` (по пути).
 Начинать любую задачу Creo — со стартового набора `SKILL_CHARGE_START.md` (он уже в промпте).
 Главное направление дома — **Creo/CREOSON**.
 
-## Creo (46)
+## Creo (55)
 - `Creo\API\_INDEX.md` — Use when: подраздел API темы Creo — указатель на скиллы · когда: creo, каналы API, pfc, creojs, otk, jlink, vbapi, weblink
 - `Creo\API\SKILL_creo_api_ecosystem.md` — Use when: разбор API Creo — один объектный слой pfc* у Creo.JS, Object TOOLKIT (C++/Java), VB API, Web.Link… · когда: OTK, Object TOOLKIT, JLINK, pfc, creojs, vbapi, weblink, otk_methods, jlinkexam…
 - `Creo\API\SKILL_creojs_api.md` — Use when: работа с родным API Creo (Creo.JS / pfc*), сверка с CREOSON, разбор механизмов Давыдовки · когда: Creo.JS, creojs, pfc, pfcSession, API, Давыдовка, ListItems, GetParam, ListRows…
@@ -40,6 +40,14 @@ date: 24.09.2026 16:51
 - `Creo\INFRA\_INDEX.md` — Use when: подраздел INFRA темы Creo — указатель на скиллы · когда: creo, флот, старт машин, логи, объектные пробы
 - `Creo\INFRA\SKILL_creostart_fleet.md` — Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы, · когда: Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы,
 - `Creo\INFRA\SKILL_object_creoson_tests-01_asm.md` — Use when: вопросы об объекте creoson_tests-01.asm и создание похожих · когда: Use when: вопросы об объекте creoson_tests-01.asm и создание похожих
+- `Creo\LIT\SKILL_lit_analysis_patterns.md` — Шаблоны и best practices для Relations в Creo Parametric при литье. Содержит проверенные алгоритмы расчета st… · когда: relations, liatie, hts, shrinkage, weiver, pattern, черновик, оптимизация
+- `Creo\LIT\SKILL_lit_hts_aws.md` — (без описания)
+- `Creo\LIT\SKILL_lit_hts_china.md` — (без описания)
+- `Creo\LIT\SKILL_lit_hts_en.md` — (без описания)
+- `Creo\LIT\SKILL_lit_hts_patents_summary.md` — (без описания)
+- `Creo\LIT\SKILL_lit_hts_patents_summary_ru.md` — (без описания)
+- `Creo\LIT\SKILL_lit_hts_turkey.md` — (без описания)
+- `Creo\LIT\SKILL_lit_troubleshooting.md` — Справочник по диагностике и устранению типичных ошибок при работе с Relations в Creo Parametric для литья. Со… · когда: relations, liatie, hts, ошибки, крахи, отладка, debug
 - `Creo\RELATIONS\_INDEX.md` — Use when: подраздел RELATIONS темы Creo — указатель на скиллы · когда: creo, relations, уравнения, кривые, пружины
 - `Creo\RELATIONS\SKILL_creo_relations.md` — Relations в Creo: синтаксис, функции, лимиты, примеры (справочник). Правила — в SKILL_relations_constitution · когда: relations, уравнения, синтаксис, функции, операторы, IF ENDIF, FOR, d-имена, ли…
 - `Creo\RELATIONS\SKILL_curves_examples.md` — ГОТОВЫЕ РЕЦЕПТЫ КРИВЫХ ИЗ УРАВНЕНИЯ (НАШИ ЗАДАЧИ) · когда: спираль пружины, эвольвента, конус, синусоида
@@ -50,6 +58,7 @@ date: 24.09.2026 16:51
 - `Creo\RELATIONS\SKILL_spring_compression_generator.md` — ГЕНЕРАТОР КОДА — Пружина сжатия (Creo Relations) · когда: пружина сжатия, сжатие, compression spring, relations, код пружины
 - `Creo\RELATIONS\SKILL_spring_tension_master.md` — ЭТАЛОН: Пружина растяжения (Tension Spring). ГОСТ 13766. · когда: пружина растяжения, крючки, начальное натяжение, tension
 - `Creo\SKILL_creo_directions_mfg_gdt.md` — Use when: разбор направлений Creo — ЧПУ-синтаксис (mfg_cmdsyn), GD&T Advisor, ключевые методы pfcSolid/pfcFea… · когда: mfg_cmdsyn, cmdsyn, чпу, циклы, GD&T, gdt_home, pfcSolid, pfcFeature, направлен…
+- `Creo\SKILL_creo_file_reading.md` — Use when: надо прочитать данные модели/чертежа Creo НАПРЯМУЮ из файла (без запуска Creo и без CREOSON) — исто… · когда: читать файл Creo в лоб, .prt .asm .drw изнутри, история файла, mtrack, ревизия…
 - `Creo\SKILL_creo_index.md` — Use when: задача с темой Creo · когда: creo, creoson, parametric, assembly, part, drawing
 - `Creo\SKILL_creo_jlink_direct.md` — Use when: нужно УПРАВЛЯТЬ Creo напрямую из программы (Java/JLINK, pfc*), без CREOSON — подключиться к Creo, п… · когда: jlink, j-link, java, pfcasync, pfc, otk_java_free, прямое управление, программк…
 - `Creo\STANDARDS\_INDEX.md` — Use when: подраздел STANDARDS темы Creo — указатель на скиллы · когда: creo, стандарты КБ, имена, шаблоны, чертежи, параметры, карточки

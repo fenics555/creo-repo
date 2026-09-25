@@ -17,6 +17,7 @@ date: 23.09.2026
 | `SKILL_creo_index.md` | индекс ветки (что читать под теги `[CREO]`, `[PARAMETRIC]`) |
 | `CREOSON\_INDEX.md` | указатель подраздела CREOSON |
 | `README_jlink_direct.md` | полный разбор прямого управления (JLINK): пробы, среда, API, экспорт, грабли |
+| `SKILL_creo_file_reading.md` | **чтение файлов Creo «в лоб»** (без Creo и CREOSON): история изменений (раскладки A/B), упакованные числа, оглавление `#UGC_TOC`, секции/параметры, производные роли; здесь же инструмент `plm_reader` (§8.25–8.27) |
 
 ## 2. CREOSON — РУТИНА (подраздел `CREOSON\`)
 | Скилл | О чём |
@@ -123,6 +124,14 @@ D:\AI\log\reports\REPORT_creo_full_cline_2026-09-23.md      полный отч�
 `CREOSON\_INDEX.md` · правки `SKILL_creo_index.md`; в stash — `SKILL_creo_api_ecosystem.md`,
 `SKILL_creo_docs_map.md`, `SKILL_copy_assembly_project.md`, `CREOSON\SKILL_creoson_workflow.md` и
 реорганизация ветки в 8 подразделов.
+
+## 13. СЕССИЯ 25.09.2026 (чтение файлов «в лоб» и инструмент `plm_reader`)
+* `SKILL_creo_file_reading.md` — большой скилл: история изменений (раскладки A/B, время UTC),
+  **формула упакованного числа** (3/8/1-байтные формы), оглавление `#UGC_TOC` и секции, параметры `e0/e2`,
+  `BasicText` (объём/масса), производные роли (`MERGE_BASE_PART`, `ref_part_tab`), §8.25–8.28 про инструмент.
+* Инструмент дома **`plm_reader`**: `D:\AI\tools\plm_reader\plm_reader.py` (+ `README.md`, `settings.json`) —
+  окно (папка, фильтр, сортировка, выбор столбцов/имён параметров, CSV) и CLI (`--folder`, `--history`).
+* Конспект: `repo\ИЗУЧЕНО\Разбор файлов Creo в лоб\STUDY_NOTES.md` (55+ кусков).
 
 ⚠️ **Внимание:** идёт ЧУЖАЯ git-нога (rebase). Моя реорганизация и 4 скилла лежат в
 `stash@{0}: parallel-leg-creo-reorg-2209` — вернутся после `git stash pop` в её завершение.
