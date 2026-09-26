@@ -62,3 +62,21 @@
 - **следит за порядком** `dev\culture_check.py`: 12 проверок (отчёты, корень log, урна, временное вне урны,
   конспекты в памяти дома, совпадение копий `.clinerules`, мёртвые ключи `retention.json`, пустые папки)
   → код возврата 1 при нарушении. Прогонять после уборок и «разборов» папок.
+
+## 5. Обновление GitHub (штатно)
+
+**Одна кнопка:** `D:\AI\GIT_SYNC_ALL.bat` — запускает оба синка подряд и печатает итоговые статусы.
+
+| Скрипт | Репозиторий | Лог |
+|---|---|---|
+| `D:\AI\tools\GIT_SYNC.bat` | `github.com/fenics555/creo-agent` (код дома) | `D:\AI\tools\git_sync.log` |
+| `D:\AI\repo\GIT_SYNC_REPO.bat` | `github.com/fenics555/creo-repo` (правила, скиллы, спеки) | `D:\AI\tools\agent\data\git_sync_repo.log` |
+
+Каждый делает `git add -A` → `git commit -m "autosave <дата> <время>"` → `git push origin master`.
+Контроль: `git status -sb` → `## master...origin/master` **без** `[ahead N]`.
+
+- **Правило кодировки:** `.bat` дома держать в **ASCII/ANSI**. Случай 25.09.2026: `D:\AI\tools\GIT_SYNC.bat`
+  оказался в **UTF-16** → cmd ругался `'@' is not recognized`, и обновлялка инструментов **молча не работала**.
+  Лечение: перезапись ASCII (623 байта, 0 нулевых байт) — проверять `nulls` в файле после любой правки.
+- **Параллельные ноги:** `add -A` не гнать (утащит чужую работу) — `git add <свои файлы>` и
+  `git commit -m "…" -- <свои пути>`.
