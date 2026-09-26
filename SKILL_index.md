@@ -55,8 +55,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `Prog\SKILL_diff_and_apply` (Диффы и их применение)
 - `Prog\SKILL_repo_mapping` (Карта репо и указатели)
 - `Prog\SKILL_unit_testing` (Юнит-пробы на копиях)
-- `STANDARD Engineering Calculation Script Architecture.md` (Архитектура расчётных
-  скриптов; прописан под живым именем из корня, переименование = долг секции 7)
+- `Prog\SKILL_calc_script_architecture.md` (Архитектура расчётных скриптов;
+  переименован 26.09.2026 из `STANDARD Engineering Calculation Script Architecture.md`)
 ## ДОМЕН 3: Инженерные (оба агента)
 | Скилл | Назначение |
 |---|---|
@@ -128,19 +128,19 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - SKILL_tool_template.md → `Prog\SKILL_tool_template.md` — шаблон инструмента дома (создан 25.09.2026, долг закрыт).
 
 ### 7. ДОЛГИ И ИДЕИ КАРТЫ (честность: нет файла = нет скилла)
-- **PDF**: домен пуст; скиллы перепечати, миниатюр и реестра родятся из практики
-  pdf_tools.py и спеки 104 — долг оживления направления.
+- **PDF**: домен ожил (26.09.2026): вход `PDF\SKILL_pdf_index.md`, рутина
+  `PDF\SKILL_pdf_routine.md` (**critical**), контроль пар `PDF\SKILL_pdf_control.md` (**high**).
 - **Web**: в папке один сырой файл `260826_1610.md`; довести до Золотого стандарта = долг.
 - **Трейлы**: индекс создан 22.09 — `Трейлы\SKILL_trails_index.md` (в гите); журнал `Трейлы/TRAIL_JOURNAL.md` gitignored как операционный поток (пишет trail_tools).
-- **Prog\SKILL_prog_index.md**: закрыт решением 22.09: вход = секция 2, индекс не создаётся.
+- **Индекс Prog**: закрыт решением 22.09: вход = секция 2, отдельный индекс не создаётся.
 - **Creo PDF удалены словом пользователя 22.09; источник восстановления = установка PTC и онлайн-справка, в дом не возвращать без задачи; в гит не входить.**
 - **Библиотека `D:\AI\ИЗУЧИТЬ\CREO`**: на 22.09 вечером папки на диске нет (в `ИЗУЧИТЬ` остались ДАВЫДОВКА, Новые правила, Новые правила2); таблица в Creo-индексе отражает утренний замер 1 206 544 066 Б / 17 963 файла — судьбу папки решает пользователь, до его слова строку не переписывать.
 - **.gitignore (решение 22.09)**: сведены два поколения; память дома (PROGRESS_*, SPEC_*, AUDIT_*, crash/, Трейлы/TRAIL_JOURNAL.md) под гитом не игнорируется; вне гита — secrets.json, users.json, data/, log/, *.db, backup_db/, *.log, *.bak, Избранное/.
 - **Журнал Трейлов (решение 22.09)**: `Трейлы/TRAIL_JOURNAL.md` — память дома о том, кто и когда работал в железе; из игнора убран (в remote уже трекается, а ignore против трекнутого файла бессилен).
 - **crash\SKILL_crash_reasoning-loop.md**: указатель вместо двойника (тело = plan-loop); удаление только по слову пользователя (22.09).
 - **SKILL_architect_reviewer** (идея ниже): **долг: файла нет** (аудит 22.09).
-- **Переименование**: `STANDARD Engineering Calculation Script Architecture.md` →
-  `Prog\SKILL_calc_script_architecture.md` — по слову пользователя, со сверкой ссылок.
+- **Переименование (закрыто 26.09.2026)**: `STANDARD Engineering Calculation Script Architecture.md` →
+  `Prog\SKILL_calc_script_architecture.md`; выполнено, ссылки в карте сверены.
 
 ## ЗОЛОТОЙ СТАНДАРТ (Golden Standard Template)
 

@@ -1,5 +1,5 @@
 ---
-name: parameters-mp
+name: parameters_guide
 system: Creo
 description: ПАРАМЕТРЫ И МАССОВЫЕ ХАРАКТЕРИСТИКИ CREO
 when: параметры, MP_MASS, массовые, вывод на чертеж

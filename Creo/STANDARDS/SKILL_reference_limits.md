@@ -1,5 +1,5 @@
 ---
-name: creo-limits
+name: reference_limits
 system: Creo
 description: CREO REFERENCE — ЛИМИТЫ, СИНТАКСИС, ФУНКЦИИ (Help 12.4.2.0, выверено)
 when: лимиты, длина имени, степень, ROUND, синтаксис IF

@@ -77,7 +77,8 @@ agent.py  (тонкий вход: pid, 3 потока — HTTP 8765, ночь, �
 | `db_tools` | 4 | `behavior,graph,vision,chat,timeline,copy,pdf_refresh,one_c,map,similar,memory_facts,predict` | по 1 |
 | `role_tools`, `web_tools`, `users_tools` | 3 | `vision_audit` (модуль) | +неск. |
 
-Полный список: `D:\AI\PROBA\agent_tools_inventory.txt`.
+Полный список модулей и блоков — обходом `*_tools.py` в `D:\AI\tools\agent\`;
+файл `D:\AI\PROBA\agent_tools_inventory.txt` отсутствует (проверено 26.09.2026, аудит R4).
 **Ядро частых** (в промпте с полным описанием): `creo_get_active`, `creo_status`, `creo_session`,
 `creo_list_files`, `models_find`, `models_where`, `models_stats`, `usage_state`, `search_kb`, `read_file`,
 `trail_predict`, `trail_problems`, `settings_show`, `help`, `tools_help`.
@@ -189,11 +190,13 @@ agent.py  (тонкий вход: pid, 3 потока — HTTP 8765, ночь, �
 ## 10. СВЯЗАННЫЕ ДОКУМЕНТЫ
 `D:\AI\repo\SKILL_agent_protocol.md` (протокол `[TOOL]/[ANSWER]` для модели агента) ·
 `D:\AI\repo\SKILL_local_agent_cline.md` (выживание в Cline) · `D:\AI\repo\Prog\SKILL_agent_memory.md`
-(память/якорь) · `D:\AI\repo\PASSPORT.md` («Модули агента») · `D:\AI\repo\CREO_MAP.md` (как агент ходит в Creo).
+(память/якорь) · `D:\AI\repo\PASSPORT.md` («Модули агента») · `D:\AI\repo\Creo\CREO_MAP.md` (как агент ходит в Creo).
 Крах-скиллы: `crash\SKILL_agent-frozen.md`, `crash\SKILL_crash_agent-duplicate-restart-race.md`,
 `crash\SKILL_crash_agent_corruption.md`, `crash\SKILL_crash_agent_silence.md`,
 `crash\SKILL_crash_runcommands_kill-by-name-house-services.md`.
-Конспект разбора: `D:\AI\PROBA\AGENT_NOTES.md`. Инвентарь инструментов: `D:\AI\PROBA\agent_tools_inventory.txt`.
+Конспект разбора: `D:\AI\PROBA\AGENT_NOTES.md` (6 146 б). Инвентарь инструментов — списком в §3
+выше; файл `D:\AI\PROBA\agent_tools_inventory.txt` отсутствует (проверено 26.09.2026, аудит R4) —
+при надобности строится заново обходом `*_tools.py`.
 
 ## 11. ОБСЛУЖИВАНИЕ (чистка 23.09.2026)
 - **Убрано 200 объектов (~592 МБ):** одноразовые `fix_*.py`/`debug_*.py`/`patch_*.py`/`harvest_part*.py`,

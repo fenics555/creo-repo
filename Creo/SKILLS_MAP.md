@@ -63,7 +63,7 @@ date: 23.09.2026
 | `SKILL_relations_examples.md` | примеры отношений |
 | `SKILL_reference_limits.md` | справочные пределы и таблицы |
 | `SKILL_creo_commands.md` | команды/меню Creo (шпаргалка) |
-| `SKILL_creo_cards.md` + `cards\liteika_hts_mm_relations.md` | карты тем; «литейка» — 67 КБ готовых отношений |
+| `SKILL_creo_cards.md` + `LIT\liteika_hts_mm_relations.md` | карты тем; «литейка» — 67 КБ готовых отношений |
 
 ## 6. ОФОРМЛЕНИЕ И ЧЕРТЕЖИ
 | Скилл | О чём |

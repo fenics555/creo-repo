@@ -1,5 +1,5 @@
 ---
-name: standard-engineering-calculation-script-architecture
+name: calc_script_architecture
 system: общее
 description: Use when: Ниже представлен готовый **System Skill / Instruction File** для размещения в репозитории (`.cursorrules`, `.github/copi
 when: standard engineering calculation script architecture
