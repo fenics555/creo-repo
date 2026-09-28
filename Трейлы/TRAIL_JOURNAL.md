@@ -1216,3 +1216,13 @@
   • [err_feature] 1040-954-35 — Creating feature 28 in model 1040-954-35 - error 0
   • [err_feature] 1040-954-35 — Creating feature 30 in model 1040-954-35 - error 0
   • [err_feature] 1040-954-35 — Creating feature 29 in model 1040-954-35 - error 0
+
+## 2026-09-28 08:02 | trail.txt.1095
+- trail.txt.1095: сессия 2026/09/25  22:15:16 (~0 мин), простой ~0 мин, память 0 МБ
+  • [err_translation] afx_options.txt — не открывается файл перевода
+  • [err_translation] ifx_opt.txt — не открывается файл перевода
+
+## 2026-09-28 08:02 | trail.txt.1095
+- trail.txt.1095: сессия 2026/09/25  22:15:16 (~0 мин), простой ~0 мин, память 0 МБ
+  • [err_translation] afx_options.txt — не открывается файл перевода
+  • [err_translation] ifx_opt.txt — не открывается файл перевода
