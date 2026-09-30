@@ -1,6 +1,6 @@
 # КУЛЬТУРА ДОМА: куда что кладётся (одно место)
 
-**Обновлено:** 29.09.2026 (Cline). Добавлен адрес `D:\AI\AGENT_SETTINGS\` (настройки моделей агента). **Канон в правилах:** `D:\AI\repo\.clinerules`, абзац «ОТЧЁТЫ И ЛОГИ».
+**Обновлено:** 30.09.2026 (Cline). Автосинхронизация копии `.clinerules` (мастер — `D:\AI\.clinerules`, копия для GitHub — `D:\AI\repo\.clinerules`). **Канон в правилах:** `D:\AI\repo\.clinerules`, абзац «ОТЧЁТЫ И ЛОГИ».
 Этот файл — карта. Если правило и карта разошлись — правь оба, а расхождение пиши в отчёт.
 
 ## 1. Пять адресов
@@ -85,6 +85,11 @@
   `D:\AI\GIT_SYNC_ALL.bat "plm_reader: что сделал"` — текст попадёт в оба репозитория;
   без текста имя будет `autosave <дата> <время>`. То же по отдельности:
   `D:\AI\tools\GIT_SYNC.bat "текст"` и `D:\AI\repo\GIT_SYNC_REPO.bat "текст"`.
+- **Копия правил для GitHub (`.clinerules`):** мастер — `D:\AI\.clinerules` (правит владелец), копия
+  `D:\AI\repo\.clinerules` живёт в creo-repo и **синхронизируется сама**: `repo\sync_clinerules.bat`
+  (копирует только при различии; лог `D:\AI\tools\agent\data\clinerules_sync.log`) зовётся из
+  `GIT_SYNC_REPO.bat` перед `git add -A` — то есть при каждом автосейве и в конце ноги. Совпадение
+  проверяет `dev\culture_check.py`; вручную — `fc /b "D:\AI\.clinerules" "D:\AI\repo\.clinerules"`.
 - **Кириллица в имени коммита:** через `-m` в консоли может исказиться — надёжно подавать файлом
   (`git commit -F D:\AI\log\urn\<исполнитель>\msg.txt`) или латиницей.
 - **Проверка, что доехало:** `git ls-remote origin master` должен вернуть тот же хеш, что `git rev-parse HEAD`;

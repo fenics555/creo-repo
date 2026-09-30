@@ -9,6 +9,8 @@ if "%MSG%"=="" set "MSG=autosave repo %date% %time%"
 cd /d "%ROOT%"
 echo ===== %date% %time% ===== >> "%SLOG%"
 echo message: %MSG% >> "%SLOG%"
+rem GitHub copy of the rules mirrors the master (D:\AI\.clinerules wins) before every autosave
+call "D:\AI\repo\sync_clinerules.bat" >> "%SLOG%" 2>&1
 git add -A
 git diff --cached --quiet
 if %errorlevel% equ 0 echo nothing to commit, working tree clean >> "%SLOG%"
