@@ -52,6 +52,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `Prog\SKILL_automated_validation` (Автоматические пробы и гейты)
 - `Prog\SKILL_code_parsing` (Разбор кода: ast, не regex)
 - `Prog\SKILL_cursor_rules_format` (Форматы внешних правил cursor/cline)
+- `Prog\\SKILL_prog_local_agent_cline` (Память и выживание в Cline) — **high**
+
 - `Prog\SKILL_diff_and_apply` (Диффы и их применение)
 - `Prog\SKILL_repo_mapping` (Карта репо и указатели)
 - `Prog\SKILL_unit_testing` (Юнит-пробы на копиях)
@@ -118,7 +120,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - Код проекта → python_standard + test_first_rule.
 - Физика/материалы → Инженерные.
 - «Где деталь / когда комплект / якорь / цикл» → production_mirror.
-- «Почему вылетаю / как работать в Cline / где что лежит» → SKILL_local_agent_cline (в корне).
+- «Почему вылетаю / как работать в Cline / где что лежит» → SKILL_local_agent_cline (в корне) или Prog\\SKILL_prog_local_agent_cline.
+
 - «Запетлял / встал / повторяю одно и то же» mid-task → §9.3 SKILL_local_agent_cline:
   СТОП → вслух назвать подпись краха → смена метода ИЛИ стоп-отчёт пользователю (помощь снаружи).
 
