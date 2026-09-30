@@ -4,8 +4,11 @@ system: crash
 description: Use when: Python open() падает с OSError [WinError 6] "Неверный дескриптор" при чтении/записи файла
 when: WinError 6, invalid handle, open, OSError, неверный дескриптор, скрипт, bench
 priority: high
+executor: Cline
 ---
 # open() ПОЛУЧАЕТ ЧИСЛО ВМЕСТО ПУТИ → WinError 6 (28.09.2026)
+
+ОШИБКА (дословно, для grep): OSError [WinError 6] «Неверный дескриптор» на open(src, 'rb') — функция вернула размер вместо пути
 
 ## Подпись
 `OSError: [WinError 6] Неверный дескриптор` на строке `open(src, 'rb')`,
