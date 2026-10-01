@@ -14,8 +14,9 @@ priority: critical
 - Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
 - Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md (закон) + crash\SKILL_crash_index.md (список крах-скиллов)
 - **PROMPT (новое, 01.10.2026):** PROMPT\SKILL_prompt_index.md — правила как инженерная система:
-  позиция блока от окна модели, диагностика «модель потеряла правило», связь с измерителем
-  `AGENT_SETTINGS\checks\`.
+  позиция блока от окна модели, диагностика «модель потеряла правило». Тело скилла и код
+  измерителя лежат в репозитории AI_AGENT_SETTINGS: `AGENT_SETTINGS\PROMPT\` и
+  `AGENT_SETTINGS\checks\` (методика и её инструменты обновляются вместе).
 
 ### 1. Creo (Веб-агент, Инженер)
 *Специализация на работе с CAD-системой через API и интерфейсы.*
