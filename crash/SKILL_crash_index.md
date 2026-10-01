@@ -58,5 +58,6 @@ date: 22.09.2026
 - `SKILL_crash_update-version-mismatch` — Use when: после обновления шапка новая, а «есть обновление» не гаснет — версия живёт в двух местах (`engine.VERSION` рядом с `APP_VERSION`), и/или манифест тянется по кэшируемому raw вместо GitHub API.
 
 - `SKILL_crash_strict_test_stamp-missing` — Use when: проверка `strict_test.py` проходит все вопросы, но отчёт не пишется — `NameError: name 'STAMP' is not defined` в разделе отчёта.
+- `SKILL_crash_ollama-ansi-stderr-falseexit` — Use when: `ollama stop/rm/create/ps` даёт ложный `NativeCommandError`/exit1 из-за ANSI-спиннера в stderr и рвёт цепочку `;` — успех проверять по `ollama list`/HTTP, а не по exit-коду PowerShell.
 
-Всего крах-скиллов: 46 (без учёта конституции и этого списка; один из них — указатель `SKILL_crash_reasoning-loop`).
+Всего крах-скиллов: 47 (без учёта конституции и этого списка; один из них — указатель `SKILL_crash_reasoning-loop`).
