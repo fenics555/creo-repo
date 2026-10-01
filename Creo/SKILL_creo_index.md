@@ -1,8 +1,11 @@
+---
 name: creo-index
 system: INDEX
 description: Use when: задача с темой Creo
 when: creo, creoson, parametric, assembly, part, drawing
 date: 22.09.2026
+---
+
 ЧТО ЗДЕСЬ: см. раздел «СТРУКТУРА И КАРТА СКИЛЛОВ» ниже — 8 подразделов (API, DOCS, CREOSON, COPY, STANDARDS, RELATIONS, DAVYDOVKA, INFRA).
 КОГДА ОТКРЫВАТЬ: теги [CREO], [PARAMETRIC]
 КОГДА ПИСАТЬ: CRASH триггеры: SKILL_creoson_probe_method, Ошибки\ERR_creoson_write_ops.md

@@ -1,3 +1,4 @@
+---
 name: crash_pdf-roots-two-lists
 system: CRASH
 description: Поиск PDF пуст при живых парах в базе знаний (сравнение scan_roots и kb_roots)
@@ -5,6 +6,8 @@ when: pdf-search-empty, roots-mismatch, scan_roots
 date: 16.09.2026
 executor: Cline
 task: СПЕКА 60
+---
+
 ОШИБКА (дословно, для grep):
 None
 СИМПТОМ: PDF-глаза показывают 0 пар, хотя файлы существуют в scan_roots и files.

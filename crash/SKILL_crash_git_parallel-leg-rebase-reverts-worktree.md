@@ -1,3 +1,4 @@
+---
 name: crash_git_parallel-leg-rebase-reverts-worktree
 system: CRASH
 description: Use when: параллельная нога делает rebase — рабочее дерево откатывается (структура/правки исчезают), своя работа оказывается в stash
@@ -5,6 +6,8 @@ when: git, rebase, parallel leg, stash, worktree revert, чужая нога, п
 date: 22.09.2026
 executor: Cline
 task: тема CREO — структуризация Creo\ (подразделы) + наполнение скиллов
+---
+
 ОШИБКА (дословно, для grep):
 `interactive rebase in progress; onto 91556ce` + `stash@{0}: On master: parallel-leg-creo-reorg-2209`
 СИМПТОМ: подпапки `Creo\` (API, DOCS, CREOSON, …) исчезли, новые скиллы пропали из рабочего дерева;

@@ -1,3 +1,4 @@
+---
 name: crash_editor_too_large_and_non_unique_anchors
 system: CRASH
 description: Use when: editor падает из-за размера файла > 6 КБ или нескольких совпадений old_text
@@ -5,6 +6,8 @@ when: editor, too_large, multiple_matches, non_unique_anchor
 date: 20.09.2026
 executor: Cline
 task: frontend_integration_pdfrefresh
+---
+
 ОШИБКА (дословно, для grep):
 Editor input too large: new_text was ... characters, exceeding the recommended limit of 6000.
 СИМПТОМ: цикл неудачных вызовов editor или ошибка о нескольких совпадениях.

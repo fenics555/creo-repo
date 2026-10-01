@@ -1,6 +1,10 @@
+---
 name: crash_command-30s-timeout
 system: CRASH
 description: Use when: run_commands падает с "Command timed out after 30000ms" — таймаут
+when: run_commands падает с "Command timed out after 30000ms" — таймаут
+---
+
   инструмента 30 секунд, а не 300; любые Start-Sleep и долгие ожидания в одной команде
 when: timeout, 30000ms, Start-Sleep, ожидание, таймаут, sleep
 date: 16.09.2026

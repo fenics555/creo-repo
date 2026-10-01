@@ -1,3 +1,4 @@
+---
 name: crash_protocol_omission
 system: CRASH
 description: Use when: пропуск обязательной записи крах-скилла — ритуал краха выполнен частично
@@ -5,6 +6,8 @@ when: protocol_omission, пропуск скилла, ритуал краха, �
 date: 17.09.2026
 executor: Cline
 task: <текущая задача>
+---
+
 ОШИБКА (дословно, для grep):
 omission of skill writing
 СИМПТОМ: после инцидента сделана диагностика/отчёт, но крах-скилл не создан (ритуал разорван).

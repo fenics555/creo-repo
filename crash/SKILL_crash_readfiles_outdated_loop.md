@@ -1,3 +1,4 @@
+---
 name: crash_readfiles_outdated_loop
 system: CRASH
 description: Use when: `read_files` в цикле возвращает `[outdated - see the latest file content]`
@@ -5,6 +6,8 @@ when: readfiles, outdated, loop, tool-loop
 date: 19.09.2026
 executor: Cline
 task: Spec 95 (Frontend Pattern Discovery)
+---
+
 ОШИБКА (дословно, для grep):
 [outdated - see the latest file content]
 СИМПТОМ: Три одинаковых вызова `read_files` с одним и тем же путем возвращают один и тот же статус "outdated" без содержимого.

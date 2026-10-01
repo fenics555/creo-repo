@@ -1,9 +1,12 @@
+---
 name: lit-analysis-patterns
 system: Creo
 description: Шаблоны и best practices для Relations в Creo Parametric при литье. Содержит проверенные алгоритмы расчета standing, gate, runners, chilllers и economic efficiency.
 when: relations, liatie, hts, shrinkage, weiver, pattern, черновик, оптимизация
 priority: critical
 date: 24.09.2026
+---
+
 ---
 
 # SKILL_lit_analysis_patterns - Основные шаблоны для литья в Creo Parametric

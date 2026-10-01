@@ -1,3 +1,10 @@
+---
+name: lit-hts-en
+system: Creo
+description: SKILL_lit_hts_en - Методология HTS для европейских литей (EN 1563)
+when: hts, литьё, hts, en
+---
+
 # SKILL_lit_hts_en - Методология HTS для европейских литей (EN 1563)
 
 ## 📋 ОПИСАНИЕ

@@ -3,22 +3,25 @@ name: CHARGE_START
 system: ЗНАНИЯ
 description: Use when: стартовый набор знаний Creo/CREOSON — полные тексты главных скиллов (уже в промпте агента)
 when: стартовый набор, Creo, CREOSON, с чего начать задачу, индекс Creo
-date: 25.09.2026 14:48
+date: 01.10.2026 07:17
 ---
 
 # СТАРТОВЫЙ НАБОР ЗНАНИЙ (читать сразу, это в промпте агента)
 
-**Собрано:** 25.09.2026 14:48
+**Собрано:** 01.10.2026 07:17
 Порядок чтения: индекс Creo → индекс CREOSON → рутина CREOSON → природа модели → общая карта скиллов.
 
 
 
 ===== Creo\SKILL_creo_index.md =====
+---
 name: creo-index
 system: INDEX
 description: Use when: задача с темой Creo
 when: creo, creoson, parametric, assembly, part, drawing
 date: 22.09.2026
+---
+
 ЧТО ЗДЕСЬ: см. раздел «СТРУКТУРА И КАРТА СКИЛЛОВ» ниже — 8 подразделов (API, DOCS, CREOSON, COPY, STANDARDS, RELATIONS, DAVYDOVKA, INFRA).
 КОГДА ОТКРЫВАТЬ: теги [CREO], [PARAMETRIC]
 КОГДА ПИСАТЬ: CRASH триггеры: SKILL_creoson_probe_method, Ошибки\ERR_creoson_write_ops.md
@@ -48,7 +51,8 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | `RELATIONS\` | `SKILL_creo_relations.md`, `SKILL_relations_constitution.md`, `SKILL_relations_basics.md`, `SKILL_relations_examples.md`, `SKILL_curves_from_equation.md`, `SKILL_curves_examples.md`, `SKILL_spring_compression_generator.md`, `SKILL_spring_tension_master.md` |
 | `DAVYDOVKA\` | `SKILL_davydovka_creoson_map.md` (карта Давыдовка ↔ CREOSON) |
 | `INFRA\` | `SKILL_creostart_fleet.md` (флот, старт машин), `SKILL_object_creoson_tests-01_asm.md` (объектные пробы) |
-| корень | этот индекс + `cards\` (карты моделей, сырые близнецы) + `SKILL_creo_file_reading.md` (чтение файлов «в лоб»: история, упакованные числа, оглавление; инструмент `plm_reader`) + `CREO_MAP.md`, `SKILLS_MAP.md` |
+| корень | этот индекс + `cards\` (карты моделей, сырые близнецы) + `SKILL_creo_file_reading.md` (чтение файлов «в лоб»: история, упакованные числа, оглавление, параметры и отношения; §8.70–8.81 от 28–29.09.2026; инструмент `plm_reader` V24) + `CREO_MAP.md`, `SKILLS_MAP.md` |
+| проверка хозяйства | **спека прогона — `D:\AI\СПЕКИ\СПЕКА_ПРОВЕРКИ_CREO.md`** (установка/настройки `CREO-START`, библиотеки `Libraries`, склад `Work`, тормоза, ошибки, предложения). Читается целиком до первого действия; живые файлы Creo не менять |
 
 ## КАК ИИ НАХОДИТ СКИЛЛ (правило поиска)
 1. Вход — корневой `SKILL_index.md` (домен Creo) → **этот файл**.
@@ -336,6 +340,8 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 *Стандарты кода, тестов и памяти агента; вход направления = эта секция,
 собственный индекс-файл Prog\ = долг (см. секцию 7).*
 - `Prog\SKILL_python_standard` (Стандарт расчётных скриптов: блоки, суффиксы, аудит) — **critical**
+- `Prog\SKILL_tool_template` (Шаблон инструмента дома: своё окно, лог, время работы, README + кнопка
+  «README», настройки, слои кнопок, версия в шапке, три руки) — **critical**
 - `Prog\SKILL_test_first_rule` (Правило TEST-first) — **critical**
 - `Prog\SKILL_tool_routing` (Маршрутизация запросов; единственная прописка здесь,
   из Core не дублировать) — **critical**
@@ -343,11 +349,13 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `Prog\SKILL_automated_validation` (Автоматические пробы и гейты)
 - `Prog\SKILL_code_parsing` (Разбор кода: ast, не regex)
 - `Prog\SKILL_cursor_rules_format` (Форматы внешних правил cursor/cline)
+- `Prog\\SKILL_prog_local_agent_cline` (Память и выживание в Cline) — **high**
+
 - `Prog\SKILL_diff_and_apply` (Диффы и их применение)
 - `Prog\SKILL_repo_mapping` (Карта репо и указатели)
 - `Prog\SKILL_unit_testing` (Юнит-пробы на копиях)
-- `STANDARD Engineering Calculation Script Architecture.md` (Архитектура расчётных
-  скриптов; прописан под живым именем из корня, переименование = долг секции 7)
+- `Prog\SKILL_calc_script_architecture.md` (Архитектура расчётных скриптов;
+  переименован 26.09.2026 из `STANDARD Engineering Calculation Script Architecture.md`)
 ## ДОМЕН 3: Инженерные (оба агента)
 | Скилл | Назначение |
 |---|---|
@@ -374,7 +382,7 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
     - `strategy.md` (Журнал развития; живое имя без префикса SKILL_)
     - `SKILL_skill_craft` — **долг: файла нет** (аудит 22.09); был задуман как мета-скилл (Ремесло промтов и скиллов; priority high,
       подгружается по надобности: задача о промтах, скиллах, правилах, шаблонах)
-    - `SKILL_parameters` (Справочник параметров; «дикий», интегрирован 22.09)
+    - `Creo\STANDARDS\SKILL_parameters` (Справочник параметров моделей; перенесён из корня по содержанию 01.10.2026)
     - `DESIGN_davydovka_tokens.md` (токены дизайна Давыдовки для окон и витрины;
       не скилл, а закон дизайна, цитируется .clinerules)
 - **Аудит**: `AUDIT_rules_*.md` и `SKILL_audit_protocol.md`
@@ -385,7 +393,7 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `agents\rag-architect\SKILL_rag_architect.md` + `agents\rag-architect\references\` (chunking_strategies_comparison.md, embedding_model_benchmark.md, rag_evaluation_framework.md)
 - `agents\skill-security-auditor\SKILL_skill_security_auditor.md` + `agents\skill-security-auditor\references\threat-model.md`
 - `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md`
-- `agents\SKILL-AUTHORING-STANDARD.md` (стандарт авторства скиллов)
+- `agents\SKILL_authoring_standard.md` (стандарт авторства скиллов; переименован 01.10.2026 — дефис ломал фильтр `skill_*`)
 - `AGENT_MAP.md` (**Карта строения агента** `D:\AI\tools\agent`: модули, порт 8765, инструменты,
   данные, ночи и сторож — high; вход по тегам «агент/agent.py/loop/tools_registry/8765»)
 - `SKILL_parallel_local_leg.md` — **удалён по слову пользователя 23.09.2026** (спека 113 не оправдала
@@ -409,29 +417,30 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - Код проекта → python_standard + test_first_rule.
 - Физика/материалы → Инженерные.
 - «Где деталь / когда комплект / якорь / цикл» → production_mirror.
-- «Почему вылетаю / как работать в Cline / где что лежит» → SKILL_local_agent_cline (в корне).
+- «Почему вылетаю / как работать в Cline / где что лежит» → SKILL_local_agent_cline (в корне) или Prog\\SKILL_prog_local_agent_cline.
+
 - «Запетлял / встал / повторяю одно и то же» mid-task → §9.3 SKILL_local_agent_cline:
   СТОП → вслух назвать подпись краха → смена метода ИЛИ стоп-отчёт пользователю (помощь снаружи).
 
 ## ИСТОЧНИКИ ПРАВДЫ
 - DESIGN_davydovka_tokens.md: канон дизайна для новых инструментов. **Долг/проверить: файла в репо нет**
   (аудит 25.09: найден только в копии `D:\AI\log\urn\cline\repo_clone\`), окна дома сейчас строятся без токенов.
-- SKILL_tool_template.md: шаблон создания трёхрукого инструмента — **долг: файла нет** (аудит 22.09).
+- SKILL_tool_template.md → `Prog\SKILL_tool_template.md` — шаблон инструмента дома (создан 25.09.2026, долг закрыт).
 
 ### 7. ДОЛГИ И ИДЕИ КАРТЫ (честность: нет файла = нет скилла)
-- **PDF**: домен пуст; скиллы перепечати, миниатюр и реестра родятся из практики
-  pdf_tools.py и спеки 104 — долг оживления направления.
+- **PDF**: домен ожил (26.09.2026): вход `PDF\SKILL_pdf_index.md`, рутина
+  `PDF\SKILL_pdf_routine.md` (**critical**), контроль пар `PDF\SKILL_pdf_control.md` (**high**).
 - **Web**: в папке один сырой файл `260826_1610.md`; довести до Золотого стандарта = долг.
 - **Трейлы**: индекс создан 22.09 — `Трейлы\SKILL_trails_index.md` (в гите); журнал `Трейлы/TRAIL_JOURNAL.md` gitignored как операционный поток (пишет trail_tools).
-- **Prog\SKILL_prog_index.md**: закрыт решением 22.09: вход = секция 2, индекс не создаётся.
+- **Индекс Prog**: закрыт решением 22.09: вход = секция 2, отдельный индекс не создаётся.
 - **Creo PDF удалены словом пользователя 22.09; источник восстановления = установка PTC и онлайн-справка, в дом не возвращать без задачи; в гит не входить.**
 - **Библиотека `D:\AI\ИЗУЧИТЬ\CREO`**: на 22.09 вечером папки на диске нет (в `ИЗУЧИТЬ` остались ДАВЫДОВКА, Новые правила, Новые правила2); таблица в Creo-индексе отражает утренний замер 1 206 544 066 Б / 17 963 файла — судьбу папки решает пользователь, до его слова строку не переписывать.
 - **.gitignore (решение 22.09)**: сведены два поколения; память дома (PROGRESS_*, SPEC_*, AUDIT_*, crash/, Трейлы/TRAIL_JOURNAL.md) под гитом не игнорируется; вне гита — secrets.json, users.json, data/, log/, *.db, backup_db/, *.log, *.bak, Избранное/.
 - **Журнал Трейлов (решение 22.09)**: `Трейлы/TRAIL_JOURNAL.md` — память дома о том, кто и когда работал в железе; из игнора убран (в remote уже трекается, а ignore против трекнутого файла бессилен).
 - **crash\SKILL_crash_reasoning-loop.md**: указатель вместо двойника (тело = plan-loop); удаление только по слову пользователя (22.09).
 - **SKILL_architect_reviewer** (идея ниже): **долг: файла нет** (аудит 22.09).
-- **Переименование**: `STANDARD Engineering Calculation Script Architecture.md` →
-  `Prog\SKILL_calc_script_architecture.md` — по слову пользователя, со сверкой ссылок.
+- **Переименование (закрыто 26.09.2026)**: `STANDARD Engineering Calculation Script Architecture.md` →
+  `Prog\SKILL_calc_script_architecture.md`; выполнено, ссылки в карте сверены.
 
 ## ЗОЛОТОЙ СТАНДАРТ (Golden Standard Template)
 

@@ -2,6 +2,7 @@
 name: object_creoson_tests-01_asm
 system: обучение
 description: Use when: вопросы об объекте creoson_tests-01.asm и создание похожих
+when: вопросы об объекте creoson_tests-01.asm и создание похожих
 source_model: creoson_tests-01.asm
 learned: 2026-09-07 14:40
 ---

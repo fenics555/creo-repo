@@ -1,6 +1,10 @@
+---
 name: crash_runcommands-copy-race-fake-parameter
 system: CRASH
 description: Use when: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка
+when: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка
+---
+
 записи и чтения), либо Get-Content с параметром -LineNumber падает NamedParameterNotFound
 (такого параметра у Get-Content не существует)
 when: run_commands, Copy-Item, Get-Content, race, PathNotFound, NamedParameterNotFound,

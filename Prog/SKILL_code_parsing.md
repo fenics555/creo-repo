@@ -1,7 +1,10 @@
-# SKILL_code_parsing
-# Направление: Программирование
-# Priority: critical
-# When: ast, tree-sitter, parse, structure, syntax, query, grammar, bounds, precision
+---
+name: code-parsing
+system: Программирование
+description: ## КОНЦЕПЦИЯ
+when: ast, tree-sitter, parse, structure, syntax, query, grammar, bounds, precision
+priority: critical
+---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 

@@ -1,3 +1,4 @@
+---
 name: crash_session-interruption
 system: CRASH
 description: Use when: потеря сессии, обрыв связи, генерация оборвана на полуслове
@@ -5,6 +6,8 @@ when: session_loss, interruption, connection_error, timeout
 date: 17.09.2026
 executor: Cline
 task: СПЕКА 71 (рефактор agent.py)
+---
+
 ОШИБКА (дословно, для grep):
 None (потеря связи)
 СИМПТОМ: ИИ перестал отвечать или сессия закрылась неожиданно.

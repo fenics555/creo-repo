@@ -1,7 +1,10 @@
-# SKILL_unit_testing
-# Направление: Программирование
-# Priority: critical
-# When: test, jest, unit-test, coverage, mock, matcher, assertion, suite, describe, beforeEach, afterEach, async-test, spy
+---
+name: unit-testing
+system: Программирование
+description: ## КОНЦЕПЦИЯ
+when: test, jest, unit-test, coverage, mock, matcher, assertion, suite, describe, beforeEach, afterEach, async-test, spy
+priority: critical
+---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 
@@ -51,4 +54,3 @@
 - **При тестировании ошибок**: Всегда используй `expect.assertions(n)`, чтобы убедиться, что блок `catch` действительно был выполнен.
 - **Не переборщи с моками**: Не мокай внутреннюю логику, которую ты тестируешь. Мокай только внешние зависимости.
 - **Если тест падает**: Сначала пойми *почему* (через `console.log` или отладку), а потом исправляй код.
-

@@ -1,3 +1,10 @@
+---
+name: lit-hts-turkey
+system: Creo
+description: SKILL_lit_hts_turkey - Методология HTS для турецких литей
+when: hts, литьё, hts, turkey
+---
+
 # SKILL_lit_hts_turkey - Методология HTS для турецких литей
 
 ## 📋 ОПИСАНИЕ

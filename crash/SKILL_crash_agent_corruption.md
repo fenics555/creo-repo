@@ -1,5 +1,10 @@
+---
 name: crash_agent_corruption
+description: Use when: агент после рестарта не отвечает или отвечает старым кодом, py_compile правленого agent.py падает SyntaxError
+when: syntaxerror, agent.py, рестарт, повреждение кода, py_compile, бекап, патч-скрипт
 executor: local
+---
+
 адаптеры: MANIFEST.md
 ПОВТОРЫ: 1
 ОШИБКА (дословно, для grep):

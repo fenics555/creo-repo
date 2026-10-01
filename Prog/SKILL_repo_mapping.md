@@ -1,7 +1,10 @@
-# SKILL_repo_mapping
-# Направление: Программирование
-# Priority: critical
-# When: repo_map, structure, skeleton, map, codebase, hierarchy, grep_ast, overview
+---
+name: repo-mapping
+system: Программирование
+description: ## КОНЦЕПЦИЯ
+when: repo_map, structure, skeleton, map, codebase, hierarchy, grep_ast, overview
+priority: critical
+---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2)
 

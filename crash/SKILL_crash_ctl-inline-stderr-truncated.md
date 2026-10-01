@@ -1,6 +1,10 @@
+---
 name: crash_ctl-inline-stderr-truncated
 system: CRASH
 description: Use when: рестарт или проба агента через инлайн python -c в PowerShell гибнет
+when: рестарт или проба агента через инлайн python -c в PowerShell гибнет
+---
+
 с кодом 1, stderr обрезан на границе кодека, выходной файл пуст
 when: ctl, restart, python -c, inline, stderr truncated, ParseException, handlers/ctl
 date: 17.09.2026

@@ -1,6 +1,8 @@
 ---
 name: company-config
 system: Creo
+description: Паспорт компании: единицы MMKS/мм/кг, допуски ISO, десятичные знаки, ключевые config-параметры (сбор 15.09.2026)
+when: pro_unit_sys, единицы, допуски, tolerance_standard, паспорт компании, настройки config, масса
 priority: high
 ---
 ПАСПОРТ КОМПАНИИ (сбор 15.09.2026 14:59)

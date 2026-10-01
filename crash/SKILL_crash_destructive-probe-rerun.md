@@ -1,3 +1,4 @@
+---
 name: crash_destructive-probe-rerun
 system: CRASH
 description: Use when: разрушительная проба (kill_creo, delete, erase, перезапись) исполнена ПОВТОРНО из оставшегося в tmp скрипта
@@ -5,6 +6,8 @@ when: kill_creo, destructive, probe, rerun, tmp, повтор, разрушит�
 date: 17.09.2026
 executor: Cline (облачный)
 task: тема CREOSON/сессии, проба убийства Creo (kill_creo)
+---
+
 ОШИБКА (дословно, для grep):
 is_creo_running before kill: {"running": true} → kill_creo status: {"error": false} →
 is_creo_running after kill : {"running": false} → creo:pwd: "No session found"

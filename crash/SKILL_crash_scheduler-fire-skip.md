@@ -1,6 +1,10 @@
+---
 name: crash_scheduler-fire-skip
 system: CRASH
 description: Use when: задача планировщика с триггером повторения не стартует в расчётный
+when: задача планировщика с триггером повторения не стартует в расчётный
+---
+
   огонь — LASTRUN держится старым, NextRunTime перескакивает на следующую точку сетки,
   в журнале TaskScheduler/Operational нет ни одного события задачи за момент пропуска
 when: scheduler, fire skipped, LASTRUN, NextRunTime, StopAtDurationEnd, репетишн, триггер, тик

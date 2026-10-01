@@ -1,6 +1,10 @@
+---
 name: creostart-fleet
 system: FLEET
 description: Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы,
+when: вопросы про старт машин КБ, CREO-START, логи, трейлы,
+---
+
   сетевую диагностику, локальные и сетевые папки, развертывание creoson
 when: CREO-START, флот, трейлы, netdiag, логи, creoson, лицензия, config.pro
 priority: high

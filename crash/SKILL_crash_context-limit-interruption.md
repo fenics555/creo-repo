@@ -1,5 +1,9 @@
+---
 name: crash_context-limit-interruption
+description: Use when: выполнение задачи прерывается из-за ограничений инструментов (search_codebase, context window) или таймаутов
+when: search_codebase timeout, context full, tool limit reached, вылетел, лимит контекста
 executor: Cline
+---
 
 ## Description
 Use when: выполнение задачи прерывается из-за ограничений инструментов (search_codebase, context window) или таймаутов в процессе миграции/распила.
@@ -31,4 +35,3 @@ Spec 71 (распил agent.py)
 
 ПРОФИЛАКТИКА: разделы «ПРИНЯТИЕ» и «ПОЛУЧЕНИЕ «Е»» выше; крупные файлы — частями, пачки чтений — точечно.
 ПОВТОРЫ: 1
-

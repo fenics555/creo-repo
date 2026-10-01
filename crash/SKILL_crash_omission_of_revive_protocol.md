@@ -1,3 +1,4 @@
+---
 name: crash_omission_of_revive_protocol
 system: CRASH
 description: Use when: пропуск обязательных шагов ритуала (чтение скилла и строка-доказательство) при REVIVE или крахе
@@ -5,6 +6,8 @@ when: revive, omission, ритуал, строка-доказательство
 date: 17.09.2026
 executor: Cline
 task: <текущая задача>
+---
+
 ОШИБКА (дословно, для grep):
 omission of ritual steps during REVIVE/Crash
 СИМПТОМ: ответ на REVIVE/крах не содержит обязательной строки-доказательства и перечитывания скилла выживания.

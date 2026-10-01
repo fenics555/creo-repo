@@ -1,10 +1,13 @@
-﻿name: editor_too_large
+---
+name: editor_too_large
 system: CRASH
 description: Use when: editor отказывает «Editor input too large» — блок new_text выше лимита (~6000 символов)
 when: editor, too large, new_text, limit, chunking, якорь
 date: 17.09.2026
 executor: Cline
 task: <текущая задача>
+---
+
 ОШИБКА (дословно, для grep):
 Editor input too large
 

@@ -1,3 +1,4 @@
+---
 name: crash_regex_extraction_triple_quote_loop
 system: CRASH
 description: Use when: бесконечный цикл при regex-извлечении блоков кода в тройных кавычках (agent.py)
@@ -5,6 +6,8 @@ when: regex, extraction, loop, triple_quote, regex_extraction
 date: 17.09.2026
 executor: Cline
 task: F2 (raspil agent.py)
+---
+
 ОШИБКА (дословно, для grep):
 RECURSION_ERROR: maximum recursion depth exceeded in regex engine
 СИМПТОМ: Агент зацикливается при обработке кода, CPU 100%, stdout не обновляется.

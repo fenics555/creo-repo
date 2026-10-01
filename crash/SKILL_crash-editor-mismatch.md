@@ -1,3 +1,4 @@
+---
 name: crash-editor-mismatch
 system: CRASH
 description: Use when: editor падает с «text not found» из-за расхождения old_text после частичной правки или смены контекста
@@ -5,6 +6,8 @@ when: editor-mismatch, text not found, mismatch, old_text mismatch
 date: 16.09.2026
 executor: Cline (облако/локально)
 task: правка PASSPORT.md (СПЕКА 44в)
+---
+
 ОШИБКА (дословно, для grep):
 Editor operation failed: No replacement performed: text not found in [FILE]
 СИМПТОМ: вызов editor возвращает ошибку вместо правки, хотя old_text, по мнению исполнителя, совпадает с состоянием файла.

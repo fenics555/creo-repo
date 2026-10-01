@@ -1,8 +1,11 @@
+---
 name: pdf-index
 system: INDEX
 description: Use when: задача с темой PDF
 when: pdf, pdf_tools, pdf_img, extraction, rendering, перепечать, дубли
 date: 26.09.2026
+---
+
 ЧТО ЗДЕСЬ (папка `D:\AI\repo\PDF`, проверено 26.09.2026):
 - `SKILL_pdf_index.md` — этот вход направления;
 - `SKILL_pdf_routine.md` (**critical**) — рутина дома: вывод и обновление PDF чертежей Creo,

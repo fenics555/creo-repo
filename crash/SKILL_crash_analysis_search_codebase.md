@@ -1,6 +1,10 @@
+---
 name: crash_analysis_search_codebase
 system: CRASH
 description: Use when: search_codebase падает с ошибкой миграции контекста или повторяется
+when: search_codebase падает с ошибкой миграции контекста или повторяется
+---
+
   «tool result missing» в длинной сессии
 when: migration, tool result missing, legacy conversation history, search_codebase
 date: 16.09.2026

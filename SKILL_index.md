@@ -85,7 +85,7 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
     - `strategy.md` (Журнал развития; живое имя без префикса SKILL_)
     - `SKILL_skill_craft` — **долг: файла нет** (аудит 22.09); был задуман как мета-скилл (Ремесло промтов и скиллов; priority high,
       подгружается по надобности: задача о промтах, скиллах, правилах, шаблонах)
-    - `SKILL_parameters` (Справочник параметров; «дикий», интегрирован 22.09)
+    - `Creo\STANDARDS\SKILL_parameters` (Справочник параметров моделей; перенесён из корня по содержанию 01.10.2026)
     - `DESIGN_davydovka_tokens.md` (токены дизайна Давыдовки для окон и витрины;
       не скилл, а закон дизайна, цитируется .clinerules)
 - **Аудит**: `AUDIT_rules_*.md` и `SKILL_audit_protocol.md`
@@ -96,7 +96,7 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `agents\rag-architect\SKILL_rag_architect.md` + `agents\rag-architect\references\` (chunking_strategies_comparison.md, embedding_model_benchmark.md, rag_evaluation_framework.md)
 - `agents\skill-security-auditor\SKILL_skill_security_auditor.md` + `agents\skill-security-auditor\references\threat-model.md`
 - `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md`
-- `agents\SKILL-AUTHORING-STANDARD.md` (стандарт авторства скиллов)
+- `agents\SKILL_authoring_standard.md` (стандарт авторства скиллов; переименован 01.10.2026 — дефис ломал фильтр `skill_*`)
 - `AGENT_MAP.md` (**Карта строения агента** `D:\AI\tools\agent`: модули, порт 8765, инструменты,
   данные, ночи и сторож — high; вход по тегам «агент/agent.py/loop/tools_registry/8765»)
 - `SKILL_parallel_local_leg.md` — **удалён по слову пользователя 23.09.2026** (спека 113 не оправдала

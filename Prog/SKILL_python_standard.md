@@ -1,7 +1,10 @@
-# SKILL_python_standard
-# Направление: Программирование
-# Priority: high
-# When: python, стандарт, расчёт, скрипт, блоки, суффиксы, аудит, префиксы, архитектура скрипта, lint, flake8, pyflakes, tree-sitter
+---
+name: python-standard
+system: Программирование
+description: Стандарт расчётных python-скриптов: блочная архитектура, имена с единицами, защита операций, аудит A1-A15, линт
+when: python, стандарт, расчёт, скрипт, блоки, суффиксы, аудит, префиксы, архитектура скрипта, lint, flake8, pyflakes, tree-sitter
+priority: high
+---
 
 # СТАНДАРТ РАСЧЁТНЫХ PYTHON-СКРИПТОВ
 Область: Python-скрипты расчётов и автоматизации в VS Code.

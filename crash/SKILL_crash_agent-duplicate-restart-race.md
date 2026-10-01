@@ -1,3 +1,4 @@
+---
 name: crash_agent-duplicate-restart-race
 system: CRASH
 description: Use when: после рестарта агента живы ДВА python agent.py и на порту два LISTENING — рестарт среагировал в гонке со сторожем ctl --watch
@@ -5,6 +6,8 @@ when: agent restart, duplicate process, double start, ctl watch, race, SO_REUSEA
 date: 17.09.2026
 executor: Cline (gemma4:26b)
 task: спека 66d, рестарт по прямому слову пользователя
+---
+
 ПОВТОРЫ: 1
 ОШИБКА (дословно, для grep):
 строковой ошибки нет; дословный признак (netstat -ano | findstr ':8765' | findstr 'LISTENING'):

@@ -1,3 +1,10 @@
+---
+name: lit-hts-aws
+system: Creo
+description: SKILL_lit_hts_aws - Методология HTS для американских литей (AWS D10.1)
+when: hts, литьё, hts, aws
+---
+
 # SKILL_lit_hts_aws - Методология HTS для американских литей (AWS D10.1)
 
 ## 📋 ОПИСАНИЕ

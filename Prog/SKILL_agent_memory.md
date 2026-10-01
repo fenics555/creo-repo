@@ -1,7 +1,10 @@
-# SKILL_agent_memory
-# Направление: Программирование
-# Priority: critical
-# When: memory, context, long-term, agent, state, management, letta, memgpt, stateful
+---
+name: agent-memory
+system: Программирование
+description: ## КОНЦЕПЦИЯ
+when: memory, context, long-term, agent, state, management, letta, memgpt, stateful
+priority: critical
+---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 1)
 

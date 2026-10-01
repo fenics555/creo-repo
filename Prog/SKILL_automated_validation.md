@@ -1,7 +1,10 @@
-# SKILL_automated_validation
-# Направление: Программирование
-# Priority: critical
-# When: lint, format, check, validate, verify, clean, type-check, static-analysis, pre-commit, anti-overengineering
+---
+name: automated-validation
+system: Программирование
+description: ## КОНЦЕПЦИЯ
+when: lint, format, check, validate, verify, clean, type-check, static-analysis, pre-commit, anti-overengineering
+priority: critical
+---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 

@@ -1,3 +1,4 @@
+---
 name: crash_editor-studycheck-halfedit-undefined-name
 system: CRASH
 description: Use when: файл после правки ссылается на имя, которого нет (NameError), потому что правка оборвана до объявления имени и до прогона проверки
@@ -5,6 +6,8 @@ when: halfedit, undefined name, nameerror, skill2, study_check, оборванн
 date: 24.09.2026
 executor: Cline
 task: культура дома / инструмент study_* (конспект изучения)
+---
+
 ОШИБКА (дословно, для grep):
 Traceback (most recent call last):
   File "D:\AI\tools\agent\dev\study_check.py", line 76, in <module>

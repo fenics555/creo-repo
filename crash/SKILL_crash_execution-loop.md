@@ -1,3 +1,4 @@
+---
 name: crash_execution-loop
 system: CRASH
 description: Use when: агент зацикливается в попытках исправить ошибку, повторяя одну и ту же неудачную команду или используя несоответствующий инструмент (например, слишком сложный python -c в PowerShell).
@@ -5,6 +6,7 @@ when: "зациклился", "execution loop", "repeating failed command", "too
 date: 17.09.2026
 executor: Cline
 task: <текущая задача>
+---
 
 ОШИБКА (дословно, для grep):
 зациклился (или "повторяет неудачную команду", "tooling loop")

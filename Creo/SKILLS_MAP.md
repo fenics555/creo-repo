@@ -36,7 +36,7 @@ date: 23.09.2026
 | Скилл | О чём |
 |---|---|
 | `SKILL_creo_jlink_direct.md` | среда, подключение/запуск/`Disconnect`, рецепты, **PDF из чертежа**, экспорт 3D, 717 классов API, грабли |
-| `SKILL_creo_ecosystem.md` *(в stash: `SKILL_creo_api_ecosystem.md`)* | каналы: один `pfc*` у Creo.JS/OTK/VB/Web.Link/JLINK/CREOSON |
+| `API\SKILL_creo_api_ecosystem.md` | каналы: один `pfc*` у Creo.JS/OTK/VB/Web.Link/JLINK/CREOSON |
 | `SKILL_creojs_api.md` | канал **Creo.JS** (как в Давыдовке): API и приёмы |
 | `SKILL_creo_directions_mfg_gdt.md` | направления: `mfg_cmdsyn` (синтаксис ЧПУ), GD&T Advisor, `pfcSolid`/`pfcFeature` |
 | `README_jlink_direct.md` | исследование целиком (наравне со скиллом) |

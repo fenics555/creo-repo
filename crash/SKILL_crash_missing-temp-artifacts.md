@@ -1,9 +1,12 @@
+---
 name: crash_missing-temp-artifacts
 system: CRASH
 description: Use when: временные артефакты tmp потеряны к моменту, когда нужны следующему шагу
 when: missing temp artifacts, tmp loss, lost files, anchor
 date: 2026-09-17
 executor: <имя_пользователя>
+---
+
 ПОВТОРЫ: 1
 ОШИБКА (дословно, для grep):
 строковой ошибки нет; дословный признак: файл, зафиксированный в [СДЕЛАНО]/MANIFEST предыдущей ноги, на следующем шаге Test-Path → False.

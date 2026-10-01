@@ -1,3 +1,10 @@
+---
+name: lit-hts-china
+system: Creo
+description: SKILL_lit_hts_china - Методология HTS для китайских литей
+when: hts, литьё, hts, china
+---
+
 # SKILL_lit_hts_china - Методология HTS для китайских литей
 
 ## 📋 ОПИСАНИЕ

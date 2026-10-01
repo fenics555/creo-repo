@@ -1,7 +1,10 @@
-# SKILL_diff_and_apply
-# Направление: Программирование
-# Priority: critical
-# When: diff, patch, apply, edit, update, unified-diff, hunk, context, precision, robustness, surgical
+---
+name: diff-and-apply
+system: Программирование
+description: ## КОНЦЕПЦИЯ
+when: diff, patch, apply, edit, update, unified-diff, hunk, context, precision, robustness, surgical
+priority: critical
+---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 

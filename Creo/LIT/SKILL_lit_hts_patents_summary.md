@@ -1,3 +1,10 @@
+---
+name: lit-hts-patents-summary
+system: Creo
+description: 🇯🇵🇮🇹🇫🇷🇨🇳🇺🇸 HTS Patent Summary by Country
+when: hts, литьё, hts, patents, summary
+---
+
 # 🇯🇵🇮🇹🇫🇷🇨🇳🇺🇸 HTS Patent Summary by Country
 
 ## 📋 Purpose

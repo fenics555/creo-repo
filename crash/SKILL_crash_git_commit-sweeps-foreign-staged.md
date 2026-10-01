@@ -1,3 +1,4 @@
+---
 name: crash_git_commit-sweeps-foreign-staged
 system: CRASH
 description: Use when: коммит без pathspec в доме с параллельными ногами уносит чужую застейдженную работу в свой коммит
@@ -5,6 +6,8 @@ when: git, commit, staged, foreign work, pathspec, parallel legs, house
 date: 22.09.2026
 executor: Cline (локальная модель)
 task: спека 112 / Creo-нога, коммит бумаг
+---
+
 ОШИБКА (дословно, для grep):
 [master ce81b27] spec112 creo leg: pdf removal recorded + library divergence (docs)
  35 files changed, 46 insertions(+), 20 deletions(-)

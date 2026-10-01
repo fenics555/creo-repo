@@ -3,19 +3,19 @@ name: CHARGE
 system: ЗНАНИЯ
 description: Use when: карта скиллов репо — что есть и когда брать (сборка dev\skills_charge.py)
 when: карта скиллов, заряд знаний, какие скиллы есть, индекс скиллов
-date: 25.09.2026 14:48
+date: 01.10.2026 07:17
 ---
 
 # ЗАРЯД ЗНАНИЙ АГЕНТА (карта скиллов репо)
 
-**Собрано:** 25.09.2026 14:48 · скиллов: 145
+**Собрано:** 01.10.2026 07:17 · скиллов: 151
 
 **Как этим пользоваться (агенту).** Это КАРТА: здесь каждый скилл одной строкой — «что это и когда брать».
 Тела скиллов в промпт не грузятся: нужный открывается `search_kb` (поиск) или `read_file` (по пути).
 Начинать любую задачу Creo — со стартового набора `SKILL_CHARGE_START.md` (он уже в промпте).
 Главное направление дома — **Creo/CREOSON**.
 
-## Creo (55)
+## Creo (56)
 - `Creo\API\_INDEX.md` — Use when: подраздел API темы Creo — указатель на скиллы · когда: creo, каналы API, pfc, creojs, otk, jlink, vbapi, weblink
 - `Creo\API\SKILL_creo_api_ecosystem.md` — Use when: разбор API Creo — один объектный слой pfc* у Creo.JS, Object TOOLKIT (C++/Java), VB API, Web.Link… · когда: OTK, Object TOOLKIT, JLINK, pfc, creojs, vbapi, weblink, otk_methods, jlinkexam…
 - `Creo\API\SKILL_creojs_api.md` — Use when: работа с родным API Creo (Creo.JS / pfc*), сверка с CREOSON, разбор механизмов Давыдовки · когда: Creo.JS, creojs, pfc, pfcSession, API, Давыдовка, ListItems, GetParam, ListRows…
@@ -38,15 +38,15 @@ date: 25.09.2026 14:48
 - `Creo\DOCS\_INDEX.md` — Use when: подраздел DOCS темы Creo — указатель на скиллы · когда: creo, документация, справка, help, pdf
 - `Creo\DOCS\SKILL_creo_docs_map.md` — Use when: нужна справка/документация Creo — где лежат хелпы, PDF и API-руководства в установке и в доме · когда: документация, справка, help, хелп, PDF, Toolkit, OTK, VB API, Web.Link, Creo.JS…
 - `Creo\INFRA\_INDEX.md` — Use when: подраздел INFRA темы Creo — указатель на скиллы · когда: creo, флот, старт машин, логи, объектные пробы
-- `Creo\INFRA\SKILL_creostart_fleet.md` — Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы, · когда: Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы,
-- `Creo\INFRA\SKILL_object_creoson_tests-01_asm.md` — Use when: вопросы об объекте creoson_tests-01.asm и создание похожих · когда: Use when: вопросы об объекте creoson_tests-01.asm и создание похожих
+- `Creo\INFRA\SKILL_creostart_fleet.md` — Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы, · когда: вопросы про старт машин КБ, CREO-START, логи, трейлы,
+- `Creo\INFRA\SKILL_object_creoson_tests-01_asm.md` — Use when: вопросы об объекте creoson_tests-01.asm и создание похожих · когда: вопросы об объекте creoson_tests-01.asm и создание похожих
 - `Creo\LIT\SKILL_lit_analysis_patterns.md` — Шаблоны и best practices для Relations в Creo Parametric при литье. Содержит проверенные алгоритмы расчета st… · когда: relations, liatie, hts, shrinkage, weiver, pattern, черновик, оптимизация
-- `Creo\LIT\SKILL_lit_hts_aws.md` — (без описания)
-- `Creo\LIT\SKILL_lit_hts_china.md` — (без описания)
-- `Creo\LIT\SKILL_lit_hts_en.md` — (без описания)
-- `Creo\LIT\SKILL_lit_hts_patents_summary.md` — (без описания)
-- `Creo\LIT\SKILL_lit_hts_patents_summary_ru.md` — (без описания)
-- `Creo\LIT\SKILL_lit_hts_turkey.md` — (без описания)
+- `Creo\LIT\SKILL_lit_hts_aws.md` — SKILL_lit_hts_aws - Методология HTS для американских литей (AWS D10.1) · когда: hts, литьё, hts, aws
+- `Creo\LIT\SKILL_lit_hts_china.md` — SKILL_lit_hts_china - Методология HTS для китайских литей · когда: hts, литьё, hts, china
+- `Creo\LIT\SKILL_lit_hts_en.md` — SKILL_lit_hts_en - Методология HTS для европейских литей (EN 1563) · когда: hts, литьё, hts, en
+- `Creo\LIT\SKILL_lit_hts_patents_summary.md` — 🇯🇵🇮🇹🇫🇷🇨🇳🇺🇸 HTS Patent Summary by Country · когда: hts, литьё, hts, patents, summary
+- `Creo\LIT\SKILL_lit_hts_patents_summary_ru.md` — 🇯🇵🇮🇹🇫🇷🇨🇳🇺🇸 Свод патентов HTS по странам · когда: hts, литьё, hts, patents, summary, ru
+- `Creo\LIT\SKILL_lit_hts_turkey.md` — SKILL_lit_hts_turkey - Методология HTS для турецких литей · когда: hts, литьё, hts, turkey
 - `Creo\LIT\SKILL_lit_troubleshooting.md` — Справочник по диагностике и устранению типичных ошибок при работе с Relations в Creo Parametric для литья. Со… · когда: relations, liatie, hts, ошибки, крахи, отладка, debug
 - `Creo\RELATIONS\_INDEX.md` — Use when: подраздел RELATIONS темы Creo — указатель на скиллы · когда: creo, relations, уравнения, кривые, пружины
 - `Creo\RELATIONS\SKILL_creo_relations.md` — Relations в Creo: синтаксис, функции, лимиты, примеры (справочник). Правила — в SKILL_relations_constitution · когда: relations, уравнения, синтаксис, функции, операторы, IF ENDIF, FOR, d-имена, ли…
@@ -62,19 +62,20 @@ date: 25.09.2026 14:48
 - `Creo\SKILL_creo_index.md` — Use when: задача с темой Creo · когда: creo, creoson, parametric, assembly, part, drawing
 - `Creo\SKILL_creo_jlink_direct.md` — Use when: нужно УПРАВЛЯТЬ Creo напрямую из программы (Java/JLINK, pfc*), без CREOSON — подключиться к Creo, п… · когда: jlink, j-link, java, pfcasync, pfc, otk_java_free, прямое управление, программк…
 - `Creo\STANDARDS\_INDEX.md` — Use when: подраздел STANDARDS темы Creo — указатель на скиллы · когда: creo, стандарты КБ, имена, шаблоны, чертежи, параметры, карточки
-- `Creo\STANDARDS\SKILL_company_config.md` — Creo · когда: company-config
+- `Creo\STANDARDS\SKILL_company_config.md` — Паспорт компании: единицы MMKS/мм/кг, допуски ISO, десятичные знаки, ключевые config-параметры (сбор 15.09.20… · когда: pro_unit_sys, единицы, допуски, tolerance_standard, паспорт компании, настройки…
 - `Creo\STANDARDS\SKILL_creo_cards.md` — Use when: карточка модели Creo (D:\AI\repo\Creo\cards) — аудит отношений, параметры, massprops, сырой близнец · когда: карточка, cards, аудит, liteika, параметры модели, сырой близнец, crc32, masspr…
 - `Creo\STANDARDS\SKILL_creo_company.md` — Паспорт компании для Creo: единицы mmks, шаблоны, шифры, обязательные параметры, чертежи ЕСКД, массовые MP_ · когда: единицы, mmks, шаблоны, шифр, обязательные параметры, rel_model_name, МАТ_MARK…
 - `Creo\STANDARDS\SKILL_creo_model_nature.md` — Use when: определяешь природу модели (деталь / сборка / производство-мануфакчуринг) или правишь параметр ТИП… · когда: ТИП, тип модели, производство, мануфакчуринг, ПАРТИЯ, чесалка, typcheck, оснаст…
 - `Creo\STANDARDS\SKILL_creo_templates.md` — Канон-шаблоны моделей: свидетельство о рождении TPL_SOURCE, отношения-минимум, секции спецификации · когда: шаблон, новая модель, канон, TPL_SOURCE, начать модель, секция спецификации, св…
 - `Creo\STANDARDS\SKILL_drawings_eskd.md` — Чертежи по ЕСКД/ГОСТ: MY_ESKD.dtl, шаблоны, даты, допуски, переименование, шифры, папки проектов · когда: чертёж, шаблон, ЕСКД, ГОСТ, оформление чертежа, дата, допуски, шифр, номер черт…
 - `Creo\STANDARDS\SKILL_naming_spec.md` — ИМЕНА, ШИФРЫ и ОБЯЗАТЕЛЬНЫЕ ПАРАМЕТРЫ модели: rel_model_name, МАТ_MARK, MASS, ТИП · когда: имя модели, шифр, rel_model_name, ТИП, МАТ_MARK, переименование, rename, обязат…
+- `Creo\STANDARDS\SKILL_parameters.md` — Параметры моделей Creo — источники правды: ОБОЗНАЧЕНИЕ/наименование, CATALOG_*, ТИП как природа модели, огран… · когда: параметры модели, ОБОЗНАЧЕНИЕ, CATALOG_NUMBER, ТИП, ПАРТИЯ, шифр, ограниченные…
 - `Creo\STANDARDS\SKILL_parameters_guide.md` — ПАРАМЕТРЫ И МАССОВЫЕ ХАРАКТЕРИСТИКИ CREO · когда: параметры, MP_MASS, массовые, вывод на чертеж
 - `Creo\STANDARDS\SKILL_reference_limits.md` — CREO REFERENCE — ЛИМИТЫ, СИНТАКСИС, ФУНКЦИИ (Help 12.4.2.0, выверено) · когда: лимиты, длина имени, степень, ROUND, синтаксис IF
 
 ## PDF (3)
 - `PDF\SKILL_pdf_control.md` — Use when: нужно проверить PDF-хозяйство — дубли PDF, PDF не рядом со своим чертежом, PDF без модели (документ… · когда: дубли pdf, не рядом, pdf без модели, документация, корзина инструмента, пары, c…
-- `PDF\SKILL_pdf_index.md` — Use when: задача с темой PDF · когда: pdf, pdf_tools, pdf_img, extraction, rendering
+- `PDF\SKILL_pdf_index.md` — Use when: задача с темой PDF · когда: pdf, pdf_tools, pdf_img, extraction, rendering, перепечать, дубли
 - `PDF\SKILL_pdf_routine.md` — Use when: нужно вывести или ОБНОВИТЬ PDF чертежа Creo (главная рутина дома) — правила, конфиг оформления, инс… · когда: pdf, чертёж, drw, вывод pdf, обновить pdf, перепечать, форматки, MY_ESKD, table…
 
 ## Web (1)
@@ -97,22 +98,24 @@ date: 25.09.2026 14:48
 - `Ошибки\ERR_creoson_write_ops.md` — Use when: пишущая операция CREOSON упала — backup без target_dir, rename General Error · когда: backup, target_dir, rename, General Error, CREOSON, запись, async
 - `Ошибки\SKILL_errors.md` — Use when: ошибка, сбой, ERR, Traceback, «не работает» — карта базы ошибок и правила добавления · когда: ошибка error err traceback сбой лечение неисправность
 
-## crash (46)
+## crash (49)
 - `crash\crash_appjs-syntaxerror-no-uicheck.md` — Use when: правка app.js/index.html ушла без пробы консоли — синтаксическая ошибка живёт до первой проверки · когда: appjs, syntaxerror, ui_check, console, javascript
 - `crash\crash_deleted-house-file-without-word.md` — Use when: домовой файл (напр. harvest_gui.py) удалён вне data\tmp и data\backup без прямого слова пользователя · когда: delete, harvest_gui, house-file, manual-deletion
 - `crash\crash_loop_perception.md` — Use when: исполнитель принимает череду мелких нужных шагов (инвентаризация, Select-String, проверки путей) за… · когда: loop, perception, false loop, inventory, stuck, REVIVE, кажется цикл
+- `crash\crash_python_open-number-invalid-handle.md` — Use when: Python open() падает с OSError [WinError 6] "Неверный дескриптор" при чтении/записи файла · когда: WinError 6, invalid handle, open, OSError, неверный дескриптор, скрипт, bench
 - `crash\crash_reasoning-loop.md` — Use when the agent gets stuck in a loop of repetitive, failing tool calls or reasoning without making progres… · когда: loop, repeat, reasoning, same-parameters
-- `crash\SKILL_agent-frozen.md` — (без описания)
+- `crash\crash_update-test-self-overwrite.md` — Use when тестируешь механизм самообновления инструмента — тест на ЖИВОЙ копии затирает только что написанный… · когда: автообновление, sync_by_manifest, install update, тест обновления, self-update…
+- `crash\SKILL_agent-frozen.md` — Use when: Агент (HTTP-сервис) «застыл» — порт 8765 слушает (LISTENING), но curl/requests возвращают «Connecti… · когда: frozen, hang, service stall, connection reset, port listening but no response…
 - `crash\SKILL_crash-editor-mismatch.md` — Use when: editor падает с «text not found» из-за расхождения old_text после частичной правки или смены контек… · когда: editor-mismatch, text not found, mismatch, old_text mismatch
 - `crash\SKILL_crash_agent-duplicate-restart-race.md` — Use when: после рестарта агента живы ДВА python agent.py и на порту два LISTENING — рестарт среагировал в гон… · когда: agent restart, duplicate process, double start, ctl watch, race, SO_REUSEADDR…
-- `crash\SKILL_crash_agent_corruption.md` — (без описания) · когда: crash_agent_corruption
+- `crash\SKILL_crash_agent_corruption.md` — Use when: агент после рестарта не отвечает или отвечает старым кодом, py_compile правленого agent.py падает S… · когда: syntaxerror, agent.py, рестарт, повреждение кода, py_compile, бекап, патч-скрипт
 - `crash\SKILL_crash_agent_silence.md` — Use when: исполнитель «завис» — сообщение кончилось рассуждением без вызова инструмента, IDE видит простой, п… · когда: silence, hang, stall, no tool call, завис, стоял, замирал
-- `crash\SKILL_crash_analysis_search_codebase.md` — Use when: search_codebase падает с ошибкой миграции контекста или повторяется · когда: Use when: search_codebase падает с ошибкой миграции контекста или повторяется
+- `crash\SKILL_crash_analysis_search_codebase.md` — Use when: search_codebase падает с ошибкой миграции контекста или повторяется · когда: search_codebase падает с ошибкой миграции контекста или повторяется
 - `crash\SKILL_crash_cline_longsession_context_death.md` — Use when: окно Cline умирает молча после длинной сессии на шаге генерации длинного ответа · когда: cline, вылет, context, longsession, компакция, papers, прогресс
-- `crash\SKILL_crash_command-30s-timeout.md` — Use when: run_commands падает с "Command timed out after 30000ms" — таймаут · когда: Use when: run_commands падает с "Command timed out after 30000ms" — таймаут
-- `crash\SKILL_crash_constitution.md` — Документ рамок вылетов — правило, шаблон экземпляра, шаблон передачи, блок имён. · когда: Документ рамок вылетов — правило, шаблон экземпляра, шаблон передачи, блок имён.
-- `crash\SKILL_crash_context-limit-interruption.md` — (без описания) · когда: crash_context-limit-interruption
-- `crash\SKILL_crash_ctl-inline-stderr-truncated.md` — Use when: рестарт или проба агента через инлайн python -c в PowerShell гибнет · когда: Use when: рестарт или проба агента через инлайн python -c в PowerShell гибнет
+- `crash\SKILL_crash_command-30s-timeout.md` — Use when: run_commands падает с "Command timed out after 30000ms" — таймаут · когда: run_commands падает с "Command timed out after 30000ms" — таймаут
+- `crash\SKILL_crash_constitution.md` — Документ рамок вылетов — правило, шаблон экземпляра, шаблон передачи, блок имён. · когда: крах, вылет, ошибка, инфраструктурная ошибка, необъяснимый отказ, отчёт о краше…
+- `crash\SKILL_crash_context-limit-interruption.md` — Use when: выполнение задачи прерывается из-за ограничений инструментов (search_codebase, context window) или… · когда: search_codebase timeout, context full, tool limit reached, вылетел, лимит конте…
+- `crash\SKILL_crash_ctl-inline-stderr-truncated.md` — Use when: рестарт или проба агента через инлайн python -c в PowerShell гибнет · когда: рестарт или проба агента через инлайн python -c в PowerShell гибнет
 - `crash\SKILL_crash_destructive-probe-rerun.md` — Use when: разрушительная проба (kill_creo, delete, erase, перезапись) исполнена ПОВТОРНО из оставшегося в tmp… · когда: kill_creo, destructive, probe, rerun, tmp, повтор, разрушительная проба, Creo
 - `crash\SKILL_crash_editor-create-overwrote.md` — Use when: вызов editor/write_file в режиме create на СУЩЕСТВУЮЩЕМ файле перезаписал его начисто и убил тело (… · когда: editor, create, overwrite, lost content, усох файл, потерян скилл
 - `crash\SKILL_crash_editor-studycheck-halfedit-undefined-name.md` — Use when: файл после правки ссылается на имя, которого нет (NameError), потому что правка оборвана до объявле… · когда: halfedit, undefined name, nameerror, skill2, study_check, оборванная правка, по…
@@ -124,7 +127,7 @@ date: 25.09.2026 14:48
 - `crash\SKILL_crash_git_parallel-leg-rebase-reverts-worktree.md` — Use when: параллельная нога делает rebase — рабочее дерево откатывается (структура/правки исчезают), своя раб… · когда: git, rebase, parallel leg, stash, worktree revert, чужая нога, параллельная ног…
 - `crash\SKILL_crash_handling.md` — Use when: петля или зависание из-за лимитов инструментов (editor too large, длинные цепочки run_commands, edi… · когда: crash handling, tool limits, editor too large, run_commands chain, loop, hang
 - `crash\SKILL_crash_index.md` — Список всех крах-скиллов папки crash (навигация); вход в тему — SKILL_crash_constitution.md · когда: крах, crash, список крахов, какой скилл, навигация по крахам
-- `crash\SKILL_crash_login-stale-memory.md` — Use when: вход в агента не проходит при верном пароле — три источника правды · когда: Use when: вход в агента не проходит при верном пароле — три источника правды
+- `crash\SKILL_crash_login-stale-memory.md` — Use when: вход в агента не проходит при верном пароле — три источника правды · когда: вход в агента не проходит при верном пароле — три источника правды
 - `crash\SKILL_crash_loop_economy_failure.md` — Use when: нога в петле на лимите editor - «экономия» из спеки истолкована как разрешение не читать и не дроби… · когда: economy loop, editor limit, orphan_scan, экономия, петля, limit exceeded
 - `crash\SKILL_crash_missing-temp-artifacts.md` — Use when: временные артефакты tmp потеряны к моменту, когда нужны следующему шагу · когда: missing temp artifacts, tmp loss, lost files, anchor
 - `crash\SKILL_crash_omission_of_revive_protocol.md` — Use when: пропуск обязательных шагов ритуала (чтение скилла и строка-доказательство) при REVIVE или крахе · когда: revive, omission, ритуал, строка-доказательство
@@ -135,45 +138,48 @@ date: 25.09.2026 14:48
 - `crash\SKILL_crash_readfiles_outdated_loop.md` — Use when: `read_files` в цикле возвращает `[outdated - see the latest file content]` · когда: readfiles, outdated, loop, tool-loop
 - `crash\SKILL_crash_reasoning-loop.md` — (без описания)
 - `crash\SKILL_crash_regex_extraction_triple_quote_loop.md` — Use when: бесконечный цикл при regex-извлечении блоков кода в тройных кавычках (agent.py) · когда: regex, extraction, loop, triple_quote, regex_extraction
-- `crash\SKILL_crash_runcommands-copy-race-fake-parameter.md` — Use when: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка · когда: Use when: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка
+- `crash\SKILL_crash_runcommands-copy-race-fake-parameter.md` — Use when: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка · когда: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка
 - `crash\SKILL_crash_runcommands_kill-by-name-house-services.md` — Use when: остановка процесса по ИМЕНИ (Stop-Process -Name / taskkill /IM) в доме — сносит ЧУЖИЕ сервисы дома · когда: Stop-Process, -Name, taskkill, /IM, kill by name, python, house services, порты…
-- `crash\SKILL_crash_scheduler-fire-skip.md` — Use when: задача планировщика с триггером повторения не стартует в расчётный · когда: Use when: задача планировщика с триггером повторения не стартует в расчётный
-- `crash\SKILL_crash_searchcodebase-any-pattern-migration-marker.md` — Use when: search_codebase возвращает маркер миграции · когда: Use when: search_codebase возвращает маркер миграции
-- `crash\SKILL_crash_searchcodebase-multipattern-migration-marker.md` — Use when: search_codebase с 3+ regex-паттернами возвращает маркер миграции · когда: Use when: search_codebase с 3+ regex-паттернами возвращает маркер миграции
+- `crash\SKILL_crash_scheduler-fire-skip.md` — Use when: задача планировщика с триггером повторения не стартует в расчётный · когда: задача планировщика с триггером повторения не стартует в расчётный
+- `crash\SKILL_crash_searchcodebase-any-pattern-migration-marker.md` — Use when: search_codebase возвращает маркер миграции · когда: search_codebase возвращает маркер миграции
+- `crash\SKILL_crash_searchcodebase-multipattern-migration-marker.md` — Use when: search_codebase с 3+ regex-паттернами возвращает маркер миграции · когда: search_codebase с 3+ regex-паттернами возвращает маркер миграции
 - `crash\SKILL_crash_searchcodebase-timeout.md` — Use when: search_codebase зависает/таймаут или возвращает маркер миграции вместо результатов · когда: search_codebase, timeout, migration marker, result missing, hang
 - `crash\SKILL_crash_session-interruption.md` — Use when: потеря сессии, обрыв связи, генерация оборвана на полуслове · когда: session_loss, interruption, connection_error, timeout
 - `crash\SKILL_crash_sleep-poll-loop-after-timeout.md` — Use when: исполнитель после таймаута run_commands (30 с) ждёт детач-процесс повторными опросами «Start-Sleep… · когда: sleep-poll, петля опросов, детач-процесс, Start-Sleep, таймаут 30с, зацикливани…
+- `crash\SKILL_crash_update-version-mismatch.md` — Use when после обновления шапка новая, а «есть обновление» не гаснет — версия живёт в двух местах, и check_up… · когда: автообновление, есть обновление, версия не совпадает, V31 vs V32, check_updates…
 - `crash\SKILL_editor_too_large.md` — Use when: editor отказывает «Editor input too large» — блок new_text выше лимита (~6000 символов) · когда: editor, too large, new_text, limit, chunking, якорь
 
-## Prog (13)
-- `Prog\SKILL_agent_memory.md` — (без описания)
+## Prog (15)
+- `Prog\SKILL_agent_memory.md` — ## КОНЦЕПЦИЯ · когда: memory, context, long-term, agent, state, management, letta, memgpt, stateful
 - `Prog\SKILL_agent_protocol.md` — (без описания)
-- `Prog\SKILL_automated_validation.md` — (без описания)
-- `Prog\SKILL_code_parsing.md` — (без описания)
-- `Prog\SKILL_cursor_rules_format.md` — (без описания)
-- `Prog\SKILL_diff_and_apply.md` — (без описания)
+- `Prog\SKILL_automated_validation.md` — ## КОНЦЕПЦИЯ · когда: lint, format, check, validate, verify, clean, type-check, static-analysis, pre…
+- `Prog\SKILL_calc_script_architecture.md` — Use when: Ниже представлен готовый **System Skill / Instruction File** для размещения в репозитории (`.cursor… · когда: standard engineering calculation script architecture
+- `Prog\SKILL_code_parsing.md` — ## КОНЦЕПЦИЯ · когда: ast, tree-sitter, parse, structure, syntax, query, grammar, bounds, precision
+- `Prog\SKILL_cursor_rules_format.md` — ## КОНЦЕПЦИЯ · когда: cursor, rules, mdc, format, guidelines, awesome, .mdc
+- `Prog\SKILL_diff_and_apply.md` — ## КОНЦЕПЦИЯ · когда: diff, patch, apply, edit, update, unified-diff, hunk, context, precision, robus…
 - `Prog\SKILL_editor_too_large.md` — (без описания)
-- `Prog\SKILL_local_agent_cline.md` — (без описания)
-- `Prog\SKILL_python_standard.md` — (без описания)
-- `Prog\SKILL_repo_mapping.md` — (без описания)
-- `Prog\SKILL_test_first_rule.md` — (без описания)
-- `Prog\SKILL_tool_routing.md` — (без описания)
-- `Prog\SKILL_unit_testing.md` — (без описания)
+- `Prog\SKILL_prog_local_agent_cline.md` — (без описания)
+- `Prog\SKILL_python_standard.md` — Стандарт расчётных python-скриптов: блочная архитектура, имена с единицами, защита операций, аудит A1-A15, ли… · когда: python, стандарт, расчёт, скрипт, блоки, суффиксы, аудит, префиксы, архитектура…
+- `Prog\SKILL_repo_mapping.md` — ## КОНЦЕПЦИЯ · когда: repo_map, structure, skeleton, map, codebase, hierarchy, grep_ast, overview
+- `Prog\SKILL_test_first_rule.md` — Сначала TEST-проба на сыром ответе, потом блоки агента; постоянные тесты в TEST с STATUS, разовые прогоны в l… · когда: тест, проба, новая команда, creoson неизвестно, интеграция, правка блока
+- `Prog\SKILL_tool_routing.md` — Маршрутизация инструментов агента по намерениям: карта по намерениям, безопасный выбор, антипримеры · когда: Всегда перед выбором инструмента. При любом запросе пользователя.
+- `Prog\SKILL_tool_template.md` — Use when: создаётся или правится программа-инструмент дома — обязательный состав и вид окна · когда: новый инструмент, окно, ридми, кнопка ридми, лог, время работы, настройки, слои…
+- `Prog\SKILL_unit_testing.md` — ## КОНЦЕПЦИЯ · когда: test, jest, unit-test, coverage, mock, matcher, assertion, suite, describe, bef…
 
 ## Прочее (16)
 - `agents\rag-architect\SKILL_rag_architect.md` — "Use when the user asks to design a RAG pipeline, choose a chunking strategy or embedding model, pick a vecto… · когда: "Use when the user asks to design a RAG pipeline, choose a chunking strategy or…
 - `agents\skill-security-auditor\SKILL_skill_security_auditor.md` — > · когда: >
+- `agents\SKILL_authoring_standard.md` — Use when: Skill Authoring Standard · когда: skill authoring standard
 - `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md` — "Runs a disciplined Discuss -> Map -> Decompose -> Execute -> Verify loop that grounds code in verified struc… · когда: "Runs a disciplined Discuss -> Map -> Decompose -> Execute -> Verify loop that…
 - `data\backup\pre_lang_fix\SKILL_crash-editor-mismatch.md` — Use when: editor tool fails with "text not found" due to old_text mismatch after a partial update or context… · когда: editor-mismatch, text not found, mismatch, old_text mismatch
 - `data\backup\pre_lang_fix\SKILL_crash_editor_too_large_and_non_unique_anchors.md` — Use when editor fails due to file size > 6KB or multiple matches found for old_text. · когда: editor, too_large, multiple_matches, non_unique_anchor
 - `data\backup\pre_lang_fix\SKILL_crash_omission_of_revive_protocol.md` — (без описания) · когда: crash_omission_of_revive_protocol
 - `data\backup\pre_lang_fix\SKILL_crash_protocol_omission.md` — (без описания) · когда: crash_protocol_omission
 - `data\backup\pre_lang_fix\SKILL_crash_session-interruption.md` — Use when: session loss, connection interrupted, AI stopped generating mid-sentence · когда: session_loss, interruption, connection_error, timeout
-- `SKILL_agent_protocol.md` — (без описания)
-- `SKILL_audit_protocol.md` — (без описания)
+- `SKILL_agent_protocol.md` — Протокол инженера-напарника для агента: роль, русский язык, формат один блок [TOOL]/[ANSWER], против выдумыва… · когда: протокол агента, напарник, [ANSWER], [TOOL], формат ответа, агент Ollama
+- `SKILL_audit_protocol.md` — Железные правила аудита дома: не правит ничего кроме отчёта, каждый факт — живым чтением, находка с двумя вар… · когда: аудит, проверка дома, находка, отчёт аудита, AUDIT
 - `SKILL_culture_files.md` — Use when: куда положить логи, отчёты, временные файлы и конспект изучения; где правила хранения, сроки и как… · когда: культура, куда класть, логи, отчёты, урна, временное, конспект, изучение, reten…
 - `SKILL_index.md` — Карта всех скиллов репо по доменам: что где лежит и куда смотреть · когда: навигация, где что, карта скиллов, список скиллов, какой скилл, домены
 - `SKILL_local_agent_cline.md` — Use when: локальная модель ИИ работает в VS Code / Cline — как не вылетать, как жить в 131k контексте, где чт… · когда: Cline, локальная модель, gemma, выживание, вылет, контекст, транспорт, редактор…
-- `SKILL_parameters.md` — (без описания)
 - `SKILL_production_mirror.md` — Производственный контур из срезов 1С: склад, входящие, запуск, отгрузки, составы; якорь и время цикла · когда: где деталь, склад, входящие, запуск, этап, отгрузки, кто заказывал, сколько изг…
 - `SKILL_web_vision_limits.md` — Что WEB (чтение сайтов) и ВИЗИЯ (чтение картинок) умеют и НЕ умеют — чтобы не выдумывать содержимое · когда: web, сайт, ссылка, читать страницу, скриншот, картинка, визия, изображение, web…

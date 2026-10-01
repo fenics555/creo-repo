@@ -1,7 +1,10 @@
-# SKILL_cursor_rules_format
-# Направление: Программирование
-# Priority: normal
-# When: cursor, rules, mdc, format, guidelines, awesome, .mdc
+---
+name: cursor-rules-format
+system: Программирование
+description: ## КОНЦЕПЦИЯ
+when: cursor, rules, mdc, format, guidelines, awesome, .mdc
+priority: normal
+---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 1 + НОВЫЕ ПРАВИЛА)
 

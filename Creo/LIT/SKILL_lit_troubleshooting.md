@@ -1,5 +1,4 @@
-
-
+---
 name: lit-troubleshooting
 system: Creo
 description: Справочник по диагностике и устранению типичных ошибок при работе с Relations в Creo Parametric для литья. Содержит коды ошибок, причины и способы их решения.

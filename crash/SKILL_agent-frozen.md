@@ -1,9 +1,11 @@
-# name: agent-frozen
-# system: CRASH
-# description: Use when: Агент (HTTP-сервис) «застыл» — порт 8765 слушает (LISTENING), но curl/requests возвращают «Connection closed without response» или «Timeout»; процесс есть, но не реагирует на запросы.
-# when: frozen, hang, service stall, connection reset, port listening but no response, застыл, завис сервис
-# date: 19.09.2026
-# executor: Cline (локальная модель)
+---
+name: agent-frozen
+system: CRASH
+description: Use when: Агент (HTTP-сервис) «застыл» — порт 8765 слушает (LISTENING), но curl/requests возвращают «Connection closed without response» или «Timeout»; процесс есть, но не реагирует на запросы.
+when: frozen, hang, service stall, connection reset, port listening but no response, застыл, завис сервис
+date: 19.09.2026
+executor: Cline (локальная модель)
+---
 
 ОШИБКА (дословно, для grep):
 curl/requests к 8765 → «Connection reset by peer» / «Remote end closed connection without response»

@@ -1,3 +1,4 @@
+---
 name: crash_editor-create-overwrote
 system: CRASH
 description: Use when: вызов editor/write_file в режиме create на СУЩЕСТВУЮЩЕМ файле перезаписал его начисто и убил тело (4256 → 1100 байт)
@@ -5,6 +6,8 @@ when: editor, create, overwrite, lost content, усох файл, потерян
 date: 23.09.2026
 executor: Cline
 task: аудит правил 23.09 (восстановление ссылки .clinerules:82)
+---
+
 ОШИБКА (дословно, для grep):
 crash_editor-create-overwrote: так потерян скилл карты Давыдовки, 4256 → 1100 байт
 СИМПТОМ: файл усох по размеру после «правки»; старое тело заменено одним коротким блоком.

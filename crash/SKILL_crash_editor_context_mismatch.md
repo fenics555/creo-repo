@@ -1,3 +1,4 @@
+---
 name: crash_editor_context_mismatch
 system: CRASH
 description: Use when: editor падает из-за несовпадения текста или лимита размера при крупных правках
@@ -5,6 +6,8 @@ when: editor, mismatch, large, text, too_large
 date: 20.09.2026
 executor: Cline
 task: Implement Spec 101 (harvest_gui.py)
+---
+
 ОШИБКА (дословно, для grep):
 Editor operation failed: No replacement performed: text not found in D:\AI\tools\agent\harvest_gui.py.
 СИМПТОМ: Невозможность применить правки в файлах более 50-100 строк или при больших блоках замены.

@@ -1,3 +1,4 @@
+---
 name: crash_runcommands_kill-by-name-house-services
 system: CRASH
 description: Use when: остановка процесса по ИМЕНИ (Stop-Process -Name / taskkill /IM) в доме — сносит ЧУЖИЕ сервисы дома
@@ -5,6 +6,8 @@ when: Stop-Process, -Name, taskkill, /IM, kill by name, python, house services, 
 date: 22.09.2026
 executor: Cline
 task: полигон D:\AI\PROBA, умная копия (зависший smartcopy.py)
+---
+
 ОШИБКА (дословно, для grep):
 `Stop-Process -Name python -Force` — снёс copy-server (8000) и агент (8765) вместе со своим скриптом
 СИМПТОМ: после «остановки скрипта по имени» исчез LISTENING на 8000 и 8765; агент ожил только после `ctl.py up`.

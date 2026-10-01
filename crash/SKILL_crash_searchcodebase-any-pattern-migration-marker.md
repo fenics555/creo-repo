@@ -1,6 +1,10 @@
+---
 name: crash_searchcodebase-any-pattern-migration-marker
 system: CRASH
 description: Use when: search_codebase возвращает маркер миграции
+when: search_codebase возвращает маркер миграции
+---
+
 [missing in legacy conversation history] при любом количестве паттернов (1+),
 включая точечные запросы
 when: search_codebase, migration marker, result missing, any pattern,
