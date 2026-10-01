@@ -13,6 +13,9 @@ priority: critical
 - Creo: Creo\SKILL_creo_index.md · PDF: PDF\SKILL_pdf_index.md · Web: Web\SKILL_web_index.md
 - Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
 - Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md (закон) + crash\SKILL_crash_index.md (список крах-скиллов)
+- **PROMPT (новое, 01.10.2026):** PROMPT\SKILL_prompt_index.md — правила как инженерная система:
+  позиция блока от окна модели, диагностика «модель потеряла правило», связь с измерителем
+  `AGENT_SETTINGS\checks\`.
 
 ### 1. Creo (Веб-агент, Инженер)
 *Специализация на работе с CAD-системой через API и интерфейсы.*

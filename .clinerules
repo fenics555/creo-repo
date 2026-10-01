@@ -205,7 +205,7 @@ stash и доложить; перед массовыми git mv — цитата
 SKILL_local_agent_cline.md; карта скиллов — SKILL_index.md; направления —
 Creo\SKILL_creo_index.md, PDF\SKILL_pdf_index.md, Web\SKILL_web_index.md,
 Инженерные\SKILL_engineering_index.md, Трейлы\SKILL_trails_index.md,
-Ошибки\SKILL_errors.md; прецеденты — crash\; долги — *\SKILL_*_inbox_*.md; код дома —
+Ошибки\SKILL_errors.md, PROMPT\SKILL_prompt_index.md; прецеденты — crash\; долги — *\SKILL_*_inbox_*.md; код дома —
 D:\AI\tools\agent\; аудиты — AUDIT_rules_*.md, SKILL_audit_protocol.md (read-only).
 
 
