@@ -9,4 +9,7 @@ date: 17.09.2026
 ЧТО ЗДЕСЬ: SKILL_casting_hts_master.md, SKILL_engineering_mechanics.md, SKILL_heat_hydraulics.md, SKILL_materials_reference.md
 КОГДА ОТКРЫВАТЬ: теги [ENG], [MECHANICS]
 КОГДА ПИСАТЬ: CRASH триггеры: [нет]
+КАРТА (критичные — в SKILL_index.md): SKILL_casting_hts_master = литейка/спеки HTS (критичный);
+  SKILL_materials_reference = материалы; SKILL_engineering_mechanics = механика;
+  SKILL_heat_hydraulics = тепло/гидравлика. Маршрут входа: SKILL_index.md -> [ENG].
 универсальный закон — MANIFEST.md, специфика среды — в адаптерах

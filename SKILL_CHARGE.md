@@ -3,12 +3,12 @@ name: CHARGE
 system: ЗНАНИЯ
 description: Use when: карта скиллов репо — что есть и когда брать (сборка dev\skills_charge.py)
 when: карта скиллов, заряд знаний, какие скиллы есть, индекс скиллов
-date: 01.10.2026 07:17
+date: 01.10.2026 07:59
 ---
 
 # ЗАРЯД ЗНАНИЙ АГЕНТА (карта скиллов репо)
 
-**Собрано:** 01.10.2026 07:17 · скиллов: 151
+**Собрано:** 01.10.2026 07:59 · скиллов: 151
 
 **Как этим пользоваться (агенту).** Это КАРТА: здесь каждый скилл одной строкой — «что это и когда брать».
 Тела скиллов в промпт не грузятся: нужный открывается `search_kb` (поиск) или `read_file` (по пути).
@@ -167,10 +167,10 @@ date: 01.10.2026 07:17
 - `Prog\SKILL_unit_testing.md` — ## КОНЦЕПЦИЯ · когда: test, jest, unit-test, coverage, mock, matcher, assertion, suite, describe, bef…
 
 ## Прочее (16)
-- `agents\rag-architect\SKILL_rag_architect.md` — "Use when the user asks to design a RAG pipeline, choose a chunking strategy or embedding model, pick a vecto… · когда: "Use when the user asks to design a RAG pipeline, choose a chunking strategy or…
-- `agents\skill-security-auditor\SKILL_skill_security_auditor.md` — > · когда: >
+- `agents\rag-architect\SKILL_rag_architect.md` — "Use when the user asks to design a RAG pipeline, choose a chunking strategy or embedding model, pick a vecto… · когда: rag, chunking, embedding, vector database, retrieval, precision, recall, ndcg
+- `agents\skill-security-auditor\SKILL_skill_security_auditor.md` — > · когда: skill security, audit skill, scan skill, prompt injection, vulnerability, suppl…
 - `agents\SKILL_authoring_standard.md` — Use when: Skill Authoring Standard · когда: skill authoring standard
-- `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md` — "Runs a disciplined Discuss -> Map -> Decompose -> Execute -> Verify loop that grounds code in verified struc… · когда: "Runs a disciplined Discuss -> Map -> Decompose -> Execute -> Verify loop that…
+- `agents\zero-hallucination-coder\SKILL_zero_hallucination_coder.md` — "Runs a disciplined Discuss -> Map -> Decompose -> Execute -> Verify loop that grounds code in verified struc… · когда: hallucinated code, invented api, plan before coding, high-stakes code, verify s…
 - `data\backup\pre_lang_fix\SKILL_crash-editor-mismatch.md` — Use when: editor tool fails with "text not found" due to old_text mismatch after a partial update or context… · когда: editor-mismatch, text not found, mismatch, old_text mismatch
 - `data\backup\pre_lang_fix\SKILL_crash_editor_too_large_and_non_unique_anchors.md` — Use when editor fails due to file size > 6KB or multiple matches found for old_text. · когда: editor, too_large, multiple_matches, non_unique_anchor
 - `data\backup\pre_lang_fix\SKILL_crash_omission_of_revive_protocol.md` — (без описания) · когда: crash_omission_of_revive_protocol
