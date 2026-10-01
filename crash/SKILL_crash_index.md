@@ -57,4 +57,6 @@ date: 22.09.2026
 - `SKILL_crash_editor-studycheck-halfedit-undefined-name` — Use when: файл после правки ссылается на необъявленное имя (NameError) — правка оборвана до объявления имени и до прогона проверки; и сопутствующее: вывод проверки с эмодзи роняет консоль cp1251 (UnicodeEncodeError 'charmap').
 - `SKILL_crash_update-version-mismatch` — Use when: после обновления шапка новая, а «есть обновление» не гаснет — версия живёт в двух местах (`engine.VERSION` рядом с `APP_VERSION`), и/или манифест тянется по кэшируемому raw вместо GitHub API.
 
-Всего крах-скиллов: 45 (без учёта конституции и этого списка; один из них — указатель `SKILL_crash_reasoning-loop`).
+- `SKILL_crash_strict_test_stamp-missing` — Use when: проверка `strict_test.py` проходит все вопросы, но отчёт не пишется — `NameError: name 'STAMP' is not defined` в разделе отчёта.
+
+Всего крах-скиллов: 46 (без учёта конституции и этого списка; один из них — указатель `SKILL_crash_reasoning-loop`).
