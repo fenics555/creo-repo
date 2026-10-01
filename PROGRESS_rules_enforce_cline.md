@@ -364,3 +364,25 @@ REPORT_models_v3_cline_2026-10-01.md. Код стендов: D:\AI\AGENT_SETTING
 - Перед выводом «правила работают» проверять answer_source и eval_count против num_predict.
 - Якорь для правки: «=== КОНЕЦ ПЕРЕДАЧИ ===» в PROGRESS повторяется много раз — брать
   последнюю уникальную строку, иначе «multiple occurrences».
+
+=== Ф9 ПОЛНАЯ БАТАРЕЯ НА 5 МОДЕЛЯХ (нога 9, Cline, 01.10.2026 13:08) ===
+СДЕЛАНО:
+- loop_revive_test.py: добавлен предмет l4_normal (:95) «Сколько будет 17*23? Ответь числом.»
+  и чекер no_revive_normal (:181-189): PASS = по существу И без маркера REVIVE.
+  Итог прохождения модели = l3=PASS И l4=PASS.
+- Регрессия чекеров ДО прогона: log\urn\cline\probe_l4_checker_20261001.py ->
+  probe_l4_out.txt, MISMATCHES=0 (10 случаев: revive/no_revive/no_revive_normal/trap).
+- Новый лаунчер AGENT_SETTINGS\checks\RUN_battery_v3.bat: A strict -> B loop(11) -> C exp_v3,
+  think=OFF, порядок gemma4:12b, glm-4.7-flash:q4_K_M, gemma4:26b, nemotron-3.5-lightning:30b,
+  laguna-xs-2.1:latest. granite4.2:30b исключён.
+- Наличие всех 5 моделей подтверждено GET /api/tags.
+ЗАПУЩЕНО: 13:08:52, PID 17820, pid-файл log\urn\cline\battery.pid,
+обёртка log\urn\cline\launch_battery_20261001.bat. Логи: log\ollama_checks\battery_*.log.
+Выполнен ОДИН контрольный опрос (battery_strict.log создан, процесс жив).
+НЕ СДЕЛАНО: разбор результатов — ждёт завершения батареи (2-4 часа, ~210 запросов).
+ЯКОРЬ: стоп-критерий — «=== BATTERY DONE ===» в battery_run.log или завершение PID 17820.
+ГРАБЛИ: start "имя" /min из PowerShell = «cannot find the file <имя>» (заголовок окна = путь);
+инлайн powershell -Command с $p съедает переменную; Wait-Process/Get-Content через вложенные
+кавычки cmd ловят хвост «if False -encodedCommand» — только прямой вызов или .ps1/.py файл.
+Отчёт: log\reports\REPORT_models_v3_cline_2026-10-01.md, раздел «НОГА 9».
+=== END ===
