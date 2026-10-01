@@ -21,6 +21,7 @@ fenics555/AI_AGENT_SETTINGS). Причина разделения: методи�
 | `AGENT_SETTINGS\PROMPT\SKILL_fewshot_as_template.md` | **закон:** слабые модели копируют few-shot как шаблон; замена формулировки ПЕРЕНОСИТ шаблон на соседнюю ситуацию; если провал переставляется — тема закрыта (замер 22:35–22:50) |
 | `AGENT_SETTINGS\PROMPT\SKILL_section_cut_silently.md` | **дефект измерителя:** `SECTION_MAX=7000` молча режет раздел ВОСКРЕШЕНИЕ (9 560 символов) — 2 560 символов правил не доходили до модели, health check был слеп (проба 23:08) |
 | `AGENT_SETTINGS\PROMPT\SKILL_full_block_noise_for_weak_model.md` | **закон:** полный блок = шум для слабой модели. Подъём `SECTION_MAX` до 10 000 довёл хвост ВОСКРЕШЕНИЕ — laguna **9 → 4** с ложным REVIVE, при зелёном health check и держащемся 26b 15/15 (замер 23:39) |
+| `AGENT_SETTINGS\PROMPT\SKILL_criterion_needs_baseline.md` | **закон:** любой критерий оптимизатора сравнивается с БАЗОЙ. Требование «слепые = все PASS» при падающем в базе `h3_patent_fake` у laguna означало «откатывать всегда» (замер R0, 02.10.2026) |
 
 ## Измеритель (код направления)
 
