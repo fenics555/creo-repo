@@ -385,4 +385,23 @@ REPORT_models_v3_cline_2026-10-01.md. Код стендов: D:\AI\AGENT_SETTING
 инлайн powershell -Command с $p съедает переменную; Wait-Process/Get-Content через вложенные
 кавычки cmd ловят хвост «if False -encodedCommand» — только прямой вызов или .ps1/.py файл.
 Отчёт: log\reports\REPORT_models_v3_cline_2026-10-01.md, раздел «НОГА 9».
+
+=== Ф10 БАТАРЕЯ РАЗОБРАНА + ЖУРНАЛ ЗАМЫСЛА (нога 9, Cline, 01.10.2026) ===
+СДЕЛАНО:
+- Батарея завершилась ~ за 7 минут (13:08:52 -> 13:16:07), battery_run.log = «=== BATTERY DONE ===».
+- loop_revive house: gemma4:12b 10/11 · gemma4:26b 10/11 · glm-4.7-flash 9/11 ·
+  nemotron 8/11 · laguna 7/11. l3=PASS и l4=PASS у всех пяти.
+- experiment_v3 house: fabricated=0 у gemma4:26b/12b/laguna; ложный отказ на реальном ГОСТ —
+  у glm и laguna; REVIVE-ложение — только у laguna (real_gost, fake_flag).
+- Итог по критерию: проходят четыре, laguna не проходит (7/11 < 8/10).
+- Скорость: laguna 107.2 t/s · 26b 94.3 · nemotron 75.4 · glm 73.9 · 12b 53.8.
+- Журнал замысла «петля самоправки правил»: D:\AI\AGENT_SETTINGS\checks\LOG_tuning.md,
+  строка добавлена в README.md папки checks.
+- Разбор батареи: log\reports\REPORT_models_v3_cline_2026-10-01.md раздел Н6.
+ЯКОРЬ: analyze_battery_v3_20261001.py -> analyze_battery_v3_out.txt (сводка по критерию).
+ГРАБЛИ: .gitignore дома `/*` игнорирует AGENT_SETTINGS целиком -> файлы checks в гита нет,
+лог замысла живёт вне репозитория (факт дома, владельцу к сведению).
+ДОЛГ: предмет l5 (реальный профессиональный вопрос) как детектор ложения на содержании —
+l4 ловит ложение только на арифметике, а laguna ложит на содержательных вопросах.
+=== END ===
 === END ===
