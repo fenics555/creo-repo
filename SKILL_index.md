@@ -108,7 +108,10 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
     - `Creo\STANDARDS\SKILL_parameters` (Справочник параметров моделей; перенесён из корня по содержанию 01.10.2026)
     - `DESIGN_davydovka_tokens.md` (токены дизайна Давыдовки для окон и витрины;
       не скилл, а закон дизайна, цитируется .clinerules)
-- **Аудит**: `AUDIT_rules_*.md` и `SKILL_audit_protocol.md`
+- **Аудит**: `AUDIT_rules_*.md` и `SKILL_audit_protocol.md` (аудит ДОМА)
+- **Аудит программы** (не дома): `SKILL_audit_program.md` — карта проверок одной программы
+  (пути, настройки, вызовы, логи, мусор), формат отчёта и **шаблон спеки** для вставки в задачу.
+  Проверен на `plm_reader` 02.10.2026 (V37, `REPORT_plm_reader_audit_2026-10-02.md`).
 - **Справочники и управленческие файлы** (не скиллы, в маршрутизацию не входят): `GUIDE\db.md`, `GUIDE\models.md`, `GUIDE\plm.md`, `Vericut\VERICUT_отложи_в_Vericut_260820.md`, `Ошибки\ERR_260902_web_fetch.md`, `BACKLOG_tools.md`
 
 ### 6. Agents (Автономные исполнители)
