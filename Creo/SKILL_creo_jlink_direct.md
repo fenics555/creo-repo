@@ -25,7 +25,15 @@ JLINK даёт полный доступ к `pfc*` и не требует сер
 ```java
 System.loadLibrary("pfcasyncmt");           // или pfcasync
 ```
-- `PATH` += `D:\PTC\CREO12\Creo 12.4.2.0\Common Files\x86e_win64\lib` и `...\x86e_win64\obj`;
+- **КАТОРАГИЧЕСКИ НЕ ЗАШИВЫВАЙ ПУТЬ** вида `D:\PTC\CREO12\Creo 12.4.2.0\Common Files` (02.10.2026):
+  версия меняется (дом уже на **CREO13**, дальше будет CREO14), и зашитый путь ломает инструмент молча.
+  Бери путь из **источника истины**, порядок такой:
+  1) боевой бат запуска `Z:\PTC\CREO-START\START-STD\CREO-START.bat` → строка `set CREO_EXE=…`
+     (из неё: `...\Creo <верс>\Parametric\bin\parametric.exe` → `...\Creo <верс>\Common Files`);
+  2) настройки дома (`data\<инструмент>_settings.json`, ключ `creo_common`);
+  3) автопоиск `D:\PTC\CREO*\Creo *\Common Files`, где есть `x86e_win64\lib` (признак рабочей).
+  Готовый искатель в доме: `agent\creo_comb\creo_find.py` (печатает путь в stdout, проверка `-v`).
+  Ниже все примеры показывают CREO12 для наглядности — **подставляй найденный путь**.
 - JVM-флаг `-Djava.library.path="<те же две папки>"`;
 - `PRO_COMM_MSG_EXE` = `...\x86e_win64\obj\pro_comm_msg.exe`;
 - classpath: `pfcasync.jar` (`Common Files\text\java`) + `pfcasyncmt`.
