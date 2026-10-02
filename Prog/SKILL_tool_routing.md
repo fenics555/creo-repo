@@ -29,8 +29,9 @@ priority: critical
 Пример (живая проверка 02.10.2026): человек называет `D:\PTC\CREO13`, программа создаёт
 `Creo 13.4.1.0\Parametric\bin\parametric.exe` + `Common Files\`.
 Значит искать программу надо **по признаку-файлу, а не по имени папки**: рекурсивно, на всех
-локальных дисках. Порядок источников для Creo — `Creo\INFRA\SKILL_creostart_fleet.md`
-(живой `CREO-START.bat` на Z: → реестр → рекурсивный поиск `Parametric\bin\parametric.exe`).
+локальных дисках. Порядок источников для Creo: **рекурсивный поиск `Parametric\bin\parametric.exe`
+(главный) → реестр (ярлык) → `CREO-START.bat` (частный случай машины владельца, не источник истины)** —
+`Creo\INFRA\SKILL_creostart_fleet.md`.
 Общее правило для любых программ — `Prog\SKILL_tool_template.md`, раздел «АВТОНОМНОСТЬ ИНСТРУМЕНТА».
 
 ## Принцип выбора

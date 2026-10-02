@@ -10,6 +10,9 @@ priority: critical
 Один скилл = одна зона знания. Домены не дублируют друг друга.
 
 ## НАПРАВЛЕНИЯ (первый указатель, состав по MANIFEST.md)
+- **Параллельные ноги (ВСЕГДА, до любого git):** `SKILL_parallel_legs.md` — **critical**, общий закон
+  общих репозиториев `D:\AI\repo` и `D:\AI\tools`: коммит только с pathspec, чужой staged не трогать,
+  чужой rebase не продолжать. Читать перед первым `git commit`/`git push` в этой сессии.
 - Creo: Creo\SKILL_creo_index.md · PDF: PDF\SKILL_pdf_index.md · Web: Web\SKILL_web_index.md
 - Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
 - Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md (закон) + crash\SKILL_crash_index.md (список крах-скиллов)
