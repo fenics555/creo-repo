@@ -1,4 +1,17 @@
+---
+name: crash_git-push-says-up-to-date-but-ahead
+system: CRASH
+description: Use when: git push написал «Everything up-to-date», а rev-list показал ahead 1 — приёмка только через ls-remote и нули rev-list
+when: git, push, up-to-date, ahead, rev-list, ls-remote, приёмка, тихая потеря работы
+date: 01.10.2026
+executor: Cline
+task: AGENT_SETTINGS, фаза 21
+---
+
 # crash_git-push-says-up-to-date-but-ahead — `Everything up-to-date` при реальном ahead
+
+ОШИБКА (дословно, для grep):
+crash_git-push_says_up_to_date_but_ahead: git push origin master -> Everything up-to-date, а git rev-list --left-right --count origin/master...HEAD -> 0	1
 
 **Симптом (01.10.2026, 23:20, задача AGENT_SETTINGS):**
 ```

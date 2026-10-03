@@ -1,4 +1,17 @@
+---
+name: crash_command_timeout_kills_process_tree
+system: CRASH
+description: Use when: команда истекла по таймауту 30 с и вместе с ней убито дерево процессов детача (батарея, ночной прогон) — правка применена, замера нет
+when: timeout, 30s, run_commands, детач, PID, ночной оптимизатор, Start-Process
+date: 02.10.2026
+executor: Cline
+task: ночной оптимизатор, H2
+---
+
 # crash_command_timeout_kills_process_tree
+
+ОШИБКА (дословно, для grep):
+crash_command_timeout_kills_process_tree: Command failed: Command timed out after 30000ms — дерево процессов детача убито
 
 **Подпись (дословно):** `Command failed: Command timed out after 30000ms`
 

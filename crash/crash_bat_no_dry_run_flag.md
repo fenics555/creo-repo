@@ -1,4 +1,17 @@
+---
+name: crash_bat_no_dry_run_flag
+system: CRASH
+description: Use when: .bat запустили «просто глянуть» (--help) и он пошёл выполнять работу — таймаут команды убил прогон
+when: bat, cmd, --help, таймаут, RUN_p18_probe, приёмка, архивный бат
+date: 02.10.2026
+executor: Cline
+task: правка шапки RUN_p18_probe.bat
+---
+
 # crash_bat_no_dry_run_flag
+
+ОШИБКА (дословно, для grep):
+crash_bat_no_dry_run_flag: Command failed: Command timed out after 30000ms после cmd /c RUN_p18_probe.bat --help
 
 **Подпись:** `Command failed: Command timed out after 30000ms` после запуска `.bat` «просто глянуть».
 
@@ -20,5 +33,15 @@
 3. Если `.bat` всё же надо проверить — сначала `Get-Content`, потом запуск через `Start-Process`
    (иначе таймаут команды убьёт прогон: `crash_command_timeout_kills_process_tree.md`).
 
-**Профилактика в файле:** архивные баты получают шапку `АРХИВ. НЕ ЗАПУСКАТЬ ДЛЯ ПРИЁМКИ`
-с указанием, что запускать вместо них. В `RUN_p18_probe.bat` такая шапка стоит с 11:47.
+ПОВТОРЫ: 2
+
+**ПОВТОР 03.10.2026, 10:24 — та же подпись, но ПИТА: аудит `dev\` (нога запустила «посмотреть,
+что делает инструмент» → `python dev\doctor.py`):**
+`doctor.py` — не проверочный, а **ПРАВЯЩИЙ** скрипт: он перезаписал живой
+`Z:\PTC\CREO-START\START-STD\CREO-START.bat` (7197 б вместо 7331), обновил зеркало в `data\kb\`
+и запустил `GIT_SYNC.bat`. Откат сделан немедленно из бекапа, который скрипт сделал сам
+(`data\backup\pre_d12b_Z_creostart.bat`), оба файла сверены по sha256 — совпало.
+
+**Урок для будущих ног:** перед «а что делает этот файл?» читать ПЕРВЫЕ 15 строк, а не запускать.
+Признак правящего скрипта: в шапке есть `open(..., "w")`, `shutil.copy2`, `subprocess.Popen`,
+`os.startfile` или `git`. Такой файл запускается только по слову владельца и только на копии.

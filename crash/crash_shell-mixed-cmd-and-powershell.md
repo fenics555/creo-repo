@@ -1,4 +1,17 @@
+---
+name: crash_shell-mixed-cmd-and-powershell
+system: CRASH
+description: Use when: PowerShell-командлет (Select-Object и др.) попал внутрь cmd /c — cmd.exe его не знает, код возврата 1 врёт о провале операции
+when: cmd /c, Select-Object, PowerShell, cmd.exe, конвейер, ложный exit 1, push
+date: 01.10.2026
+executor: Cline
+task: AGENT_SETTINGS, ~22:48
+---
+
 # crash_shell-mixed-cmd-and-powershell — конвейер PowerShell внутри `cmd /c`
+
+ОШИБКА (дословно, для grep):
+crash_shell-mixed-cmd-and-powershell: 'Select-Object' is not recognized as an internal or external command, operable program or batch file.
 
 **Подпись:** `'Select-Object' is not recognized as an internal or external command,
 operable program or batch file.`
