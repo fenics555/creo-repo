@@ -8,7 +8,21 @@ priority: critical
 # CREOSON: переименование модели и чертежа — доказанный механизм (16.09.2026)
 
 Живые пробы в чистой сессии на копии в tmp (объект `zkr_rename_test.prt`), CREOSON
-3.0.2 + Creo 12.4.2.0 + Temurin 25 (Java 25 — штатный JRE creoson 3.0.2, см. RELEASE_NOTES).
+3.0.2 + Creo 12.4.2.0 + **JRE 21** (штатный JRE для Creo 12 — RELEASE_NOTES: «Made
+compatible with Creo 12 by changing the embedded JRE to Java 21»).
+
+**ЖИВАЯ ПОПРАВКА 03.10.2026 (стенд поднят, шаг rename_model в плане):**
+1. **`file:close_window` НЕ ЗАКРЫВАЕТ модель.** Отвечает `{'status': {'error': False}}`,
+   а модель остаётся в сессии (`rename_tools._session()` не меняется). Единственный
+   способ убрать — **`file:erase` по имени** (после него сессия чиста). Прежний совет
+   «закрыть окно перед следующим шагом» в этом скилле был неверен — отсюда падение
+   rename с дословным `Error renaming model; check to see there isn't another model in
+   memory with the same name`.
+2. **`_source_ext` (rename_tools) искал только версии `base + ext + ".*"`** и отвечал
+   «нет файлов», когда рядом лежал `имя.prt` БЕЗ номера версии. Правка: сначала сам
+   файл, потом версии.
+3. Переименование по ПРОБЕ может идти в произвольную папку — механизм принимает
+   полный путь (`_split` даёт (папка, база)), а не только имя.
 
 ## Что работает, что нет
 | Вызов | Результат |

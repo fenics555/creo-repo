@@ -16,8 +16,17 @@ priority: high
   и это работает годами — менять только после пробы на всём флоте;
 - `playground.html` — тестер функций из браузера;
 - эндпоинты: `POST http://127.0.0.1:<port>/creoson` (JSON) и `/server`;
-- `RELEASE_NOTES.txt`: версия 3.0.2 — «Made compatible with Creo 13 by changing the embedded
-  JRE to Java 25» — отсюда наш `JAVA_HOME=D:\AI\Java` (Temurin 25.0.4); менять JDK без нужды нельзя;
+- `RELEASE_NOTES.txt`: **версия JRE зависит от версии Creo, а не от CREOSON.**
+  Строки 13 и 5 дословно: «Made compatible with Creo 12 by changing the embedded JRE to
+  Java 21» и «Made compatible with Creo 13 by changing the embedded JRE to Java 25».
+  Значит: **Creo 12 → Java 21**, Creo 13 → Java 25. Дома стоит Creo 12.4.2.0, поэтому
+  `JAVA_HOME` обязан указывать на **JRE 21** — живой факт 03.10.2026: на Temurin 25
+  CREOSON падает (`EXCEPTION_ACCESS_VIOLATION`, `hs_err_pid*.log`), на JRE 11 —
+  `UnsupportedClassVersionError ... class file version 65.0` (65 = Java 21), на
+  **Temurin JRE 21.0.12.1+1 — работает**: `Starting server, listening on port 8080.`
+  Текущее значение: `JAVA_HOME=D:\AI\Java21\jdk-21.0.12.1+1-jre` (бекап прежней
+  строки — `setvars_pre_java11.bak`). **Версию JVM не угадывают — читают RELEASE_NOTES
+  или ошибку запуска.**
 - `setvars.bat` создаётся ТОЛЬКО `CreosonSetup.exe`; без него `creoson_run.bat` падает дословно
   «The setvars.bat file does not exist» (крах 17.09.2026; лечение: CreosonSetup.exe либо копия
   `setvars.bat` из старого каталога creoson).
