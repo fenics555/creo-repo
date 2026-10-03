@@ -82,6 +82,10 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
   `SKILL_spring_compression_generator`, `SKILL_spring_tension_master` — **critical**
 - `DAVYDOVKA\` — `SKILL_davydovka_creoson_map` (карта Давыдовка ↔ CREOSON)
 - `INFRA\` — `SKILL_creostart_fleet` (флот/старт), `SKILL_object_creoson_tests-01_asm` (объектные пробы)
+- корень `repo\` — `SKILL_archive_plm` (**архивы склада `\\Backup\Public\АРХИВЫ` → история в базу
+  PLM**: RAR5-многотомники, грабли 7z и правил параметров, карта производства по срезам,
+  сверка одноимённых файлов «было → стало, кто и когда», дописывание в боевую базу
+  таблицами `arch_*` + `changes(kind='архив')`; конспект `ИЗУЧЕНО\Архивы PLM\STUDY_NOTES.md`) — **high**
 - корень `Creo\` — `CREO_MAP` (строение Creo), `SKILLS_MAP` (карта скиллов ветки),
   `SKILL_creo_file_reading` (**чтение файлов Creo «в лоб»**: история изменений, упакованные числа, секции/параметры;
   там же инструмент дома `plm_reader`), `README_jlink_direct`

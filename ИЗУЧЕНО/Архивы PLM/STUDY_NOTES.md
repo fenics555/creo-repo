@@ -156,9 +156,22 @@ CHPU 29, IVAN_ 17, VSOKOLOV 6, TDR 7, GORSHKOV 5. Что меняли: мате�
 
 ## 8. ЧТО СДЕЛАНО (инструмент)
 
-`C:\Users\User\.cline\data\workspaces\chat\plm-archive-scan\archive_scan.py`
-(CLI) + `archive.db` (`arch_snapshots`, `arch_changes`, `arch_runs`) + копия боевой базы
-в `\\Backup\Public\АРХИВЫ\PLM_БАЗА\`. Подробности — в `README.md` рядом.
+**Скилл готов:** `D:\AI\repo\SKILL_archive_plm.md` (запись в `SKILL_index.md`, раздел «1. Creo»),
+указатель в `GUIDE\plm.md`. Скилл содержит: суть, главный закон (не лить через `do_scan`),
+7 граблей, таблицу «что PLM Reader собирает, а что нет», порядок дописывания в боевую базу
+и факты прочки — чтобы следующая работа не начиналась с нуля.
 
-**Нужны ли ещё скиллы?** Да: «сканирование архивов PLM» как готовый рецепт (распаковать по дате →
-прочитать → удалить → отчёт) ещё стоит записать в `repo\SKILL_*` после успешной пробы.
+**Кампания запущена (03.10.2026 13:32):** `archive_scan.py --all --skip-done --automerge`,
+31 дата в очереди (2 уже прочитаны: 29.03.2022 и 02.02.2023). Оценка 12–15 часов.
+Прогресс: `archive_scan.log`, сводка `archive_scan.py --report`, проверка боевой базы `check_live.py`.
+Прогон переживает остановку: `--skip-done` пропускает уже прочитанные даты, в конце сам
+делает сверку и дописывает в боевую базу.
+
+**Разовая операция:** после прочки удаляются `D:\ARC_WORK` и скрипты кампании
+(только словом хозяина); в базе остаются таблицы `arch_*` и записи `changes(kind='архив')`.
+
+Инструмент: `C:\Users\User\.cline\data\workspaces\chat\plm-archive-scan\`
+(`archive_scan.py` — чтение, `arch_diff.py` — сверка, `arch_map.py` — карта,
+`arch_merge.py` — слияние, `check_live.py` — проверка), `archive.db`, `README.md`.
+
+**Нужен ли ещё скилл?** Нет — `SKILL_archive_plm.md` закрывает тему.
