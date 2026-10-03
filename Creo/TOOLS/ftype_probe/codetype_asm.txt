@@ -1,0 +1,36 @@
+FILE chk_asm.asm.1 полей=3976
+коды маркера: ['E0', 'E2', 'E3', 'E4', 'E9', 'EB', 'EF', 'F0', 'F2', 'F4', 'F6', 'F8', 'FC', 'FD']
+
+маркер/код  полей  %%строковых  первые байты значения            типичные имена
+E0/01       1739    8.3%  00:534, F6:273, 01:156, F8:129, F1:68 type(128), id(85), attr(37), feat_id(27), geom_id(24), attributes(23)
+E0/00       1076   28.2%  E3:253, E1:242, F1:178, F8:148, E2:127 gen_info(26), first_instr_ptr(24), matrix(13), View(12), viewattr(12),
+E0/02        604   31.1%  F9:166, 18:161, F8:91, 10:44, 29:29 local_sys(28), matrix(19), coord(16), offset(16), orient(12), fit_outl
+E0/0A        242    5.4%  E1:135, 00:11, 32:9, 30:8, 4E:8  name(46), model_name(13), unrep_model_name(12), named_orient(12), text
+F0/00         49    0.0%  46:21, 2D:7, 7A:6, 18:6, 00:3    HH(46), FTs33333(2), FTs333339(1)
+E0/09         45   15.6%  00:11, F8:9, 01:6, F1:6, EB:5    attr(8), ref_id_coll_flags(3), ref_id_strength(3), height(3), revnum(3
+E3/0E         43    0.0%  01:39, F8:4                      RIGHT(16), CENTROVKA(4), NC_ASM_TOP(1), NC_ASM_FRONT(1), ADTM9(1), ADT
+E3/0A         43    0.0%  F8:43                            T0010(8), T0004(7), T0014(7), T0021(5), FASKA(5), T0003(4)
+E3/01         29    0.0%  2F:25, 00:2, 18:2                i/1(12), i/Y(6), i/0(6), h/(2), i/9(2), R/.(1)
+E3/07         26    0.0%  01:26                            S2D0003(16), S2D0004(4), S2D0002(3), S2D0005(2), S2D0001(1)
+E3/0D         14    0.0%  F8:14                            T0012(4), T0009(4), T0011(3), T0001(3)
+E0/05          9    0.0%  00:5, 01:4                       init_dens(3), init_rel_dens(3), ADTM58(1), type(1), fcn_id(1)
+F6/04          9    0.0%  18:9                             H4(6), H.(2), H5(1)
+E3/0F          8    0.0%  F8:8                             T0018(3), T0007(3), T0006(2)
+E0/07          7    0.0%  F8:5, 00:1, 01:1                 checksum(4), parents_checksum(1), known(1), homogeneity(1)
+E0/03          7    0.0%  E1:4, 65:1, 43:1, D0:1           internal_name(1), bump(1), decal(1), texture(1), Proe_version(1), inst
+E4/00          6    0.0%  F6:6                             BCD(1), HIJ(1), KGL(1), NOP(1), MQR(1), XYZ(1)
+E0/08          3    0.0%  02:1, 00:1, F8:1                 key(1), uvar_id(1), arg_arr(1)
+F6/01          2    0.0%  19:1, 18:1                       HM(1), HH(1)
+FC/02          2    0.0%  2D:1, 18:1                       HD(1), HH(1)
+F8/0F          2    0.0%  00:2                             F9(2)
+E0/04          1    0.0%  48:1                             type(1)
+F2/03          1    0.0%  00:1                             SV5(1)
+F4/03          1    0.0%  00:1                             SV5-(1)
+E2/05          1    0.0%  00:1                             ADTM46(1)
+E4/05          1    0.0%  00:1                             ADTM47(1)
+E9/05          1    0.0%  00:1                             ADTM48(1)
+EB/05          1    0.0%  00:1                             ADTM49(1)
+FD/05          1    0.0%  00:1                             ADTM51(1)
+EF/0D          1    0.0%  2D:1                             HD(1)
+E2/01          1    0.0%  32:1                             HH(1)
+FC/0F          1    0.0%  2D:1                             HA(1)
