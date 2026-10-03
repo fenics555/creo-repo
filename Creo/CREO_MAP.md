@@ -116,3 +116,21 @@ date: 23.09.2026
 Полный отчёт исследования — `D:\AI\log\reports\REPORT_creo_full_cline_2026-09-23.md`.
 Разбор прямого управления — `README_jlink_direct.md`. Карта скиллов — `SKILLS_MAP.md`.
 Индекс ветки — `SKILL_creo_index.md`; общий индекс дома — `D:\AI\repo\SKILL_index.md`.
+
+## 9. 🆕 ИНСТРУМЕНТЫ ОФЛАЙН-РАЗБОРА (03.10.2026)
+`TOOLS\ftype_probe\` — **17 скриптов** для чтения файлов Creo «в лоб» **без Creo и без сети**.
+Запуск: `python <скрипт> <файл> [аргументы]`. Подробности — `TOOLS\ftype_probe\_INDEX.md`.
+
+| Задача | Скрипт |
+|---|---|
+| Найти поле, снять контекст | `creoscan.py`, `rawdump.py` (чистый HEX ±32 байта) |
+| Инвентаризация полей/секций | `fields.py`, `fieldhunt.py`, `schema.py` |
+| Коды типов полей | `codetype.py`, `checklen.py`, `codewhat.py` |
+| Узлы дерева и категории | `treenodes.py`, `objid_map.py` |
+| Границы блоков | `blockwalk.py`, `boundtest.py`, `lenormark.py`, `counttest.py` |
+| Типы фич (отрицательные результаты) | `mtype.py`, `featdiff.py`, `typetoken.py`, `featleaf.py` |
+| Справка Creo | `helpscan.py` |
+| ⭐ **Приём эталона из Creo** | **`etalon_match.py`** |
+
+**Закрытие долга №7 (FEATTYPE):** экспорт дерева из Creo **на сборке**
+(для детали команды нет) → `etalon_match.py <экспорт.txt> <модель>`.
