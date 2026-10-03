@@ -45,7 +45,8 @@ date: 23.09.2026
 | `READ\SKILL_creo_read_drw.md` | **чертёж** `.drw` — что законно пусто, ритуна PDF |
 | `READ\SKILL_creo_read_mfg.md` | **мануфакчуринг** `ASSEM_MFG` / `.tph` — операции, переходы, инструмент |
 | `READ\SKILL_creo_read_family.md` | **семейства и исполнения** `FamilyInf` + библиотека `Z:\PTC\CREO-START\Libraries` |
-| `READ\SKILL_creo_read_feat.md` | **операции построения** — имена читаются, тип/`feat_id` нет |
+| `READ\SKILL_creo_read_feat.md` | **операции построения** — имена ✅, ID ✅, словарь **280 типов** из `pfcFeature.h` (скачивать не надо) |
+| `READ\SKILL_creo_read_roles.md` | **РОЛИ: зеркало / наследование / заготовка** — `MERGE_BASE_PART`, `ref_part_tab`, отсев шаблона `MM_ASSY`; прогон: **54 заготовки, 3 зеркала** |
 | `READ\SKILL_creo_write_raw.md` | **ПРАВКА в лоб** — текст той же длины, запреты, порядок, приёмка |
 | `READ\SKILL_creo_new_file.md` | **создание/перезапись файла детали/сборки** — подготовка (не начато) |
 
