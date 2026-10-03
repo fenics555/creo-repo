@@ -35,6 +35,7 @@ date: 03.10.2026
 | **`featall.py`** | Разбор секции `AllFeatur`, поиск постоянства хвостов записей | `python featall.py <файл> [макс]` |
 | **`ftbyname.py`** | Тип операции по имени (признак «Отверстие»=HOLE и т.п.) | `python ftbyname.py <файл>` |
 | **`ftprobe.py`** | Поиск записей `MTTyped_CreateData` | `python ftprobe.py <файл>` |
+| **`objid_map.py`** | **Сопоставляет `obj_id` (дерево) с блоками данных по секциям.** Да: коды `obj_type` 05=база/15=ось на 2 моделях; вторая таблица `names_table` в `LargeText` | `python objid_map.py <файл>` |
 
 **Вывод пишется рядом со скриптом** в `out_*.txt` / `*_out.txt` (UTF-8).
 ⚠️ Надёжнее писать в файл, а не в `System.out`-подобный stdout — кириллица в консоли
@@ -54,5 +55,9 @@ PowerShell ломается (в Python вывод в файл надёжнее).
 * ✅ Код типа поля после маркера + распределение на 3 моделях — `SKILL_creo_read_core.md` §2б.
 * ✅ Поля-схема vs данные — `SKILL_creo_read_core.md` §2б.
 * ✅ Дерево верхнего уровня `obj_id`/`obj_type`/`STD_FH_*` — `SKILL_creo_read_feat.md` §4е.
+  **Коды категорий расшифрованы:** `05`=база, `15`=ось (проверено на 2 моделях).
+  **Вторая копия дерева — `names_table` в `LargeText`** (порядок полей обратный).
+  **ID объектов — 2 байта**, сходится с `sort_feat_ids`.
 * ❌ **Числительный FEATTYPE не найден.** Вычеркнуты `ft_type` (запись размера),
-  `feat_type_ptr`/`feattype_key` (указатели схемы), `type` в `feat_defs_*` (указатель).
+  `feat_type_ptr`/`feattype_key` (указатели схемы), `type` в `feat_defs_*` (указатель),
+  `obj_type` (категория объекта, не `pfcFEATTYPE`).
