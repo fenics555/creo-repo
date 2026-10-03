@@ -33,7 +33,12 @@ date: 03.10.2026
 |---|---|
 | Паспорт/скан/дерево/входимость/изменения | `D:\AI\tools\agent\plm_reader\` (V37, база в `db\`, настройки в `settings\`) |
 | Таблица семейств из файла | `D:\AI\ИЗУЧИТЬ\ДАВЫДОВКА\creoJS\creo_bom_js\family_table_file.py` |
-| Проба операций построения | `D:\AI\PROBA\feat_probe\feat_read.py` |
+| Проба операций построения | `D:\AI\PROBA\feat_probe\feat_read.py`, `D:\AI\PROBA\deep\*.py` |
+| Эталон дерева из живого Creo (JLINK) | `D:\AI\PROBA\feat_probe\FeatDump.java` (скомпилирован) |
 | Пишущие операции в Creo | CREOSON / JLINK — `..\SKILL_creo_jlink_direct.md`, `..\CREOSON\SKILL_creoson_write_rules.md` |
+
+**Карта диска `Z:\PTC` (74 ГБ, ≈45 252 модели, 4 ошибки боевого `config.pro`)** —
+`..\INFRA\SKILL_creo_z_drive.md`
+
 
 **Закон:** ПЛМ/паспорт/дерево — читаются из файлов (**Creo не нужен**). Creo нужен **только для записи**.
