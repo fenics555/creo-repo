@@ -1,0 +1,194 @@
+{
+ "dims": [
+  {
+   "dwg_dim": false,
+   "name": "d9",
+   "value": 360.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d10",
+   "value": 27.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d11",
+   "value": 43.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d12",
+   "value": 1200.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d13",
+   "value": 30.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d14",
+   "value": 45.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d15",
+   "value": 10.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d16",
+   "value": 2.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d17",
+   "value": 10.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d18",
+   "value": 2.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d19",
+   "value": 30.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d20",
+   "value": 45.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d22",
+   "value": 5.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d23",
+   "value": 52.5,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d24",
+   "value": 66.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d26",
+   "value": 2.5,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d28",
+   "value": 5.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d30",
+   "value": 2.5,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d31",
+   "value": 10.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d32",
+   "value": 66.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d41",
+   "value": 30.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d42",
+   "value": 6.6667,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "p43",
+   "value": 37.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "p44",
+   "value": 2.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d45",
+   "value": 30.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "d46",
+   "value": 6.6667,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "p47",
+   "value": 36.0,
+   "encoded": false
+  },
+  {
+   "dwg_dim": false,
+   "name": "p48",
+   "value": 2.0,
+   "encoded": false
+  }
+ ],
+ "layers": [
+  {
+   "status": "NORMAL",
+   "name": "AXES",
+   "id": 194
+  },
+  {
+   "status": "NORMAL",
+   "name": "NOTES",
+   "id": 102
+  },
+  {
+   "status": "NORMAL",
+   "name": "PLANES",
+   "id": 201
+  },
+  {
+   "status": "NORMAL",
+   "name": "SOLID",
+   "id": 195
+  }
+ ]
+}
