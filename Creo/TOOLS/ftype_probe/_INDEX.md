@@ -1,4 +1,4 @@
----
+﻿---
 name: creo-tools-ftype
 ---
 ## ⭐⭐⭐ ФОРМУЛА ID РАЗОБРАНА ПОЛНОСТЬЮ (04.10.2026) — СМЕЩЕНИЯ НЕТ
@@ -92,8 +92,35 @@ feat_id · ft_type · comp_type · prev_feat_id · feat_name · pat_group_header
 `icon_name` в этой структуре = `section_planar16X16` — **читаемая строка**, но
 встречается **1 раз на файл**, так что использовать как общий тип нельзя.
 
-**Долг 7 остаётся ОТКРЫТЫМ.** Следующий путь — не искать число рядом с именем,
-а разобрать таблицу прототипов, на которую ссылается `ft_type` (значения 917/911).
+### FEATTYPE NAIDEN: TIP LEZHIT V IMENI PROTOTIPA (chastichno, 04.10.2026 vecherom)
+
+V zapisi fechi vstrechaetsya struktura:
+```
+E2 <imya>\0   F7 4D F6 00 <PROTOTIP>\0   00   E2 "id <N>\0
+```
+| prototip | sootvetstvie etalonu CREOSON |
+|---|---|
+| `dtmplane` | OPORNAYA PLOSKOST |
+| `protextrude` | VYSTUP |
+| `cutextrude` | VYREZ |
+| `protrevolve` | VRASHCHENIE (est vo vsekh failakh) |
+| `project16` | proektsiya/sechenie |
+| `dtmsktcurve` | eskiz na bazovoy ploskosti |
+
+Instrument: **`ftype_proto.py`** (izvlekaet prototip i `id N`).
+
+### OGRANICHENIYA (chestno)
+1. Zapisi `F7 4D F6 00` est NE vo vsekh failakh: 6 shtuk v `9112-410_008-01`,
+   NOL v `137_011_0041`, `00479`, `00612`. Eto ne universalnaya forma.
+2. V ostalnykh failakh prototipy lezhat BIBLIOTEKOY (`dtmplane` 144 raza v `137`),
+   a NE privyazkoy k konkretnoy feche -> tip otdelnoy fechi tak ne vzyat.
+3. Tekst `id 7094` - eto id SUSHCHHNOSTI, on ne vsegda est v `feature/list`.
+
+### VYVOD
+CHislovoy FEATTYPE po-prezhnemu NE POLUCHEN, no poyavilsya SLOVAR IMEN PROTOTIPOV.
+Eto most k `pfcFEATTYPE_*` iz `pfcFeature.h`. Sleduyushchiy shag: nayti, gde
+v zapisi fechi lezhit SSYLKA NA EYO PROTOTIP (veroyatno, cherez `feat_defs_<N>`).
+
 ### ✅ МАССОВЫЙ АУДИТ НА БОЕВОЙ БАЗЕ (600 файлов, 04.10.2026)
 `id_audit.py` — ищет `<имя>\0 01 00 [18 E5] <varint>` и проверяет `enc(dec(x)) == x`.
 

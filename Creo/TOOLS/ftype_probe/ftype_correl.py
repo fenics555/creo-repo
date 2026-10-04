@@ -14,8 +14,56 @@
 import json, io, sys
 from collections import defaultdict
 
-WIN_L = 30   # байт до имени
-WIN_R = 60   # байт после имени
+WIN_L = 200  # байт до имени
+WIN_R = 200  # байт после имени
+MIN_NAME = 4  # короче — ловится внутри других слов («В» давал 481 мусор)
+
+
+def dec(b, k):
+    b0 = b[k]
+    tag = b0 & 0xC0
+    if tag == 0xC0:
+        return ((b0 & 0x3F) << 16) | (b[k+1] << 8) | b[k+2], 3
+    if tag == 0x80:
+        return ((b0 & 0x7F) << 8) | b[k+1], 2
+    return b0, 1
+
+
+def verified_windows(b, nm, fid):
+    """Окна, привязанные к ID фичи. Обе формы записи:
+       A) <имя>\\0 01 00 [18 E5] <varint id>   (ASCII-имена)
+       B) e3 <varint id> <длина> <имя>        (кириллица и часть ASCII)
+    Окно центрируется на позиции varint, поэтому смещения сопоставимы.
+    """
+    pat = []
+    i = fid
+    if i < 0x80:
+        pat = bytes([i])
+    elif i < 0x4000:
+        pat = bytes([0x80 | ((i >> 8) & 0x7F), i & 0xFF])
+    else:
+        pat = bytes([0xC0 | ((i >> 16) & 0x3F), (i >> 8) & 0xFF, i & 0xFF])
+
+    out = []
+    start = 0
+    while True:
+        p = b.find(pat, start)
+        if p < 0:
+            break
+        start = p + 1
+        ok = False
+        if p >= 3 and b[p - 3:p] == b'\x00\x01\x00':
+            ok = True                       # форма A
+        if not ok and p >= 1 and b[p - 1] == 0xE3:
+            tail = b[p + len(pat):p + len(pat) + 2]
+            if tail and nm.startswith(tail[1:2]):
+                ok = True                   # форма B: <длина><имя>
+        if not ok:
+            continue
+        lo, hi = max(0, p - WIN_L), min(len(b), p + WIN_R)
+        if hi - lo == WIN_L + WIN_R:
+            out.append((p, b[lo:hi]))
+    return out
 
 
 def cstr(b, k):
@@ -31,26 +79,20 @@ def main():
     b = open(path, 'rb').read()
     fl = json.load(io.open(meta, encoding='utf-8'))['data']['featlist']
 
-    # собираем окна: тип -> список окон (только фичи, реально найденные)
+    # собираем окна: тип -> список окон, ТОЛЬКО по проверенным записям
     per_type = defaultdict(list)
     found = 0
     for f in fl:
         nm = f['name'].encode('utf-8')
-        if not nm:
+        if len(nm) < MIN_NAME:
             continue
-        start = 0
-        while True:
-            i = b.find(nm, start)
-            if i < 0:
-                break
-            start = i + 1
-            lo, hi = max(0, i - WIN_L), min(len(b), i + len(nm) + WIN_R)
-            if hi - lo < WIN_L + WIN_R:
-                continue
-            per_type[f['type']].append(b[lo:hi])
-            found += 1
+        wins = verified_windows(b, nm, f['feat_id'])
+        if not wins:
+            continue
+        per_type[f['type']].extend(w[1] for w in wins)
+        found += len(wins)
     if found == 0:
-        print('имена не найдены')
+        print('проверенных записей не найдено')
         return
 
     print('файл: %s' % path)
