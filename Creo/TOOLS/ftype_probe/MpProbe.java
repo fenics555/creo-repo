@@ -18,16 +18,17 @@ public class MpProbe {
 
     public static void main(String[] args) throws Exception {
         System.out.println("=== JCDFstart ===");
-        // pfcasyncmt.dll НУЖНО загрузить ДО pfcasync.jar: именно в ней
+        // pfcasyncmt.dll НУЖно загрузить ДО pfcasync.jar: именно в ней
         // нативная реализация AsyncConnection_Connect
         System.loadLibrary("pfcasyncmt");
         System.out.println("pfcasyncmt loaded");
 
-        // Подключаемся к УЖЕ РАБОТАЮЩЕМУ CREOSON через AsyncConnection
-        AsyncConnection ac = pfcAsyncConnection.AsyncConnection_Connect(
-                "127.0.0.1", "8080", "creoson", Integer.valueOf(0));
+        // Spawn САМ поднимает parametric.exe с -jlink и ждёт его готовности.
+        // Это штатный способ JLINK-приложений — не нужен уже запущенный Creo.
+        AsyncConnection ac = pfcAsyncConnection.AsyncConnection_Spawn(
+                "127.0.0.1", "creoson");
         Session s = ac.GetSession();
-        System.out.println("session ok via AsyncConnection");
+        System.out.println("session ok via AsyncConnection_Spawn");
 
         String model = args.length > 0 ? args[0]
             : "Z:\\PTC\\Work\\137.011.0041\\137_011_0041.prt";
