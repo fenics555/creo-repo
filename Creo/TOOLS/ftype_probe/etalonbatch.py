@@ -1,11 +1,23 @@
-"""ПАКЕТНЫЙ ЭТАЛОН: сопоставление ID CREOSON с записями в файле.
-Доказанная формула: ID_в_файле = ID_из_Creo + 0x8001
+"""ПАКЕТНЫЙ ЭТАЛОН: сопоставление feat_id(CREOSON) с записями в файле.
+
+ДОКАЗАНО (04.10.2026, ручной разбор байтов): в файле лежит САМ feat_id,
+записанный varint'ом, где старший бит первого байта = флаг «2 байта».
+    id < 128  -> 1 байт: [id]
+    иначе    -> 2 байта: [ (id>>8)|0x80 , id&0xFF ]
+Смещения НЕТ. Прежняя гипотеза «+0x8001» ОПРОВЕРГНУТА — совпадала по шуму.
+
 Запуск: python etalonbatch.py [папка] [N]
 """
 import json, sys, io, os, random, re, urllib.request
 
 URL = 'http://127.0.0.1:8080/creoson'
-OFF = 0x8001
+
+
+def enc_varint(i):
+    """Кодек файла: <128 -> 1 байт, иначе 2 байта со старшим битом-флагом."""
+    if i < 128:
+        return bytes([i & 0xFF])
+    return bytes([((i >> 8) & 0x7F) | 0x80, i & 0xFF])
 
 def call(cmd, fn, sid=None, data=None):
     body = {'command': cmd, 'function': fn}
@@ -21,14 +33,23 @@ def call(cmd, fn, sid=None, data=None):
         return {'status': {'error': True, 'message': str(e)}, 'data': None}
 
 def find_in_file(path, name, fid):
-    """Ищем запись фичи по имени и по ID+OFF."""
+    """Ищем ID ТОЛЬКО рядом с именем фичи, а не где попало по файлу.
+
+    Шаблон записи: <имя>\\0 01 00 [18 E5] <varint feat_id>
+    (префикс 18 E5 опционален — в некоторых моделях его нет).
+    """
     data = open(path, 'rb').read()
     nb = name.encode('utf-8')
     hits_name = [m.start() for m in re.finditer(re.escape(nb), data)]
-    file_id = fid + OFF
-    pat = bytes([(file_id >> 8) & 0xFF, file_id & 0xFF])
-    hits_id = [m.start() for m in re.finditer(re.escape(pat), data)]
-    return hits_name, hits_id, file_id
+    want = enc_varint(fid)
+    # ID может идти сразу после "00 01 00" либо через префикс "18 E5" (din933)
+    hit_id = []
+    for p in hits_name:
+        base = p + len(nb) + 3
+        for skip in (0, 2):
+            if data[base + skip:base + skip + len(want)] == want:
+                hit_id.append(p); break
+    return hits_name, hit_id, fid
 
 def main():
     base = sys.argv[1] if len(sys.argv) > 1 else r'Z:\PTC\Work'
@@ -38,7 +59,7 @@ def main():
     if not sid:
         print('CREOSON недоступен'); return
     out = io.open('etalonbatch_out.txt', 'w', encoding='utf-8')
-    out.write('ПАКЕТНЫЙ ЭТАЛОН CREOSON · формула ID_файл = ID_creo + 0x%X\n\n' % OFF)
+    out.write('ПАКЕТНЫЙ ЭТАЛОН CREOSON · ID в файле = feat_id БЕЗ СМЕЩЕНИЯ (varint)\n\n')
 
     files = []
     for root, dirs, fs in os.walk(base):
@@ -90,7 +111,7 @@ def main():
                       % (nm[:14], ty[:22], fid, fidx, len(hn), len(hi),
                          '✅' if ok else '—'))
         out.write('\n')
-    out.write('ИТОГО: фич %d, ID+0x%X найдено в файле у %d\n' % (tot_f, OFF, hit_f))
+    out.write('ИТОГО: фич %d, feat_id найден рядом с именем у %d\n' % (tot_f, hit_f))
     out.close()
     print('etalonbatch_out.txt files=%d feats=%d hit=%d' % (used, tot_f, hit_f))
 
