@@ -67,6 +67,7 @@ date: 22.09.2026
 
 - `SKILL_crash_creoson-search-pro-visibility` — Use when: CREOSON отказывает в открытии модели (`Unknown Model Extension`) при верном существующем пути; причина — папки нет в списке `Z:\PTC\Work\search.pro` (4109 папок), а не «видимость START-STD» и не «2 уровня» (оба утверждения опровергнуты).
 - `SKILL_crash_creoson-open-prt1-extension` — Use when: `file:open` отвечает `Unknown Model Extension` при верном пути — чаще всего передан `имя.prt.1` вместо `имя.prt`; для чтения байтов путь с `.1` нужен, для API — без.
+- `SKILL_crash_creo-text-not-binary` — Use when: в `.prt`/`.asm` ищешь фичи или компоненты по бинарным сигнатурам — заголовок UGC на самом деле открытый текст (`#UGC:2`, `@тег N L`, `E0 <len> поле\0`); сначала напечатать 2 КБ как текст, потом искать по ИМЕНАМ полей (`to_name`, `comp_ids`), а не по маркерам.
 - `crash_command_timeout_kills_process_tree` — Use when: `Start-Process cmd /c <лаунчер>` и таймаут рвёт всё дерево процессов вместе с результатом.
 - `crash_python_open-number-invalid-handle` — Use when: `open()` в Python получает номер как дескриптор (`OSError: Invalid argument` / `TypeError`).
 - `crash_update-test-self-overwrite` — Use when: проверка обновления пишет поверх сравниваемого файла и «проходит» сама у себя.

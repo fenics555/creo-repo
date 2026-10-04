@@ -26,9 +26,31 @@ def extract_universal_bom(data, file_path):
             continue
         bom.append(s)
 
-    kind = 'СБ (прямые ссылки)'
+    kind = 'СБ'
     if bom:
-        return sorted(set(bom)), kind, '%d компонентов' % len(set(bom))
+        found = list(bom)
+    else:
+        found = []
+
+    # ---- ФАЗА 3: поле to_name в формате E0 <len> to_name\0 <len> <NAME>\0 ----
+    P3 = re.compile(
+        rb'E0 [\dA-Fa-f]{1,3} to_name\x00(?:[\dA-Fa-f]{1,3} )?([^\x00]{2,48})[\x00\n]')
+    n3 = 0
+    for m in P3.finditer(data):
+        s = m.group(1).decode('latin-1').strip()
+        if not s:
+            continue
+        if s.upper() == stem or s.upper().startswith(stem):
+            continue
+        item = s + '.ASM'
+        if item not in found:
+            found.append(item)
+            n3 += 1
+    if n3:
+        kind = 'СБ (ссылки + to_name)'
+    if found:
+        uniq = sorted(set(found))
+        return uniq, kind, '%d компонентов' % len(uniq)
 
     # ---- ФАЗА 1 (старое поколение, nut_*, krishka): @comp_ids + 2-й @model_name ----
     if b'@comp_ids' in data:
