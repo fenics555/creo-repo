@@ -17,7 +17,14 @@ def decode(b1, b2):
     return 2 ** (e + 1) * (1 + f / 4096.0)
 
 def tokenize(body):
-    """Возвращает (значения, статистика)."""
+    """Возвращает (значения, статистика).
+
+    ВАЖНО: маркер 2F/48 может идти БЕЗ префиксного байта.
+    Пример hb72551-mod1-01:
+        48 5B C8 | 2F 4E 40 | 18 2F 41 80 | 2F 5B C8 | 2F 4E 40 | ...
+    → шесть упакованных чисел подряд, префикс 18 стоит лишь иногда.
+    Поэтому сканируем ПО МАРКЕРУ, а не по префиксу.
+    """
     vals = []
     i = 0
     n = len(body)
@@ -27,18 +34,18 @@ def tokenize(body):
             i += 4
             ff += 1
             continue
-        if body[i:i + 2] == b'\xE0\x2E':
+        if body[i] == 0xE0:
             j = i + 2
             while j < n - 1:
-                if body[j] == 0x18 and body[j + 1] in MARK:
+                if body[j] in MARK:
                     break
                 j += 1
             ins += 1
             i = j
             continue
-        if body[i] == 0x18 and i + 3 < n and body[i + 1] in MARK:
-            vals.append(decode(body[i + 2], body[i + 3]))
-            i += 4
+        if body[i] in MARK and i + 2 < n:
+            vals.append(decode(body[i + 1], body[i + 2]))
+            i += 3
             continue
         i += 1
     return vals, ff, ins
