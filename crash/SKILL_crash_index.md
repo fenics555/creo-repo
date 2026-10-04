@@ -64,6 +64,9 @@ date: 22.09.2026
 - `SKILL_crash_ollama-ansi-stderr-falseexit` — Use when: `ollama stop/rm/create/ps` даёт ложный `NativeCommandError`/exit1 из-за ANSI-спиннера в stderr и рвёт цепочку `;` — успех проверять по `ollama list`/HTTP, а не по exit-коду PowerShell.
 
 - `crash_bat_no_dry_run_flag` — Use when: лаунчер `.bat` запускается без ключа пробы/`--dry` и сразу делает необратимое действие (в индексе отсутствовал, внесён 02.10.2026).
+
+- `SKILL_crash_creoson-search-pro-visibility` — Use when: CREOSON отказывает в открытии модели (`Unknown Model Extension`) при верном существующем пути; причина — папки нет в списке `Z:\PTC\Work\search.pro` (4109 папок), а не «видимость START-STD» и не «2 уровня» (оба утверждения опровергнуты).
+- `SKILL_crash_creoson-open-prt1-extension` — Use when: `file:open` отвечает `Unknown Model Extension` при верном пути — чаще всего передан `имя.prt.1` вместо `имя.prt`; для чтения байтов путь с `.1` нужен, для API — без.
 - `crash_command_timeout_kills_process_tree` — Use when: `Start-Process cmd /c <лаунчер>` и таймаут рвёт всё дерево процессов вместе с результатом.
 - `crash_python_open-number-invalid-handle` — Use when: `open()` в Python получает номер как дескриптор (`OSError: Invalid argument` / `TypeError`).
 - `crash_update-test-self-overwrite` — Use when: проверка обновления пишет поверх сравниваемого файла и «проходит» сама у себя.
