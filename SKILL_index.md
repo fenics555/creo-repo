@@ -147,6 +147,7 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 - `Prog\SKILL_tool_template` (Шаблон инструмента дома: своё окно, лог, время работы, README + кнопка
   «README», настройки, слои кнопок, версия в шапке, три руки) — **critical**
 - `Prog\SKILL_test_first_rule` (Правило TEST-first) — **critical**
+- `Prog\SKILL_settings_audit` (Аудит настроек: поиск по имени ВРЁТ — `model_for`/`get_for`/скрытые `ui=False`/таблицы-призраки; чем чинить и как не обмануть пробой) — **critical**
 - `Prog\SKILL_tool_routing` (Маршрутизация запросов; единственная прописка здесь,
   из Core не дублировать) — **critical**
 - `Prog\SKILL_agent_memory` (Память агента: что помнить, куда класть)
