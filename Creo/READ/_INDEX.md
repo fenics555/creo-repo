@@ -29,6 +29,7 @@ date: 03.10.2026
 | `SKILL_creo_new_file.md` | **создание/перезапись файла детали/сборки с нуля** | новая модель (подготовка) |
 | `SKILL_creo_read_mass_double.md` | **вещественные числа**: что читается (`0xED`, `0x2F`), реестр 9 опровергнутых гипотез, таблица `PRO_MP_*`, почему `volume`/`area` = `null` | масса, объём, площадь, DOUBLE |
 | `SKILL_creo_read_asm_bom.md` | **состав сборки `.asm` без Creo**: заголовок как текст (91 тег), 3 схемы (`d N (имя)`, `@comp_ids`, `to_name`), фильтр `ASSEM_MFG`, ловушки | спецификация, компоненты, BOM |
+| `SKILL_creo_read_feature_types.md` | ✅ **FEATTYPE закрыт**: типы лежат в файле (`cutextrude`, `featround`, `protrevolve`, `dtmplane`) рядом с русскими именами; схема `MTTyped_CreateData`, поле `prev_feat_id` = дерево | дерево построений, типы операций |
 
 ## 🚪 ТРИ КАНАЛА ЧТЕНИЯ (04.10.2026) — не путать
 
