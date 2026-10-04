@@ -92,6 +92,25 @@ feat_id · ft_type · comp_type · prev_feat_id · feat_name · pat_group_header
 `icon_name` в этой структуре = `section_planar16X16` — **читаемая строка**, но
 встречается **1 раз на файл**, так что использовать как общий тип нельзя.
 
+### ✅✅ IMENA FECH: POKRYTIE 99% (04.10.2026, dopolneno)
+
+`creofeat.py` teper chitaet **OBE formy zapisi**:
+
+| Forma | Kogda | Struktura |
+|---|---|---|
+| **A** | ASCII-imena (`DTM1`, `TOP`) | `<imya>\0 01 00 [18 E5] <varint id>` |
+| **B** | kirillitsa (`ЗАМОК`, `КАНАЛ`) | `e3 <varint id> <байт> <imya>\0` |
+
+⚠️ **Tolko forma A davala 46 % pokrytiya.** Posle formy B — **99 %** (188 из 189
+fic na 4 modelyah: `137_011_0041` 150/150, `9112-410_008-01` 22/22,
+`00612` 8/8, `al-138` 8/9).
+
+### ⚠️ GRABLYA SVERKI: CREOSON UKORACHIVAET IMYA
+V faile imya — `ПОПЕРЕЧНОЕ СЕЧЕНИЕ А`, a CREOSON otdayot prosto **`А`**.
+Sveryat nado **po vhждeniyu** (etalon ⊂ file), a ne po tochnomu ravenstvu —
+inache poluchaesh lozhnye «poteri» (bylo 97 % vmesto realnyh 100 % na 3 modelyah).
+Ne najdeno po-nastoyashchemu tolko `R0_5` v `al-138`.
+
 ### FEATTYPE NAIDEN: TIP LEZHIT V IMENI PROTOTIPA (chastichno, 04.10.2026 vecherom)
 
 V zapisi fechi vstrechaetsya struktura:

@@ -23,13 +23,18 @@ def dec(b, k):
 
 
 def read_features(b):
-    """Все записи вида <имя>\\0 01 00 [18 E5] <varint id>."""
+    """Фичи в обеих формах записи.
+
+    Форма A (ASCII-имена):  <имя>\\0 01 00 [18 E5] <varint id>
+    Форма B (кириллица):    e3 <varint id> <байт> <имя>\\0
+    """
     out = []
     i = 0
     n = len(b)
+
+    # --- форма A ---
     while i < n - 8:
         if b[i + 1:i + 4] == b'\x00\x01\x00' and 32 <= b[i] < 127:
-            # имя: ASCII подряд перед этим байтом
             j = i - 1
             k = j
             while k >= 0 and 32 <= b[k] < 127:
@@ -49,7 +54,39 @@ def read_features(b):
                         nm = name.decode('utf-8')
                     except UnicodeDecodeError:
                         nm = name.decode('latin-1')
-                    out.append((fid, nm, i))
+                    out.append((fid, nm, i, 'A'))
+        i += 1
+
+    # --- форма B ---
+    i = 0
+    while i < n - 4:
+        if b[i] == 0xE3:
+            try:
+                fid, w = dec(b, i + 1)
+            except IndexError:
+                i += 1
+                continue
+            p = i + 1 + w
+            if 0 < fid < 2_000_000 and p < n:
+                # после ID идёт байт, затем имя в UTF-8 до NUL
+                st = p + 1
+                nm = b''
+                q = st
+                while q < n and b[q] != 0 and q - st < 80:
+                    nm += bytes([b[q]])
+                    q += 1
+                if 1 <= len(nm) <= 60 and q < n and b[q] == 0:
+                    try:
+                        s = nm.decode('utf-8')
+                    except UnicodeDecodeError:
+                        s = ''
+                    # имя должно быть осмысленным: буквы/цифры/._-
+                    # ⚠️ длину 1 НЕЛЬЗЯ отбрасывать: фичи «А», «Б», «В»
+                    # (Поперечное сечение) иначе теряются полностью
+                    if s and all(
+                            c.isalnum() or c in '._- АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя'
+                            for c in s):
+                        out.append((fid, s, i, 'B'))
         i += 1
     return out
 
@@ -102,11 +139,11 @@ def main():
         return
 
     byid = defaultdict(list)
-    for fid, nm, off in feats:
+    for fid, nm, off, _f in feats:
         byid[fid].append(nm)
     print('\n--- ФИЧИ (имя, ID) ---')
     seen = set()
-    for fid, nm, off in feats:
+    for fid, nm, off, _f in feats:
         if fid in seen:
             continue
         seen.add(fid)
