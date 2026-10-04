@@ -69,11 +69,15 @@ def read_model(path):
     out['operations'] = [o for o in ops
                          if not (o['name'] in seen or seen.add(o['name']))]
 
-    # поверхности: "<Имя> featssrf <тип> id <N>"
+    # поверхности: имя идёт в поле feat_name, тип в icon_name -> featssrf
     surf = []
-    for mm in re.finditer(r'([A-Za-zА-Яа-я][\w А-Яа-я]{2,30}?)\x00[\s\S]{0,60}?'
-                          r'featssrf\x00([\w ]+?) id (\d+)', st):
-        surf.append({'name': mm.group(1).strip(), 'kind': mm.group(2).strip(),
+    for mm in re.finditer(r'([A-Za-zА-Яа-я][\w А-Яа-я]{2,30}?)\x00[\s\S]{0,300}?'
+                          r'featssrf\x00[\s\S]{0,20}?'
+                          r'([\w ]+?) id (\d+)', st):
+        nm = mm.group(1).strip()
+        if nm in ('ADMIN', 'fpn', 'fch', 'fpr'):
+            continue
+        surf.append({'name': nm, 'kind': mm.group(2).strip(),
                      'id': int(mm.group(3))})
     out['surfaces'] = surf
 
@@ -89,10 +93,22 @@ def read_model(path):
 
     # --- BOM: MdlRefInfo ---
     refs = sect('MdlRefInfo').decode('latin-1')
+    stem = name.split('.')[0].lower()
     comp = sorted(set(mm.group(1) for mm in
                       re.finditer(r'([A-Za-z0-9_\-]{2,40}\.(?:prt|PRT|asm|ASM))', refs)
-                      if not mm.group(1).lower().startswith(
-                          name.split('.')[0].lower())))
+                      if not mm.group(1).lower().startswith(stem)))
+    # если в MdlRefInfo пусто — ищем прямые ссылки по всему файлу (без геометрии)
+    if not comp:
+        i = raw.find(b'#UGC_TOC')
+        j = raw.find(b'\n', i) + 1
+        scan = raw[j:]
+        e = scan.find(b'SolidPrimdata')
+        if e > 0:
+            scan = scan[:e]
+        comp = sorted(set(mm.group(1) for mm in
+                          re.finditer(rb'([A-Za-z0-9_\-]{2,40}\.(?:prt|PRT|asm|ASM))', scan)
+                          if not mm.group(1).lower().startswith(stem.encode())))
+        comp = [c.decode('latin-1') for c in comp]
     out['bom'] = comp
 
     # --- параметры кириллицей из LargeText/BasicText ---
