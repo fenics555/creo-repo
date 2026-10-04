@@ -26,9 +26,9 @@ public class MpProbe {
         // Spawn САМ поднимает parametric.exe с -jlink и ждёт его готовности.
         // Это штатный способ JLINK-приложений — не нужен уже запущенный Creo.
         AsyncConnection ac = pfcAsyncConnection.AsyncConnection_Spawn(
-                "127.0.0.1", "creoson");
+                "*", "creoson");
         Session s = ac.GetSession();
-        System.out.println("session ok via AsyncConnection_Spawn");
+        System.out.println("session ok, host=" + (args.length > 1 ? args[1] : "localhost"));
 
         String model = args.length > 0 ? args[0]
             : "Z:\\PTC\\Work\\137.011.0041\\137_011_0041.prt";
