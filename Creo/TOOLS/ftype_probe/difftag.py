@@ -114,7 +114,7 @@ def diff(f1, f2):
     for i, j in runs[:60]:
         lo = max(0, i - 12)
         o.write('@%-9d  A=%s\n' % (i, ' '.join('%02X' % c for c in a[lo:j + 12])))
-        o.write('            B=%s\n' % ' '.join('%02X' % c for c in b[lo:j + 12])))
+        o.write('            B=%s\n' % ' '.join('%02X' % c for c in b[lo:j + 12]))
         # если участок похож на упакованное число — декодируем
         for k in range(i, max(i, j - 1)):
             if k + 2 < n and a[k] in (0x2F, 0x48) and b[k] in (0x2F, 0x48):

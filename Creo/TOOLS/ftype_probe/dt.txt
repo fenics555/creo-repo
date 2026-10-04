@@ -1,6 +1,0 @@
-D:\AI\repo\Creo\TOOLS\ftype_probe\difftag.py:13: SyntaxWarning: "\A" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\A"? A raw string is also an option.
-  python difftag.py --find "D:\AI\PROBA\m500.prt.1" 500
-  File "D:\AI\repo\Creo\TOOLS\ftype_probe\difftag.py", line 117
-    o.write('            B=%s\n' % ' '.join('%02X' % c for c in b[lo:j + 12])))
-                                                                              ^
-SyntaxError: unmatched ')'
