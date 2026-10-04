@@ -1,6 +1,7 @@
 import com.ptc.pfc.pfcModel.*;
 import com.ptc.pfc.pfcSession.*;
 import com.ptc.pfc.pfcSolid.*;
+import com.ptc.pfc.pfcAsyncConnection.*;
 import com.ptc.pfc.pfcPart.*;
 import com.ptc.pfc.pfcObject.*;
 import com.ptc.pfc.pfcModelItem.*;
@@ -17,8 +18,16 @@ public class MpProbe {
 
     public static void main(String[] args) throws Exception {
         System.out.println("=== JCDFstart ===");
-        Session s = pfcSession.GetCurrentSession();
-        System.out.println("session ok");
+        // pfcasyncmt.dll НУЖНО загрузить ДО pfcasync.jar: именно в ней
+        // нативная реализация AsyncConnection_Connect
+        System.loadLibrary("pfcasyncmt");
+        System.out.println("pfcasyncmt loaded");
+
+        // Подключаемся к УЖЕ РАБОТАЮЩЕМУ CREOSON через AsyncConnection
+        AsyncConnection ac = pfcAsyncConnection.AsyncConnection_Connect(
+                "127.0.0.1", "8080", "creoson", Integer.valueOf(0));
+        Session s = ac.GetSession();
+        System.out.println("session ok via AsyncConnection");
 
         String model = args.length > 0 ? args[0]
             : "Z:\\PTC\\Work\\137.011.0041\\137_011_0041.prt";
