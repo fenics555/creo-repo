@@ -95,9 +95,17 @@ def read_features(b):
     return out
 
 
-def read_order(b):
-    """Списки `f8 <N>` + N*varint(id) — кандидаты на порядок построения."""
-    out = []
+def read_order(b, ids_a=None):
+    """Списки `f8 <N>` + N*varint(id) — кандидаты на порядок построения.
+
+    ⚠️ Без отбора по эталону список выбрать нельзя: «самый длинный» и
+    «возрастающие ID» дают ложные списки (проверено). Здесь отбор
+    САМОПРОВЕРЯЮЩИЙСЯ: берём список, который содержит ≥3 ID, найденных
+    формой A (она ложных срабатываний не даёт), и максимизируем пересечение.
+
+    Возвращает (список_id, отфильтрованные_фичи).
+    """
+    cands = []
     i = 0
     n = len(b)
     while i < n - 2:
@@ -116,38 +124,56 @@ def read_order(b):
                     break
                 ids.append(v)
                 k += w
-            if len(ids) == cnt:
-                out.append((i, ids))
+            if len(ids) == cnt and len(ids) >= 5:
+                cands.append((i, ids))
         i += 1
-    return out
+
+    ids_a = ids_a or set()
+    best = None
+    for off, ids in cands:
+        ov = len([x for x in ids if x in ids_a])
+        if ov >= 3 and (best is None or ov > best[0]):
+            best = (ov, off, ids)
+    if best is None:
+        return None, None
+    return best[2], best[1]
 
 
 def main():
     path = sys.argv[1]
     b = open(path, 'rb').read()
     feats = read_features(b)
-    orders = read_order(b)
+    ids_a = set(f for f, _, _, form in feats if form == 'A')
+    order, order_off = read_order(b, ids_a)
 
     print('файл: %s' % path)
     print('размер: %d б' % len(b))
-    print('фич с ID: %d, списков-кандидатов порядка: %d'
-          % (len(feats), len(orders)))
+    print('записей-кандидатов в фичи: %d (форма A: %d, форма B: %d)'
+          % (len(feats), len(ids_a), len(feats) - len(ids_a)))
+
+    # ⚠️ Фильтр по списку порядка НЕ включаем по умолчанию.
+    # Проверено 04.10.2026: самопроверяющийся отбор (пересечение с формой A)
+    # даёт верный список в 137 (73/73, мусор 0), но в 9112 и al-138
+    # выбирает НЕВЕРНЫЙ список и роняет покрытие 99 % → 46 %.
+    # Причина: в моделях с кириллическими именами форма A находит всего
+    # 4–5 фич, и критерий пересечения становится шумным.
+    # Надёжно — только сверка с эталоном CREOSON (feat_order.py).
+    if '--clean' in sys.argv:
+        if order:
+            keep = set(order)
+            before = len(feats)
+            feats = [f for f in feats if f[0] in keep]
+            print('фильтр по порядку @%07X: %d элементов, отброшено %d записей'
+                  % (order_off, len(order), before - len(feats)))
+        else:
+            print('⚠️ список порядка не найден — фильтр НЕ применён')
 
     if '--audit' in sys.argv:
-        # ⚠️ ВАЖНО: без эталона список порядка выбрать НЕЛЬЗЯ.
-        # Проверено: «самый длинный» и «возрастающие ID» дают ложные
-        # списки (в 137 обедают на 192 и 90 «элементов» вместо верных 73).
-        # Надёжен только отбор по сверке с эталоном CREOSON — feat_order.py.
-        print('списков-кандидатов: %d' % len(orders))
-        print('⚠️ выбор списка порядка требует эталона CREOSON → feat_order.py')
         return
 
-    byid = defaultdict(list)
-    for fid, nm, off, _f in feats:
-        byid[fid].append(nm)
     print('\n--- ФИЧИ (имя, ID) ---')
     seen = set()
-    for fid, nm, off, _f in feats:
+    for fid, nm, off, _f in sorted(feats, key=lambda x: x[0]):
         if fid in seen:
             continue
         seen.add(fid)
