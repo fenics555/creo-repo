@@ -130,6 +130,35 @@ def cmd_geom(data, o):
             % (tot, clean, nums, nice))
     return tot > 0
 
+def cmd_ast(data, o):
+    """ДЕКОМПИЛЯЦИЯ грамматики отношений рядом с rel_model_name."""
+    out = []
+    for p0 in [m.start() for m in re.finditer(rb'rel_model_name', data)][:3]:
+        lo = max(0, p0 - 64)
+        hi = min(len(data), p0 + 128)
+        seg = data[lo:hi]
+        o.write('\n  @%d  rel_model_name\n' % p0)
+        # поля по закону записи E0 <код> <имя>\0 <значение>
+        for m in FIELD.finditer(seg):
+            fn = m.group(2).decode('ascii', 'replace')
+            val = seg[m.end():m.end() + 8]
+            o.write('     %-20s %s\n' % (fn, ' '.join('%02X' % c for c in val)))
+        # кириллица в окне
+        for m in re.finditer(rb'[\xd0-\xd1][\x80-\xbf](?:[\xd0-\xef][\x80-\xbf]){2,}', seg):
+            try:
+                t = m.group().decode('utf-8')
+            except Exception:
+                continue
+            if len(t) > 3:
+                b4 = ' '.join('%02X' % c for c in seg[max(0, m.start() - 4):m.start()])
+                out.append((t, b4))
+        o.write('     hex окна: %s\n' % ' '.join('%02X' % c for c in seg[:96]))
+    if out:
+        o.write('   КИРИЛЛИЦА рядом с rel_model_name:\n')
+        for t, b4 in out:
+            o.write('     «%s»  предшествующие байты: %s\n' % (t, b4))
+    return True
+
 def cmd_meta(data, o):
     f = collections.Counter(m.group(2).decode('ascii', 'replace')
                             for m in FIELD.finditer(data))
@@ -139,7 +168,8 @@ def cmd_meta(data, o):
     return bool(f)
 
 CMDS = {'--bom': cmd_bom, '--tree': cmd_tree, '--mass': cmd_mass,
-        '--dims': cmd_dims, '--geom': cmd_geom, '--meta': cmd_meta}
+        '--dims': cmd_dims, '--geom': cmd_geom, '--meta': cmd_meta,
+        '--ast': cmd_ast}
 
 def collect(path):
     if os.path.isdir(path):
