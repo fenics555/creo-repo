@@ -60,6 +60,13 @@ READERS = {
     'int16 BE /1e2':   ('i', rd_i16be, 2),
     'int16 LE /1e2':   ('i', rd_i16le, 2),
     'ниббл показатель': ('n', None, 2),
+    # ---- новая обойма (03.10.2026) ----
+    '2x_float32 BE':   ('f32b', None, 8),
+    '2x_float32 LE':   ('f32l', None, 8),
+    '4x_float16 BE':   ('f16b', None, 8),
+    '4x_float16 LE':   ('f16l', None, 8),
+    'NURBS 0..1 BE':   ('nur', None, 8),
+    'NURBS 0..1 LE':   ('nurl', None, 8),
 }
 
 def read_body(body, key):
@@ -76,6 +83,27 @@ def read_body(body, key):
     elif kind == 'n':
         for i in range(0, len(body) - 1, 2):
             vals.append(rd_nib(body[i], body[i + 1]))
+    elif kind == 'f32b' or kind == 'f32l':
+        e = '>ff' if kind == 'f32b' else '<ff'
+        for i in range(0, len(body) - 7, 8):
+            try:
+                vals.extend(struct.unpack(e, body[i:i + 8]))
+            except Exception:
+                pass
+    elif kind == 'f16b' or kind == 'f16l':
+        e = '>eeee' if kind == 'f16b' else '<eeee'
+        for i in range(0, len(body) - 7, 8):
+            try:
+                vals.extend(struct.unpack(e, body[i:i + 8]))
+            except Exception:
+                pass
+    elif kind == 'nur' or kind == 'nurl':
+        e = '>d' if kind == 'nur' else '<d'
+        for i in range(0, len(body) - 7, 8):
+            try:
+                vals.append(struct.unpack(e, body[i:i + 8])[0])
+            except Exception:
+                pass
     else:
         for i in range(0, len(body) - step + 1, step):
             try:
