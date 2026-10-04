@@ -74,14 +74,21 @@ def read_model(path):
     stb = sect('MdlStatus')
     surf = []
     for mm in re.finditer(rb'featssrf\x00([\w_ ]+?) id (\d+)', stb):
-        # структура: "<Имя>\x00\xf6\x00featssrf"  (F6 — служебный маркер)
-        n1 = stb.rfind(b'\x00', 0, mm.start())      # NUL перед featssrf
+        # структура: "<Имя>\x00\xf6\x00featssrf"
+        # перед именем может НЕ быть NUL — значит имя = подряд идущие
+        # печатные байты, заканчивающиеся перед маркером
+        n1 = stb.rfind(b'\x00', 0, mm.start())
         n2 = n1 - 2 if (n1 >= 2 and stb[n1 - 1] == 0xF6) else n1
-        q = stb.rfind(b'\x00', 0, n2)
-        if q < 0 or n2 <= q:
-            continue
-        nm = stb[q + 1:n2].decode('latin-1').strip()
-        if not nm or not re.match(r'^[A-Za-z\xd0-\xd1]', nm):
+        q = n2
+        while q > 0 and 32 <= stb[q - 1] < 127:
+            q -= 1
+        nm = stb[q:n2].decode('latin-1').strip()
+        # перед именем может остаться хвост прошлого поля ("rSplit Surface 2")
+        # имя всегда вида "Слово Слово N" — обрезаем по последнему совпадению
+        m2 = re.search(r'[A-Z\xd0-\xd1][\w\xd0-\xd1]*(?: [\w\xd0-\xd1]+)* \d+$', nm)
+        if m2:
+            nm = m2.group(0)
+        if len(nm) < 3 or not re.match(r'^[A-Za-z\xd0-\xd1]', nm):
             continue
         surf.append({'name': nm,
                      'kind': mm.group(1).decode('latin-1').strip(),
