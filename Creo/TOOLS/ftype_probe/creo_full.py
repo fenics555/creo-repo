@@ -69,16 +69,23 @@ def read_model(path):
     out['operations'] = [o for o in ops
                          if not (o['name'] in seen or seen.add(o['name']))]
 
-    # поверхности: имя идёт в поле feat_name, тип в icon_name -> featssrf
+    # поверхности: "Split Surface 1" 00 F6 00 "featssrf" 00 "Split_surface id 35186"
+# -> имя оканчивается за 3 байта до featssrf (00 F6 00)
+    stb = sect('MdlStatus')
     surf = []
-    for mm in re.finditer(r'([A-Za-zА-Яа-я][\w А-Яа-я]{2,30}?)\x00[\s\S]{0,300}?'
-                          r'featssrf\x00[\s\S]{0,20}?'
-                          r'([\w ]+?) id (\d+)', st):
-        nm = mm.group(1).strip()
-        if nm in ('ADMIN', 'fpn', 'fch', 'fpr'):
+    for mm in re.finditer(rb'featssrf\x00([\w_ ]+?) id (\d+)', stb):
+        # структура: "<Имя>\x00\xf6\x00featssrf"  (F6 — служебный маркер)
+        n1 = stb.rfind(b'\x00', 0, mm.start())      # NUL перед featssrf
+        n2 = n1 - 2 if (n1 >= 2 and stb[n1 - 1] == 0xF6) else n1
+        q = stb.rfind(b'\x00', 0, n2)
+        if q < 0 or n2 <= q:
             continue
-        surf.append({'name': nm, 'kind': mm.group(2).strip(),
-                     'id': int(mm.group(3))})
+        nm = stb[q + 1:n2].decode('latin-1').strip()
+        if not nm or not re.match(r'^[A-Za-z\xd0-\xd1]', nm):
+            continue
+        surf.append({'name': nm,
+                     'kind': mm.group(1).decode('latin-1').strip(),
+                     'id': int(mm.group(2))})
     out['surfaces'] = surf
 
     # --- ФИЧИ: имена ---
