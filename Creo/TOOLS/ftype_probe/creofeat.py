@@ -54,7 +54,10 @@ def read_features(b):
                         nm = name.decode('utf-8')
                     except UnicodeDecodeError:
                         nm = name.decode('latin-1')
-                    out.append((fid, nm, i, 'A'))
+                    # тот же фильтр, что и в форме B: имя с буквы,
+                    # иначе в вывод идёт мусор (`>=`, `ND_TABLE`, числа)
+                    if nm and (nm[0].isalpha() or nm[0] == '_'):
+                        out.append((fid, nm, i, 'A'))
         i += 1
 
     # --- форма B ---
@@ -80,10 +83,11 @@ def read_features(b):
                         s = nm.decode('utf-8')
                     except UnicodeDecodeError:
                         s = ''
-                    # имя должно быть осмысленным: буквы/цифры/._-
+                    # ⚠️ имя должно начинаться с БУКВЫ. Без этого в форму B
+                    # попадает мусор: `>=`, `A_2`, числа — они не фичи.
                     # ⚠️ длину 1 НЕЛЬЗЯ отбрасывать: фичи «А», «Б», «В»
-                    # (Поперечное сечение) иначе теряются полностью
-                    if s and all(
+                    # (Поперечное сечение) иначе теряются полностью.
+                    if s and s[0].isalpha() and all(
                             c.isalnum() or c in '._- АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя'
                             for c in s):
                         out.append((fid, s, i, 'B'))

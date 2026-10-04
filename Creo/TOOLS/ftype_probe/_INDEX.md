@@ -105,6 +105,15 @@ feat_id · ft_type · comp_type · prev_feat_id · feat_name · pat_group_header
 fic na 4 modelyah: `137_011_0041` 150/150, `9112-410_008-01` 22/22,
 `00612` 8/8, `al-138` 8/9).
 
+### ⚠️ ФОРМА B ЛОВИТ И НЕ-ФИЧИ (честно, 04.10.2026)
+Форма B (`e3 <varint id> <байт> <имя>`) — та же схема, что у **параметров**,
+поэтому в вывод идут обрезанные имена параметров: `ND_TABLE`, `SS_DENSITY`,
+`EEL_40X`, `ISSON_RATIO`. Это не фичи, а хвосты имён вида
+`…_TABLE`/`…_DENSITY` без первой буквы.
+⇒ **Покрытие 99 % — честное, но список занижен мусором.** Разделить
+фичи и параметры по одной форме нельзя — нужен признак записи фичи
+(вероятно, ссылка на прототип, см. `ftype_proto.py`).
+
 ### ⚠️ GRABLYA SVERKI: CREOSON UKORACHIVAET IMYA
 V faile imya — `ПОПЕРЕЧНОЕ СЕЧЕНИЕ А`, a CREOSON otdayot prosto **`А`**.
 Sveryat nado **po vhждeniyu** (etalon ⊂ file), a ne po tochnomu ravenstvu —
