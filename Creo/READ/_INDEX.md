@@ -30,6 +30,7 @@ date: 03.10.2026
 | `SKILL_creo_read_mass_double.md` | **вещественные числа**: что читается (`0xED`, `0x2F`), реестр 9 опровергнутых гипотез, таблица `PRO_MP_*`, почему `volume`/`area` = `null` | масса, объём, площадь, DOUBLE |
 | `SKILL_creo_read_asm_bom.md` | **состав сборки `.asm` без Creo**: заголовок как текст (91 тег), 3 схемы (`d N (имя)`, `@comp_ids`, `to_name`), фильтр `ASSEM_MFG`, ловушки | спецификация, компоненты, BOM |
 | `SKILL_creo_read_feature_types.md` | ✅ **FEATTYPE закрыт**: типы лежат в файле (`cutextrude`, `featround`, `protrevolve`, `dtmplane`) рядом с русскими именами; схема `MTTyped_CreateData`, поле `prev_feat_id` = дерево | дерево построений, типы операций |
+| **`SKILL_creo_file_format.md`** | ⭐ **АНАТОМИЯ ФАЙЛА**: оглавление `#UGC_TOC` — 28 секций со смещениями и длинами (`SolidPrimdata`=геометрия, `AllFeatur`=все фичи, `FeatDefs`=типы, `MdlRefInfo`=BOM, `LargeText`=уравнения); формат записи `typed_data(<КЛАСС>)`; история ревизий в тексте | где что лежит в файле |
 
 ## 📊 ИТОГОВАЯ ПАНЕЛЬ (04.10.2026) — точка отсчёта
 
