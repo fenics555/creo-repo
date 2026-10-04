@@ -93,7 +93,7 @@ def cmd_tree(data, o):
 def cmd_mass(data, o):
     o.write('МАССОВЫЕ СВОЙСТВА\n')
     got = False
-    for name, key in (('volume', 'объём'), ('surfarea', 'площадь')):
+    for name, key in ((b'volume', 'объём'), (b'surfarea', 'площадь')):
         for m in re.finditer(name + rb'\x00\xed', data):
             v = struct.unpack('>d', data[m.end():m.end() + 8])[0]
             if 1e-9 < abs(v) < 1e12:
@@ -208,21 +208,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-                v = val3(body[k + 1], body[k + 2])
-                nums += 1
-                if 0.001 <= abs(v) <= 1e5 and abs(v * 4 - round(v * 4)) < 1e-9:
-                    nice += 1
-    o.write('ГЕОМЕТРИЯ: записей %d, чистых %d, координат %d, красивых %d\n'
-            % (tot, clean, nums, nice))
-    return tot > 0
-
-def cmd_meta(data, o):
-    f = collections.Counter(m.group(2).decode('ascii', 'replace')
-                            for m in FIELD.finditer(data))
-    o.write('МЕТАДАННЫЕ: полей уникальных = %d\n' % len(f))
-    for k, c in f.most_common(15):
-        o.write('   %-28s %d\n' % (k, c))
-    return bool(f)
 
 CMDS = {'--bom': cmd_bom, '--tree': cmd_tree, '--mass': cmd_mass,
         '--dims': cmd_dims, '--geom': cmd_geom, '--meta': cmd_meta}

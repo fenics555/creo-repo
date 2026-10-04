@@ -1,3 +1,0 @@
-  File "D:\AI\repo\Creo\TOOLS\ftype_probe\creo_read.py", line 211
-    v = val3(body[k + 1], body[k + 2])
-IndentationError: unexpected indent
