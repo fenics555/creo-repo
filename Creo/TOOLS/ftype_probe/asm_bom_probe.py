@@ -2,6 +2,36 @@ import os, re
 
 A = r'Z:\PTC\Work\001_10 AGV\NUTS\nut_m12x1_5-sl.asm.1'
 d = open(A, 'rb').read()
+print('СБОРКА %s (%d байт)' % (os.path.basename(A), len(d)))
+print()
+
+# Теговый формат: "@model_name  <n> <len>" затем строки "<obj> <field> <VALUE>"
+print('=== ВСЕ @model_name / @generic_name СО ЗНАЧЕНИЯМИ ===')
+# парсим построчно: строка вида "4 25 NUT_M12X1_5-SL"
+lines = d[:6000].split(b'\n')
+last_tag = None
+for ln in lines:
+    t = ln.decode('ascii', 'replace').strip()
+    if t.startswith('@'):
+        parts = t.split()
+        if len(parts) >= 2:
+            last_tag = parts[0]
+        continue
+    if last_tag in ('@model_name', '@generic_name', '@alias_name',
+                     '@to_model_id', '@obj_id'):
+        parts = t.split(' ', 2)
+        if len(parts) >= 3 and parts[1] == last_tag[1:]:
+            print('   %-14s = %r' % (last_tag, parts[2].strip()))
+    elif t.startswith('@'):
+        last_tag = None
+
+print()
+print('=== БЛОК ПОСЛЕ @comp_ids (сырой) ===')
+i = d.find(b'@comp_ids')
+print(d[i:i + 700].decode('ascii', 'replace'))
+
+A = r'Z:\PTC\Work\001_10 AGV\NUTS\nut_m12x1_5-sl.asm.1'
+d = open(A, 'rb').read()
 
 print('=== БЛОК @comp_ids / @comp_dep_types ===')
 i = d.find(b'@comp_ids')
