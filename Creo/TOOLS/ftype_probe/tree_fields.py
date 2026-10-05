@@ -62,30 +62,100 @@ print('feat_id из MdlStatus (%d), найдено в FeatDefs как 2 байт
       % (len(fids), found))
 
 # --- ГЛАВНОЕ: как feat_id из MdlStatus соотносится с FeatDefs ---
-print('=== ПОИСК СВЯЗИ MdlStatus <-> FeatDefs ===')
+print('=== ПРОВЕРКА: реально ли feat_id из MdlStatus есть в FeatDefs ===')
 by_id = {f['feat_id']: f for f in feats}
 
-# как реально выглядит feat_id внутри FeatDefs? ищем один известный
-sample = sorted(by_id)[0]
-needle = sample.to_bytes(2, 'big')
-print('пример feat_id=%d, байты %s' % (sample, needle.hex(' ')))
-for m in list(re.finditer(re.escape(needle), fd))[:4]:
-    s = max(0, m.start() - 14)
-    print('   @%-8d %s' % (m.start(), fd[s:m.start() + 16].hex(' ')))
-    print('              %r' % fd[s:m.start() + 16])
+# count() ищет подстроку ВООБЩЕ — это ложное совпадение.
+# Настоящая проверка: встречаются ли байты как самостоятельное значение c0 <id>.
+vals = set()
+for m in re.finditer(rb'\xc0(..)', fd):
+    vals.add((m.group(1)[0] << 8) | m.group(1)[1])
+print('уникальных значений c0 <id> в FeatDefs: %d' % len(vals))
+real = [f for f in by_id if f in vals]
+print('feat_id из MdlStatus, найденных как c0 <id> в FeatDefs: %d из %d'
+      % (len(real), len(by_id)))
 
-# ищем id СРАЗУ ПОСЛЕ кириллического/латинского имени фичи
-print('\n=== id сразу после известных имён ===')
-names = [f['name'] for f in feats[:40] if f['name']]
-print('проверяю %d имён' % len(names))
-pat = re.compile(rb'\x00(' + ('|'.join(re.escape(n.encode('utf-8'))
-                                        for n in names)) + rb')\x00(.{0,6})', re.S)
-found = 0
-for m in list(pat.finditer(fd))[:8]:
-    tail = m.group(2)
-    print('   %-22s после: %s' % (m.group(1).decode('utf-8'), tail.hex(' ')))
-    found += 1
-print('совпадений: %d' % found)
+if real:
+    # смотрим, что стоит сразу ПОСЛЕ c0 <feat_id> в FeatDefs
+    print('\n=== что стоит после c0 <feat_id> в FeatDefs ===')
+    valset = set(vals)
+    for f in real[:6]:
+        nb = f.to_bytes(2, 'big')
+        for m in re.finditer(rb'\xc0' + re.escape(nb), fd):
+            tail = fd[m.end():m.end() + 14]
+            print('   %-16s id=%-6d далее: %s'
+                  % (by_id[f]['name'][:14], f, tail.hex(' ')))
+            break
+
+    # ГЛАВНОЕ: 6390 встречается 2116 раз. Это id-владелец?
+    print('\n=== владелец 6390 (частота 2116) ===')
+    nb = (6390).to_bytes(2, 'big')
+    occ = 0
+    for m in re.finditer(rb'\xc0' + re.escape(nb), fd):
+        prev = fd[max(0, m.start() - 8):m.start()]
+        occ += 1
+        if occ <= 5:
+            print('   перед: %s' % prev.hex(' '))
+    print('   реальных вхождений c0 18 f6: %d' % occ)
+
+    # ПРОВЕРКА: после c0<feat_id> идёт f6 02 e3 NN 49 c0 <owner>
+    print('\n=== ВЛАДЕЛЕЦ: что за c0 <owner> после feat_id ===')
+    OWN = re.compile(rb'\xc0(..)\xf6\x02\xe3.\x49\xc0(..)', re.S)
+    own = {}
+    for m in OWN.finditer(fd):
+        a = (m.group(1)[0] << 8) | m.group(1)[1]
+        b = (m.group(2)[0] << 8) | m.group(2)[1]
+        if a in by_id:
+            own[a] = b
+    print('найдено пар (фича -> владелец): %d' % len(own))
+
+    kids2 = collections.defaultdict(list)
+    for a, b in own.items():
+        kids2[b].append(a)
+    print('владельцев с >1 ребёнком: %d' % sum(1 for v in kids2.values() if len(v) > 1))
+    known = set(by_id)
+    roots2 = [a for a, b in own.items() if b not in known]
+    print('корни (владелец не среди фич): %d' % len(roots2))
+
+    def dep2(a, seen):
+        if a in seen:
+            return -1
+        seen.add(a)
+        p = own.get(a)
+        if p is None or p not in own:
+            return 0
+        return 1 + dep2(p, seen)
+
+    cy = md = 0
+    for a in own:
+        d = dep2(a, set())
+        if d < 0:
+            cy += 1
+        else:
+            md = max(md, d)
+    print('ЦИКЛОВ: %d   ГЛУБИНА: %d' % (cy, md))
+
+    print('\n=== ДЕРЕВО ИЗ ФАЙЛА (до 36 узлов) ===')
+    cnt = [0]
+
+    def show2(b, d=0):
+        for c in kids2.get(b, []):
+            if cnt[0] > 36:
+                return
+            cnt[0] += 1
+            f = by_id.get(c)
+            print('   %s%s [%s]' % ('  ' * d,
+                                    f['name'][:26] if f else '?%d' % c,
+                                    f['type'] if f else '?'))
+            show2(c, d + 1)
+
+    for r in sorted(roots2)[:2]:
+        f = by_id.get(r)
+        print(' КОРЕНЬ: %s' % (f['name'][:26] if f else r))
+        show2(r, 1)
+else:
+    print('\nВЫВОД: связки нет. Прежние "305 найдено" — ложное срабатывание '
+          'substring-поиска, а не записи.')
 
 print('\n--- диагностика: что на самом деле значит B ---')
 # если B = предок, то у каждого B должен быть ребёнок. Проверим обратное:
