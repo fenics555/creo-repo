@@ -50,9 +50,55 @@ print('уникальных подписей: %d, всего: %d' % (len(cnt), s
 for k, v in cnt.most_common(15):
     print('   %-30s %d' % (k, v))
 
-print('\n=== sort_feat_ids: сырые байты ===')
+print('\n=== MdlStatus: имена фич + ближайший id ===')
 b = sect('MdlStatus')
-for m in list(re.finditer(rb'sort_feat_ids\x00', b))[:6]:
-    w = b[m.end():m.end() + 46]
-    print('\n@%-6d %s' % (m.start(), w.hex(' ')))
-    print('        %r' % w)
+RU = ('[А-ЯЁ][А-ЯЁа-яё ]{2,26}\\s?\\d*').encode('utf-8')
+TYP = (rb'(featssrf|cutextrude|featround|protrevolve|feathole|'
+        rb'featsketch|group)')
+hits = list(re.finditer(rb'\x00(' + RU + rb')\x00[\s\S]{0,80}?' + TYP + rb'\x00', b))
+print('найдено пар имя+тип: %d' % len(hits))
+for m in hits[:12]:
+    nm = m.group(1).decode('utf-8', 'replace').strip()
+    tail = b[m.end():m.end() + 40]
+    print('   %-26s [%s]' % (nm, m.group(2).decode()))
+    print('      после типа: %s' % tail.hex(' '))
+
+print('\n=== ЗАПИСИ ФИЧ: e3 c0 <id> ... f6 c0 <prev> <ИМЯ> 00 c0 <id> 00 <тип> ===')
+b = sect('MdlStatus')
+REC = re.compile(
+    rb'\xe3\xc0(..)'                      # начало записи + id записи
+    rb'(..)'                              # код типа записи (2 байта)
+    rb'(?:\xf6(.{0,4}?))?'                # возможная ссылка (f6 + что-то)
+    rb'\xc0(..)'                          # id ФИЧИ — стоит непосредственно перед именем
+    rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
+    rb'\xc0(..)\x00'                      # id (повтор)
+    rb'(\w+)\x00',
+    re.S)
+recs = []
+for m in REC.finditer(b):
+    fid = (m.group(4)[0] << 8) | m.group(4)[1]
+    dup = (m.group(6)[0] << 8) | m.group(6)[1]
+    ref = m.group(3)
+    prev = None
+    if ref and ref[:1] == b'\xc0' and len(ref) >= 3:
+        prev = (ref[1] << 8) | ref[2]
+    try:
+        nm = m.group(5).decode('utf-8')
+    except Exception:
+        nm = m.group(5).decode('latin-1')
+    recs.append((fid, prev, nm.strip(), m.group(7).decode(), dup))
+print('записей: %d' % len(recs))
+print('id совпадает с дублем: %d из %d'
+      % (sum(1 for r in recs if r[0] == r[4]), len(recs)))
+
+print('\n--- ПЕРВЫЕ 18 ---')
+for fid, prev, nm, tp, dup in recs[:18]:
+    print('   fid=%-6d prev=%-6s %-24s [%s]  dup=%d' % (fid, prev, nm, tp, dup))
+
+kids = {}
+for fid, prev, nm, tp, _ in recs:
+    kids.setdefault(prev, []).append((fid, nm, tp))
+br = [(p, v) for p, v in kids.items() if p is not None and len(v) > 1]
+print('\nузлов с >1 ребёнком: %d' % len(br))
+for p, v in br[:5]:
+    print('   prev=%-6s -> %s' % (p, [x[1] for x in v][:8]))
