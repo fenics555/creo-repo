@@ -11,7 +11,6 @@ import re, sys, collections
 P = sys.argv[1] if len(sys.argv) > 1 else \
     r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'
 raw = open(P, 'rb').read()
-
 i = raw.find(b'#UGC_TOC')
 j = raw.find(b'\n', i) + 1
 end = raw.find(b'NEXT_TOC_ENTRY', j)
@@ -21,85 +20,72 @@ for mm in re.finditer(
         rb'^([A-Za-z_][A-Za-z0-9_]*)\s+([0-9a-f]+)\s+([0-9a-f]+)\s+'
         rb'([0-9a-f]+)\s+[0-9a-f]+\s+[0-9a-zA-Z_]+\s+(-?[0-9a-f]+)', blob, re.M):
     toc[mm.group(1).decode()] = (int(mm.group(2), 16), int(mm.group(3), 16))
-for mm in re.finditer(rb'ND:0:([A-Za-z0-9_]+):\d+\s+([0-9a-f]+)\s+([0-9a-f]+)', blob):
-    toc.setdefault(mm.group(1).decode(),
-                   (int(mm.group(2), 16), int(mm.group(3), 16)))
+o, l = toc['FeatDefs']
+fd = raw[o:o + l]
 
-o, l = toc['MdlStatus']
-st = raw[o:o + l]
+print('FeatDefs: %d байт' % len(fd))
 
+# 1) есть ли тут кириллические имена фич
+RU = ('[А-ЯЁ][А-ЯЁа-яё ]{2,26}\\s?\\d*').encode('utf-8')
+print('кириллических имён: %d' % len(re.findall(rb'\x00(' + RU + rb')\x00', fd)))
+for m in list(re.finditer(rb'\x00(' + RU + rb')\x00', fd))[:6]:
+    print('   %s' % m.group(1).decode('utf-8', 'replace').strip())
 
-def u16(b):
-    return (b[0] << 8) | b[1]
+# 2) структура записи: что стоит РЯДОМ с каждым именем
+print('\n=== контекст после кириллического имени ===')
+for m in list(re.finditer(rb'\x00(' + RU + rb')\x00', fd))[:5]:
+    s = m.end()
+    print('   %-22s %s' % (m.group(1).decode('utf-8', 'replace').strip()[:20],
+                          fd[s:s + 26].hex(' ')))
 
+# 3) ищем указатель на родителя: 2 байта id, встречающиеся >1 раза как значение
+print('\n=== частые 2-байтовые значения после c0 ===')
+cnt = collections.Counter()
+for m in re.finditer(rb'\xc0(..)', fd):
+    cnt[(m.group(1)[0] << 8) | m.group(1)[1]] += 1
+print('уникальных значений: %d' % len(cnt))
+print('топ-15 по частоте (кандидаты на «владельца группы»):')
+for v, c in cnt.most_common(15):
+    print('   id=%-6d встречается %d раз' % (v, c))
 
-# B = id сразу перед именем; C = id после имени
-REC = re.compile(
-    rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'
-    rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
-    rb'\xc0(..)(.)(\w+)\x00',
-    re.S)
+# 4) проверка: встречается ли каждый feat_id из MdlStatus в FeatRefs
+print('\n=== feat_id из MdlStatus в FeatDefs ===')
+mo, ml = toc['MdlStatus']
+ms = raw[mo:mo + ml]
+import sys as _s
+_s.path.insert(0, '.')
+from creo_tree_builder import build_tree
+t, n, lk, tc, oi, feats = build_tree(P)
+fids = set(f['feat_id'] for f in feats)
+found = sum(1 for f in fids if fd.count(f.to_bytes(2, 'big')))
+print('feat_id из MdlStatus (%d), найдено в FeatDefs как 2 байта: %d'
+      % (len(fids), found))
 
-recs = []
-for m in REC.finditer(st):
-    try:
-        nm = m.group(4).decode('utf-8')
-    except Exception:
-        nm = m.group(4).decode('latin-1')
-    recs.append({
-        'A': u16(m.group(1)), 'B': u16(m.group(3)),
-        'C': u16(m.group(5)), 'flag': m.group(6)[0],
-        'name': nm.strip(), 'type': m.group(7).decode(),
-    })
+# --- ГЛАВНОЕ: как feat_id из MdlStatus соотносится с FeatDefs ---
+print('=== ПОИСК СВЯЗИ MdlStatus <-> FeatDefs ===')
+by_id = {f['feat_id']: f for f in feats}
 
-print('записей: %d' % len(recs))
+# как реально выглядит feat_id внутри FeatDefs? ищем один известный
+sample = sorted(by_id)[0]
+needle = sample.to_bytes(2, 'big')
+print('пример feat_id=%d, байты %s' % (sample, needle.hex(' ')))
+for m in list(re.finditer(re.escape(needle), fd))[:4]:
+    s = max(0, m.start() - 14)
+    print('   @%-8d %s' % (m.start(), fd[s:m.start() + 16].hex(' ')))
+    print('              %r' % fd[s:m.start() + 16])
 
-# --- проверка гипотезы B = предок ---
-ids = {r['A'] for r in recs}
-kids = collections.defaultdict(list)
-for r in recs:
-    kids[r['B']].append(r)
-
-known_parent = [r for r in recs if r['B'] in ids]
-roots = [r for r in recs if r['B'] not in ids]
-
-print('\n--- Проверка B = prev_feat_id ---')
-print('узлов, чей B найден среди A: %d из %d' % (len(known_parent), len(recs)))
-print('корней (B не найден среди A): %d' % len(roots))
-multi = [b for b, v in kids.items() if len(v) > 1]
-print('предков с >1 ребёнком: %d' % len(multi))
-
-# циклы
-def depth(a, seen):
-    if a in seen:
-        return -1
-    seen.add(a)
-    nxt = next((r['B'] for r in recs if r['A'] == a), None)
-    if nxt is None or nxt not in ids:
-        return 0
-    return 1 + depth(nxt, seen)
-
-
-by_a = {r['A']: r for r in recs}
-cyc = 0
-maxd = 0
-for r in recs:
-    d = depth(r['A'], set())
-    if d < 0:
-        cyc += 1
-    else:
-        maxd = max(maxd, d)
-print('узлов в цикле: %d   максимальная глубина: %d' % (cyc, maxd))
-
-# --- для сравнения: C ---
-kidsC = collections.defaultdict(list)
-for r in recs:
-    kidsC[r['C']].append(r)
-rootsC = [r for r in recs if r['C'] not in ids]
-multiC = [c for c, v in kidsC.items() if len(v) > 1]
-print('\n--- Для сравнения C ---')
-print('корней (C не найден среди A): %d' % len(rootsC))
-print('C с >1 ребёнком: %d' % len(multiC))
+# ищем id СРАЗУ ПОСЛЕ кириллического/латинского имени фичи
+print('\n=== id сразу после известных имён ===')
+names = [f['name'] for f in feats[:40] if f['name']]
+print('проверяю %d имён' % len(names))
+pat = re.compile(rb'\x00(' + ('|'.join(re.escape(n.encode('utf-8'))
+                                        for n in names)) + rb')\x00(.{0,6})', re.S)
+found = 0
+for m in list(pat.finditer(fd))[:8]:
+    tail = m.group(2)
+    print('   %-22s после: %s' % (m.group(1).decode('utf-8'), tail.hex(' ')))
+    found += 1
+print('совпадений: %d' % found)
 
 print('\n--- диагностика: что на самом деле значит B ---')
 # если B = предок, то у каждого B должен быть ребёнок. Проверим обратное:
