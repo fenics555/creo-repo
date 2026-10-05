@@ -1,4 +1,33 @@
-import struct, re, json, os, urllib.request
+import re, sys, struct
+
+def analyse(path):
+    """Структура записи PRO_MP_* : общий префикс, байт-тип, длина значения."""
+    b = open(path, 'rb').read()
+    print('файл:', path, ' размер:', len(b))
+    for name in (b'PRO_MP_MASS', b'PRO_MP_VOLUME', b'PRO_MP_AREA'):
+        tag = name.decode()
+        hits = list(re.finditer(name, b))
+        print('\n=== %s : вхождений %d ===' % (tag, len(hits)))
+        pre = b[11:23]
+        print('  общий префикс после имени: %s' % pre.hex(' '))
+        for m in hits[1:]:
+            st = m.start() + 11
+            rec = b[st:st + 26]
+            # ищем маркер значения 'e3 32' + байт-тип
+            j = rec.find(b'\xe3\x32')
+            if j < 0:
+                continue
+            vt = rec[j + 2]
+            body = rec[j + 3:j + 12]
+            term = rec.find(b'\xf1', j + 2)
+            ln = (term - (j + 3)) if term > 0 else -1
+            print('  0x%08X  тип=0x%02X  длина=%-2d  %s'
+                  % (m.start(), vt, ln, body[:ln].hex(' ') if ln > 0 else body.hex(' ')))
+        print('  эталон CREOSON: см. ниже')
+
+
+if __name__ == '__main__':
+    analyse(sys.argv[1] if len(sys.argv) > 1 else r'mtest\before.prt.1')
 
 def call(c, f, s=None, d=None):
     b = {'command': c, 'function': f}
