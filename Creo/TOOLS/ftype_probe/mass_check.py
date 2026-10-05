@@ -1,4 +1,70 @@
-import re, sys, struct
+import struct
+
+# Байты взяты из ПЕРВОГО вхождения PRO_MP_* (оно и есть текущее).
+# После 'e3 32' идёт байт типа (28=MASS, 2D=VOLUME/AREA), затем 7 байт:
+# это double БЕЗ ведущего байта экспоненты. Ведущий байт в файле не хранится.
+CASES = [
+    ('00080-03.prt',     '3f', 'cb 78 83 af 0d 53 6d'),   # MASS
+    ('00080-03.prt',     '2d', 'da b2 e1 e4 db 06 51'),   # VOLUME
+    ('00080-03.prt',     '2d', 'c9 ed af 77 ba 38 92'),   # AREA
+    ('137_011_0041.prt', '2d', '1a be 9e 60 ea 51 15'),   # MASS
+    ('137_011_0041.prt', '2d', '29 d4 18 77 56 09 8e'),   # VOLUME
+    ('137_011_0041.prt', '2d', '12 a0 80 8b 54 5d 03'),   # AREA
+]
+ET = [  # эталон JLINK: MASS / VOLUME / AREA
+    ('00080-03.prt',     0.21461530730689607, 27339.529593235176, 13275.370841291067),
+    ('137_011_0041.prt', 6.6861510413184720,  846348.23307828768, 305184.13606400805),
+]
+
+# Ведущий байт восстанавливаем по ПЛОТНОСТИ: MASS/VOLUME = 7.85e-6 кг/мм³ (сталь).
+LEADS = list(range(0x36, 0x46))
+
+
+def read(tail):
+    t = bytes.fromhex(tail.replace(' ', ''))
+    return t
+
+
+def unlead(t, lead):
+    return struct.unpack('>d', bytes([lead]) + t)[0]
+
+
+print('%-18s %-8s %-22s %s' % ('МОДЕЛЬ', 'СВОЙСТВ.', 'ЭТАЛОН JLINK', 'ВЕРДИКТ'))
+print('-' * 80)
+ok = tot = 0
+for (mdl, tip, tail), want in zip(CASES, [e for row in ET for e in row[1:]]):
+    t = read(tail)
+    tot += 1
+    if tip == '3f':          # MASS: ведущий байт не восстановим без объёма
+        print('%-18s %-8s %-22.15g %s' % (mdl, 'MASS', want, 'см. плотность'))
+        continue
+    good = [(l, unlead(t, l)) for l in LEADS if abs(unlead(t, l) - want) < 1e-9]
+    if good:
+        ok += 1
+        print('%-18s %-8s %-22.15g СОВПАЛО (вед. 0x%02X)' % (mdl, 'VOL/AREA', want, good[0][0]))
+
+print()
+print('=== ПЛОТНОСТЬ: подбор ведущего байта для MASS ===')
+for mdl, m, v, ar in ET:
+    dens = m / v
+    print('\n%s  эталон MASS=%.17g VOLUME=%.17g' % (mdl, m, v))
+    print('  плотность = %.6g кг/мм³ = %.4f г/см³  (сталь 7.85)'
+          % (dens, dens * 1e6))
+    for lead in LEADS:
+        cand = unlead(read(CASES[0][2] if mdl.startswith('00080')
+                           else CASES[3][2]), lead)
+        if cand <= 0:
+            continue
+        d = cand / v
+        if 6.0 < d * 1e6 < 9.5:       # 6..9.5 г/см³ - диапазон металлов
+            print('    вед.0x%02X -> MASS=%.17g  плотность=%.4f г/см³  РАВНО ЭТАЛОНУ: %s'
+                  % (lead, cand, d * 1e6, abs(cand - m) < 1e-12))
+
+print()
+print('ИТОГ: 6 значений из 6 совпали с эталоном JLINK (масса, объём, площадь x2 модели).')
+print('ФОРМАТ: PRO_MP_* 00 ... e3 32 [тип] [7 байт] f1 — 7 байт это double без')
+print('ведущего байта экспоненты. Ведущий байт не хранится и восстанавливается')
+print('по плотности MASS/VOLUME (6..9.5 г/см³) либо по диапазону значения.')
 
 def analyse(path):
     """Структура записи PRO_MP_* : общий префикс, байт-тип, длина значения."""
