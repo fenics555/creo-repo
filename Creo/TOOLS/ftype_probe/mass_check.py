@@ -138,24 +138,58 @@ for fp in (r'Z:\PTC\Work\00080\00080-03.prt.1',
                       % (m.group(1).decode('utf-8', 'replace').strip()[:18],
                          b[s:m.start()].hex(' ')[:52],
                          b[m.end():m.end() + 14].hex(' ')))
-            import sys, os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from creo_full import read_model
+            import re, os, sys
 
-print('=== ПРОВЕРКА УНИВЕРСАЛЬНОГО ПАРСЕРА ДЕРЕВА ===')
-for f in (r'Z:\PTC\Work\00080\00080-03.prt.1',
-          r'Z:\PTC\Work\00132\00132.prt.1',
-          r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):
-    if not os.path.exists(f):
+def toc_of(raw):
+    i = raw.find(b'#UGC_TOC')
+    j = raw.find(b'\n', i) + 1
+    e = raw.find(b'NEXT_TOC_ENTRY', j)
+    blob = raw[j:e if e > 0 else j + 12000]
+    t = {}
+    for mm in re.finditer(
+            rb'^([A-Za-z_][A-Za-z0-9_]*)\s+([0-9a-f]+)\s+([0-9a-f]+)\s+'
+            rb'([0-9a-f]+)\s+[0-9a-f]+\s+[0-9a-zA-Z_]+\s+(-?[0-9a-f]+)', blob, re.M):
+        t[mm.group(1).decode()] = (int(mm.group(2), 16), int(mm.group(3), 16))
+    return t
+
+
+TYPES = ('featssrf', 'cutextrude', 'featround', 'protrevolve', 'feathole',
+         'featsketch', 'group', 'dtmplane', 'csys', 'featpattern')
+# РАБОТА СО СТРОКОЙ, а не с байтами: кириллица — многобайтовая, класс символов
+# по байтам рвёт слова. Разметка между записями меняется, а сам шаблон — нет.
+NT = re.compile(
+    r'([A-Za-zА-Яа-яЁё][\wА-Яа-яЁё \-]{1,28}?)\x00(?:\xf6\x00)?'
+    r'(' + '|'.join(TYPES) + r')\x00'
+    r'([\wА-Яа-яЁё_ \-]{1,34}?)\x00')
+
+print('%-22s %-8s %-8s %s' % ('ФАЙЛ', 'записей', 'уник', 'первые имена'))
+print('-' * 78)
+for fp in (r'Z:\PTC\Work\00080\00080-03.prt.1',
+           r'Z:\PTC\Work\00132\00132.prt.1',
+           r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):
+    if not os.path.exists(fp):
         continue
-    t = read_model(f).get('feature_tree_from_file')
-    if not t:
-        print('%-22s НЕ ПРОЧИТАНО' % os.path.basename(f))
+    raw = open(fp, 'rb').read()
+    t = toc_of(raw)
+    if 'MdlStatus' not in t:
         continue
-    print('%-22s узлов=%-5d связей=%-5d иерархия=%-5s свободных=%d'
-          % (os.path.basename(f), t['nodes'], t['linked'],
-             t['hierarchy'], t['free_count']))
-    print('    %s' % [x['name'] for x in t['roots'][:6]])
+    o, l = t['MdlStatus']
+    txt = raw[o:o + l].decode('utf-8', 'replace')
+    hits = list(NT.finditer(txt))
+    uniq = []
+    seen = set()
+    for m in hits:
+        n = m.group(1).strip()
+        if n not in seen:
+            seen.add(n)
+            uniq.append((n, m.group(2)))
+    print('%-22s %-8d %-8d %s'
+          % (os.path.basename(fp), len(hits), len(uniq),
+             [x[0] for x in uniq[:5]]))
+    types = {}
+    for _, ty in uniq:
+        types[ty] = types.get(ty, 0) + 1
+    print('%-22s типы: %s' % ('', sorted(types.items(), key=lambda x: -x[1])))
 
 for FP in (r'Z:\PTC\Work\00080\00080-03.prt.1',
            r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):
