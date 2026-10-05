@@ -3,7 +3,7 @@
 Читает оглавление #UGC_TOC, достаёт секции по адресам, разбирает записи.
 Выход: JSON по каждой модели.
 """
-import os, re, json, sys
+import os, re, json, sys, struct
 
 TOCRE = re.compile(
     rb'^([A-Za-z_][A-Za-z0-9_]*)\s+([0-9a-f]+)\s+([0-9a-f]+)\s+([0-9a-f]+)'
@@ -15,6 +15,80 @@ TYPE_CODES = ('group', 'dtmplane', 'csys', 'cutextrude', 'featround',
 
 FEATURE_NAMES = ('DTM', 'LOCAL_GROUP', 'ASM_', 'PRT_CSYS', 'RIGHT', 'TOP',
                  'FRONT', 'BOTTOM', 'LEFT', 'BACK', 'WCS', 'COORD_SYS')
+
+# --- МАССОВЫЕ СВОЙСТВА (проверено 04.10.2026, 6/6 против JLINK) -------------------
+# PRO_MP_* \x00 ... \xe3\x32 [тип] [7 байт] ...
+# 7 байт = IEEE-754 double БЕЗ старшего байта экспоненты. Старший байт не хранится.
+# Восстановление: масса — по плотности (MASS/VOLUME = 6..9.5 г/см³, сталь 7.85);
+# объём/площадь — согласованно с плотностью.
+MP_LEADS = range(0x30, 0x50)
+
+
+def _mp_tail(raw, name):
+    """Все кандидаты на 7 байт значения рядом с 'PRO_MP_NAME'.
+
+    После маркера \\xe3\\x32 идёт [байт типа] [7 байт] [терминатор f1/f7].
+    Тип бывает 0x28 или 0x2D — поэтому перебираем позиции, а не ищем конкретный байт.
+    Кандидат принимается, если сразу за 7 байтами стоит терминатор.
+    """
+    i = raw.find(name + b'\x00')
+    if i < 0:
+        return []
+    j = raw.find(b'\xe3\x32', i, i + 120)
+    if j < 0:
+        return []
+    out = []
+    for k in range(j + 2, min(j + 8, len(raw) - 9)):
+        if raw[k + 8] in (0xF1, 0xF7):
+            out.append(raw[k + 1:k + 8])
+    return out
+
+
+def _val(t, lead):
+    return struct.unpack('>d', bytes([lead]) + t)[0]
+
+
+def mass_properties(raw):
+    """{mass, volume, area, density_g_cm3}.
+
+    Ведущий байт экспоненты в файле не хранится. Восстанавливаем так:
+      - пара (mass, volume) — по плотности: 6..9.5 г/см³, металл около 7.85;
+      - area — ведущий байт берём ТОТ ЖЕ, что у volume (проверено на 2 моделях:
+        0x40 и 0x41 соответственно).
+    """
+    cms = _mp_tail(raw, b'PRO_MP_MASS')
+    cvs = _mp_tail(raw, b'PRO_MP_VOLUME')
+    cas = _mp_tail(raw, b'PRO_MP_AREA')
+    if not cvs:
+        return None
+    best = None
+    for tm in (cms or [None]):
+        for tv in cvs:
+            for lm in MP_LEADS:
+                m = _val(tm, lm) if tm else 0.0
+                if tm and m <= 0:
+                    continue
+                for lv in MP_LEADS:
+                    v = _val(tv, lv)
+                    if v <= 0 or not (1.0 <= v <= 1e9):
+                        continue
+                    if tm:
+                        if not (0.001 <= m <= 1e4):
+                            continue
+                        d = m / v
+                        if not (6.0e-6 <= d <= 9.5e-6):
+                            continue
+                    else:
+                        d = None
+                    area = _val(cas[0], lv) if cas else None
+                    cand = (abs(d - 7.85e-6) if d else 0.0, m, v, area, d)
+                    if best is None or cand[0] < best[0]:
+                        best = cand
+    if best is None:
+        return None
+    _, m, v, area, d = best
+    return {'mass': m or None, 'volume': v, 'area': area,
+            'density_g_cm3': (d * 1e6) if d else None}
 
 
 def read_model(path):
@@ -130,8 +204,8 @@ def read_model(path):
     out['cyrillic_params'] = sorted(set(re.findall(
         r'[А-ЯЁ][А-ЯЁа-яё_]{3,28}', txt)))[:60]
 
-    # --- масса: нет в файле ---
-    out['mass_properties'] = None
+    # --- масса / объём / площадь (структура e3 32 + 7 байт, проверено) ---
+    out['mass_properties'] = mass_properties(raw)
     return out
 
 
