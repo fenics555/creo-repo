@@ -73,7 +73,33 @@ def build_tree(path):
                 tree.append(node)
     for n in tree:
         _walk(n, links)
-    return tree, nodes, links, toc
+    # 2b) РЕАЛЬНЫЙ порядок дерева: sort_feat_ids = 'f8' <n> + n * '82' <id16>
+    #     Внутри записи created_features. Это данные файла, а не эвристика.
+    stb = sect('MdlStatus')          # БАЙТЫ, не декодированная строка
+    order_ids = []
+    for sm in re.finditer(rb'sort_feat_ids\x00', stb):
+        q = sm.end()
+        p = q + 1                                  # пропускаем \xf8
+        n = stb[p] if p < len(stb) else 0
+        p += 1
+        ids = []
+        for _ in range(n):
+            if p + 2 >= len(stb):
+                break
+            tag = stb[p]
+            if tag == 0x82:                        # 1 байт значения
+                ids.append(stb[p + 1])
+                p += 2
+            elif tag == 0xC0:                      # 2 байта значения
+                ids.append((stb[p + 1] << 8) | stb[p + 2])
+                p += 3
+            else:
+                break
+        print('   sort_feat_ids @%d n=%d разобрано=%d %s'
+              % (sm.start(), n, len(ids), ids[:8]))
+        if len(ids) == n and n >= 3:
+            order_ids = ids
+    return tree, nodes, links, toc, order_ids
 
 
 def _walk(n, links):
@@ -87,11 +113,13 @@ def _walk(n, links):
 if __name__ == '__main__':
     import json
     P = r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'
-    tree, nodes, links, toc = build_tree(P)
+    tree, nodes, links, toc, order_ids = build_tree(P)
     print('секций: %d' % len(toc))
     print('узлов (имя+тип): %d' % len(nodes))
     print('связей "<ТИП> id N": %d' % len(links))
     print('корневых узлов: %d' % len(tree))
+    print('ПОРЯДК ИЗ ФАЙЛА (sort_feat_ids): %d id' % len(order_ids))
+    print('   %s' % order_ids)
     print()
 
     def show(ns, d=0, lim=[0]):

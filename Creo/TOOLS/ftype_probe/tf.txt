@@ -1,0 +1,71 @@
+=== поля, похожие на иерархию ===
+
+FeatDefs (1247900 байт) — релевантных полей 63:
+   feat_defs_                 6
+   own_ref_id                 3
+   ext_id                     3
+   ref_id                     2
+   _id                        2
+   plane_id                   2
+   ref_type                   2
+   header_id                  2
+   feat_id                    2
+   pnt_set_id                 2
+   subset_ids                 2
+   start_idx                  1
+   elder_rev_back_idx         1
+   cur_undo_id                1
+   cur_redo_id                1
+   dim_id                     1
+
+AllFeatur (1517339 байт) — релевантных полей 46:
+   feat_id                    4
+   crv_id                     3
+   srf_id                     2
+   next_crv_id                2
+   crv_geom_id                2
+   geom_id                    2
+   first_feat_ptr             1
+   feat_type_ptr              1
+   table_id                   1
+   feattype_key               1
+   srf_id_tab_ptr             1
+   cvt_feat_dat               1
+   feat_dates_ptr             1
+   first_geom_id              1
+   roll_back_id               1
+   largest_prev_rev           1
+
+MdlStatus (69694 байт) — релевантных полей 27:
+   featssrf                   219
+   featround                  144
+   feat_id                    6
+   start_feat_id              2
+   created_features           2
+   pat_group_header_id        2
+   feat_ids                   2
+   sort_feat_ids              2
+   active_comb_state_id       1
+   aux_id                     1
+   parent_rec_id              1
+   app_id                     1
+   children_rec_ids           1
+   rec_uobj_id                1
+   uobj_id                    1
+   feat_type                  1
+
+FeatOrder — секции нет
+
+FeatInfo — секции нет
+
+=== где вообще встречаются " id <N>" ===
+уникальных подписей: 1, всего: 6
+   Split_surface                  6
+
+=== sort_feat_ids: сырые байты ===
+
+@40429  f8 03 82 a0 82 db c0 44 50 f7 32 00 00 e2 00 e2 e3 94 55 e2 83 57 f6 f6 f6 00 e6 01 e1 81 c5 e1 41 44 4d 49 4e 00 e2 2e 27 07 11 09 74 f7
+        b"\xf8\x03\x82\xa0\x82\xdb\xc0DP\xf72\x00\x00\xe2\x00\xe2\xe3\x94U\xe2\x83W\xf6\xf6\xf6\x00\xe6\x01\xe1\x81\xc5\xe1ADMIN\x00\xe2.'\x07\x11\tt\xf7"
+
+@43162  f8 05 82 9b 82 9c 82 9e 82 a0 82 db e0 01 70 61 74 5f 67 72 6f 75 70 5f 68 65 61 64 65 72 5f 69 64 00 00 f1 f7 1a 4c 4f 43 41 4c 5f 47 52
+        b'\xf8\x05\x82\x9b\x82\x9c\x82\x9e\x82\xa0\x82\xdb\xe0\x01pat_group_header_id\x00\x00\xf1\xf7\x1aLOCAL_GR'
