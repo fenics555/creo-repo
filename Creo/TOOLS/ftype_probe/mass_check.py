@@ -1,4 +1,20 @@
-import struct
+import json, collections, os
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+for f in ('plm_final.jsonl', 'plm_library.jsonl'):
+    if not os.path.exists(f):
+        print('нет файла', f)
+        continue
+    rows = [json.loads(l) for l in open(f, encoding='utf-8') if l.strip()]
+    print('=' * 66)
+    print('%s : %d моделей' % (f, len(rows)))
+    keys = collections.Counter()
+    for r in rows:
+        for k, v in r.items():
+            if v not in (None, [], {}, '', 0):
+                keys[k] += 1
+    for k, c in keys.most_common():
+        print('   %-26s %5d  (%.0f%%)' % (k, c, 100.0 * c / len(rows)))
 
 # Байты взяты из ПЕРВОГО вхождения PRO_MP_* (оно и есть текущее).
 # После 'e3 32' идёт байт типа (28=MASS, 2D=VOLUME/AREA), затем 7 байт:
