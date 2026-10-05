@@ -138,12 +138,36 @@ for fp in (r'Z:\PTC\Work\00080\00080-03.prt.1',
                       % (m.group(1).decode('utf-8', 'replace').strip()[:18],
                          b[s:m.start()].hex(' ')[:52],
                          b[m.end():m.end() + 14].hex(' ')))
-            # что сразу ПОСЛЕ имени+типа
-            for m in list(re.finditer(rb'(featssrf|cutextrude|featround|protrevolve|'
-                                      rb'feathole|featsketch|group)\x00', b))[:3]:
-                print('      после %-12s %s'
-                      % (m.group(1).decode(),
-                         b[m.end():m.end() + 22].hex(' ')))
+            print('\n\n' + '=' * 70)
+print('РАЗВЕДКА CREO 9: где лежат имена и связи')
+print('=' * 70)
+
+for FP in (r'Z:\PTC\Work\00080\00080-03.prt.1',
+           r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):
+    if not os.path.exists(FP):
+        continue
+    raw = open(FP, 'rb').read()
+    tt = toc_of(raw)
+    print('\n########## %s ##########' % os.path.basename(FP))
+    for sname in ('MdlStatus', 'FeatDefs'):
+        if sname not in tt:
+            continue
+        o, l = tt[sname]
+        b = raw[o:o + l]
+        print('\n--- %s (%d байт) ---' % (sname, len(b)))
+        for tp in (b'featssrf', b'cutextrude', b'featround', b'feathole',
+                   b'featsketch', b'protrevolve', b'group', b'dtmplane', b'csys'):
+            c = b.count(tp)
+            if not c:
+                continue
+            m = re.search(tp + rb'\x00', b)
+            if not m:
+                continue
+            before = b[max(0, m.start() - 30):m.start()]
+            after = b[m.end():m.end() + 34]
+            print('\n  %-11s x%-5d' % (tp.decode(), c))
+            print('     до  : %r' % before.decode('latin-1'))
+            print('     после: %r' % after.decode('latin-1', 'replace')[:32])
 
 print('\n=== ГИПОТЕЗА СТАРОГО ФОРМАТА: <ТИП>\\x00<ИМЯ> id <N>\\x00 ===')
 OLD = re.compile(

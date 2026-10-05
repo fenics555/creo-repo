@@ -203,20 +203,38 @@ def feats_from_file(raw, toc):
         return (b[0] << 8) | b[1]
 
     FEATREC = re.compile(
-        rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'
-        rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
+        rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'        # маркер нового формата (нет в Creo 9)
+        rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'  # имя
         rb'\xc0(..)(.)(\w+)\x00', re.S)
+    # Универсальный шаблон ИМЯ+ТИП — работает в обоих форматах:
+    #   137:  'Split Surface 1\x00\xf6\x00featssrf\x00Split_surface id 35186\x00'
+    #   9:    'ОТВЕРСТИЕ 1\x00\xf6\x00feathole\x00ОТВЕРСТИЕ id 147\x00'
+    TYPES = (b'featssrf', b'cutextrude', b'featround', b'protrevolve',
+             b'feathole', b'featsketch', b'group', b'dtmplane', b'csys')
+    NT = re.compile(
+        rb'([A-Za-z\xd0-\xd1][\w\xd0-\xd1 ]{1,28}?)\x00(?:\xf6\x00)?'
+        rb'(' + rb'|'.join(TYPES) + rb')\x00'
+        rb'([\w\xd0-\xd1][\w\xd0-\xd1_ ]{1,34}?)\x00', re.S)
     feats = []
-    for m in FEATREC.finditer(st):
+    seen = set()
+    for m in NT.finditer(st):
         try:
-            nm = m.group(4).decode('utf-8')
+            nm = m.group(1).decode('utf-8')
         except Exception:
-            nm = m.group(4).decode('latin-1')
-        feats.append({'feat_id': u16(m.group(1)), 'name': nm.strip(),
-                      'type': m.group(7).decode(), 'flag': m.group(6)[0]})
+            nm = m.group(1).decode('latin-1')
+        nm = nm.strip()
+        if nm in seen:
+            continue
+        seen.add(nm)
+        feats.append({'feat_id': 0, 'name': nm,
+                      'type': m.group(2).decode(),
+                      'flag': 1 if m.group(2) == b'group' else 0,
+                      'owner_id': None, 'id_confirmed': False,
+                      'prev_feat_id': None,
+                      'label': m.group(3).decode('utf-8', 'replace')})
     if not feats:
         return None
-    by_id = {f['feat_id']: f for f in feats}
+    by_id = {f['feat_id']: f for f in feats if f['feat_id']}
 
     # связка «фича -> владелец»
     fdd = sect('FeatDefs')
