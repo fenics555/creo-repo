@@ -206,10 +206,11 @@ def feats_from_file(raw, toc):
         rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'        # маркер записи (есть в Creo 3.0)
         rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'  # имя
         rb'\xc0(..)(.)(\w+)\x00', re.S)
-    # ОТКАТ: универсальный шаблон «ИМЯ+ТИП» без маркера e3 c0 пробовали —
-    # он давал 7 узлов вместо 422 и мусор в именах ('gDTM1', 'rSplit Surface 2'),
+    # ОТКАТ regex-подхода: универсальный шаблон «ИМЯ+ТИП» без маркера e3 c0
+    # давал 7 узлов вместо 422 и мусор в именах ('gDTM1', 'rSplit Surface 2'),
     # потому что класс [\xd0-\xd1] ловит СТАРШИЙ байт UTF-8, а не символ.
-    # Рабочий вариант требует маркер e3 c0.
+    # Рабочий путь требует маркер e3 c0. Для файлов БЕЗ него (Creo 9)
+    # есть детерминированный fallback _records_tree — см. ниже.
     feats = []
     for m in FEATREC.finditer(st):
         try:
@@ -221,7 +222,7 @@ def feats_from_file(raw, toc):
                       'owner_id': None, 'id_confirmed': False,
                       'prev_feat_id': None})
     if not feats:
-        return None
+        return _records_tree(st, sect)
     by_id = {f['feat_id']: f for f in feats}
 
     # связка «фича -> владелец»
@@ -253,6 +254,62 @@ def feats_from_file(raw, toc):
     return {'roots': tree, 'free_count': len(feats) - len(own),
             'nodes': len(feats), 'linked': len(own),
             'hierarchy': bool(tree and tree[0]['children'])}
+
+
+def _records_tree(st, sect):
+    """Fallback: формат записи ОДИНАКОВ в Creo 3.0 и Creo 9, e3 c0 не нужен.
+
+    Запись:  <id varint> <код> f6 <prev varint> <ИМЯ> \\x00
+             [<owner varint> <is_header>] <ТИП> \\x00
+
+    Поля проверены на трёх файлах (_val9.py):
+      * ветка «без f6» после имени несёт owner + is_header;
+      * ветка «f6» несёт is_header (1 — только у типа group), owner нет.
+    id читается назад от f6 (_ids9.py): на Creo 9 сходится 100% и с полем
+    «<имя> id <N>», и с цепочкой prev. На Creo 3.0 перед id стоит тег
+    f7 42 и обратный разбор даёт неверные id — поэтому fallback включается
+    ТОЛЬКО когда FEATREC не нашёл ни одной записи (Creo 9), а Creo 3.0
+    идёт своим, уже проверенным путём.
+    """
+    from feat_records import parse_feats, record_id
+
+    fs = parse_feats(st)
+    if not fs:
+        return None
+    for f in fs:
+        r = record_id(st, f['f6_off'])
+        f['feat_id'] = r[0] if r else None
+        f['owner_id'] = f['owner'] if f['branch'] == 'plain' else None
+        f['group_id'] = None
+        f['id_confirmed'] = f['id'] is not None and f['id'] == f['feat_id']
+        f['prev_feat_id'] = f['prev']
+
+    by_id = {}
+    for f in fs:
+        if f['feat_id'] is not None and f['feat_id'] not in by_id:
+            by_id[f['feat_id']] = f
+
+    own = {}
+    for f in fs:
+        fid, ow = f['feat_id'], f['owner_id']
+        if fid is not None and ow:
+            own[fid] = ow
+
+    kids = {}
+    linked = 0
+    for a, ow in own.items():
+        if ow in by_id and ow != a:          # владелец должен быть в файле
+            kids.setdefault(ow, []).append(a)
+            linked += 1
+    roots = [a for a in by_id if own.get(a) not in by_id]
+
+    tree = [_node(by_id[r], kids, by_id) for r in sorted(roots)]
+    return {'roots': tree, 'free_count': len(by_id) - linked,
+            'nodes': len(by_id), 'linked': linked,
+            'hierarchy': bool(tree and tree[0]['children']),
+            'source': 'records',
+            'headers': sum(1 for f in fs if f['is_header'] == 1),
+            'ids_confirmed': sum(1 for f in fs if f.get('id_confirmed'))}
 
 
 def _node(f, kids, by_id):

@@ -46,10 +46,15 @@ if ok != tot:
 import json, collections, os
 
 print()
-print('=== ДИАГНОСТИКА: почему дерево только у 1 модели из 661 ===')
+print('=== ДИАГНОСТИКА: дерево из файла по источникам ===')
 rows = [json.loads(l) for l in open('plm_final.jsonl', encoding='utf-8') if l.strip()]
 have = [r for r in rows if r.get('feature_tree_from_file')]
-print('с деревом: %d' % len(have))
+print('с деревом: %d из %d' % (len(have), len(rows)))
+src = {}
+for r in have:
+    s = r['feature_tree_from_file'].get('source') or 'e3c0 (Creo 3.0)'
+    src[s] = src.get(s, 0) + 1
+print('   источники: %s' % sorted(src.items(), key=lambda x: -x[1]))
 
 print('\n=== ПРЯМАЯ ПРОВЕРКА РАЗБОРА НА НЕСКОЛЬКИХ ФАЙЛАХ ===')
 import re as _re
@@ -264,9 +269,14 @@ for f in ('plm_final.jsonl', 'plm_library.jsonl'):
     ft = [r for r in rows if r.get('feature_tree_from_file')]
     nodes = sum(r['feature_tree_from_file']['nodes'] for r in ft)
     linked = sum(r['feature_tree_from_file']['linked'] for r in ft)
+    srcc = {}
+    for r in ft:
+        s = r['feature_tree_from_file'].get('source') or 'e3c0'
+        srcc[s] = srcc.get(s, 0) + 1
     print('%s: %d моделей | mass %d (%.0f%%) | дерево из файла %d (%.0f%%), узлов %d, связей %d'
           % (f, len(rows), len(mp), 100.0 * len(mp) / len(rows),
              len(ft), 100.0 * len(ft) / len(rows), nodes, linked))
+    print('   источник дерева: %s' % sorted(srcc.items(), key=lambda x: -x[1]))
     dens = collections.Counter(
         round(r['mass_properties']['density_g_cm3'], 2) for r in mp
         if r['mass_properties'].get('density_g_cm3'))
