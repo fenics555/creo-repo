@@ -206,6 +206,15 @@ def read_model(path):
 
     # --- масса / объём / площадь (структура e3 32 + 7 байт, проверено) ---
     out['mass_properties'] = mass_properties(raw)
+
+    # --- ДЕРЕВО ФИЧ ИЗ ФАЙЛА (без эвристики) ---
+    try:
+        from creo_tree_builder import feats_from_file
+        fr = feats_from_file(raw, toc)
+        if fr:
+            out['feature_tree_from_file'] = fr
+    except Exception:
+        out['feature_tree_from_file'] = None
     return out
 
 
