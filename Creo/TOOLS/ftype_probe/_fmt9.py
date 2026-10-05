@@ -10,9 +10,12 @@ TYPES = (rb'featssrf', rb'cutextrude', rb'featround', rb'protrevolve',
          rb'feathole', rb'featsketch', rb'group', rb'dtmplane', rb'csys')
 
 CYR = rb'[\xd0-\xd1][\x80-\xbf]'      # один символ кириллицы (2 байта)
-WORD = rb'[\w \-\xd0-\xd1\x80-\xbf]'  # буква/цифра/пробел/кириллица
+# БЫЛА ОШИБКА: CYR вставлялась внутрь [ ... ], и это превращалось в требование
+# «[A-Za-z|d0|d1], затем [80-bf]» — два байта подряд. Правильно — альтернатива.
+FIRST = rb'(?:[A-Za-z]|' + CYR + rb')'
+WORD = rb'[\w \-]' + CYR
 NTB = re.compile(
-    rb'([A-Za-z' + CYR + rb']' + WORD + rb'{1,28}?)\x00(?:\xf6\x00)?'
+    rb'(' + FIRST + WORD + rb'{1,28}?)\x00(?:\xf6\x00)?'
     rb'(' + rb'|'.join(TYPES) + rb')\x00'
     rb'(' + WORD + rb'{1,34}?)\x00')
 
@@ -32,8 +35,10 @@ def toc_of(raw):
 
 
 # --- сначала проверяем регулярку на ЭТАЛОНЕ, который точно есть в 137 ---
-S = ('Split Surface 1\x00\xf6\x00featssrf\x00'
-     'Split_surface id 35186\x00').encode('utf-8')
+# ВАЖНО: литерал \xf6 нельзя кодировать в UTF-8 — получится c3 b6 (2 байта).
+# В файле байт ОДИН. Поэтому эталон собираем из БАЙТОВ.
+S = (b'Split Surface 1\x00\xf6\x00featssrf\x00'
+     b'Split_surface id 35186\x00')
 print('эталон, %d байт: %s' % (len(S), S[:24].hex(' ')))
 for pat, lbl in (
         (rb'([A-Za-z][\w \-]{1,28})\x00\xf6\x00(featssrf)\x00', 'A строгий'),
@@ -43,9 +48,9 @@ for pat, lbl in (
     m = re.search(pat, S)
     print('   %-12s %s' % (lbl, repr(m.group(1)) if m else 'НЕТ'))
 print()
-print(' NTB на эталоне: %s' % (repr(NTB.search(S).group(1))
-                               if NTB.search(S) else 'НЕТ'))
-print()
+m = NTB.search(S)
+print('   NTB на эталоне: %s' % (repr(m.group(1)) if m else 'НЕТ'))
+print('   NTB групп: %d' % NTB.groups)
 sys.exit(0)
 
 print('%-24s %-8s %-7s %s' % ('ФАЙЛ', 'записей', 'уник', 'типы'))
