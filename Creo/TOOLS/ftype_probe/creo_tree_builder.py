@@ -77,24 +77,37 @@ def build_tree(path):
     #     Структура: e3 c0 <id> <код 2 байта> [f6 <ссылка>] c0 <id> <ИМЯ> 00 c0 <id> 00 <ТИП>
     stb = sect('MdlStatus')          # БАЙТЫ, не декодированная строка
     FEATREC = re.compile(
-        rb'\xe3\xc0(..)(..)(?:\xf6(.{0,4}?))?\xc0(..)'
-        rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00\xc0(..)\x00(\w+)\x00',
+        rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'
+        rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
+        rb'\xc0(..)(.)(\w+)\x00',
         re.S)
     feats = []
     for m in FEATREC.finditer(stb):
         fid = (m.group(4)[0] << 8) | m.group(4)[1]
         dup = (m.group(6)[0] << 8) | m.group(6)[1]
-        ref = m.group(3)
-        prev = None
-        if ref and ref[:1] == b'\xc0' and len(ref) >= 3:
-            prev = (ref[1] << 8) | ref[2]
         try:
             nm = m.group(5).decode('utf-8')
         except Exception:
             nm = m.group(5).decode('latin-1')
         feats.append({'feat_id': fid, 'name': nm.strip(),
-                      'type': m.group(7).decode(), 'prev_feat_id': prev,
+                      'type': m.group(8).decode(), 'prev_feat_id': None,
+                      'flag': m.group(7)[0],
                       'id_confirmed': fid == dup})
+
+    # 2c) ГРУППИРОВКА ИЗ ФЛАГА 0x01 (заголовок группы). Это данные файла.
+    #     Флаг стоит между c0 <C> и именем типа: 0x01 = group, 0x00 = лист.
+    #     Лист принадлежит последнему встреченному заголовку по порядку в файле.
+    seq = [(m.group(1), m.group(6)[0]) for m in FEATREC.finditer(stb)]
+    owner, cur = {}, None
+    for g in seq:
+        aid = (g[0][0] << 8) | g[0][1]
+        if g[1] == 0x01:
+            cur = aid
+        elif cur is not None:
+            owner[aid] = cur
+    for f in feats:
+        f['group_id'] = owner.get(f['feat_id'])
+        f['is_header'] = (f['type'] == 'group')
 
     # 2b) РЕАЛЬНЫЙ порядок дерева: sort_feat_ids = 'f8' <n> + n * '82' <id16>
     order_ids = []
@@ -138,8 +151,15 @@ if __name__ == '__main__':
     print('ЗАПИСЕЙ ФИЧ ИЗ ФАЙЛА: %d' % len(feats))
     conf = sum(1 for f in feats if f['id_confirmed'])
     withprev = sum(1 for f in feats if f['prev_feat_id'])
+    withgrp = sum(1 for f in feats if f.get('group_id'))
+    heads = [f for f in feats if f['is_header']]
     print('   с подтверждённым id (== дубль): %d' % conf)
-    print('   с prev_feat_id: %d' % withprev)
+    print('   с prev_feat_id: %d  <- НЕ РАБОТАЕТ' % withprev)
+    print('   с group_id (флаг 0x01): %d' % withgrp)
+    print('   заголовков групп: %d, пустых: %d'
+          % (len(heads),
+             sum(1 for h in heads
+                 if not any(f.get('group_id') == h['feat_id'] for f in feats))))
     print('связей "<ТИП> id N": %d' % len(links))
     print('ПОРЯДОК ИЗ sort_feat_ids: %s' % order_ids)
     print()

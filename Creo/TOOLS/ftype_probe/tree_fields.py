@@ -171,119 +171,63 @@ for a in allA:
         md = max(md, d)
 print('узлов в цикле: %d   максимальная глубина: %d' % (cy, md))
 
-print('\n--- ДЕРЕВО ПО C (первые 32 строки) ---')
-cnt = [0]
+print('\n=== pat_group_header_id / is_header / флаг записи ===')
+print('pat_group_header_id: %d вхождений' % len(re.findall(rb'pat_group_header_id', st)))
+for m in re.finditer(rb'pat_group_header_id\x00', st):
+    w = st[m.end():m.end() + 24]
+    print('   @%-6d %s  %r' % (m.start(), w.hex(' '), w[:20]))
 
+print('\nis_header: %d вхождений' % len(re.findall(rb'is_header', st)))
+for m in re.finditer(rb'is_header\x00', st):
+    w = st[m.end():m.end() + 10]
+    print('   @%-6d %s  %r' % (m.start(), w.hex(' '), w[:8]))
 
-def show2(cid, d=0):
-    for r in by_c.get(cid, []):
-        if cnt[0] > 32:
-            return
-        cnt[0] += 1
-        print('   %s%s [%s]' % ('  ' * d, r['name'][:30], r['type']))
-        show2(r['A'], d + 1)
+print('\nфлаги в записях (байт между c0<C> и типом):')
+fc = collections.Counter()
+for m in REC.finditer(st):
+    fc[(m.group(6)[0], m.group(7).decode())] += 1
+for (f, t), n in sorted(fc.items()):
+    print('   0x%02X  %-12s %d' % (f, t, n))
 
+print('\n=== ГРУППЫ: записи с типом group ===')
+groups = [r for r in recs if r['type'] == 'group']
+print('всего записей group: %d' % len(groups))
+for r in groups[:12]:
+    print('   A=%-6d B=%-6d C=%-6d %s' % (r['A'], r['B'], r['C'], r['name']))
 
-for r in roots_c[:2]:
-    print(' КОРЕНЬ: %s [%s]' % (r['name'][:30], r['type']))
-    show2(r['A'], 1)
-import re, sys, struct, collections
+print('\n=== ФЛАГ 0x01 = ЗАГОЛОВОК ГРУППЫ -> ДЕРЕВО ===')
+by_a = {r['A']: r for r in recs}
+gid = [(u16(m.group(1)), m.group(6)[0]) for m in REC.finditer(st)]
+owner, cur = {}, None
+for aid, fl in gid:
+    if fl == 0x01:
+        cur = aid
+    elif cur is not None:
+        owner[aid] = cur
+nleaf = sum(1 for _, f in gid if f == 0x00)
+print('заголовков(0x01): %d   листьев(0x00): %d   с хозяином: %d'
+      % (len(groups), nleaf, len(owner)))
 
-P = sys.argv[1] if len(sys.argv) > 1 else \
-    r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'
-raw = open(P, 'rb').read()
+gc = collections.defaultdict(list)
+for aid, o in owner.items():
+    gc[o].append(aid)
 
-i = raw.find(b'#UGC_TOC')
-j = raw.find(b'\n', i) + 1
-end = raw.find(b'NEXT_TOC_ENTRY', j)
-toc = {}
-blob = raw[j:end if end > 0 else j + 12000]
-for mm in re.finditer(
-        rb'^([A-Za-z_][A-Za-z0-9_]*)\s+([0-9a-f]+)\s+([0-9a-f]+)\s+'
-        rb'([0-9a-f]+)\s+[0-9a-f]+\s+[0-9a-zA-Z_]+\s+(-?[0-9a-f]+)', blob, re.M):
-    toc[mm.group(1).decode()] = (int(mm.group(2), 16), int(mm.group(3), 16))
-for mm in re.finditer(rb'ND:0:([A-Za-z0-9_]+):\d+\s+([0-9a-f]+)\s+([0-9a-f]+)', blob):
-    toc.setdefault(mm.group(1).decode(),
-                   (int(mm.group(2), 16), int(mm.group(3), 16)))
+print('\n--- содержимое первых 10 групп ---')
+for g in groups[:10]:
+    ch = [by_a[c]['name'][:20] for c in gc.get(g['A'], [])[:7]]
+    print('   %-20s (%2d) %s' % (g['name'][:20], len(gc.get(g['A'], [])),
+                                 ch if ch else '-- ПУСТО'))
 
+empt = [g for g in groups if not gc.get(g['A'])]
+multi = [(g['name'], len(gc[g['A']])) for g in groups if len(gc.get(g['A'], [])) > 3]
+print('\nпустых групп: %d из %d' % (len(empt), len(groups)))
+print('групп с >3 детейми: %d' % len(multi))
+for n, c in multi[:6]:
+    print('   %-22s %d детей' % (n, c))
 
-def sect(n):
-    if n not in toc:
-        return b''
-    o, l = toc[n]
-    return raw[o:o + l]
-
-
-print('=== поля, похожие на иерархию ===')
-for name in ('FeatDefs', 'AllFeatur', 'MdlStatus', 'FeatOrder', 'FeatInfo'):
-    b = sect(name)
-    if not b:
-        print('\n%s — секции нет' % name)
-        continue
-    hits = collections.Counter(m.group(0) for m in re.finditer(rb'[a-z_]{3,24}', b))
-    want = [(k.decode('latin-1'), v) for k, v in hits.items()
-            if any(w in k for w in (b'_id', b'prev', b'parent', b'feat', b'ref'))]
-    print('\n%s (%d байт) — релевантных полей %d:' % (name, len(b), len(want)))
-    for k, v in sorted(want, key=lambda x: -x[1])[:16]:
-        print('   %-26s %d' % (k, v))
-
-print('\n=== где вообще встречаются " id <N>" ===')
-cnt = collections.Counter()
-for m in re.finditer(rb'([A-Za-z_][A-Za-z0-9_ ]{2,30}) id (\d+)', raw):
-    cnt[m.group(1).decode('latin-1')] += 1
-print('уникальных подписей: %d, всего: %d' % (len(cnt), sum(cnt.values())))
-for k, v in cnt.most_common(15):
-    print('   %-30s %d' % (k, v))
-
-print('\n=== MdlStatus: имена фич + ближайший id ===')
-b = sect('MdlStatus')
-RU = ('[А-ЯЁ][А-ЯЁа-яё ]{2,26}\\s?\\d*').encode('utf-8')
-TYP = (rb'(featssrf|cutextrude|featround|protrevolve|feathole|'
-        rb'featsketch|group)')
-hits = list(re.finditer(rb'\x00(' + RU + rb')\x00[\s\S]{0,80}?' + TYP + rb'\x00', b))
-print('найдено пар имя+тип: %d' % len(hits))
-for m in hits[:12]:
-    nm = m.group(1).decode('utf-8', 'replace').strip()
-    tail = b[m.end():m.end() + 40]
-    print('   %-26s [%s]' % (nm, m.group(2).decode()))
-    print('      после типа: %s' % tail.hex(' '))
-
-print('\n=== ЗАПИСИ ФИЧ: e3 c0 <id> ... f6 c0 <prev> <ИМЯ> 00 c0 <id> 00 <тип> ===')
-b = sect('MdlStatus')
-REC = re.compile(
-    rb'\xe3\xc0(..)'                      # начало записи + id записи
-    rb'(..)'                              # код типа записи (2 байта)
-    rb'(?:\xf6(.{0,4}?))?'                # возможная ссылка (f6 + что-то)
-    rb'\xc0(..)'                          # id ФИЧИ — стоит непосредственно перед именем
-    rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
-    rb'\xc0(..)\x00'                      # id (повтор)
-    rb'(\w+)\x00',
-    re.S)
-recs = []
-for m in REC.finditer(b):
-    fid = (m.group(4)[0] << 8) | m.group(4)[1]
-    dup = (m.group(6)[0] << 8) | m.group(6)[1]
-    ref = m.group(3)
-    prev = None
-    if ref and ref[:1] == b'\xc0' and len(ref) >= 3:
-        prev = (ref[1] << 8) | ref[2]
-    try:
-        nm = m.group(5).decode('utf-8')
-    except Exception:
-        nm = m.group(5).decode('latin-1')
-    recs.append((fid, prev, nm.strip(), m.group(7).decode(), dup))
-print('записей: %d' % len(recs))
-print('id совпадает с дублем: %d из %d'
-      % (sum(1 for r in recs if r[0] == r[4]), len(recs)))
-
-print('\n--- ПЕРВЫЕ 18 ---')
-for fid, prev, nm, tp, dup in recs[:18]:
-    print('   fid=%-6d prev=%-6s %-24s [%s]  dup=%d' % (fid, prev, nm, tp, dup))
-
-kids = {}
-for fid, prev, nm, tp, _ in recs:
-    kids.setdefault(prev, []).append((fid, nm, tp))
-br = [(p, v) for p, v in kids.items() if p is not None and len(v) > 1]
-print('\nузлов с >1 ребёнком: %d' % len(br))
-for p, v in br[:5]:
-    print('   prev=%-6s -> %s' % (p, [x[1] for x in v][:8]))
+# вложенность: группа внутри группы
+nest = [(g['name'], by_a[owner[g['A']]]['name'])
+        for g in groups if g['A'] in owner]
+print('\nгрупп, вложенных в другую группу: %d' % len(nest))
+for c, p in nest[:5]:
+    print('   %-20s внутри %s' % (c, p))
