@@ -85,11 +85,90 @@ for fp in (r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1',
     e3 = st.count(b'\xe3\xc0')
     print('   %-20s MdlStatus=%-6d e3 c0=%-5d REC совпадений=%d'
           % (os.path.basename(fp)[:18], len(st), e3, n))
-    if 'FeatDefs' in t:
-        fd = raw[t['FeatDefs'][0]:t['FeatDefs'][0] + t['FeatDefs'][1]]
-        o = len(REC.findall(fd))
-        OWN = _re.compile(rb'\xc0(..)\xf6\x02\xe3.\x49\xc0(..)', _re.S)
-        print('       FeatDefs=%-8d REC=%-5d owner-пар=%d' % (len(fd), o, len(OWN.findall(fd))))
+    import re, os, collections
+
+REC2 = re.compile(
+    rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'
+    rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
+    rb'\xc0(..)(.)(\w+)\x00', re.S)
+
+
+def toc_of(raw):
+    i = raw.find(b'#UGC_TOC')
+    j = raw.find(b'\n', i) + 1
+    e = raw.find(b'NEXT_TOC_ENTRY', j)
+    blob = raw[j:e if e > 0 else j + 12000]
+    t = {}
+    for mm in re.finditer(
+            rb'^([A-Za-z_][A-Za-z0-9_]*)\s+([0-9a-f]+)\s+([0-9a-f]+)\s+'
+            rb'([0-9a-f]+)\s+[0-9a-f]+\s+[0-9a-zA-Z_]+\s+(-?[0-9a-f]+)', blob, re.M):
+        t[mm.group(1).decode()] = (int(mm.group(2), 16), int(mm.group(3), 16))
+    return t
+
+
+print('=== СТАРЫЙ ФОРМАТ (Creo 9): где записи фич ===')
+for fp in (r'Z:\PTC\Work\00080\00080-03.prt.1',
+           r'Z:\PTC\Work\00132\00132.prt.1',
+           r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):
+    if not os.path.exists(fp):
+        continue
+    raw = open(fp, 'rb').read()
+    t = toc_of(raw)
+    print('\n--- %s (%d байт) ---' % (os.path.basename(fp), len(raw)))
+    for sname in ('MdlStatus', 'FeatDefs', 'AllFeatur'):
+        if sname not in t:
+            continue
+        o, l = t[sname]
+        b = raw[o:o + l]
+        # какие маркеры записи встречаются
+        marks = collections.Counter()
+        for tag in (b'\xe3\xc0', b'\xe2\x32', b'\xe3\x32', b'\xf7\x1a', b'\xf7\x19'):
+            if b.count(tag):
+                marks[tag.hex()] = b.count(tag)
+        print('   %-10s %8d байт  маркеры: %s'
+              % (sname, len(b), dict(marks)))
+        if sname == 'MdlStatus':
+            # контекст вокруг кириллического имени фичи
+            RU = ('[А-ЯЁ][А-ЯЁа-яё ]{2,26}\\s?\\d*').encode('utf-8')
+            hits = list(re.finditer(rb'\x00(' + RU + rb')\x00', b))
+            print('      кириллических имён: %d' % len(hits))
+            for m in hits[:3]:
+                s = max(0, m.start() - 20)
+                print('      %-20s ...%s | %s...'
+                      % (m.group(1).decode('utf-8', 'replace').strip()[:18],
+                         b[s:m.start()].hex(' ')[:52],
+                         b[m.end():m.end() + 14].hex(' ')))
+            # что сразу ПОСЛЕ имени+типа
+            for m in list(re.finditer(rb'(featssrf|cutextrude|featround|protrevolve|'
+                                      rb'feathole|featsketch|group)\x00', b))[:3]:
+                print('      после %-12s %s'
+                      % (m.group(1).decode(),
+                         b[m.end():m.end() + 22].hex(' ')))
+
+print('\n=== ГИПОТЕЗА СТАРОГО ФОРМАТА: <ТИП>\\x00<ИМЯ> id <N>\\x00 ===')
+OLD = re.compile(
+    rb'(featssrf|cutextrude|featround|protrevolve|feathole|featsketch|group)'
+    rb'\x00(?:[\xf6-\xff][\s\S]{0,12})?'
+    rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,28}?)\x00', re.S)
+for fp in (r'Z:\PTC\Work\00080\00080-03.prt.1',
+           r'Z:\PTC\Work\00132\00132.prt.1',
+           r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):
+    if not os.path.exists(fp):
+        continue
+    raw = open(fp, 'rb').read()
+    t = toc_of(raw)
+    o, l = t['MdlStatus']
+    b = raw[o:o + l]
+    hits = list(OLD.finditer(b))
+    good = [m for m in hits if re.search(rb'\s\d+$', m.group(2))]
+    print('\n%s: всего %d, с «ИМЯ N» %d'
+          % (os.path.basename(fp), len(hits), len(good)))
+    for m in good[:9]:
+        try:
+            nm = m.group(2).decode('utf-8')
+        except Exception:
+            nm = m.group(2).decode('latin-1')
+        print('   %-24s [%s]' % (nm.strip()[:22], m.group(1).decode()))
 nosh = [r for r in rows if not r.get('feature_tree_from_file')][:6]
 print('\nверсии Creo: с деревом vs без')
 for r in (have[:2] + nosh):
