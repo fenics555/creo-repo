@@ -81,18 +81,29 @@ def build_tree(path):
         rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
         rb'\xc0(..)(.)(\w+)\x00',
         re.S)
+    def u16(b):
+        b = bytes(b)
+        while len(b) < 2:
+            b += b'\x00'
+        return (b[0] << 8) | b[1]
+
+
+# --- разбор записей ---
+    # группы: 1=A(id записи) 2=код 3=B 4=имя 5=C 6=флаг 7=тип
     feats = []
     for m in FEATREC.finditer(stb):
-        fid = (m.group(4)[0] << 8) | m.group(4)[1]
-        dup = (m.group(6)[0] << 8) | m.group(6)[1]
         try:
-            nm = m.group(5).decode('utf-8')
+            nm = m.group(4).decode('utf-8')
         except Exception:
-            nm = m.group(5).decode('latin-1')
-        feats.append({'feat_id': fid, 'name': nm.strip(),
-                      'type': m.group(8).decode(), 'prev_feat_id': None,
-                      'flag': m.group(7)[0],
-                      'id_confirmed': fid == dup})
+            nm = m.group(4).decode('latin-1')
+        feats.append({'feat_id': u16(m.group(1)),
+                      'prev_in_seq': u16(m.group(3)),
+                      'name': nm.strip(),
+                      'group_key': u16(m.group(5)),
+                      'flag': m.group(6)[0],
+                      'type': m.group(7).decode(),
+                      'id_confirmed': u16(m.group(1)) == u16(m.group(5)),
+                      'prev_feat_id': None})
 
     # 2c) ГРУППИРОВКА ИЗ ФЛАГА 0x01 (заголовок группы). Это данные файла.
     #     Флаг стоит между c0 <C> и именем типа: 0x01 = group, 0x00 = лист.
