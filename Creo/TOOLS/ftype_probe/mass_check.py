@@ -138,9 +138,24 @@ for fp in (r'Z:\PTC\Work\00080\00080-03.prt.1',
                       % (m.group(1).decode('utf-8', 'replace').strip()[:18],
                          b[s:m.start()].hex(' ')[:52],
                          b[m.end():m.end() + 14].hex(' ')))
-            print('\n\n' + '=' * 70)
-print('РАЗВЕДКА CREO 9: где лежат имена и связи')
-print('=' * 70)
+            import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from creo_full import read_model
+
+print('=== ПРОВЕРКА УНИВЕРСАЛЬНОГО ПАРСЕРА ДЕРЕВА ===')
+for f in (r'Z:\PTC\Work\00080\00080-03.prt.1',
+          r'Z:\PTC\Work\00132\00132.prt.1',
+          r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):
+    if not os.path.exists(f):
+        continue
+    t = read_model(f).get('feature_tree_from_file')
+    if not t:
+        print('%-22s НЕ ПРОЧИТАНО' % os.path.basename(f))
+        continue
+    print('%-22s узлов=%-5d связей=%-5d иерархия=%-5s свободных=%d'
+          % (os.path.basename(f), t['nodes'], t['linked'],
+             t['hierarchy'], t['free_count']))
+    print('    %s' % [x['name'] for x in t['roots'][:6]])
 
 for FP in (r'Z:\PTC\Work\00080\00080-03.prt.1',
            r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'):

@@ -203,38 +203,26 @@ def feats_from_file(raw, toc):
         return (b[0] << 8) | b[1]
 
     FEATREC = re.compile(
-        rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'        # маркер нового формата (нет в Creo 9)
+        rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'        # маркер записи (есть в Creo 3.0)
         rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'  # имя
         rb'\xc0(..)(.)(\w+)\x00', re.S)
-    # Универсальный шаблон ИМЯ+ТИП — работает в обоих форматах:
-    #   137:  'Split Surface 1\x00\xf6\x00featssrf\x00Split_surface id 35186\x00'
-    #   9:    'ОТВЕРСТИЕ 1\x00\xf6\x00feathole\x00ОТВЕРСТИЕ id 147\x00'
-    TYPES = (b'featssrf', b'cutextrude', b'featround', b'protrevolve',
-             b'feathole', b'featsketch', b'group', b'dtmplane', b'csys')
-    NT = re.compile(
-        rb'([A-Za-z\xd0-\xd1][\w\xd0-\xd1 ]{1,28}?)\x00(?:\xf6\x00)?'
-        rb'(' + rb'|'.join(TYPES) + rb')\x00'
-        rb'([\w\xd0-\xd1][\w\xd0-\xd1_ ]{1,34}?)\x00', re.S)
+    # ОТКАТ: универсальный шаблон «ИМЯ+ТИП» без маркера e3 c0 пробовали —
+    # он давал 7 узлов вместо 422 и мусор в именах ('gDTM1', 'rSplit Surface 2'),
+    # потому что класс [\xd0-\xd1] ловит СТАРШИЙ байт UTF-8, а не символ.
+    # Рабочий вариант требует маркер e3 c0.
     feats = []
-    seen = set()
-    for m in NT.finditer(st):
+    for m in FEATREC.finditer(st):
         try:
-            nm = m.group(1).decode('utf-8')
+            nm = m.group(4).decode('utf-8')
         except Exception:
-            nm = m.group(1).decode('latin-1')
-        nm = nm.strip()
-        if nm in seen:
-            continue
-        seen.add(nm)
-        feats.append({'feat_id': 0, 'name': nm,
-                      'type': m.group(2).decode(),
-                      'flag': 1 if m.group(2) == b'group' else 0,
+            nm = m.group(4).decode('latin-1')
+        feats.append({'feat_id': u16(m.group(1)), 'name': nm.strip(),
+                      'type': m.group(7).decode(), 'flag': m.group(6)[0],
                       'owner_id': None, 'id_confirmed': False,
-                      'prev_feat_id': None,
-                      'label': m.group(3).decode('utf-8', 'replace')})
+                      'prev_feat_id': None})
     if not feats:
         return None
-    by_id = {f['feat_id']: f for f in feats if f['feat_id']}
+    by_id = {f['feat_id']: f for f in feats}
 
     # связка «фича -> владелец»
     fdd = sect('FeatDefs')
@@ -257,8 +245,14 @@ def feats_from_file(raw, toc):
     free = [f for f in feats if f['feat_id'] not in own]
 
     tree = [_node(by_id[r], kids, by_id) for r in sorted(roots) if r in by_id]
-    return {'roots': tree, 'free_count': len(free),
-            'nodes': len(feats), 'linked': len(own)}
+    # если связки нет — плоский список по порядку файла (всё равно из файла)
+    if not tree:
+        tree = [{'name': f['name'], 'type': f['type'], 'feat_id': 0,
+                 'owner_id': None, 'group_id': None, 'children': []}
+                for f in feats]
+    return {'roots': tree, 'free_count': len(feats) - len(own),
+            'nodes': len(feats), 'linked': len(own),
+            'hierarchy': bool(tree and tree[0]['children'])}
 
 
 def _node(f, kids, by_id):
