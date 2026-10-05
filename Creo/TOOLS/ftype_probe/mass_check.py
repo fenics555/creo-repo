@@ -1,4 +1,92 @@
-import struct, re, json
+import struct, re, json, os, urllib.request
+
+def call(c, f, s=None, d=None):
+    b = {'command': c, 'function': f}
+    if s:
+        b['sessionId'] = s
+    b['data'] = d or {}
+    r = urllib.request.Request('http://127.0.0.1:8080/creoson',
+        data=json.dumps(b).encode('utf-8'),
+        headers={'Content-Type': 'application/json; charset=utf-8'})
+    return json.loads(urllib.request.urlopen(r, timeout=60).read().decode('utf-8'))
+
+
+def read_props(path):
+    """Читает PRO_MP_MASS / VOLUME / AREA по якорю '\\x2d' + be[1:8]."""
+    b = open(path, 'rb').read()
+    out = {}
+    for prop in (b'PRO_MP_MASS', b'PRO_MP_VOLUME', b'PRO_MP_AREA'):
+        vals = []
+        for m in re.finditer(prop, b):
+            win = b[m.start() + len(prop):m.start() + len(prop) + 40]
+            # якорь: тег 0x2D, затем 7 байт хвоста double
+            for i in range(len(win) - 8):
+                if win[i] != 0x2D:
+                    continue
+                tail = win[i + 1:i + 8]
+                if len(tail) != 7:
+                    continue
+                for lead in (0x40, 0x3F, 0x41):
+                    try:
+                        v = struct.unpack('>d', bytes([lead]) + tail)[0]
+                    except Exception:
+                        continue
+                    if 1e-6 < abs(v) < 1e9:
+                        vals.append((lead, v))
+                        break
+                if vals:
+                    break
+            if vals:
+                break
+        if vals:
+            out[prop.decode()] = {'value': vals[0][1], 'lead': hex(vals[0][0])}
+    return out
+
+
+MODELS = [r'Z:\PTC\Work\137.011.0041\137_011_0041.prt',
+          r'Z:\PTC\Work\00080\00080-03.prt',
+          r'Z:\PTC\Work\00612\00612.prt']
+
+print('%-24s %-20s %-20s %s' % ('МОДЕЛЬ', 'MASS из файла', 'эталон CREOSON', 'вердикт'))
+print('-' * 78)
+ok = tot = 0
+for M in MODELS:
+    if not os.path.exists(M + '.1'):
+        continue
+    s = call('connection', 'connect')['sessionId']
+    if call('file', 'open', s, {'file': M})['status']['error']:
+        print('%-24s НЕ ОТКРЫЛАСЬ' % os.path.basename(M))
+        continue
+    et = {}
+    pl = (call('parameter', 'list', s, {'file': M}).get('data') or {}).get('paramlist') or []
+    for p in pl:
+        if p.get('type') != 'STRING':
+            try:
+                et[p['name']] = float(p['value'])
+            except Exception:
+                pass
+    g = read_props(M + '.1')
+    mv = g.get('PRO_MP_MASS', {}).get('value')
+    want = et.get('MASS')
+    tot += 1
+    if mv is not None and want is not None:
+        good = abs(mv - want) < 1e-9
+        ok += good
+        print('%-24s %-20.15g %-20.15g %s'
+              % (os.path.basename(M), mv, want, 'СОВПАЛО' if good else 'НЕТ'))
+    else:
+        print('%-24s %-20s %-20s %s'
+              % (os.path.basename(M),
+                 ('%.15g' % mv) if mv else '—',
+                 ('%.15g' % want) if want else '—', 'нет данных'))
+
+print()
+print('СОВПАДЕНИЙ: %d из %d' % (ok, tot))
+r137 = read_props(MODELS[0] + '.1')
+print('дополнительно в 137: объём=%s  площадь=%s'
+      % (r137.get('PRO_MP_VOLUME', {}).get('value'),
+         r137.get('PRO_MP_AREA', {}).get('value')))
+
 
 def read_mass(path):
     """Масса = PRO_MP_MASS ... <тег> <be[1:8]>."""
