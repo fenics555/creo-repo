@@ -1,7 +1,192 @@
-"""Поиск полей иерархии фич (feat_id / prev_feat_id) в секциях Creo.
+"""Проверка: является ли `c0 <id>` перед именем PREV_FEAT_ID.
 
-Цель — заменить эвристику «последняя открытая группа» на реальные связи.
+Структура записи (с байтов):
+    e3 c0 <A:id записи> <код 2 байта> [f6] c0 <B> <ИМЯ> 00 c0 <C> <флаг> <ТИП> 00
+Гипотеза: B = prev_feat_id (предок), C = что-то третье.
+Признак подтверждения: по B строится корректное дерево — у каждого узла
+ровно один предок, есть корни, нет циклов.
 """
+import re, sys, collections
+
+P = sys.argv[1] if len(sys.argv) > 1 else \
+    r'Z:\PTC\Work\137.011.0041\137_011_0041.prt.1'
+raw = open(P, 'rb').read()
+
+i = raw.find(b'#UGC_TOC')
+j = raw.find(b'\n', i) + 1
+end = raw.find(b'NEXT_TOC_ENTRY', j)
+blob = raw[j:end if end > 0 else j + 12000]
+toc = {}
+for mm in re.finditer(
+        rb'^([A-Za-z_][A-Za-z0-9_]*)\s+([0-9a-f]+)\s+([0-9a-f]+)\s+'
+        rb'([0-9a-f]+)\s+[0-9a-f]+\s+[0-9a-zA-Z_]+\s+(-?[0-9a-f]+)', blob, re.M):
+    toc[mm.group(1).decode()] = (int(mm.group(2), 16), int(mm.group(3), 16))
+for mm in re.finditer(rb'ND:0:([A-Za-z0-9_]+):\d+\s+([0-9a-f]+)\s+([0-9a-f]+)', blob):
+    toc.setdefault(mm.group(1).decode(),
+                   (int(mm.group(2), 16), int(mm.group(3), 16)))
+
+o, l = toc['MdlStatus']
+st = raw[o:o + l]
+
+
+def u16(b):
+    return (b[0] << 8) | b[1]
+
+
+# B = id сразу перед именем; C = id после имени
+REC = re.compile(
+    rb'\xe3\xc0(..)(..)(?:\xf6)?\xc0(..)'
+    rb'([\w\xd0-\xd1][\w\xd0-\xd1 ]{1,30}?)\x00'
+    rb'\xc0(..)(.)(\w+)\x00',
+    re.S)
+
+recs = []
+for m in REC.finditer(st):
+    try:
+        nm = m.group(4).decode('utf-8')
+    except Exception:
+        nm = m.group(4).decode('latin-1')
+    recs.append({
+        'A': u16(m.group(1)), 'B': u16(m.group(3)),
+        'C': u16(m.group(5)), 'flag': m.group(6)[0],
+        'name': nm.strip(), 'type': m.group(7).decode(),
+    })
+
+print('записей: %d' % len(recs))
+
+# --- проверка гипотезы B = предок ---
+ids = {r['A'] for r in recs}
+kids = collections.defaultdict(list)
+for r in recs:
+    kids[r['B']].append(r)
+
+known_parent = [r for r in recs if r['B'] in ids]
+roots = [r for r in recs if r['B'] not in ids]
+
+print('\n--- Проверка B = prev_feat_id ---')
+print('узлов, чей B найден среди A: %d из %d' % (len(known_parent), len(recs)))
+print('корней (B не найден среди A): %d' % len(roots))
+multi = [b for b, v in kids.items() if len(v) > 1]
+print('предков с >1 ребёнком: %d' % len(multi))
+
+# циклы
+def depth(a, seen):
+    if a in seen:
+        return -1
+    seen.add(a)
+    nxt = next((r['B'] for r in recs if r['A'] == a), None)
+    if nxt is None or nxt not in ids:
+        return 0
+    return 1 + depth(nxt, seen)
+
+
+by_a = {r['A']: r for r in recs}
+cyc = 0
+maxd = 0
+for r in recs:
+    d = depth(r['A'], set())
+    if d < 0:
+        cyc += 1
+    else:
+        maxd = max(maxd, d)
+print('узлов в цикле: %d   максимальная глубина: %d' % (cyc, maxd))
+
+# --- для сравнения: C ---
+kidsC = collections.defaultdict(list)
+for r in recs:
+    kidsC[r['C']].append(r)
+rootsC = [r for r in recs if r['C'] not in ids]
+multiC = [c for c, v in kidsC.items() if len(v) > 1]
+print('\n--- Для сравнения C ---')
+print('корней (C не найден среди A): %d' % len(rootsC))
+print('C с >1 ребёнком: %d' % len(multiC))
+
+print('\n--- диагностика: что на самом деле значит B ---')
+# если B = предок, то у каждого B должен быть ребёнок. Проверим обратное:
+without_kid = [b for b in {r['B'] for r in recs} if b not in kids or not kids[b]]
+print('значений B без единого ребёнка: %d' % len(without_kid))
+
+# Проверка «B = предыдущая запись в файле»: расстояние по позиции
+pos = {}
+for idx, m in enumerate(REC.finditer(st)):
+    pos[idx] = m.start()
+seq = []
+for m in REC.finditer(st):
+    seq.append(u16(m.group(1)))
+idx_of = {v: k for k, v in enumerate(seq)}
+adj = 0
+tot = 0
+for k, m in enumerate(REC.finditer(st)):
+    b = u16(m.group(3))
+    tot += 1
+    if idx_of.get(b) == k - 1:
+        adj += 1
+print('B указывает на ПРЕДЫДУЩУЮ по порядку запись: %d из %d' % (adj, tot))
+
+# Проверка «B — предок через иерархию»: строим и смотрим на глубины
+print('\n--- цепочка B (как есть) ---')
+cur = [r for r in recs if r['B'] not in {x['A'] for x in recs}][:3]
+for r in cur:
+    ch = r
+    line = [r['name'][:18]]
+    for _ in range(6):
+        nxt = kids.get(ch['A'])
+        if not nxt:
+            break
+        ch = nxt[0]
+        line.append(ch['name'][:18])
+    print('   %s' % ' -> '.join(line))
+
+# --- Проверка C = РОДИТЕЛЬ ---
+print('\n=== ПРОВЕРКА C = РОДИТЕЛЬ (кандидат на настоящее дерево) ===')
+by_c = collections.defaultdict(list)
+for r in recs:
+    by_c[r['C']].append(r)
+roots_c = [r for r in recs if r['C'] not in by_c]
+multi_c = {c: v for c, v in by_c.items() if len(v) > 1}
+print('C найден как родитель у %d из %d' % (len(recs) - len(roots_c), len(recs)))
+print('корней: %d' % len(roots_c))
+print('родителей с >1 ребёнком: %d' % len(multi_c))
+
+c_parent = {r['A']: r['C'] for r in recs}
+allA = set(c_parent)
+
+
+def cdepth(a, seen):
+    if a in seen:
+        return -1
+    seen.add(a)
+    p = c_parent.get(a)
+    if p is None or p not in allA:
+        return 0
+    return 1 + cdepth(p, seen)
+
+
+cy = md = 0
+for a in allA:
+    d = cdepth(a, set())
+    if d < 0:
+        cy += 1
+    else:
+        md = max(md, d)
+print('узлов в цикле: %d   максимальная глубина: %d' % (cy, md))
+
+print('\n--- ДЕРЕВО ПО C (первые 32 строки) ---')
+cnt = [0]
+
+
+def show2(cid, d=0):
+    for r in by_c.get(cid, []):
+        if cnt[0] > 32:
+            return
+        cnt[0] += 1
+        print('   %s%s [%s]' % ('  ' * d, r['name'][:30], r['type']))
+        show2(r['A'], d + 1)
+
+
+for r in roots_c[:2]:
+    print(' КОРЕНЬ: %s [%s]' % (r['name'][:30], r['type']))
+    show2(r['A'], 1)
 import re, sys, struct, collections
 
 P = sys.argv[1] if len(sys.argv) > 1 else \
