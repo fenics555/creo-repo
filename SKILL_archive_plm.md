@@ -417,3 +417,31 @@ v3: то же, что v2 — правок не было
 свойства детали и не связи чертёж→деталь. Таблица `arch_dwg_links` остаётся в базе,
 но в новых проходах опоры на неё нет.
 Подробности и цифры: `D:\AI\repo\ИЗУЧЕНО\Архивы PLM\STUDY_NOTES.md`.
+
+## 15. РАЗМЕРЫ И ИСТОРИЯ — В PLM READER (06.10.2026)
+
+Функции размеров перенесены из `archive_scan.py` в окно PLM Reader
+(`D:\AI\tools\agent\plm_reader\plm_reader.py`, модульный уровень перед `latest_path`):
+`read_dims_all`, `read_history_vals`, `read_history`, `_hist_val`, `_dec3_any`, `_dec_ef`,
+`_dim_name` + регулярки `DIM_HEAD_RE`/`DIM_NAME_RE`/`DIM_AFTER_RE`.
+Плюс `archive_dims(model)` — читает `arch_dims`/`arch_dim_ch` из боевой базы
+(регистронезависимо, только чтение; нет таблиц → `(None, None)`).
+
+Отображение — во вкладке **«Свойства детали»** (`_prop_show`):
+размеры из файла (`dNN, мм`), последнее изменение из файла (`diff_vals`), размеры и
+история из базы (`arch_dims`/`arch_dim_ch`), если таблицы есть.
+
+Приёмка: `a887-94-1500-01.prt.1` → `d12=8, d13=21.5, d25=12.6992` (эталон хозяина совпал),
+`read_history` → `d16: 15 → 21.1953`; `archive_dims('SOLDATIK')` → `{d1:14.5977}` + история.
+
+⚠️ **ГРАБЛЯ: `arch_merge.py` терял размеры.** `arch_dims`/`arch_dim_ch` были в `TRANSFER`,
+но НЕ создавались в `SCHEMA` → `INSERT` в несуществующую таблицу, и в боевую базу они
+не попадали (в `plm_reader_20261006_123920.db` таблиц нет). Починено: `CREATE TABLE`
++ индекс добавлены в `SCHEMA`. **Слияние надо перезапустить** (`arch_merge.py --dry-run`
+→ `arch_merge.py`), иначе окно покажет размеры только из файла, а блока «база» не будет.
+
+⚠️ **ГРАБЛЯ: «before»-файлы `plm_reader_before_{...}.py` (329 КБ) — мусор.** Полный файл
+сшит ДВАЖДЫ (двойные `scan_file`/`read_dims_all`), дубль строки `sql = (`, а `SELECT`
+ссылается на несуществующие колонки `snapshots` (`d_dims,dim_history,mfg_type,service_links`).
+Для переноса брать функции из `archive_scan.py`, а не из «before».
+Подробности и приёмка: `log\reports\REPORT_plm_dims_cline_2026-10-06.md`.
