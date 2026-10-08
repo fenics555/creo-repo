@@ -631,3 +631,32 @@ v3: то же, что v2 — правок не было
 - **ДАЛЬШЕ:** Шаг 2 — `plm_history.py` (~650); затем Шаги 3–7 (parse/dbview/settings/scan/paths_window) —
   передать локальному ИИ по спеке `D:\AI\СПЕКИ\СПЕКА_РАСПИЛА_PLM_READER.md`.
 
+## 24. РАСПИЛ `plm_reader.py` — ШАГИ 2–7 (08.10.2026, V69–V73)
+
+Цель — файлы, подъёмные для локального ИИ. Итог: **`plm_reader.py` 4787 → 670 строк**.
+
+| Модуль | Версия | Что ушло |
+|---|---|---|
+| `plm_toolwin.py` | V68 | окно `run_gui` (~2527) |
+| `plm_history.py` | V69 | история + окна истории (`_WINS`) |
+| `plm_parse.py` | V70 | парсинг файлов (параметры/размеры/история/`parse_changes`) |
+| `plm_dbview.py` | V71 | просмотр базы + кэш + `log_line` |
+| `plm_settings.py` | V72 | настройки, миграции, `norm_path`, `apply_db_paths` |
+| `plm_paths_window.py` | V73 | `class PathsWindow` |
+| **`plm_scan.py` — ПРОПУЩЕН** | — | `scan_file/scan_folder/path_under/…` ОСТАЛИСЬ в `plm_reader` (грабля 3) |
+
+**Метод (большие куски):** скрипты `D:\AI\log\urn\cline\` — `split_plm.py` (одна функция), `split_mod.py`
+(набор имён), `reorder_plm.py` (сортировка блоков переэкспорта). Новый модуль берёт имена
+`from plm_reader import (...)`; `plm_reader` ПЕРЕЭКСПОРТИРУЕТ вынесенное (чтобы `plm_toolwin`/`main` не
+ломались); `CODE_FILES += "<модуль>.py"` в ТОМ ЖЕ коммите.
+
+**ГРАБЛИ (дорого дались):**
+1. **Запуск скриптом → `__main__` ≠ `plm_reader`**: `from plm_reader import …` переимпортирует файл и
+   зациклится. Лечение: вверху `plm_reader.py` — `if __name__=="__main__": sys.modules.setdefault("plm_reader", sys.modules["__main__"])`.
+2. **Порядок блоков переэкспорта — ТОПОЛОГИЧЕСКИЙ** (иначе `ImportError`). Сортирует `reorder_plm.py`.
+3. **ЦИКЛ: `plm_scan` ↔ `plm_dbview`/`plm_history`** (`scan_file` зовёт `history`, `history_rows` — `scan_file`;
+   `dbview` зовёт `path_under`, `scan` — `db_rows_map/load_cache`). Два модуля одного цикла выносить НЕЛЬЗЯ
+   → `plm_scan` оставлен в `plm_reader`. ПРАВИЛО: перед выносом проверять `a→b` и `b→a`; цикл разрывать.
+4. Блоки переэкспорта вставлять перед ПОСЛЕДНИМ `if __name__` (иначе попадёшь на `__main__`-алиас).
+5. Проверка окна: `probe_selfcheck3.py` (redirect stdout в ФАЙЛ — иначе окно падает от `print`).
+
