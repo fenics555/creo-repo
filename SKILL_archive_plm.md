@@ -612,3 +612,22 @@ v3: то же, что v2 — правок не было
 - **Живая приёмка:** `probe_mirror_cfg.py` — `mirror_keep=5` → 5, `=99` → 50 (кладём), без настроек →
   3 / full_only=True; `probe_pathswin.py` — окно с новыми полями строится.
 
+## 23. РАСПИЛ `plm_reader.py` — ШАГ 1: окно в `plm_toolwin.py` (07.10.2026, V68)
+
+**Слово владельца:** «локальный ИИ не может работать с таким большим файлом → распилить частично».
+
+- **Факты:** `plm_reader.py` был **4787 стр.**; `run_gui()` = строки 2204–4730 (**2527 строк**) — монолит окна.
+- **Метод вырезки (editor 2500 строк НЕ тянет):** скрипт-распиловщик `D:\AI\log\urn\cline\split_plm.py`
+  через `ast`: границы узла `run_gui`, сбор имён для импорта (`used − bound − builtins`), запись
+  `plm_toolwin.py`, удаление блока, бекап исходника. **ГРАБЛЯ сборщика:** локальные `import`-алиасы
+  (`import engine as _e`, `import tkinter as tk`, `import io`, `from tkinter import messagebox as mb`)
+  надо помечать СВЯЗАННЫМИ (`visit_Import`/`visit_ImportFrom`), иначе они попадут в «нерешённые» и стоп.
+- **Результат:** `plm_reader.py` **4787 → 2261**; `plm_toolwin.py` = 2589 строк; 43 имени импортируются
+  из `plm_reader` (`from plm_reader import (...)`), включая `_WINS`, `PathsWindow`, `eng`, `APP_TITLE`.
+- **ЦИКЛ ИМПОРТОВ:** `main()` зовёт окно ЛЕНИВО (`from plm_toolwin import run_gui` ВНУТРИ `main`); на
+  верхнем уровне `plm_reader` окно НЕ импортирует.
+- **`CODE_FILES` += `"plm_toolwin.py"`** (иначе на шаре уедет в `obsolete\`); `make_version_json.py` → files=10.
+- **Приёмка:** `py_compile` rc=0; живое окно — «вкладок 5, активна «Родословная»», не упало за 9 с.
+- **ДАЛЬШЕ:** Шаг 2 — `plm_history.py` (~650); затем Шаги 3–7 (parse/dbview/settings/scan/paths_window) —
+  передать локальному ИИ по спеке `D:\AI\СПЕКИ\СПЕКА_РАСПИЛА_PLM_READER.md`.
+
