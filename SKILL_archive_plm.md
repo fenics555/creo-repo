@@ -643,7 +643,7 @@ v3: то же, что v2 — правок не было
 | `plm_dbview.py` | V71 | просмотр базы + кэш + `log_line` |
 | `plm_settings.py` | V72 | настройки, миграции, `norm_path`, `apply_db_paths` |
 | `plm_paths_window.py` | V73 | `class PathsWindow` |
-| **`plm_scan.py` — ПРОПУЩЕН** | — | `scan_file/scan_folder/path_under/…` ОСТАЛИСЬ в `plm_reader` (грабля 3) |
+| `plm_scan.py` | V74 | сканирование (`scan_file/scan_folder/path_under/…`); цикл разорван ленивыми импортами |
 
 **Метод (большие куски):** скрипты `D:\AI\log\urn\cline\` — `split_plm.py` (одна функция), `split_mod.py`
 (набор имён), `reorder_plm.py` (сортировка блоков переэкспорта). Новый модуль берёт имена
@@ -654,9 +654,9 @@ v3: то же, что v2 — правок не было
 1. **Запуск скриптом → `__main__` ≠ `plm_reader`**: `from plm_reader import …` переимпортирует файл и
    зациклится. Лечение: вверху `plm_reader.py` — `if __name__=="__main__": sys.modules.setdefault("plm_reader", sys.modules["__main__"])`.
 2. **Порядок блоков переэкспорта — ТОПОЛОГИЧЕСКИЙ** (иначе `ImportError`). Сортирует `reorder_plm.py`.
-3. **ЦИКЛ: `plm_scan` ↔ `plm_dbview`/`plm_history`** (`scan_file` зовёт `history`, `history_rows` — `scan_file`;
-   `dbview` зовёт `path_under`, `scan` — `db_rows_map/load_cache`). Два модуля одного цикла выносить НЕЛЬЗЯ
-   → `plm_scan` оставлен в `plm_reader`. ПРАВИЛО: перед выносом проверять `a→b` и `b→a`; цикл разрывать.
+3. **ЦИКЛ `scan ↔ dbview/history` РАЗОРВАН ленивыми импортами** (V74): `scan_file` делает
+   `from plm_history import history` ВНУТРИ себя; `plm_dbview.path_under` — ленивый шим. ПРАВИЛО: цикл
+   (`a→b` и `b→a`) между модулями разрывать ЛЕНИВЫМ импортом на ОДНОМ ребре, а не слипать модули.
 4. Блоки переэкспорта вставлять перед ПОСЛЕДНИМ `if __name__` (иначе попадёшь на `__main__`-алиас).
 5. Проверка окна: `probe_selfcheck3.py` (redirect stdout в ФАЙЛ — иначе окно падает от `print`).
 
