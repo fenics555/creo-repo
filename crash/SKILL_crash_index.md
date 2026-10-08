@@ -25,6 +25,18 @@ date: 22.09.2026
 - `SKILL_crash_editor-text-not-found` — Use when: editor не находит точный old_text, хотя при чтении текст совпадает
 - `SKILL_crash_editor_context_mismatch` — Use when: editor падает из-за несовпадения текста или лимита размера при крупных правках
 - `SKILL_crash_editor_too_large_and_non_unique_anchors` — Use when: editor падает из-за размера файла > 6 КБ или нескольких совпадений old_text
+- `SKILL_crash_editor-split-loses-indent` — Use when: файл собран несколькими вставками блоками по 5-6 КБ и падает с IndentationError «unindent does not match any outer indentation level» на шве между частями
+- `SKILL_crash_editor-insert-line-splits-function` — Use when: новый или правимый .py собирается вставками по номерам строк — вставка попадает внутрь функции и ломает отступы
+- `SKILL_crash_agent_silent-death_noport-8765` — Use when: агент молча умер — порт 8765 не слушает, процесса нет, в журнале нет строки ошибки
+- `SKILL_crash_chatloop_reports-inventwork-not-pettles` — Use when: владелец говорит «доделывай», а реальной работы нет — и нога начинает придумывать мелкие дела, чтобы не сказать «делать нечего»
+- `SKILL_crash_creo-text-not-binary` — Use when: в .prt/.asm ищешь фичи или компоненты бинарным поиском сигнатур — заголовок UGC на самом деле открытый текст с тегами, а записи полей имеют вид E0 <len> <поле>\0 <len> <значение>\0
+- `SKILL_crash_creoson-open-keeps-other-model` — Use when: CREOSON file:open по полному пути не переключает окно — запись уходит в модель с тем же стемом (копия vs боевая)
+- `SKILL_crash_gui-helper-returns-wrong-type` — Use when: окно на tkinter зависает намертво (App() не возвращает) после подключения к общему каркасу ui_common или другому помощнику GUI
+- `SKILL_crash_ollama-ansi-stderr-falseexit` — Use when: команда ollama (stop/rm/create/ps) печатает ANSI-спиннер в stderr — PowerShell даёт ложный NativeCommandError/exit1 и рвёт цепочку команд через «;», хотя команда выполнена
+- `SKILL_crash_probe-buffer-swallows-output` — Use when: фоновый/детач-прогон python не даёт вывода при таймауте — файл перенаправления пуст, и неясно, где завис процесс
+- `SKILL_crash_probe-dialog-hang-and-pollutes-settings` — Use when: автопрогон окна зависает на messagebox (диалог ждёт человека) или проба портит боевые настройки окна (записала битый путь)
+- `SKILL_crash_strict_test_stamp-missing` — Use when: проверка strict_test.py проходит все вопросы, но отчёт не пишется — NameError 'STAMP' is not defined
+- `SKILL_crash_sys-stdout-closed-on-import` — Use when: проба падает с «ValueError: I/O operation on closed file» — модуль при импорте переназначил sys.stdout обёрткой TextIOWrapper
 - `SKILL_crash_execution-loop` — Use when: агент зацикливается в попытках исправить ошибку, повторяя одну и ту же неудачную команду или используя несоответствующий инструмент (например, слишком сложный python -c в PowerShell).
 - `SKILL_crash_handling` — Use when: петля или зависание из-за лимитов инструментов (editor too large, длинные цепочки run_commands, editor без old_text)
 - `SKILL_crash_login-stale-memory` — Use when: вход в агента не проходит при верном пароле — три источника правды

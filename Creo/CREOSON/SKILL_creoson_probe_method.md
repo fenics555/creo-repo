@@ -1,4 +1,12 @@
 ---
+---
+name: creoson-probe-method
+system: Creo/CREOSON
+description: Use when: проба живого CREOSON — как строить запрос, три грабли подключения, что из команд существует
+when: creoson, проба, probe, sessionId, connection/connect, feature/list, живой порт 8080, метод пробы направления
+priority: critical
+date: 03.10.2026
+---
 ## 📡 ПРОТОКОЛ CREOSON — ВСКРЫТ ЭМПИРИЧЕСКИ (03.10.2026, живой порт 8080)
 
 **Формат:** `POST http://127.0.0.1:8080/creoson`, тело JSON.
