@@ -1,72 +1,75 @@
 ---
 name: "rag-architect"
-when: rag, chunking, embedding, vector database, retrieval, precision, recall, ndcg
-description: "Use when the user asks to design a RAG pipeline, choose a chunking strategy or embedding model, pick a vector database, or evaluate retrieval quality (precision@k, recall@k, NDCG). Examples: 'design a RAG system for our docs', 'what chunk size should I use for this corpus', 'evaluate my retriever against ground truth'. NOT for general LLM cost tuning (use llm-cost-optimizer) or agent loops over retrieval (use agenthub)."
+when: rag, чанкинг, эмбеддинги, векторная база, поиск, точность, полнота, ndcg
+description: "Использовать, когда просят спроектировать RAG-конвейер, выбрать стратегию чанкинга или модель эмбеддингов, подобрать векторную БД или оценить качество поиска (precision@k, recall@k, NDCG). НЕ для общей оптимизации стоимости LLM и НЕ для агентных циклов поверх поиска."
 ---
 
-# RAG Architect
+# RAG-Архитектор
 
-Design, tune, and evaluate production RAG pipelines with three deterministic tools. Run the tools against the actual corpus and requirements — do not pick chunk sizes or databases by intuition.
+Проектирование, настройка и оценка боевых RAG-конвейеров тремя детерминированными инструментами.
+Инструменты запускать на РЕАЛЬНОМ корпусе и требованиях — не выбирать размер чанка и БД «на глаз».
 
-## Hard rules
+## Жёсткие правила
 
-1. **Never present model names or vendor prices as current facts.** Embedding models and vector-DB pricing rot in months. Recommend a *tier* (see table below), name a current-generation candidate, and tell the user to verify against the provider's live pricing page.
-2. **Every design ends with an evaluation run.** A RAG design without `retrieval_evaluator.py` numbers is a hypothesis, not a deliverable.
-3. **Chunking is corpus-driven.** Run `chunking_optimizer.py` on the real documents before choosing a strategy.
+1. **Никогда не выдавать имена моделей и цены вендоров за текущий факт.** Модели эмбеддингов и цены
+   векторных БД устаревают за месяцы. Рекомендовать *уровень* (см. таблицу ниже), назвать кандидата
+   текущего поколения и попросить пользователя сверить с живой страницей цен провайдера.
+2. **Любой дизайн заканчивается прогоном оценки.** RAG-дизайн без чисел `retrieval_evaluator.py` —
+   гипотеза, а не результат.
+3. **Чанкинг определяется корпусом.** Перед выбором стратегии прогнать `chunking_optimizer.py` на реальных документах.
 
-## Embedding model tiers (pattern, not price list)
+## Уровни моделей эмбеддингов (паттерн, не список цен)
 
-| Tier | Current-generation examples (verify before use) | When |
+| Уровень | Примеры текущего поколения (проверять) | Когда |
 |---|---|---|
-| Fast / self-hosted | `all-MiniLM-L6-v2`, `bge-small` | Cost-sensitive, small scale, real-time |
-| Balanced open | `all-mpnet-base-v2`, `bge-large`, `e5-large` | Quality without API dependency |
-| Quality API | `text-embedding-3-large`, `voyage-3-large` | Accuracy-priority general retrieval |
-| Code | `voyage-code-3`, CodeBERT-family | Code search corpora |
+| Быстрый / self-hosted | `all-MiniLM-L6-v2`, `bge-small` | Экономия, малый масштаб, реальное время |
+| Сбалансированный открытый | `all-mpnet-base-v2`, `bge-large`, `e5-large` | Качество без зависимости от API |
+| Качественный API | `text-embedding-3-large`, `voyage-3-large` | Приоритет точности |
+| Для кода | `voyage-code-3`, семейство CodeBERT | Поиск по корпусам кода |
 
-**Pricing discipline:** build the cost model with a placeholder table — columns `model | $/1M tokens (verify) | dims | as-of date` — and have the user fill in live numbers. Same for vector DBs (Pinecone/Weaviate/Qdrant/Chroma/pgvector): the selection criteria (managed vs self-hosted, scale, filtering, existing Postgres) are durable; the dollar figures are not.
+**Дисциплина цен:** модель стоимости строить с таблицей-заглушкой — колонки
+`модель | $/1М токенов (проверить) | размерность | дата актуальности` — числа вписывает пользователь.
+То же для векторных БД (Pinecone / Weaviate / Qdrant / Chroma / pgvector): критерии выбора
+(managed vs self-hosted, масштаб, фильтрация, наличие Postgres) устойчивы, а цифры — нет.
 
-## Workflow
+## Порядок работы
 
-All paths relative to this skill folder. Outputs chain: corpus analysis → design → evaluation.
+Все пути — относительно папки этого скилла. Выходы связаны: анализ корпуса → дизайн → оценка.
 
-### 1. Analyze the corpus and pick chunking
-
+### 1. Проанализировать корпус и выбрать чанкинг
 ```bash
-python3 chunking_optimizer.py /path/to/docs --extensions .md .txt -o chunking.json
+python3 chunking_optimizer.py /путь/к/докс --extensions .md .txt -o chunking.json
 ```
+Выдаёт `chunking.json`: `corpus_info`, `strategy_results` по стратегиям, `recommendation`, `sample_chunks`.
+Использовать `recommendation.strategy` и её конфиг; показать 2–3 `sample_chunks` для проверки границ.
 
-Emits `chunking.json` with `corpus_info`, per-strategy `strategy_results`, a `recommendation`, and `sample_chunks`. Use `recommendation.strategy` and its config; show the user 2-3 `sample_chunks` so they can sanity-check boundaries.
-
-### 2. Design the pipeline from requirements
-
-Write a requirements JSON with these keys (all required): `document_types[]`, `document_count`, `avg_document_size` (chars), `queries_per_day`, `query_patterns[]`, `latency_requirement`, `budget_monthly`, `accuracy_priority` (0-1), `cost_priority` (0-1), `maintenance_complexity`.
-
+### 2. Спроектировать конвейер по требованиям
+Написать JSON требований (все ключи обязательны): `document_types[]`, `document_count`,
+`avg_document_size` (символы), `queries_per_day`, `query_patterns[]`, `latency_requirement`,
+`budget_monthly`, `accuracy_priority` (0-1), `cost_priority` (0-1), `maintenance_complexity`.
 ```bash
 python3 rag_pipeline_designer.py requirements.json -o design.json
 ```
+Выдаёт `design.json`: `chunking`, `embedding`, `vector_db`, `retrieval`, `reranking`, `evaluation`,
+`total_cost`, `architecture_diagram` (mermaid), `config_templates`. Показать диаграмму; каждую цифру
+`cost_monthly` помечать как оценку к проверке (правило 1).
 
-Emits `design.json` with `chunking`, `embedding`, `vector_db`, `retrieval`, `reranking`, `evaluation`, `total_cost`, `architecture_diagram` (mermaid), and `config_templates`. Present the diagram; label every `cost_monthly` figure as an estimate to verify (rule 1).
-
-### 3. Evaluate retrieval quality
-
-Prepare `queries.json` (list of `{id, text}` or `{"queries": [...]}`) and `ground_truth.json` (`{query_id: [relevant_doc_ids]}`), then:
-
+### 3. Оценить качество поиска
+Подготовить `queries.json` (список `{id, text}` или `{"queries": [...]}`) и `ground_truth.json`
+(`{query_id: [id_док]}`), затем:
 ```bash
-python3 retrieval_evaluator.py queries.json /path/to/docs ground_truth.json --k-values 3 5 10 -o eval.json
+python3 retrieval_evaluator.py queries.json /путь/к/докс ground_truth.json --k-values 3 5 10 -o eval.json
 ```
+Отчёт: precision@k, recall@k, MRR, NDCG@k + `poor_precision_examples` / `poor_recall_examples` для разбора.
 
-Reports precision@k, recall@k, MRR, NDCG@k, plus `poor_precision_examples` / `poor_recall_examples` for failure analysis.
+### 4. Цикл проверки
+Дизайн готов только когда:
+1. `eval.json` достигает целей — типовые пороги: precision@5 ≥ 0.8, recall@10 ≥ 0.85 (задаются с пользователем).
+2. Ниже цели: посмотреть списки плохих примеров, изменить **ОДНУ** переменную (стратегия чанкинга →
+   шаг 1; уровень эмбеддингов; добавить реранкинг; гибридный поиск) и перезапустить шаг 3. Повторять.
+3. Каждая рекомендованная модель/цена несёт пометку «проверить актуальность» с датой.
 
-### 4. Verification loop
-
-The design is done only when:
-
-1. `eval.json` meets targets — typical floors: precision@5 ≥ 0.8, recall@10 ≥ 0.85 (set per use case with the user).
-2. If below target: inspect the poor-example lists, then change **one** variable (chunking strategy → re-run step 1; embedding tier; add reranking; hybrid retrieval) and re-run step 3. Repeat.
-3. Every recommended model/price in the deliverable carries a "verify current pricing/model availability" note with an as-of date.
-
-## References
-
-- `references/chunking_strategies_comparison.md` — strategy trade-offs the optimizer implements
-- `references/embedding_model_benchmark.md` — benchmark *methodology* (dated snapshot; staleness warning at top)
-- `references/rag_evaluation_framework.md` — metric definitions (faithfulness, relevance, precision/recall/NDCG)
+## Материалы
+- `references/chunking_strategies_comparison.md` — компромиссы стратегий, реализованных в оптимизаторе
+- `references/embedding_model_benchmark.md` — *методология* бенчмарка (снимок с датой, предупреждение об устаревании)
+- `references/rag_evaluation_framework.md` — определения метрик (достоверность, релевантность, precision/recall/NDCG)

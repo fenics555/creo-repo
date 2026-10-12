@@ -1,272 +1,221 @@
 ---
 name: zero-hallucination-coder
-when: hallucinated code, invented api, plan before coding, high-stakes code, verify structure, yagni
-description: "Runs a disciplined Discuss -> Map -> Decompose -> Execute -> Verify loop that grounds code in verified structure — no invented APIs, no assumed imports, no placeholder code — with a lazy-senior-dev YAGNI ladder that deletes unnecessary code before it is written. Use when a coding task is high-stakes, complex, or spans existing code (auth, databases, migrations, multi-file features), or when the user explicitly asks to plan carefully before coding, avoid hallucinated code, or work rigorously. Not for trivial edits, typos, or throwaway one-off scripts — those do not need the full loop."
+when: выдуманный код, несуществующий api, план перед кодингом, ответственный код, проверка структуры, yagni
+description: "Дисциплинированный цикл Обсудить → Карта → Разбить → Выполнить → Проверить, который привязывает код к проверенной структуре — без выдуманных API, без предположенных импортов, без заглушек — с YAGNI-лестницей ленивого сеньора, которая удаляет ненужный код ДО его написания. Использовать, когда задача по коду ответственная, сложная или затрагивает существующий код (auth, БД, миграции, многофайловые фичи), или когда пользователь явно просит планировать тщательно и не выдумывать. НЕ для тривиальных правок, опечаток и одноразовых скриптов."
 ---
 
-# Zero-Hallucination Coder
+# Кодер без галлюцинаций
 
-A disciplined, senior engineering partner. The goal is code that is correct, grounded, and complete — with zero invented APIs, zero skipped steps, and zero hallucinated behavior.
+Дисциплинированный старший инженер-напарник. Цель — код корректный, обоснованный и полный:
+ноль выдуманных API, ноль пропущенных шагов, ноль галлюцинированного поведения.
 
-## When to invoke (opt-in discipline)
+## Когда применять (осознанно)
 
-This is a **deliberate, opt-in** pipeline, not the default for every edit. Reach for it when:
+Это **сознательный, включаемый вручную** конвейер, а не режим по умолчанию для любой правки:
 
-- The task is high-stakes or hard to undo (migrations, schema/auth changes, deployments).
-- It spans existing code across multiple files, or touches external APIs, auth, databases, or state.
-- The user explicitly asks to "plan carefully," "avoid hallucinated code," or "do this rigorously."
+- Задача ответственная или трудно обратимая (миграции, изменения схемы/auth, деплой).
+- Затрагивает существующий код в нескольких файлах или внешние API, auth, БД, состояние.
+- Пользователь явно просит «планировать тщательно», «не выдумывать», «сделать строго».
 
-For a typo, a reformat, a docstring, or a throwaway script, skip the loop — the ceremony costs more than it saves. Anti-hallucination Rules 1-7 (below) still apply everywhere, but the five-phase loop is reserved for work that earns it.
+Для опечатки, переформатирования, докстринга или одноразового скрипта цикл пропускать — церемония
+дороже пользы. Правила анти-галлюцинаций 1–7 (ниже) действуют ВСЕГДА, а пятифазный цикл — только для достойной работы.
 
-## Credits & Inspiration
+## Благодарности (источники идей)
 
-This skill is a synthesis of four open-source projects. Their ideas power every phase of the loop below.
+Скилл — синтез четырёх открытых проектов; их идеи питают каждую фазу цикла.
 
-| Project | Author | What It Contributes |
+| Проект | Автор | Вклад |
 |---------|--------|---------------------|
-| [Ralph](https://github.com/snarktank/ralph) | [@snarktank](https://github.com/snarktank) | PRD-driven atomic coding loop — implement one story at a time in fresh context, commit only when quality checks pass |
-| [GSD Core](https://github.com/open-gsd/gsd-core) | [@open-gsd](https://github.com/open-gsd) | Context-engineering discipline — Discuss → Plan → Execute → Verify → Ship phase loop, structured memory files, preventing context rot |
-| [Graphify](https://github.com/safishamsi/graphify) | [@safishamsi](https://github.com/safishamsi) | Knowledge-graph codebase reasoning — explicit KNOWN/INFERRED/UNKNOWN relationship tagging, grounded in real structure not guesses |
-| [Ponytail](https://github.com/DietrichGebert/ponytail) | [@DietrichGebert](https://github.com/DietrichGebert) | Lazy senior dev hierarchy — before writing any code, check if it needs to exist at all, producing 80–94% less code |
+| Ralph | @snarktank | Атомарный цикл по PRD — одна история за раз в свежем контексте, коммит только при пройденных проверках |
+| GSD Core | @open-gsd | Инженерия контекста — фазы Обсудить→План→Выполнить→Проверить→Отгрузить, структурная память против «гниения контекста» |
+| Graphify | @safishamsi | Рассуждение о коде как о графе знаний — явная разметка KNOWN/INFERRED/UNKNOWN, опора на реальную структуру |
+| Ponytail | @DietrichGebert | Иерархия ленивого сеньора — до написания кода проверить, нужен ли он вообще (на 80–94% меньше кода) |
 
-Each project also ships its own native tooling (autonomous runners, AST graph builders, lifecycle hooks). This skill bakes their *discipline* into one loop; install the originals separately only if you want their standalone tooling.
+## Перед началом
+**Сначала проверить контекст:** если в рабочей папке есть `project-context.md` — прочитать его до вопросов и спрашивать только про пробелы.
 
----
+## Режимы
+- **С нуля** — нет существующего кода. Прогнать все пять фаз.
+- **Расширение существующего** — нужные файлы должны быть предоставлены ДО фазы 2 (Карта). Запрашивать только важные файлы, не весь репозиторий.
+- **Отладка/рефакторинг** — сокращённый цикл: Обсудить → Карта (прочитать сломанный код) → Выполнить (точечная правка) → Проверить.
 
-## Before Starting
+## Пятифазный цикл
+Каждая сессия под этим скиллом проходит все пять фаз по порядку. Пропуск фаз — главная причина
+галлюцинированного, сломанного или неполного кода.
 
-**Check for context first:** If `project-context.md` exists in the workspace, read it before asking questions. Use that context and only ask for gaps.
+### Фаза 1: ОБСУДИТЬ
+**Цель:** зафиксировать, что именно строится, ДО планирования.
+Задать и полностью закрыть:
+1. Каково конечное состояние? Описать работающую вещь, а не шаги к ней.
+2. Какой стек, язык, основные библиотеки? (НЕ предполагать.)
+3. Есть ли существующий код, который это затрагивает? Если да — предоставить.
+4. Жёсткие ограничения? (Должно работать на X, использовать Y, не ломать Z.)
+5. Как выглядит «готово» — как поймём, что работает?
+**Правила:** задать все пять вопросов ОДНИМ сообщением и ждать ответов. Не начинать планирование,
+пока не отвечены 1, 2 и 5. Если пользователь говорит «просто напиши код» — кратко объяснить, почему
+пропуск Обсуждения даёт сломанный результат, и спросить ещё раз; при настойчивости — продолжить с явными пометками UNKNOWN.
+**Выход:** абзац-«Резюме ситуации», который пользователь подтверждает.
 
-## Modes
-
-- **Build from scratch** — no existing codebase. Run all five phases.
-- **Extend existing code** — the relevant files must be shared before Phase 2 (Map) can run. Request only the files that matter, not the whole repo.
-- **Debug or refactor** — abbreviated loop: Discuss → Map (read broken code) → Execute (targeted fix) → Verify.
-
----
-
-## The Five-Phase Loop
-
-Every session under this skill runs all five phases in order. Skipping phases is the primary cause of hallucinated, broken, or incomplete code.
-
-### Phase 1: DISCUSS
-
-**Goal:** Capture what is actually being built before any planning happens.
-
-Ask and fully resolve:
-
-1. What is the end state? Describe the working thing, not the steps to get there.
-2. What tech stack, language, and major libraries are in use? (Do NOT assume.)
-3. Does existing code exist that this touches? If yes, share it.
-4. What are the hard constraints? (Must run on X, must use Y, must not break Z.)
-5. What does "done" look like — how will we know this works?
-
-**Rules:**
-- Ask all five questions in a single message and wait for answers.
-- Do not start planning until questions 1, 2, and 5 are answered.
-- If the user says "just write the code", explain briefly why skipping Discuss produces broken output and ask once more. If they insist, proceed with explicit UNKNOWN tags everywhere.
-
-**Output:** A one-paragraph Situation Summary the user confirms before moving forward.
-
-### Phase 2: MAP
-
-**Goal:** Build a codebase map before writing a single line of code. *(Graphify principle)*
-
-For existing code:
-
+### Фаза 2: КАРТА
+**Цель:** построить карту кодовой базы до единой строки кода. *(принцип Graphify)*
+Для существующего кода:
 ```
-CODEBASE MAP
-============
-[KNOWN]    UserService.ts → calls → AuthService.authenticate()
-[KNOWN]    AuthService.ts → imports → jwt library (v9.x, user confirmed)
-[INFERRED] UserController.ts → probably calls → UserService (assumed from naming)
-[UNKNOWN]  Database connection layer → HOW auth tokens are stored → NOT VERIFIED
+КАРТА КОДОВОЙ БАЗЫ
+==================
+[KNOWN]    UserService.ts → вызывает → AuthService.authenticate()
+[KNOWN]    AuthService.ts → импортирует → библиотека jwt (v9.x, подтверждено)
+[INFERRED] UserController.ts → вероятно вызывает → UserService (по именованию)
+[UNKNOWN]  Слой подключения к БД → КАК хранятся токены auth → НЕ ПРОВЕРЕНО
 
-UNKNOWN FLAGS — must resolve before coding:
-- Token storage mechanism: ask user or request db/config file
+ФЛАГИ UNKNOWN — закрыть до кодинга:
+- Механизм хранения токенов: спросить пользователя или запросить db/config
 ```
+Для проектов с нуля: набросать предлагаемую архитектуру как карту зависимостей с той же разметкой.
+Каждая внешняя библиотека/API — [KNOWN] (пользователь подтвердил наличие и версию) или [ASSUMED].
+**Жёсткое правило:** никогда не писать код, зависящий от [UNKNOWN]. Закрыть все UNKNOWN до фазы 3.
+**Выход:** письменная карта без неразрешённых UNKNOWN.
 
-For greenfield projects: sketch the proposed architecture as a dependency map with the same tagging. Every external library or API must be tagged [KNOWN] (user confirmed it exists and the version) or [ASSUMED] (the library is known but the exact version/API is unconfirmed).
-
-**Hard rule:** Never write code that depends on an [UNKNOWN]. Resolve all UNKNOWN flags before Phase 3.
-
-**Output:** A written codebase map with no unresolved UNKNOWN flags.
-
-### Phase 3: DECOMPOSE
-
-**Goal:** Break the task into atomic stories — small enough that each fits in one response. *(Ralph principle)*
-
+### Фаза 3: РАЗБИТЬ
+**Цель:** разбить задачу на атомарные истории — такие, чтобы каждая влезала в один ответ. *(принцип Ralph)*
 ```
-IMPLEMENTATION PLAN
-===================
-Story 1: [short title] — STATUS: PENDING
-  - What: [exactly what gets built]
-  - Acceptance: [how we verify this works]
-  - Dependencies: [what must exist first]
-  - Risk: [what could go wrong]
-  - Complexity: LOW / MED / HIGH
+ПЛАН РЕАЛИЗАЦИИ
+===============
+История 1: [краткое имя] — СТАТУС: ОЖИДАЕТ
+  - Что: [что именно строится]
+  - Приёмка: [как проверим, что работает]
+  - Зависимости: [что должно существовать раньше]
+  - Риск: [что может пойти не так]
+  - Сложность: НИЗКАЯ / СРЕДНЯЯ / ВЫСОКАЯ
 ```
+**Правило размера:** каждая история реализуется за один ответ. Дробить, если >300 строк, >3 файлов или >2 критериев приёмки.
+- **Слишком крупно:** «Построй систему аутентификации» / «Настрой слой БД»
+- **Верно:** «Добавь `validateToken(token: string): boolean` в AuthService» / «Напиши SQL-миграцию для таблицы users»
+**Выход:** нумерованный список историй. Пользователь подтверждает/правит до исполнения.
 
-**Right-sizing rule:** Each story must be implementable in one response. Split if it needs >300 lines, touches >3 files, or has >2 acceptance criteria.
-
-- **Too big:** "Build the authentication system" / "Set up the database layer"
-- **Right-sized:** "Add `validateToken(token: string): boolean` to AuthService" / "Write the SQL migration for the users table"
-
-**Output:** Numbered story list. User confirms or adjusts before execution begins.
-
-### Phase 3.5: PONYTAIL CHECK (runs before every story)
-
-**Goal:** The best code is the code you never wrote. *(Ponytail principle)*
-
-Before implementing any story, run through this six-rung ladder and stop at the first rung that holds:
-
+### Фаза 3.5: PONYTAIL-ПРОВЕРКА (перед каждой историей)
+**Цель:** лучший код — тот, который ты не написал. *(принцип Ponytail)*
+Перед реализацией истории пройти шесть ступеней и остановиться на первой подходящей:
 ```
-PONYTAIL CHECK — Story [N]: [title]
-====================================
-Rung 1: Does this code need to exist at all?
-  → YAGNI test: required by an acceptance criterion, or speculative?
-  → If speculative: KILL IT. Note: "ponytail: skipped [X] — YAGNI"
-
-Rung 2: Does the stdlib / language itself already do this?
-  → Built-ins: array methods, datetime, pathlib, os, json, re…
-  → If yes: USE IT. Note: "ponytail: using stdlib [X] instead of custom impl"
-
-Rung 3: Does a native platform/runtime feature do this?
-  → Browser: fetch, localStorage, IntersectionObserver
+PONYTAIL-ПРОВЕРКА — История [N]: [имя]
+======================================
+Ступень 1: Нужен ли этот код вообще?
+  → YAGNI-тест: требуется критерием приёмки или это спекуляция?
+  → Если спекуляция: УБРАТЬ. Пометка: "ponytail: пропущено [X] — YAGNI"
+Ступень 2: Это уже делает стандартная библиотека / язык?
+  → Встроенное: методы массивов, datetime, pathlib, os, json, re…
+  → Если да: ИСПОЛЬЗОВАТЬ. "ponytail: беру stdlib [X] вместо своей реализации"
+Ступень 3: Это делает нативная фича платформы/рантайма?
+  → Браузер: fetch, localStorage, IntersectionObserver
   → Node: fs, http, crypto, stream
-  → If yes: USE IT.
-
-Rung 4: Does an already-installed dependency do this?
-  → Check the confirmed [KNOWN] packages from the codebase map.
-  → If yes: USE IT.
-
-Rung 5: Can this be a trivial one-liner?
-  → If yes: write it inline, no abstraction needed yet.
-
-Rung 6: Write the minimum that works.
-  → No premature abstraction. No config systems for one hardcoded value.
-  → No base classes for one subclass. No defensive layers for hypothetical futures.
-  → Note: "ponytail: minimum impl — upgrade path: [what to do when this needs to grow]"
+  → Если да: ИСПОЛЬЗОВАТЬ.
+Ступень 4: Это делает уже установленная зависимость?
+  → Проверить подтверждённые [KNOWN]-пакеты из карты.
+  → Если да: ИСПОЛЬЗОВАТЬ.
+Ступень 5: Это тривиальный однострочник?
+  → Если да: написать inline, абстракция пока не нужна.
+Ступень 6: Написать МИНИМУМ, который работает.
+  → Без преждевременных абстракций. Без систем конфигурации ради одного значения.
+  → Без базовых классов ради одного наследника. Без защитных слоёв под гипотезы.
+  → "ponytail: минимальная реализация — путь роста: [что делать при росте]"
 ```
+**Никогда не под нож:** валидация ввода на границах доверия, обработка ошибок ради сохранности данных,
+проверки безопасности, доступность в UI, ограничения целостности данных.
+**Выход:** краткий результат — какая ступень остановила поиск. Каждое упрощение помечается inline:
+`// ponytail: [причина] — путь роста: [что делать]`, чтобы отложенный долг был виден.
 
-**Never on the chopping block:** input validation at trust boundaries, error handling for data loss, security checks, accessibility in UI code, data integrity constraints.
-
-**Output:** A brief check result showing which rung stopped the search. Any implementation shortcut gets a `// ponytail: [reason] — upgrade path: [what to do]` comment inline so deferred debt stays visible.
-
-### Phase 4: EXECUTE
-
-**Goal:** Implement exactly one story at a time with no hallucinated dependencies. *(Ralph + GSD Core principle)*
-
-**Step A — Pre-implementation check:**
+### Фаза 4: ВЫПОЛНИТЬ
+**Цель:** реализовать РОВНО одну историю за раз без выдуманных зависимостей. *(Ralph + GSD Core)*
+**Шаг A — предпроверка:**
 ```
-STORY [N] — [Title]
-Pre-check:
-- All dependencies from story list: CONFIRMED ✓ / MISSING ✗
-- All APIs/methods this code calls: KNOWN ✓ / ASSUMED ⚠ / UNKNOWN ✗
-- Files this touches: [list them]
+ИСТОРИЯ [N] — [Имя]
+Предпроверка:
+- Все зависимости из списка: ПОДТВЕРЖДЕНО ✓ / ОТСУТСТВУЕТ ✗
+- Все API/методы, что вызывает код: KNOWN ✓ / ASSUMED ⚠ / UNKNOWN ✗
+- Затрагиваемые файлы: [перечислить]
 ```
-If any UNKNOWN exists, stop and resolve it before writing code.
-
-**Step B — Write the code:**
-- Complete, runnable implementation — no placeholders, no `// TODO`, no `...rest of implementation`.
-- Every function fully implemented or explicitly out of scope with a written reason.
-- Imports must be real — never invent package names.
-- If a method's existence is uncertain: `// ⚠ ASSUMED: verify this method exists in your version`.
-
-**Step C — Self-review:**
+При любом UNKNOWN — остановиться и закрыть его до кода.
+**Шаг B — написать код:** полная рабочая реализация — без заглушек, без `// TODO`, без `...остальное`.
+Каждая функция полностью реализована или явно вне области с причиной. Импорты — реальные, имена пакетов не выдумывать.
+При сомнении в методе: `// ⚠ ASSUMED: проверить, что этот метод есть в твоей версии`.
+**Шаг C — самообзор:**
 ```
-SELF-REVIEW
-===========
-☑ Does this do exactly what Story [N] specifies?
-☑ Are there any invented method names or APIs?
-☑ Are there any assumed behaviors that depend on unseen code?
-☑ Does this break anything in the codebase map?
-☑ Are the acceptance criteria from Story [N] met?
-Verdict: READY TO TEST / NEEDS REVISION — [reason]
+САМООБЗОР
+=========
+☑ Делает ли это ровно то, что в Истории [N]?
+☑ Есть ли выдуманные имена методов/API?
+☑ Есть ли предположения о поведении невидимого кода?
+☑ Не ломает ли это что-то в карте?
+☑ Достигнуты ли критерии приёмки Истории [N]?
+Вердикт: ГОТОВО К ТЕСТУ / НУЖНА ДОРАБОТКА — [причина]
 ```
-
-**Step D — Handoff note:**
+**Шаг D — записка передачи:**
 ```
-HANDOFF
-=======
-What was built: [one sentence]
-How to test: [exact steps, not "it should work"]
-What to watch for: [edge cases or fragile assumptions]
-Next story: Story [N+1] — [title]
+ПЕРЕДАЧА
+========
+Что построено: [одно предложение]
+Как тестировать: [точные шаги, не «должно работать»]
+На что смотреть: [краевые случаи или хрупкие предположения]
+Следующая история: История [N+1] — [имя]
 ```
+Не переходить к следующей истории, пока пользователь не подтвердит прохождение текущей.
 
-Do not proceed to the next story until the user confirms the current one passes.
-
-### Phase 5: VERIFY
-
-**Goal:** Before declaring done, walk through what was built vs what was planned. *(GSD Core principle)*
-
+### Фаза 5: ПРОВЕРИТЬ
+**Цель:** до объявления «готово» сверить построенное с запланированным. *(принцип GSD Core)*
 ```
-VERIFICATION REPORT
-===================
-Original end state (from Phase 1): [restate it]
-Stories completed: [N/N]
+ОТЧЁТ ПРОВЕРКИ
+==============
+Исходное конечное состояние (фаза 1): [повторить]
+Историй завершено: [N/N]
 
-Story [N] — [Title]
-  Planned acceptance: [from Phase 3]
-  Actual behavior: [what the code actually does]
-  Gap: NONE / [describe gap]
-  Status: PASS / NEEDS REVISION
+История [N] — [Имя]
+  План приёмки: [из фазы 3]
+  Фактическое поведение: [что код реально делает]
+  Разрыв: НЕТ / [описать]
+  Статус: ПРОЙДЕНО / НУЖНА ДОРАБОТКА
 
-Outstanding issues: [any gaps, assumptions, deferred items]
-
-OVERALL: COMPLETE / NEEDS WORK — [summary]
+Незакрытые вопросы: [разрывы, допущения, отложенное]
+ИТОГО: ЗАВЕРШЕНО / НУЖНА РАБОТА — [резюме]
 ```
+Если у истории есть разрыв — написать микро-историю для его закрытия и прогнать фазу 4 только для него.
 
-If any story has a gap, write a micro-story to close it and run Phase 4 again for that gap only.
+## Анти-паттерны (Правила 1–7 — всегда, даже при сокращённом цикле)
+1. **Никаких выдуманных API.** Если не уверен, что метод есть в указанной версии библиотеки — спроси
+   или напиши `// ⚠ ASSUMED: проверить, что метод существует`.
+2. **Никаких предположенных импортов.** Каждый импорт — пакет, который пользователь подтвердил в проекте.
+3. **Никаких заглушек.** `// TODO`, `pass`, `throw new Error("not implemented")` запрещены, если явно не вынесены в новую историю.
+4. **Никакого прыжка в конец.** Истории последовательны. Финальная интеграция — только после работы компонентов.
+5. **Никаких молчаливых допущений.** Каждое допущение записано и помечено [ASSUMED] или [UNKNOWN].
+6. **Одна история за ход.** Не паковать истории в один ответ, если они не тривиально малы (<20 строк, без общих зависимостей).
+7. **Свежие рассуждения на историю.** Перечитать карту и записку передачи перед каждой новой историей. Не полагаться на память о том, что было две истории назад.
 
----
+## Правила инженерии контекста
+*(Против «гниения контекста» — тихой деградации качества по мере заполнения окна, по GSD Core.)*
+- **A:** После каждой истории обновлять карту тем, что добавлено.
+- **B:** В начале истории переформулировать конечное состояние (из фазы 1) одним предложением. Против дрейфа.
+- **C:** Спросить «это текущая версия?», если прошло больше пары ходов с момента предоставления кода.
+- **D:** Если точность может падать из-за длины диалога — сказать об этом прямо и попросить переслать нужный файл.
 
-## Anti-Patterns (Rules 1-7 — always on, even when short-circuiting)
+## Когда сокращать цикл
+- **Полный цикл:** затрагивает существующий код в нескольких файлах; внешние API, auth, БД, состояние; >3 критериев приёмки; ошибки трудно откатить.
+- **Сокращённый (Обсудить + Выполнить + Проверить):** автономная утилита без внешних зависимостей; явный баг-фикс в показанном коде; скрипт преобразования данных без побочных эффектов.
+- **Просто выполнить:** опечатка, переформатирование, линт, докстринг.
 
-1. **No invented APIs.** If not certain a method exists in the stated library version, ask, or write `// ⚠ ASSUMED: verify this method exists`.
-2. **No assumed imports.** Every import must correspond to a package the user has confirmed exists in their project.
-3. **No placeholder code.** `// TODO`, `pass`, `throw new Error("not implemented")` are forbidden unless explicitly scoped out as a new story.
-4. **No skipping to the end.** Stories are sequential. No final integration before individual components work.
-5. **No silent assumptions.** Every assumption gets written down and tagged [ASSUMED] or [UNKNOWN].
-6. **One story per turn.** Do not batch multiple stories into one response unless they are trivially small (<20 lines each, no shared dependencies).
-7. **Fresh reasoning per story.** Re-read the codebase map and previous handoff note before each new story. Do not rely on memory of what was written two stories ago.
+## Проактивные триггеры
+Поднимать без запроса, когда замечено в контексте:
+- **Предупреждение о гниении контекста:** диалог очень длинный → отметить и предложить переслать состояние.
+- **Утечка UNKNOWN:** код ссылается на ещё не картированную зависимость → пауза и пометка.
+- **История слишком велика:** затрагивает >3 файлов → разбить до кодинга.
+- **Ponytail-удаление:** целую историю можно убрать через stdlib/нативное/установленный пакет → сообщить до написания кода.
 
-## Context Engineering Rules
-
-*(Prevents "context rot" — the silent quality degradation as the context window fills — per GSD Core.)*
-
-- **A:** After each story, update the codebase map with what was added.
-- **B:** At the start of each story, restate the end state (from Phase 1) in one sentence. Prevents drift.
-- **C:** Ask "is this the current version?" if more than a few turns have passed since code was shared.
-- **D:** If accuracy may be degrading due to conversation length, say so explicitly and ask the user to reshare the relevant file.
-
-## When to Short-Circuit
-
-- **Full loop required:** touches existing code across multiple files; involves external APIs, auth, databases, or state; more than 3 acceptance criteria; mistakes would be hard to undo.
-- **Abbreviated loop (Discuss + Execute + Verify):** standalone utility with no external deps; clearly scoped bug fix in shown code; data-transformation script with no side effects.
-- **Just execute:** fixing a typo, reformatting, linting, adding a docstring.
-
-## Proactive Triggers
-
-Surface these without being asked when noticed in context:
-
-- **Context rot warning:** conversation very long → flag it and offer to reshare state.
-- **UNKNOWN bleed:** user's code references a dependency not yet mapped → pause and tag it.
-- **Story too large:** a requested story would touch >3 files → split it before coding.
-- **Ponytail kill:** an entire story can be eliminated by stdlib/native/installed dep → report it before writing anything.
-
-## Output Artifacts
-
-| When the user asks for... | They get... |
+## Артефакты на выходе
+| Когда просят… | Что получают… |
 |---------------------|------------|
-| A new feature | Situation Summary → Codebase Map → Story List → Story-by-story code with self-review + handoff → Verification Report |
-| A bug fix | Map of the broken code → targeted micro-story → fix with minimal diff → verification |
-| A code review | Codebase map annotations (KNOWN/INFERRED/UNKNOWN) + gap list + prioritized fix stories |
-| An architecture plan | Decomposed story list with dependency order, complexity ratings, and Ponytail elimination notes |
+| Новую фичу | Резюме ситуации → Карта → Список историй → Код по историям с самообзором + передачей → Отчёт проверки |
+| Баг-фикс | Карта сломанного кода → точечная микро-история → фикс минимальным диффом → проверка |
+| Ревью кода | Аннотации карты (KNOWN/INFERRED/UNKNOWN) + список пробелов + приоритизированные истории-фиксы |
+| Архитектурный план | Разложенный список историй с порядком зависимостей, оценками сложности и заметками Ponytail |
 
-## Cross-References
-
-- **`senior-architect`** — pure architecture decisions with no immediate implementation. NOT for tasks where code is written in the same session.
-- **`playwright-pro`** — writing or debugging Playwright tests specifically; this skill is the zero-hallucination wrapper around that work.
-- **`self-improving-agent`** — when the goal is Claude improving its own memory and past outputs, not building new features.
+## Связи
+- **`senior-architect`** — чистые архитектурные решения без немедленной реализации. НЕ для задач, где код пишется в той же сессии.
+- **`playwright-pro`** — написание/отладка тестов Playwright; этот скилл — обёртка «без галлюцинаций» вокруг той работы.
+- **`self-improving-agent`** — когда цель — улучшение собственной памяти/прошлых выходов, а не новые фичи.

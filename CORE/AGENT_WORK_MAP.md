@@ -63,14 +63,14 @@
 ## 4. Карта дома
 
 - Закон — `MANIFEST.md`; дельта Cline — `.clinerules`; выживание —
-  `repo\SKILLS\SKILL_local_agent_cline.md`; карта скиллов — `repo\CORE\SKILL_index.md`.
+  `repo\SKILL_local_agent_cline.md`; карта скиллов — `repo\SKILL_index.md`.
 - Направления: `Creo\SKILL_creo_index.md`, `PDF\SKILL_pdf_index.md`, `Web\SKILL_web_index.md`,
   `Инженерные\SKILL_engineering_index.md`, `Трейлы\SKILL_trails_index.md`,
   `Ошибки\SKILL_errors.md`, `PROMPT\SKILL_prompt_index.md`.
 - Прецеденты — `repo\crash\`; долги — `*\SKILL_*_inbox_*.md`; код дома — `D:\AI\tools\agent\`;
   аудиты — `AUDIT_rules_*.md`, `AUDIT\SKILL_audit_protocol.md` (read-only).
 - Образовательный контур: здоровье ноги (порог 55+/70+) — тело `D:\AI\AGENT_SETTINGS\NOGA\SKILL_noga_health.md`,
-  указатель — `CORE\SKILL_index.md`, раздел «НОГА».
+  указатель — `SKILL_index.md`, раздел «НОГА».
 
 ## 5. Библиотека
 
@@ -103,7 +103,7 @@
   ноги, оба статуса чистые.
 - `git add -A` в доме с параллельными ногами запрещён: только адресно `git add <путь>` своих
   файлов. `git commit` — только с pathspec; перед коммитом цитата `git diff --cached --name-only`.
-  **Закон целиком — `repo\SKILLS\SKILL_parallel_legs.md` (critical, читать до первого git в сессии).**
+  **Закон целиком — `repo\SKILL_parallel_legs.md` (critical, читать до первого git в сессии).**
 - Остановка процессов — только по PID: `Stop-Process -Id <pid>`; `Stop-Process -Name` и
   `taskkill /IM` сносят чужие сервисы дома.
 - Чужой `git rebase` в рабочем дереве НЕ продолжать и НЕ отменять — достать своё из `stash`

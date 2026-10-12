@@ -1,466 +1,273 @@
 ---
 name: skill-authoring-standard
 system: агенты
-description: Use when: Skill Authoring Standard
-when: skill authoring standard
+description: Use when: стандарт авторства скиллов
+when: стандарт авторства скиллов, шаблон скилла, как писать скилл
 priority: normal
 ---
-# Skill Authoring Standard
+# Стандарт авторства скиллов
 
-The DNA of every skill in this repository. Follow this standard when creating new skills or upgrading existing ones.
+«ДНК» каждого скилла в этом репозитории. Соблюдать при создании новых скиллов и обновлении существующих.
 
 ---
 
-## SKILL.md Template
+## Шаблон SKILL.md
 
 ```markdown
 ---
-name: skill-name
-description: "When to use this skill. Include trigger keywords and phrases users might say. Mention related skills for disambiguation."
+name: имя-скилла
+description: "Когда применять этот скилл. Включи триггерные слова и фразы пользователя. Упомяни родственные скиллы для различения."
 license: MIT
 metadata:
   version: 1.0.0
   author: Alireza Rezvani
-  category: domain-name
-  updated: YYYY-MM-DD
+  category: имя-домена
+  updated: ГГГГ-ММ-ДД
 ---
 
-# Skill Name
+# Имя скилла
 
-You are an expert in [domain]. Your goal is [specific outcome for the user].
+Ты — эксперт в [домене]. Твоя цель — [конкретный результат для пользователя].
 
-## Before Starting
+## Перед началом
 
-**Check for context first:**
-If `[domain]-context.md` exists, read it before asking questions. Use that context and only ask for information not already covered or specific to this task.
+**Сначала проверь контекст:**
+Если есть `[домен]-context.md` — прочитай его до вопросов. Используй этот контекст и спрашивай
+только о том, чего нет или что специфично для задачи.
 
-Gather this context (ask if not provided):
+Собери контекст (спрашивай, если не дано):
 
-### 1. Current State
-- What exists today?
-- What's working / not working?
+### 1. Текущее состояние
+- Что есть сегодня?
+- Что работает / не работает?
 
-### 2. Goals
-- What outcome do they want?
-- What constraints exist?
+### 2. Цели
+- Какого результата хотят?
+- Какие ограничения?
 
-### 3. [Domain-Specific Context]
-- [Questions specific to this skill]
+### 3. [Контекст конкретного домена]
+- [Вопросы, специфичные для этого скилла]
 
-## How This Skill Works
+## Как работает этот скилл
 
-This skill supports [N] modes:
+Скилл поддерживает [N] режимов:
 
-### Mode 1: Build from Scratch
-When starting fresh — no existing [artifact] to work with.
+### Режим 1: С нуля
+Когда начинают с чистого листа — нет существующего [артефакта].
 
-### Mode 2: Optimize Existing
-When improving something that already exists. Analyze what's working, identify gaps, recommend changes.
+### Режим 2: Оптимизация существующего
+Когда улучшают то, что уже есть. Разобрать, что работает, найти пробелы, рекомендовать изменения.
 
-### Mode 3: [Situation-Specific]
-When [specific scenario that needs a different approach].
+### Режим 3: [Ситуация-специфичный]
+Когда [конкретный сценарий, требующий другого подхода].
 
-## [Core Content Sections]
+## [Основные разделы]
 
-[Action-oriented workflow. Not a textbook — a practitioner guiding you through it.]
+[Действие-ориентированный рабочий процесс. Не учебник — практик, ведущий за руку.]
 
-[Tables for structured information. Checklists for processes. Examples for clarity.]
+[Таблицы для структурированной информации. Чек-листы для процессов. Примеры для ясности.]
 
-## Proactive Triggers
+## Проактивные триггеры
 
-Surface these issues WITHOUT being asked when you notice them in context:
+Поднимай эти вопросы БЕЗ запроса, когда замечаешь их в контексте:
 
-- [Trigger 1: specific condition → what to flag]
-- [Trigger 2: specific condition → what to flag]
-- [Trigger 3: specific condition → what to flag]
+- [Триггер 1: конкретное условие → что поднять]
+- [Триггер 2: конкретное условие → что поднять]
+- [Триггер 3: конкретное условие → что поднять]
 
-## Output Artifacts
+## Артефакты на выходе
 
-| When you ask for... | You get... |
+| Когда просят... | Что получают... |
 |---------------------|------------|
-| [Common request 1] | [Specific deliverable with format] |
-| [Common request 2] | [Specific deliverable with format] |
-| [Common request 3] | [Specific deliverable with format] |
+| [Частый запрос 1] | [Конкретный результат с форматом] |
+| [Частый запрос 2] | [Конкретный результат с форматом] |
+| [Частый запрос 3] | [Конкретный результат с форматом] |
 
-## Communication
+## Коммуникация
 
-All output follows the structured communication standard:
-- **Bottom line first** — answer before explanation
-- **What + Why + How** — every finding has all three
-- **Actions have owners and deadlines** — no "we should consider"
-- **Confidence tagging** — 🟢 verified / 🟡 medium / 🔴 assumed
+Весь вывод следует стандарту структурированной коммуникации:
+- **Суть первой строкой** — ответ до объяснения
+- **Что + Почему + Как** — у каждой находки все три
+- **У действий есть исполнитель и срок** — никаких «стоило бы рассмотреть»
+- **Маркировка уверенности** — 🟢 проверено / 🟡 средне / 🔴 предположение
 
-## Related Skills
+## Родственные скиллы
 
-- **skill-name**: Use when [specific scenario]. NOT for [disambiguation].
-- **skill-name**: Use when [specific scenario]. NOT for [disambiguation].
-- **skill-name**: Use when [specific scenario]. NOT for [disambiguation].
+- **имя-скилла**: когда [сценарий]. НЕ для [различение].
+- **имя-скилла**: когда [сценарий]. НЕ для [различение].
+- **имя-скилла**: когда [сценарий]. НЕ для [различение].
 ```
 
 ---
 
-## The 10 Patterns
+## 10 паттернов
 
-### Pattern 1: Context-First
-
-Every skill checks for domain context before asking questions. Only ask for what's missing.
-
-**Implementation:**
+### Паттерн 1: Контекст первым
+Каждый скилл проверяет доменный контекст до вопросов. Спрашивать только о недостающем.
 ```markdown
-## Before Starting
-
-**Check for context first:**
-If `marketing-context.md` exists, read it before asking questions.
-Use that context and only ask for information not already covered.
+## Перед началом
+**Сначала проверь контекст:**
+Если есть `marketing-context.md` — прочитай до вопросов.
 ```
+**Файлы доменного контекста:**
 
-**Domain context files:**
-
-| Domain | Context File | Created By |
+| Домен | Файл контекста | Кто создаёт |
 |--------|-------------|-----------|
-| C-Suite | `company-context.md` | `/cs:setup` (cs-onboard skill) |
-| Marketing | `marketing-context.md` | marketing-context skill |
-| Engineering | `project-context.md` | codebase-onboarding skill |
-| Product | `product-context.md` | product-strategist skill |
-| RA/QM | `regulatory-context.md` | regulatory-affairs-head skill |
+| C-Suite | `company-context.md` | скилл cs-onboard |
+| Маркетинг | `marketing-context.md` | скилл marketing-context |
+| Инженерия | `project-context.md` | скилл codebase-onboarding |
+| Продукт | `product-context.md` | скилл product-strategist |
+| RA/QM | `regulatory-context.md` | скилл regulatory-affairs-head |
 
-**Rules:**
-- If context exists → read it, use it, only ask for gaps
-- If context doesn't exist → offer to create it (auto-draft from available info)
-- Never dump all questions at once — conversational, one section at a time
-- Push for verbatim language — exact customer/user phrases beat polished descriptions
+**Правила:** контекст есть → читать, использовать, спрашивать только пробелы; нет → предложить создать
+(авто-черновик из доступного); не вываливать все вопросы сразу — разговорно, по одному разделу;
+добиваться дословного языка пользователя — точные фразы лучше отполированных описаний.
 
----
-
-### Pattern 2: Practitioner Voice
-
-Every skill opens with an expert persona and clear goal. Not a textbook — a senior practitioner coaching you.
-
-**Implementation:**
+### Паттерн 2: Голос практика
+Каждый скилл открывается экспертной персоной и ясной целью. Не учебник — старший практик, ведущий за руку.
 ```markdown
-You are an expert in [domain]. Your goal is [outcome].
+Ты — эксперт в [домене]. Твоя цель — [результат].
 ```
+**Правила:** писать как тот, кто делал это 100 раз; прямые формулировки; если звучит как статья из
+Википедии — переписать; мнение > нейтральность (говорить, что работает, а что нет); «Сделай X» лучше
+«Можно рассмотреть X».
+**Анти-паттерны:** ❌ «Этот скилл обеспечивает полный охват...» ❌ «Рекомендуется рассмотреть...»
+✅ «Ты — эксперт в ценообразовании SaaS. Твоя цель — помочь спроектировать цену, захватывающую ценность.»
 
-**Rules:**
-- Write as someone who has done this 100 times
-- Use contractions, direct language
-- If something sounds like a Wikipedia article, rewrite it
-- Opinionated > neutral. State what works and what doesn't.
-- "Do X" beats "You might consider X"
-- Industry jargon is fine when talking to practitioners — explain when talking to founders
+### Паттерн 3: Многомодовые процессы
+У большинства скиллов 2–3 естественные точки входа — проектировать под все.
+**Правила:** режим 2 (оптимизация) спрашивает текущие данные о производительности; если они есть —
+использовать; каждый режим самодостаточен.
 
-**Anti-patterns:**
-- ❌ "This skill provides comprehensive coverage of..."
-- ❌ "The following section outlines the various approaches to..."
-- ❌ "It is recommended that one should consider..."
-- ✅ "You are an expert in SaaS pricing. Your goal is to help design pricing that captures value."
-- ✅ "Lead with their world, not yours."
-- ✅ "If it sounds like marketing copy, rewrite it."
-
----
-
-### Pattern 3: Multi-Mode Workflows
-
-Most skills have 2-3 natural entry points. Design for all of them.
-
-**Implementation:**
+### Паттерн 4: Навигация по родственным скиллам
+Каждый скилл заканчивается кураторским списком родственных. Не просто ссылки — **когда использовать
+и когда НЕ.**
 ```markdown
-## How This Skill Works
-
-### Mode 1: Build from Scratch
-When starting fresh — [describe the greenfield scenario].
-
-### Mode 2: Optimize Existing  
-When [artifact] exists but isn't performing. Analyze → identify gaps → recommend.
-
-### Mode 3: [Situation-Specific]
-When [edge case or specific scenario that needs a different approach].
+## Родственные скиллы
+- **copywriting**: для лендингов. НЕ для email-цепочек.
+- **page-cro**: для оптимизации страниц. НЕ для потоков регистрации.
 ```
+**Правила:** 3–7 родственных (кураторски); каждая запись = имя + когда + когда НЕ; перекрёстные ссылки
+двусторонние; группировать по типу связи, если >5 («Работает с», «Вместо», «После этого»).
 
-**Common mode pairs:**
+### Паттерн 5: Разделение справочников
+SKILL.md — это процесс. Справочники — база знаний. Держать отдельно.
+**Правила:** SKILL.md ≤10 КБ (длиннее → вынести в references); ссылаться на справочники inline;
+справочники грузятся по запросу (нулевая стартовая цена); каждый справочник самодостаточен;
+шаблоны — заполняемые пользователем с явными маркерами.
 
-| Skill Type | Mode 1 | Mode 2 | Mode 3 |
-|-----------|--------|--------|--------|
-| CRO skills | Audit a page | Redesign flow | A/B test specific element |
-| Content skills | Write new | Rewrite/optimize | Repurpose for channel |
-| SEO skills | Full audit | Fix specific issue | Competitive gap analysis |
-| Strategy skills | Create plan | Review/critique plan | Pivot existing plan |
-| Analytics skills | Set up tracking | Debug tracking | Analyze data |
+### Паттерн 6: Проактивные триггеры
+Скиллы поднимают проблемы без запроса, когда видят паттерны в контексте.
+**Правила:** 4–6 триггеров на скилл; каждый = конкретное условие + бизнес-последствие; триггерить на
+скрытых рисках, а не на очевидном; формат: условие → флаг → рекомендация.
+**Примеры:** SEO — «каннибализация ключей: две страницы на один термин»; цены — «конверсия >40% → вероятно недооценено»;
+контент — «нет обновлений 6+ мес».
 
-**Rules:**
-- Mode 2 (optimize) should ask for current performance data
-- If user has performance data → use it to inform recommendations
-- Each mode should be self-contained (don't assume they read the other modes)
+### Паттерн 7: Артефакты на выходе
+Сопоставить частые запросы конкретным результатам.
+**Правила:** 4–6 артефактов; у каждого конкретный формат (скорер, матрица, план, аудит, шаблон);
+артефакты действенны — не просто анализ, а рекомендации со следующими шагами.
+
+### Паттерн 8: Петля качества
+Скиллы самопроверяются до выдачи находок.
+**Правила:** каждая находка маркирована уровнем уверенности; допущения явно помечены; «не знаю» >
+ложная уверенность; кросс-функциональные утверждения ссылаются на нужный скилл.
+
+### Паттерн 9: Стандарт коммуникации
+```
+СУТЬ: [ответ одним предложением]
+ЧТО:
+• [Находка 1] — 🟢/🟡/🔴
+ПОЧЕМУ ЭТО ВАЖНО: [бизнес-влияние]
+КАК ДЕЙСТВОВАТЬ:
+1. [Действие] → [Исполнитель] → [Срок]
+ТВОЁ РЕШЕНИЕ (если нужно):
+Вариант A: [описание] — [компромисс]
+Вариант B: [описание] — [компромисс]
+```
+**Правила:** суть первой строкой; максимум 5 пунктов на раздел; у действий есть исполнитель и срок;
+решения — варианты с компромиссами; без пересказа процесса («Сначала я проанализировал...») — только результат.
+
+### Паттерн 10: Python-инструменты
+Автоматизация только на stdlib, дающая количественный анализ.
+**Правила:** без внешних зависимостей (без pip install); CLI-first (файл-аргументы или stdin);
+вывод JSON для интеграции; встроенные примеры данных (запуск без настройки); один инструмент — одна задача;
+инструменты-скоры дают 0–100. Имя: `snake_case_глагол_существительное.py` (например `seo_checker.py`).
 
 ---
 
-### Pattern 4: Related Skills Navigation
+## Стандарт структуры файлов
 
-Every skill ends with a curated list of related skills. Not just links — **when to use each and when NOT to.**
-
-**Implementation:**
-```markdown
-## Related Skills
-
-- **copywriting**: For landing page and web copy. NOT for email sequences or ad copy.
-- **page-cro**: For optimizing any marketing page. NOT for signup flows (use signup-flow-cro).
-- **email-sequence**: For lifecycle/nurture emails. NOT for cold outreach (use cold-email).
+```
+имя-скилла/
+├── SKILL.md                    # ≤10 КБ — процесс, решения, действия
+├── references/                  # Глубокое знание (грузятся по запросу)
+│   ├── [тема]-guide.md          # Подробный гид
+│   ├── [тема]-benchmarks.md     # Отраслевые данные
+│   └── [тема]-examples.md       # Реальные примеры
+├── templates/                   # Заполняемые пользователем шаблоны
+│   └── [артефакт]-template.md   # С маркерами-заглушками
+└── scripts/                     # Python-автоматизация
+    └── [глагол]_[сущ].py        # Только stdlib, CLI-first
 ```
 
-**Rules:**
-- Include 3-7 related skills (not all of them — curate)
-- Each entry: skill name + WHEN to use + WHEN NOT TO (disambiguation)
-- Cross-references must be bidirectional (A mentions B, B mentions A)
-- Include cross-domain references when relevant (e.g., marketing skill → business-growth skill)
-- Group by relationship type if >5: "Works with", "Instead of", "After this"
+**Правила имён:** папка скилла — `kebab-case`; Python-скрипты — `snake_case.py`;
+справочники — `kebab-case.md`; шаблоны — `kebab-case-template.md`.
 
 ---
 
-### Pattern 5: Reference Separation
+## Чек-лист качества
 
-SKILL.md is the workflow. Reference docs are the knowledge base. Keep them separate.
+Перед тем как считать скилл готовым:
 
-**Implementation:**
-```
-skill-name/
-├── SKILL.md              # ≤10KB — what to do, how to decide, when to act
-├── references/
-│   ├── frameworks.md      # Deep framework catalog
-│   ├── benchmarks.md      # Industry data and benchmarks
-│   ├── platform-specs.md  # Platform-specific details
-│   └── examples.md        # Real-world examples
-├── templates/
-│   └── template.md        # User-fillable templates
-└── scripts/
-    └── tool.py            # Python automation
-```
+### Структура
+- [ ] YAML-шапка: name, description (триггерные слова), version
+- [ ] Голос практика — «Ты — эксперт в X. Твоя цель — Y.»
+- [ ] Контекст первым — проверка доменного контекста до вопросов
+- [ ] Многомодовость — минимум 2 режима (создать/оптимизировать)
+- [ ] SKILL.md ≤10 КБ — тяжёлое в `references/`
 
-**Rules:**
-- SKILL.md ≤10KB — if it's longer, move content to references
-- SKILL.md links to references inline: `See [references/frameworks.md](references/frameworks.md) for the full catalog.`
-- References are loaded on demand — zero startup cost
-- Each reference doc is self-contained (can be read independently)
-- Templates are user-fillable files with clear placeholder markers
+### Содержание
+- [ ] Действие-ориентировано — что делать, а не что существует
+- [ ] Мнение — говорит, что работает, а не только варианты
+- [ ] Таблицы для структурированных сравнений
+- [ ] Чек-листы для процессов
+- [ ] Примеры для ясности
 
----
+### Интеграция
+- [ ] Раздел «Родственные скиллы» с раз различением КОГДА/НЕ
+- [ ] Перекрёстные ссылки двусторонние
+- [ ] Указан в доменном индексе
+- [ ] Указан в `.codex/skills-index.json`
+- [ ] Указан в `.claude-plugin/marketplace.json`
 
-### Pattern 6: Proactive Triggers
+### Стандарт качества
+- [ ] Проактивные триггеры (4–6)
+- [ ] Таблица артефактов (4–6)
+- [ ] Ссылка на стандарт коммуникации
+- [ ] Маркировка уверенности у находок
 
-Skills surface issues without being asked when they detect patterns in context.
-
-**Implementation:**
-```markdown
-## Proactive Triggers
-
-Surface these without being asked:
-
-- **[Condition]** → [What to flag and why]
-- **[Condition]** → [What to flag and why]
-```
-
-**Rules:**
-- 4-6 triggers per skill
-- Each trigger: specific condition + business consequence
-- Triggers should be things the user wouldn't think to ask about
-- Format: condition → flag → recommended action
-- Don't trigger on obvious things — trigger on hidden risks
-
-**Examples:**
-- SEO: "Keyword cannibalization detected — two pages targeting the same term" → flag
-- Pricing: "Conversion rate >40% — likely underpriced" → flag
-- Content: "No content updated in 6+ months" → flag
-- CRO: "Form has >7 fields with no multi-step" → flag
+### Автоматизация (если применимо)
+- [ ] Python-инструмент(ы) — только stdlib, CLI-first, JSON-вывод
+- [ ] Встроенные примеры данных — запуск без настройки
+- [ ] Скоринг по шкале 0–100
 
 ---
 
-### Pattern 7: Output Artifacts
+## Файлы доменного контекста
 
-Map common requests to specific, concrete deliverables.
-
-**Implementation:**
-```markdown
-## Output Artifacts
-
-| When you ask for... | You get... |
-|---------------------|------------|
-| "Help with pricing" | Pricing recommendation with tier structure, value metrics, and competitive positioning |
-| "Audit my SEO" | SEO scorecard (0-100) with prioritized fixes and quick wins |
-```
-
-**Rules:**
-- 4-6 artifacts per skill
-- Each artifact has a specific format (scorecard, matrix, plan, audit, template)
-- Artifacts are actionable — not just analysis, but recommendations with next steps
-- Include what the output looks like (table? checklist? narrative?)
-
----
-
-### Pattern 8: Quality Loop
-
-Skills self-verify before presenting findings.
-
-**Implementation:**
-```markdown
-## Communication
-
-All output passes quality verification:
-- Self-verify: source attribution, assumption audit, confidence scoring
-- Peer-verify: cross-functional claims validated by the owning skill
-- Output format: Bottom Line → What (with confidence) → Why → How to Act → Your Decision
-- Results only. Every finding tagged: 🟢 verified, 🟡 medium, 🔴 assumed.
-```
-
-**Rules:**
-- Every finding tagged with confidence level
-- Assumptions explicitly marked as assumptions
-- "I don't know" > fake confidence
-- Cross-functional claims reference the relevant skill
-- High-stakes recommendations get extra scrutiny
-
----
-
-### Pattern 9: Communication Standard
-
-Structured output format for all skill output.
-
-**Standard output:**
-```
-BOTTOM LINE: [One sentence answer]
-
-WHAT:
-• [Finding 1] — 🟢/🟡/🔴
-• [Finding 2] — 🟢/🟡/🔴
-
-WHY THIS MATTERS: [Business impact]
-
-HOW TO ACT:
-1. [Action] → [Owner] → [Deadline]
-
-YOUR DECISION (if needed):
-Option A: [Description] — [Trade-off]
-Option B: [Description] — [Trade-off]
-```
-
-**Rules:**
-- Bottom line first — always
-- Max 5 bullets per section
-- Actions have owners and deadlines
-- Decisions framed as options with trade-offs
-- No process narration ("First I analyzed...") — results only
-
----
-
-### Pattern 10: Python Tools
-
-Stdlib-only automation that provides quantitative analysis.
-
-**Implementation:**
-```python
-#!/usr/bin/env python3
-"""Tool description — what it does in one line."""
-
-import json
-import sys
-from collections import Counter
-
-def main():
-    # Accept input from file arg or stdin
-    # Process with stdlib only
-    # Output JSON for programmatic use
-    # Also print human-readable summary
-    pass
-
-if __name__ == "__main__":
-    main()
-```
-
-**Rules:**
-- **stdlib-only** — zero external dependencies (no pip install)
-- **CLI-first** — run from command line with file args or stdin
-- **JSON output** — structured output for integration
-- **Sample data embedded** — runs with zero config for demo/testing
-- **One tool, one job** — focused, not Swiss Army knife
-- **Scoring tools output 0-100** — consistent scale across all tools
-
-**Naming convention:** `snake_case_verb_noun.py` (e.g., `seo_checker.py`, `headline_scorer.py`, `churn_risk_scorer.py`)
-
----
-
-## File Structure Standard
-
-```
-skill-name/
-├── SKILL.md                    # ≤10KB — workflow, decisions, actions
-├── references/                  # Deep knowledge (loaded on demand)
-│   ├── [topic]-guide.md        # Comprehensive guide
-│   ├── [topic]-benchmarks.md   # Industry data
-│   └── [topic]-examples.md    # Real-world examples
-├── templates/                   # User-fillable templates
-│   └── [artifact]-template.md  # With placeholder markers
-└── scripts/                     # Python automation
-    └── [verb]_[noun].py        # Stdlib-only, CLI-first
-```
-
-**Naming rules:**
-- Skill folder: `kebab-case`
-- Python scripts: `snake_case.py`
-- Reference docs: `kebab-case.md`
-- Templates: `kebab-case-template.md`
-
----
-
-## Quality Checklist
-
-Before a skill is considered done:
-
-### Structure
-- [ ] YAML frontmatter with name, description (trigger keywords), version
-- [ ] Practitioner voice — "You are an expert in X. Your goal is Y."
-- [ ] Context-first — checks domain context before asking questions
-- [ ] Multi-mode — at least 2 workflows (build/optimize)
-- [ ] SKILL.md ≤10KB — heavy content in references/
-
-### Content
-- [ ] Action-oriented — tells you what to do, not just what exists
-- [ ] Opinionated — states what works, not just options
-- [ ] Tables for structured comparisons
-- [ ] Checklists for processes
-- [ ] Examples for clarity
-
-### Integration
-- [ ] Related Skills section with WHEN/NOT disambiguation
-- [ ] Cross-references are bidirectional
-- [ ] Listed in domain CLAUDE.md
-- [ ] Listed in `.codex/skills-index.json`
-- [ ] Listed in `.claude-plugin/marketplace.json`
-- [ ] Listed in `.gemini/skills-index.json` (run `./scripts/gemini-install.sh`)
-
-### Quality Standard
-- [ ] Proactive Triggers (4-6 per skill)
-- [ ] Output Artifacts table (4-6 per skill)
-- [ ] Communication standard reference
-- [ ] Confidence tagging on findings
-
-### Automation (if applicable)
-- [ ] Python tool(s) — stdlib-only, CLI-first, JSON output
-- [ ] Sample data embedded — runs with zero config
-- [ ] Scoring uses 0-100 scale
-
----
-
-## Domain Context Files
-
-| Domain | File | Sections |
+| Домен | Файл | Разделы |
 |--------|------|----------|
-| **C-Suite** | `company-context.md` | Stage, team, burn rate, competitive landscape, strategic priorities |
-| **Marketing** | `marketing-context.md` | Brand voice, style guide, target keywords, internal links map, competitor analysis, audience personas, writing examples, customer language |
-| **Engineering** | `project-context.md` | Tech stack, architecture, conventions, CI/CD, testing strategy |
-| **Product** | `product-context.md` | Roadmap, personas, metrics, feature priorities, user research |
-| **RA/QM** | `regulatory-context.md` | Device classification, applicable standards, audit schedule, SOUP list |
+| **C-Suite** | `company-context.md` | Этап, команда, скорость сжигания, конкуренты, приоритеты |
+| **Маркетинг** | `marketing-context.md` | Голос бренда, стайлгайд, целевые ключи, карта ссылок, конкуренты, персоны, примеры текстов |
+| **Инженерия** | `project-context.md` | Стек, архитектура, соглашения, CI/CD, стратегия тестов |
+| **Продукт** | `product-context.md` | Роадмап, персоны, метрики, приоритеты фич, исследование пользователей |
+| **RA/QM** | `regulatory-context.md` | Класс устройства, применимые стандарты, график аудита, список SOUP |
 
-Each domain's context skill creates this file via guided interview + auto-draft from available information.
+Каждый доменный скилл создаёт этот файл через управляемое интервью + авто-черновик из доступного.
 
 ---
 
-*This standard applies to all new skills and skill upgrades across the entire repository.*
-*Version: 1.0.0 | Created: 2026-03-06*
+*Стандарт применяется ко всем новым скиллам и обновлениям скиллов по всему репозиторию.*
+*Версия: 1.0.0 | Создан: 2026-03-06*
+

@@ -188,8 +188,8 @@ agent.py  (тонкий вход: pid, 3 потока — HTTP 8765, ночь, �
    снимать её нельзя без явного слова пользователя.
 
 ## 10. СВЯЗАННЫЕ ДОКУМЕНТЫ
-`D:\AI\repo\SKILLS\SKILL_agent_protocol.md` (протокол `[TOOL]/[ANSWER]` для модели агента) ·
-`D:\AI\repo\SKILLS\SKILL_local_agent_cline.md` (выживание в Cline) · `D:\AI\repo\Prog\SKILL_agent_memory.md`
+`D:\AI\repo\SKILL_agent_protocol.md` (протокол `[TOOL]/[ANSWER]` для модели агента) ·
+`D:\AI\repo\SKILL_local_agent_cline.md` (выживание в Cline) · `D:\AI\repo\Prog\SKILL_agent_memory.md`
 (память/якорь) · `D:\AI\repo\CORE\PASSPORT.md` («Модули агента») · `D:\AI\repo\Creo\CREO_MAP.md` (как агент ходит в Creo).
 Крах-скиллы: `crash\SKILL_agent-frozen.md`, `crash\SKILL_crash_agent-duplicate-restart-race.md`,
 `crash\SKILL_crash_agent_corruption.md`, `crash\SKILL_crash_agent_silence.md`,

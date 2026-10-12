@@ -147,7 +147,7 @@ executor: Cline
 
 ## 15. Ссылки на источники
 - `D:\AI\repo\MANIFEST.md` ч.1 п.1–3 (цитата, сырой близнец, бекап).
-- `D:\AI\repo\SKILLS\SKILL_local_agent_cline.md` §9 (анти-петля и детские ошибки).
+- `D:\AI\repo\SKILL_local_agent_cline.md` §9 (анти-петля и детские ошибки).
 - `D:\AI\AGENT_SETTINGS\PROMPT\SKILL_fewshot_as_template.md` (few-shot как шаблон).
 - `D:\AI\AGENT_SETTINGS\PROMPT\SKILL_prompt_index.md` (указатель).
 - `D:\AI\AGENT_SETTINGS\think_probe\log\` (прогоны v4/v5/v6).
