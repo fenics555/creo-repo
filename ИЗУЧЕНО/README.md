@@ -5,4 +5,4 @@
 (большие библиотеки, вне гита). Записи ведёт инструмент агента `study_*`:
 `study_start` → `study_note` (кусок) → `study_fail` (**неудача — сразу**) →
 `study_progress` (файл за файлом, папка за папкой) → `study_skill` (заготовки скиллов).
-Карта дома: `D:\AI\repo\CULTURE_files.md`.
+Карта дома: `D:\AI\repo\CORE\CULTURE_files.md`.

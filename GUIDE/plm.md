@@ -45,7 +45,7 @@ spec_read path=<путь.xlsx> — чтение таблицы спецы; spec_
 
 ## 03.10.2026 — АРХИВЫ СКЛАДА ПРОЧИТАНЫ, ИСТОРИЯ ДОПИСАНА В БАЗУ (разовая работа)
 
-- Скилл: `D:\AI\repo\SKILL_archive_plm.md` · конспект: `D:\AI\repo\ИЗУЧЕНО\Архивы PLM\STUDY_NOTES.md`.
+- Скилл: `D:\AI\repo\Creo\SKILL_archive_plm.md` · конспект: `D:\AI\repo\ИЗУЧЕНО\Архивы PLM\STUDY_NOTES.md`.
 - `\\Backup\Public\АРХИВЫ` — 32 многотомных RAR5 (~460 ГБ), 2022–2026; читаются тем же парсером
   (`engine.scan_item`, `plm_reader.parse_changes/history`), по одной дате за раз.
 - **Почему не через `engine.do_scan`:** он чистит `links`/`derived` по модели (`source='plm_tree'`) —

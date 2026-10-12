@@ -7,7 +7,7 @@ priority: high
 date: 23.09.2026
 ---
 # КАРТА СКИЛЛОВ ВЕТКИ CREO (23.09.2026)
-Корень ветки: `D:\AI\repo\Creo\` · подраздел: `CREOSON\` · общий индекс дома: `D:\AI\repo\SKILL_index.md`.
+Корень ветки: `D:\AI\repo\Creo\` · подраздел: `CREOSON\` · общий индекс дома: `D:\AI\repo\CORE\SKILL_index.md`.
 
 ## ⚠️ ЗОНЫ РАБОТЫ (слово владельца 03.10.2026) — читать ПЕРВЫМ делом
 * **`D:\AI\PROBA` — можно ВСЁ**: создавать, переименовывать, удалять, пробовать, запускать Creo.
@@ -131,9 +131,9 @@ date: 23.09.2026
 | `SKILL_crash_runcommands-copy-race-fake-parameter.md` | чтение файла в той же пачке, где создали |
 
 ## 10. СКИЛЛЫ ДОМА ОБ АГЕНТЕ (нужны при работе с Creo через агента)
-`D:\AI\repo\SKILL_agent_protocol.md` (протокол `[TOOL]/[ANSWER]`) ·
-`D:\AI\repo\SKILL_local_agent_cline.md` (выживание в Cline) ·
-`D:\AI\repo\Prog\SKILL_agent_memory.md` (память/якорь) · `D:\AI\repo\PASSPORT.md` («Модули агента»).
+`D:\AI\repo\SKILLS\SKILL_agent_protocol.md` (протокол `[TOOL]/[ANSWER]`) ·
+`D:\AI\repo\SKILLS\SKILL_local_agent_cline.md` (выживание в Cline) ·
+`D:\AI\repo\Prog\SKILL_agent_memory.md` (память/якорь) · `D:\AI\repo\CORE\PASSPORT.md` («Модули агента»).
 
 ## 11. ИНСТРУМЕНТЫ И КОНСПЕКТЫ ВНЕ РЕПО (не скиллы, но опора)
 ```
