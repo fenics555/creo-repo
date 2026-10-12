@@ -26,9 +26,9 @@ priority: critical
 - Creo: Creo\SKILL_creo_index.md · PDF: PDF\SKILL_pdf_index.md · Web: Web\SKILL_web_index.md
 - Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
 - Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md (закон) + crash\SKILL_crash_index.md (список крах-скиллов)
-- **НОГА (новое, 01.10.2026):** NOGA\SKILL_noga_index.md — здоровье ноги и самопередача:
-  счётчик вызовов инструментов, три признака деградации, пороги, порядок эстафеты. Тело скилла —
-  `AGENT_SETTINGS\NOGA\SKILL_noga_health.md`. Правило-источник: пункт «ПРЕДЕЛ НОГИ» в `.clinerules`.
+- **НОГА (01.10.2026):** здоровье ноги и самопередача. Тело — `D:\AI\AGENT_SETTINGS\NOGA\SKILL_noga_health.md`.
+  Суть: (1) счётчика токенов у модели нет — измерять последствия (счётчик вызовов + 3 признака деградации);
+  (2) два признака из трёх — НЕ чинить, а передать ногу; объявление — ОДНОЙ строкой (не абзац).
 - **OLAMA (новое, 08.10.2026):** OLAMA\SKILL_ollama_index.md — **critical**, вход направления
   локальных моделей Ollama: раннер, `num_predict` для рассуждающих моделей, ответ vs размышление,
   стоп/rm/create и грабли ANSI в stderr. Тела: `OLAMA\SKILL_num_predict_for_reasoning_models.md`,
