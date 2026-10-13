@@ -1,0 +1,9 @@
+﻿ИНДЕКС СКИЛЛОВ И ИНСТРУМЕНТОВ ДОМА
+дата: 2026-10-13 10:49:19
+модель: nomic-embed-text-v2-moe:latest
+файлов: 508
+чанков: 4498 (MaxChars=800, Overlap=150, Batch=32)
+префиксы: "search_document: " при индексации / "search_query: " при поиске (обязательно!)
+файл: D:\AI\AGENT_SETTINGS\think_probe\index\skills_index.jsonl
+размер индекса: 18.82 МБ
+время сборки: 75 с
