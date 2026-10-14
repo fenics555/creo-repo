@@ -58,8 +58,9 @@ priority: critical
 - **КОМАНДЫ (новое, 14.10.2026):** два направления-шпаргалки, дополняются ПАРАЛЛЕЛЬНО с работой
   (нашла полезную команду → дописал в тело скилла темы):
   `Powershell\SKILL_powershell_index.md` — грабли PS 5.1 (`SKILL_ps51_gotchas`: кириллица в UTF-8
-  ломает скрипт → ASCII-only, `-NoProfile -ExecutionPolicy Bypass`) и рутина синхронизации
-  `SKILL_plm_reader_sync` (код на шару `Z:\PTC\CREO-START\plm_reader`, сверка D: ↔ Z:);
+  ломает скрипт → ASCII-only, `-NoProfile -ExecutionPolicy Bypass`) и **правило шары**
+  `SKILL_plm_reader_sync` (critical, 14.10.2026): шару `Z:` агенты НЕ трогают ни в каком виде —
+  обновляет владелец САМ РУКАМИ и сам проверяет кнопку обновления;
   `Python\SKILL_python_index.md` — команды запуска/проверки инструментов дома, первая запись
   `SKILL_plm_reader_commands` (smoke-самопроверка, `make_version_json.py`, 3 шага выпуска версии).
   Граница доменов: код-стандарты и тесты — `Prog\`, команды запуска — эти два направления.

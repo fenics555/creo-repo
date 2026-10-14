@@ -25,4 +25,4 @@ python plm_reader.py                      # запуск окна (или plm_re
 
 ПРИЁМКА: `python _smoke_v87.py` → последняя строка `SMOKE OK`.
 ГРАБЛИ: smoke устойчив к cp1251; GUI-часть проверяется программно (без дисплея) — визуал смотрит
-человек. Синхронизация с шарой — `Powershell\SKILL_plm_reader_sync.md`.
+человек. **Шара `Z:` агентами НЕ трогается** (закон владельца 14.10.2026) — `Powershell\SKILL_plm_reader_sync.md`.

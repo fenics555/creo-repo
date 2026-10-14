@@ -10,7 +10,9 @@ date: 14.10.2026
 - `SKILL_powershell_index.md` — этот вход направления;
 - `SKILL_ps51_gotchas.md` (**high**) — грабли PowerShell 5.1 дома: кириллица в UTF-8 ломает скрипт
   (решение — ASCII-only), запуск через `-NoProfile -ExecutionPolicy Bypass`;
-- `SKILL_plm_reader_sync.md` (**high**) — рутина PLM Reader: выгрузка кода на шару и сверка D: ↔ Z:.
+- `SKILL_plm_reader_sync.md` (**critical**) — **правило шары** PLM Reader: шару `Z:` агенты НЕ
+  трогают ни в каком виде — обновляет владелец сам руками; `sync_to_share.ps1`/`sync_check.ps1` —
+  инструменты владельца, агенту запрещены (инцидент 14.10.2026).
 
 Это **ШПАРГАЛКА КОМАНД**: что запустить, что увидеть, какие грабли. Стандарты кода и тестирования —
 в `Prog\`; универсальный закон — `MANIFEST.md`; git — `SKILL_parallel_legs.md`.

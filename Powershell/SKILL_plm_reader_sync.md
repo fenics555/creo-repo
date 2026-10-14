@@ -1,31 +1,24 @@
 ---
-name: plm-reader-sync
+name: plm-reader-share-rule
 system: Команды
-description: Use when: синхронизация PLM Reader D:\AI\tools\agent\plm_reader → шара Z:\PTC\CREO-START\plm_reader
-when: plm_reader, синхронизация, шара, sync_to_share, sync_check, Z:, CREO-START, PTС, обновление на шаре, сверка копий
+description: Use when: PLM Reader и шара Z: — КТО имеет право трогать шару (закон владельца 14.10.2026)
+when: plm_reader, шара, Z:, CREO-START, sync_to_share, sync_check, синхронизация на шару, обновление шары, копия на шаре, PTС
 date: 14.10.2026
-priority: high
+priority: critical
 ---
 
-# PLM READER: СИНХРОНИЗАЦИЯ КОПИИ НА ШАРЕ
+# PLM Reader: ПРАВИЛО ШАРЫ (закон владельца, 14.10.2026)
 
-Рабочая версия инструмента — **ТОЛЬКО** `D:\AI\tools\agent\plm_reader`. Шара
-`Z:\PTC\CREO-START\plm_reader` обновляется командами ниже; отдельно живёт механизм обновления
-из GitHub (кнопка «Проверить обновления», `version.json` → релиз) — его не путать с ручной
-синхронизацией.
+**Шара `Z:\PTC\CREO-START\plm_reader` агентами НЕ трогается ни в каком виде** — не синхронизируется,
+не откатывается, не правится. Её обновляет **ТОЛЬКО ВЛАДЕЛЕЦ САМ РУКАМИ** и лично проверяет
+механизм обновления (кнопка «Проверить обновления»; свежесть канала — GitHub `version.json` → релиз).
 
-```powershell
-cd D:\AI\tools\agent\plm_reader
-powershell -ExecutionPolicy Bypass -File sync_to_share.ps1   # код на шару
-powershell -ExecutionPolicy Bypass -File sync_check.ps1      # сверка D: ↔ Z: (расхождений быть не должно)
-```
-
-ПОРЯДОК после любых правок на D::
-1. `python make_version_json.py "<notes>"` — пересобрать манифест (номер версии берётся из
-   `APP_VERSION` в `plm_reader.py`);
-2. `sync_to_share.ps1` — выгрузить код;
-3. `sync_check.ps1` — приёмка сверкой.
-
-ГРАБЛИ: оба скрипта обязаны быть **ASCII-only** — PS 5.1 + кириллица = крах парсинга
-(см. `SKILL_ps51_gotchas.md`). Правки в код — только на D:, не на шаре.
-Полная рутина выпуска версии — в README инструмента; этот скилл — только команды и порядок.
+- Агент правит **только D:** (`D:\AI\tools\agent\plm_reader` — рабочая версия).
+- **`sync_to_share.ps1` / `sync_check.ps1` агенту запускать ЗАПРЕЩЕНО** — это инструменты владельца.
+  Исключение — прямое слово владельца в тексте задачи («запусти sync_to_share»).
+- Релиз агента: `APP_VERSION` → `python make_version_json.py "<notes>"` → адресный git push
+  с `version.json` (git — по `SKILL_parallel_legs.md`). На этом **СТОП** — шага
+  «синхронизация на шару» в релизе **НЕТ**.
+- Приёмка: `python _smoke_v87.py` → последняя строка `SMOKE OK`.
+- Живой инцидент 14.10.2026: V88 уехала на шару ручным запуском `sync_to_share` «по регламенту»
+  из эстафеты — владелец это запретил; регламент (README) и этот скилл исправлены.
