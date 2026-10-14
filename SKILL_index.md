@@ -24,6 +24,7 @@ priority: critical
   **Живые факты v4/v5/v6 (11.10.2026):** ни одна модель не свободна от галлюцинаций; laguna и
   nemotron — худшие (выдуманные ГОСТ, пути, имитация `search_codebase`).
 - Creo: Creo\SKILL_creo_index.md · PDF: PDF\SKILL_pdf_index.md · Web: Web\SKILL_web_index.md
+- **КОМАНДЫ (новое, 14.10.2026):** Powershell: Powershell\SKILL_powershell_index.md · Python: Python\SKILL_python_index.md
 - Инженерные: Инженерные\SKILL_engineering_index.md · Трейлы: Трейлы\SKILL_trails_index.md
 - Ошибки: Ошибки\SKILL_errors.md · Крахи: crash\SKILL_crash_constitution.md (закон) + crash\SKILL_crash_index.md (список крах-скиллов)
 - **НОГА (01.10.2026):** здоровье ноги и самопередача. Тело — `D:\AI\AGENT_SETTINGS\NOGA\SKILL_noga_health.md`.
@@ -54,6 +55,14 @@ priority: critical
   обновляются вместе, память хранит указатель. **Проверка видимости обязана искать по обоим
   корням**, иначе живые скиллы ложно объявляются мёртвыми ссылками (случилось 08.10.2026:
   24 ложных дефекта из 26). Приёмка: `Get-ChildItem` по обоим корням с фильтром `SKILL_*.md`.
+- **КОМАНДЫ (новое, 14.10.2026):** два направления-шпаргалки, дополняются ПАРАЛЛЕЛЬНО с работой
+  (нашла полезную команду → дописал в тело скилла темы):
+  `Powershell\SKILL_powershell_index.md` — грабли PS 5.1 (`SKILL_ps51_gotchas`: кириллица в UTF-8
+  ломает скрипт → ASCII-only, `-NoProfile -ExecutionPolicy Bypass`) и рутина синхронизации
+  `SKILL_plm_reader_sync` (код на шару `Z:\PTC\CREO-START\plm_reader`, сверка D: ↔ Z:);
+  `Python\SKILL_python_index.md` — команды запуска/проверки инструментов дома, первая запись
+  `SKILL_plm_reader_commands` (smoke-самопроверка, `make_version_json.py`, 3 шага выпуска версии).
+  Граница доменов: код-стандарты и тесты — `Prog\`, команды запуска — эти два направления.
 - **ВЕТЕРОК (04.10.2026):** `Ветерок\SKILL_veterok_index.md` — очистка сборок Creo. Живой факт: удаление
   параметров пишется на диск, а пострегенерация через CREOSON — НЕТ (правильный путь JLINK
   `pfcModel.DeletePostRegenerationRelations`). Тела: `SKILL_veterok_{postregen,creoson_gotchas,program}.md`.
