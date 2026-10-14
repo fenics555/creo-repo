@@ -21,6 +21,7 @@ date: 02.10.2026
 |---|---|---|
 | `SKILL_answer_vs_thinking.md` | `content` — ответ, `thinking` — размышление; стенд никогда не подставляет размышление вместо ответа; пустой `content` при непустом `thinking` = **класс провала T** | чтение `results_*.json`, пустой ответ у reasoning-модели, правка `loop_revive_test.py` |
 | `SKILL_num_predict_for_reasoning_models.md` | `num_predict` ограничивает **размышление вместе с ответом**; reasoning-моделям нужно ≥ 2000 (живой замер: gpt-oss 8/15 → 11/15); `think` — уровень `low/medium/high`, а не булев; `OLLAMA_LOAD_TIMEOUT` объясняет молчаливые обрывы | замер моделей, падение балла при смене лимита, обрыв загрузки |
+| `SKILL_ollama_vram_orphan_runners.md` | **УРОК 14.10.2026:** осиротевшие `llama-server.exe` держат VRAM → CPU-оффлоад → скорость ÷10 + 500-ошибки; диагностика (`nvidia-smi`/`ollama ps`) и лечение; сервер поднимать только `ollama app.exe` | скорость упала (9–45 т/с); `ollama ps` ≠ 100% GPU; VRAM занят при простое; массовые ERROR; ПЕРЕД любым прогоном |
 
 ## Что ещё относится к направлению, но лежит в PROMPT
 
