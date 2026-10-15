@@ -65,13 +65,13 @@ date: 14.10.2026
   инструмента: `read_file`, `write_file`, `shell`. В описании `shell` **не упомянуты** `Rename-Item` и `python`.
   Поэтому `P2f_rename` (нужен `Rename-Item`) и `P2e_calc` (нужен python) — модель не может выбрать то, о чём не сказано.
 - **Битый узел.** `P2g_tool` шлёт читать `D:\AI\tools\agent\README.md`, а реестр инструментов дома лежит в
-  **`D:\AI\repo\INDEX\`** -> `FAIL` у laguna и gpt-oss. Это дефект теста, НЕ предел модели.
+  **`D:\AI\tools\agent\skills_index\`** -> `FAIL` у laguna и gpt-oss. Это дефект теста, НЕ предел модели.
 - **Тесный контекст.** `num_ctx=16384`; laguna `P2e_calc = NO_TOOLS` (не начала работу).
 **Ключ (гипотезы для локальной проверки на laguna+gpt-oss):**
 1. Добавить в правило-закон «задача -> точная команда» (shell с `Rename-Item`, `python`, `Select-String -Path`).
 2. Расширить/уточнить `description` инструментов (и, возможно, добавить узкие инструменты `list_dir`/`grep`).
 3. Поднять `num_ctx` на «длинных» узлах.
-4. Починить `P2g_tool` (указать `repo\INDEX`).
+4. Починить `P2g_tool` (указать `tools\agent\skills_index`).
 **Порядок:** дешёвые сначала (2,4), затем (1), затем (3). Проверка — `probe_2 -Models laguna` / `-Models gpt-oss`.
 
 ## 8. ПРОТОКОЛ ДОПРОСА И ОЦЕНКИ (метод владельца, 14.10.2026) — «выдумала или реально сделала»
