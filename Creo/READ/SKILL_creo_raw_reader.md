@@ -3,6 +3,29 @@
 **Статус:** В разработке (Прорыв достигнут, детализация не завершена).
 **Направление:** Парсинг CAD-данных (Creo) без установленного ПО.
 
+## 0. КАК ВЫЗВАТЬ (владелец, 15.10.2026) — ОБЯЗАТЕЛЬНО ПРОЧИТАТЬ ПЕРЕД ИСПОЛЬЗОВАНИЕМ
+
+> 🔴 **`creo_read.py` — это БИБЛИОТЕКА, а не CLI-скрипт.** Прямой запуск
+> `python creo_read.py <файл>` **МОЛЧИТ** (в файле нет блока `__main__`) — это НЕ ошибка, это норма.
+> Правильный способ — **импорт**:
+
+```powershell
+# ПРАВИЛЬНО: импорт библиотеки и вызов функции passport()
+python -c "import sys; sys.path.insert(0, r'D:\AI\tools\agent\plm_reader'); import creo_read; import pprint; pprint.pprint(creo_read.passport(r'D:\AI\PROBA\models\00080-03.prt'))"
+
+# или скриптом (надёжнее для длинных путей):
+#   creo_call.py:  import sys; sys.path.insert(0, r'D:\AI\tools\agent\plm_reader')
+#                  import creo_read, pprint; pprint.pprint(creo_read.passport(r'<файл>'))
+python -X utf8 creo_call.py
+```
+
+**ЗАПРЕЩЕНО:** `python creo_read.py <файл>` — молчаливый вывод = ложный «НЕТ ДАННЫХ».
+**Файл:** `D:\AI\tools\agent\plm_reader\creo_read.py` (общая библиотека дома; также вложена в `plm_reader`, `batch_params`).
+**Ключевые функции:** `passport(path)` — паспорт изделия (материал, размер, ревизия, автор, дата);
+`parse_toc`, `params`, `real`, `last_hist`, `names`, `role`.
+**Проверено 15.10.2026:** `passport('PROBA\models\00080-03.prt')` → `material=PTC_SYSTEM_MTRL_PROPS, size=61414, rev=114, author=KAMESH, revdate=05.01.24 10:15`.
+**Владелец:** способ вызова инструмента — **ВСЕГДА в скилле**, иначе модель вызывает его наугад.
+
 ## 1. Описание метода (The "How")
 Метод основан на прямом бинарном анализе файлов `.prt`, `.asm`, `.drw` с использованием регулярных выражений (`re`) и работы со структурами (`struct`). Это обеспечивает максимальную скорость и автономность.
 
