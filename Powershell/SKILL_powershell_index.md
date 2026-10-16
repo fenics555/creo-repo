@@ -1,4 +1,4 @@
----
+﻿---
 name: powershell-index
 system: Команды
 description: Use when: задача про PowerShell-команды/скрипты дома (.ps1, синхронизация, шара, ExecutionPolicy)
