@@ -14,7 +14,7 @@
 | 1 | **MANIFEST.md** | корень | универсальный закон дома |
 | 2 | **SKILL_local_agent_cline.md** | `SKILLS/` | выживание локального ИИ в Cline (транспорт, редактор, крахи) |
 | 3 | **SKILL_index.md** | `CORE/` | карта ВСЕХ скиллов (вход навигации) |
-| 4 | **SKILL_models_behavior.md** | `SKILLS/` | выбор модели, лимиты, честность (v8) |
+| 4 | **SKILL_edit_gotchas.md** | корень | грабли правки: BOM, кавычки, `;`, `old_text`, таймауты |
 | 5 | **SKILL_anti_hallucination.md** | `SKILLS/` | анти-галлюцинации (ФАКТ / ПРЕДПОЛОЖЕНИЕ / НЕТ ДАННЫХ) |
 
 Плюс critical: `SKILLS/SKILL_parallel_legs.md` (git), `SKILLS/SKILL_agent_protocol.md`, `CORE/CULTURE_files.md`.
@@ -27,7 +27,7 @@
 | `MANIFEST.md` | универсальный закон дома для любого исполнителя (слой закона) |
 | `.clinerules` | дельта среды Cline (транспорт, редактор, поиск, крахи) |
 | `CORE/` | ядро и навигация: `PASSPORT.md`, `CULTURE_files.md`, `AGENT_MAP.md`, `AGENT_WORK_MAP.md`, `SKILL_index.md` (карта скиллов), `SKILL_CHARGE*.md` (генераты), `strategy.md`, `BACKLOG_tools.md`, `company_conventions.md` |
-| `SKILLS/` | общие critical-скиллы: `SKILL_local_agent_cline.md`, `SKILL_anti_hallucination.md`, `SKILL_models_behavior.md`, `SKILL_parallel_legs.md`, `SKILL_agent_protocol.md`, `SKILL_production_mirror.md` |
+| `SKILLS/` | общие critical-скиллы: `SKILL_local_agent_cline.md`, `SKILL_anti_hallucination.md`, `SKILL_edit_gotchas.md`, `SKILL_parallel_legs.md`, `SKILL_agent_protocol.md`, `SKILL_production_mirror.md` |
 | `AUDIT/` | `SKILL_audit_protocol.md` (аудит дома), `SKILL_audit_program.md` (аудит программы) |
 | `Creo/`, `PDF/`, `Web/`, `Инженерные/`, `Трейлы/`, `Ошибки/`, `Prog/`, `NOGA/`, `OLAMA/`, `PROMPT/` | направления: входы (`_INDEX` / `SKILL_*_index`) и скиллы |
 | `crash/` | конституция краха + прецеденты со счётчиками повторов |
