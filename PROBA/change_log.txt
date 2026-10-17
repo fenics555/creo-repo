@@ -1,0 +1,3 @@
+# Change Log
+- Followed domestic commit protocol.
+- Added change_log.txt tracking compliance steps.
