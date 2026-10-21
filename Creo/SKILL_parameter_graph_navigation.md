@@ -23,3 +23,17 @@ To link a Part to a Fixture:
 ## Troubleshooting
 - If `setup_id` returns `'attr'`, do not stop. This is a sign that you must follow the chain to the `appl_id` and `id_map_info_ptr`.
 - Always treat `id_map` as a **navigator**, not a value.
+
+## Mapping Table Navigation
+
+Based on the discovery of the `id_map_info_ptr` mechanism:
+
+1.  **Identify `setup_data`**: Locate the `setup_data` block via TOC or search.
+2.  **Extract `id_map_info_ptr`**: Find the 16-bit relative offset within the `setup_data` block.
+3.  **Calculate Table Address**: `Table_Start = setup_data_offset + (ptr_value & 0xFFFF)`.
+4.  **Traverse the Table**: The table is a cyclic pool of entries:
+    - **Type `e3` / `f7`**: Marks the start of a **Name/ID** (String).
+    - **Type `e2`**: Marks a **Numeric Value** (associated with the previous name).
+    - **Separator `f7`**: Often used to terminate a field.
+5.  **Goal**: Use this structure to programmatically extract all Fixture/Tool IDs without blind searching.
+
