@@ -1,0 +1,136 @@
+{
+  "name": "D16",
+  "full_name": "Д16",
+  "standard": "ГОСТ 4784-97",
+  "type": "Аллюминий",
+  "category": "аллюминий",
+  "parameters": {
+    "material_id": "AL_SPLAV_D16",
+    "material_description": "Д16",
+    "material_type": 9,
+    "material_type_description": "Алюминиевый сплав деформируемый",
+    "young_modulus": {
+      "value": 72000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "72 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.32,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 28800,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "28.8 ГПа"
+    },
+    "mass_density": {
+      "value": 2.77,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "2770 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 2.29e-5,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "при 20°C"
+    },
+    "thermal_conductivity": {
+      "value": 130,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "130 W/mK"
+    },
+    "specific_heat": {
+      "value": 460,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "460 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 310,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "ГОСТ 4784-97: 310 MPa (твердой брусок)"
+    },
+    "tensile_yield_stress": {
+      "value": 270,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 270 MPa"
+    },
+    "hardness": {
+      "value": 105,
+      "unit": "HB",
+      "canonical": "HARDNESS",
+      "note": "95-105 HB"
+    },
+    "hardness_type": {
+      "value": "HB",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "T4",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние брусочка"
+    },
+    "material_description": {
+      "value": "Д16, ГОСТ 4784-97",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    },
+    "fatigue_type": {
+      "value": "NONE",
+      "unit": "",
+      "canonical": "FATIGUE_TYPE",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_material_type": {
+      "value": "NONFERROUS",
+      "unit": "",
+      "canonical": "FATIGUE_MATERIAL_TYPE",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_material_finish": {
+      "value": "MACHINED",
+      "unit": "",
+      "canonical": "FATIGUE_MATERIAL_FINISH",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_strength_reduct_ctr": {
+      "value": 1.0,
+      "unit": "",
+      "canonical": "FATIGUE_STRENGTH_REDUCT_FCTR",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_strength_reduction_factor": {
+      "value": null,
+      "unit": "",
+      "canonical": "FATIGUE_STRENGTH_REDUCTION_FACTOR",
+      "note": "⚠️ Не измерен, нужны исследования"
+    },
+    "material_source": {
+      "value": "ГОСТ 4784-97",
+      "unit": "",
+      "canonical": "MATERIAL_SOURCE",
+      "note": "Полный источник"
+    }
+  },
+  "weight": {
+    "embryo": 8,
+    "data": 80,
+    "note": "Полнота: 80% (S-N кривая для D16 требуется)"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\МатВида\\Алюминий\\Сплав_алюминиевый_деформируемый\\al_splav_d16.mtl"
+  ]
+}

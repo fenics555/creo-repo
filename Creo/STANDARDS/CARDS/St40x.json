@@ -1,0 +1,136 @@
+{
+  "name": "St40x",
+  "full_name": "Сталь 40Х",
+  "standard": "ГОСТ 1577-93",
+  "type": "Сталь",
+  "category": "углящая",
+  "parameters": {
+    "material_id": "40X",
+    "material_description": "Сталь 40Х",
+    "material_type": 9,
+    "material_type_description": "Сталь чугунопрочная луженатая 40Х",
+    "young_modulus": {
+      "value": 200000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "200 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.28,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 80000,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "80 ГПа"
+    },
+    "mass_density": {
+      "value": 7.85,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "7850 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 1.2e-5,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "1.2e-5 1/°C"
+    },
+    "thermal_conductivity": {
+      "value": 27,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "27 W/mK"
+    },
+    "specific_heat": {
+      "value": 460,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "460 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 580,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "ГОСТ 1577-93: 580-680 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 380,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 380 MPa"
+    },
+    "hardness": {
+      "value": 30,
+      "unit": "HRC",
+      "canonical": "HARDNESS",
+      "note": "28-34 HRC"
+    },
+    "hardness_type": {
+      "value": "HRC",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "NORMALIZED",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние брусочка"
+    },
+    "material_description": {
+      "value": "Сталь 40Х, ГОСТ 1577-93",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    },
+    "fatigue_type": {
+      "value": "NONE",
+      "unit": "",
+      "canonical": "FATIGUE_TYPE",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_material_type": {
+      "value": "FERROUS",
+      "unit": "",
+      "canonical": "FATIGUE_MATERIAL_TYPE",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_material_finish": {
+      "value": "MACHINED",
+      "unit": "",
+      "canonical": "FATIGUE_MATERIAL_FINISH",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_strength_reduct_ctr": {
+      "value": 1.0,
+      "unit": "",
+      "canonical": "FATIGUE_STRENGTH_REDUCT_FCTR",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_strength_reduction_factor": {
+      "value": null,
+      "unit": "",
+      "canonical": "FATIGUE_STRENGTH_REDUCTION_FACTOR",
+      "note": "⚠️ Не измерен, нужны исследования"
+    },
+    "material_source": {
+      "value": "ГОСТ 1577-93",
+      "unit": "",
+      "canonical": "MATERIAL_SOURCE",
+      "note": "Полный источник"
+    }
+  },
+  "weight": {
+    "embryo": 8,
+    "data": 80,
+    "note": "Полнота: 80% (S-N кривая для St40x требуется)"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Сортамент\\Прокат_листовой_горячекатаный_ГОСТ_19903\\Сталь_40Х_ГОСТ_1577_93\\List_10_GOST_19903_st40h.mtl"
+  ]
+}

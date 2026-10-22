@@ -1,0 +1,148 @@
+{
+  "name": "VCh50",
+  "full_name": "ВЧ-50",
+  "standard": "ГОСТ 7293-85",
+  "type": "Чугун",
+  "category": "сталь",
+  "parameters": {
+    "material_id": "CHUGUN_VCH50",
+    "material_description": "ВЧ-50",
+    "material_type": 9,
+    "material_type_description": "Чугун овечный",
+    "young_modulus": {
+      "value": 169000000,
+      "unit": "kPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "169 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.25,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 70000000,
+      "unit": "kPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "70 ГПа"
+    },
+    "mass_density": {
+      "value": 7.2,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "7200 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 1.15e-5,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "при 20°C"
+    },
+    "thermal_conductivity": {
+      "value": 31,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "31 W/mK"
+    },
+    "specific_heat": {
+      "value": 540,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "540 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 500,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "500 MPa (ГОСТ 7293-85)"
+    },
+    "tensile_yield_stress": {
+      "value": 320,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 320 MPa"
+    },
+    "compres_ultimate_stress": {
+      "value": -1500,
+      "unit": "MPa",
+      "canonical": "COMPR_ULTIMATE_STRESS",
+      "note": "Предел прочности при сжатии -1500 MPa"
+    },
+    "hardness": {
+      "value": 234,
+      "unit": "HB",
+      "canonical": "HARDNESS",
+      "note": "Твёрдость 234 HB"
+    },
+    "hardness_type": {
+      "value": "HB",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "NORMALIZED",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние брусочка"
+    },
+    "material_description": {
+      "value": "ВЧ-50 ГОСТ 7293-85",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    },
+    "material_fabric_architecture": {
+      "value": "UNIDIRECTIONAL",
+      "unit": "",
+      "canonical": "MATERIAL_FABRIC_ARCHITECTURE",
+      "note": ""
+    },
+    "fatigue_type": {
+      "value": "UNIFIED MATERIAL LAW (UML)",
+      "unit": "",
+      "canonical": "FATIGUE_TYPE",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_material_type": {
+      "value": "FERROUS",
+      "unit": "",
+      "canonical": "FATIGUE_MATERIAL_TYPE",
+      "note": "⚠️ Legacy"
+    },
+    "fatigue_material_finish": {
+      "value": "GOOD MACHINED",
+      "unit": "",
+      "canonical": "FATIGUE_MATERIAL_FINISH",
+      "note": "⚠️ Legacy"
+    },
+    "mechanisms_damping": {
+      "value": 0.004,
+      "unit": "s/mm",
+      "canonical": "MECHANISMS_DAMPING",
+      "note": "Демпфирование 0.4%"
+    },
+    "fatigue_strength_reduct_ctr": {
+      "value": 1.0,
+      "unit": "",
+      "canonical": "FATIGUE_STRENGTH_REDUCT_FCTR",
+      "note": "⚠️ Legacy"
+    },
+    "material_source": {
+      "value": "ГОСТ 7293-85",
+      "unit": "",
+      "canonical": "MATERIAL_SOURCE",
+      "note": "Полный источник"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 98,
+    "note": "Полнота: 98% (не хватает S-N кривой, крейтенсий)"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\МатВида\\Чугун\\chugun_vch50.mtl"
+  ]
+}
