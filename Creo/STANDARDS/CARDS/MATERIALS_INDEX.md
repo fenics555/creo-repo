@@ -97,6 +97,36 @@
 - UTS: 720-840 MPa (заполнено 720)
 - Прочность с усадкой: 550 MPa (заполнено)
 - Твёрдость: 30-39 HRC (заполнено 36)
+### St60H
+- UTS: 680-800 MPa (заполнено 680)
+- Прочность с усатки: 550 MPa (заполнено)
+- Твёрдость: 28-34 HRC (заполнено 34)
+- Ударная энергия: 60-70 J (нужно добавить)
+- Крейтенсий, S-N: нужны исследования
+
+### St65G
+- UTS: 720-840 MPa (заполнено 720)
+- Прочность с усатки: 550 MPa (заполнено)
+- Твёрдость: 30-39 HRC (заполнено 36)
+- Ударная энергия: 60-70 J (нужно добавить)
+- Крейтенсий, S-N: нужны исследования
+
+## Минимальный набор данных для полной карточки
+
+- PTC_MATERIAL_DESCRIPTION
+- PTC_YOUNG_MODULUS
+- PTC_POISSON_RATIO
+- PTC_MASS_DENSITY
+- PTC_THERMAL_EXPANSION_COEFFICIENT
+- PTC_THERMAL_CONDUCTIVITY
+- PTC_SPECIFIC_HEAT
+- PTC_TENSILE_ULTIMATE_STRESS
+- PTC_TENSILE_YIELD_STRESS
+- PTC_HARDNESS
+- PTC_HARDNESS_TYPE
+- PTC_CONDITION
+- PTC_MATERIAL_DESCRIPTION
+- PTC_MATERIAL_TYPE (legacy, не recommended)
 - Ударная энергия: 60-70 J (нужно добавить)
 - Крейтенсий, S-N: нужны исследования
 
