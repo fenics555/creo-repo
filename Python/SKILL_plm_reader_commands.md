@@ -81,7 +81,83 @@ mtime заполнен у 46756 (100%); created у 45653 (97.6%); seen — 18 м
 
 ---
 
-## СВЯЗИ: ЧЕГО ЖДАТЬ И ЧЕГО НЕТ (проверено 23.10.2026)
+## ПОЛНЫЙ ГРАФ СВЯЗЕЙ — ТОЧНЫЕ ФОРМУЛЫ (найдено 23.10.2026, читать ДО любой правки графа)
+
+**Источник:** `D:\AI\tools\agent\creo_reverse_engineering\src\creo_links_new.py` (13 699 б, правка 23.10.2026 06:31)
++ эталон `EXAMPLES_CONNECTIONS.md` (Gold Standard, 2 живых примера) + `test_case_170meta_links.md`.
+
+### ШЕСТЬ типов связей графа (не четыре!)
+
+| Тип связи | Формула поиска (живой код) | Что находит |
+|---|---|---|
+| `mfg_fixture_for` | `re.match(r'^\d+X\d+-\w+$', s)` | **ОСНАСТКА** (`10X1-D12`) — ⚠️ НЕ по `PSB`! |
+| `mfg_tool_for` | `re.match(r'^T\d{3,4}$', s)` или `SVERLO\|FREZA\|GRAVER` | инструмент (`T0010`, `T0021`) |
+| `mfg_operation_of` | `CHERN\|CHIST\|SV\|FR\|FASKA\|RASTOCHKA\|CENTROVKA\|DISKOVAYA\|STEP` | операции ЧПУ |
+| `mfg_machine_for` | `re.match(r'^(MACH\|CNC\|MACHINE)\w*$', u)` | станок |
+| `bom_component` | состав: имена `.PRT/.ASM` из `SolidPersistTable`/`Comp_Data` **минус BLACKLIST** | детали сборки |
+| `inherit_from_master` | токены `BASE_PART` / `GENERIC` в `LargeText` | заготовка → мастер-модель |
+
+### 🔴 BLACKLIST — обязателен, иначе в состав лезет мусор (стр. 53–57)
+
+```python
+blacklist = {"trf_arr","plcm_revnum","next_prop","merge_info_ptr","pre_roll_back",
+ "post_roll_back","post_regen","parchild_table","copy_info_ptr","embed_info_ptr",
+ "copy_info","embed_info","trf_arr_ptr","plcm_revnum_ptr"}
+```
+Это **внутренние поля Creo**, не компоненты. **Без фильтра связи врут.**
+
+### Эндианизм (стр. 60) — одна точка правды
+```python
+endian = '>' if b"MACH SUN_SunOS" in raw[:1024] else '<'
+```
+Big-Endian = сборки ЧПУ с SunOS. Иначе `struct.error` при чтении подач/усадок.
+
+### Параметры (стр. 205–226) — маркер + окно 128 байт
+```python
+b'PTC_SHRINKAGE_FACTOR' → усадка   (принимать 0.9 < val < 1.1)
+b'PTC_MASS'/'PTC_VOLUME'/'PTC_DENSITY' → масса/объём/плотность (1e-6 < |val| < 1e6)
+```
+
+### Формат выхода (обязательный, `EXAMPLES_CONNECTIONS.md`)
+```json
+{"source":"filename_source","target":"filename_target","type":"edge_type_string",
+ "metadata":{"parameter_name":1.012,"method":"binary_unpack"}}
+```
+
+### ЭТАЛОННЫЕ ПРИМЕРЫ — сверять результат по ним
+```
+1) ...\000_51 DF Держатели форм\23-171GR1-META 2кап черновой BDF 5 1_2''\23-171gr1-meta.asm.1
+   --[bom_component]--> DF-23-171 (PART)
+2) ...\171meta держатель форм\23-171gr1-meta.asm.1
+   --[inherit_from_master]--> 171-otlivka.prt.1 (PART_Z / BLANK)
+```
+
+### Приёмка графа (чек-лист тест-кейса)
+```
+✅ SUCCESS = найдены ВСЕ типы связей (bom / inherit / tool / operation / fixture)
+❌ FAIL(0 edges)        → проверить эндианизм и TOC
+❌ FAIL(тип неверен)    → сигнатуры в заголовке #UGC:2, НЕ секции (SolidPersistTable есть и в .prt!)
+❌ FAIL(инструмент без операции) → паттерны в LargeText
+```
+
+### 🔴 Живой замер 23.10.2026 (серии 170meta + 171meta, только чтение)
+```
+папок: 170meta 206 файлов + 171meta 109 файлов
+уникальных моделей: 105 | с .asm: 51 | со структурой: 47
+связей-кандидатов (состав без blacklist): 218
+типы заголовков: ASSEMBLY/ASSEM_MFG (24) · ASSEMBLY (8) · ASSEMBLY/CAST (2 — отливки!)
+```
+**`ASSEMBLY/CAST`** — третий тип заголовка = отливка (в скиллах не описан).
+
+### Найденные трёхбуквенные классы файлов (для классификации)
+```
+ASSEMBLY/ASSEM_MFG → обработка ЧПУ (BOM изделия НЕТ, 220 из 245)
+ASSEMBLY           → обычная сборка (BOM есть)
+ASSEMBLY/CAST      → отливка
+PART               → деталь (в т.ч. .prt с секциями SolidPersistTable — НЕ признак сборки!)
+DRAWING            → чертёж
+```
+
 
 ### Заполненность базы
 ```
