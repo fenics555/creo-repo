@@ -287,6 +287,36 @@ python -c "h=open('CREO_GRAPH.html',encoding='utf-8').read(); import re; [print(
 #card {flex:0 0 auto;height:230px;overflow:auto}   /* фикс. высота верхнего окна */
 ```
 
+### ГРАБЛЯ №4: ГРАФ РИСУЕТ СВЯЗИ ТОЛЬКО ВНИЗ (однопроходный обход)
+Симптом владельца: «связи вроде только вниз», цвета «вверх» не появляются.
+Причина: один проход `depth < 2 ? n.o : (depth > -2 ? n.n : [])` — при `depth = 0` берётся
+только `n.o` (дети); в отрицательный `depth` попасть невозможно → ветка «вверх» мертва.
+**Лечение — ДВА независимых обхода:**
+```js
+function go(start, dir){            // dir: "d" вниз (потомки), "u" вверх (предки)
+  const seen = new Set([root]); let frontier = [start];
+  for (let depth = 1; depth <= 3 && frontier.length; depth++){
+    const next = [];
+    for (const m of frontier){
+      const use = (dir === "d" ? ND[m].o : ND[m].n) || [];
+      for (const t of use.slice(0, 40)){
+        const nm = t[0];
+        if (!ND[nm] || nm === root || seen.has(nm)) continue;
+        seen.add(nm);
+        const lvl = depth * dir;                       // знак = направление
+        (N[lvl] = N[lvl] || []).push(nm);
+        const main = (depth === 1);
+        const k = main ? "main-" + dir : "deep-" + dir;
+        L.push([dir === "d" ? m : nm, dir === "d" ? nm : m, k]);   // ребро всегда «родитель→ребёнок»
+        next.push(nm);
+      }
+    }
+    frontier = next;
+  }
+}
+go(root, "d"); go(root, "u");
+```
+
 ### МИНИАТЮРЫ В СПИСКЕ — фиксировать ЖЁСТКО со всех сторон
 Симптом: «картинки в левом окне большие, в первый раз было норм».
 Причина: `flex:0 0 42px` + `object-fit` без ограничения ширины/высоты — при широком окне картинка
