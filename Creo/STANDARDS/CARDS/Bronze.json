@@ -1,0 +1,100 @@
+{
+  "name": "Bronze",
+  "full_name": "Бронза",
+  "standard": "ГОСТ 859-2005",
+  "type": "Бронза",
+  "category": "льняное",
+  "parameters": {
+    "material_id": "BRONZE",
+    "material_description": "Бронза",
+    "material_type": 0,
+    "material_type_description": "Бронза",
+    "young_modulus": {
+      "value": 110000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "110 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.34,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 41000,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "41 ГПа"
+    },
+    "mass_density": {
+      "value": 8.7,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "8700 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 1.9e-5,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "при 20°C"
+    },
+    "thermal_conductivity": {
+      "value": 65,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "65 W/mK"
+    },
+    "specific_heat": {
+      "value": 380,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "380 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 300,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "300 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 200,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 200 MPa"
+    },
+    "hardness": {
+      "value": 100,
+      "unit": "HB",
+      "canonical": "HARDNESS",
+      "note": "100 HB"
+    },
+    "hardness_type": {
+      "value": "HB",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "NORMALIZED",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Бронза",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 85,
+    "note": "Полнота: 85%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Бронза"
+  ]
+}

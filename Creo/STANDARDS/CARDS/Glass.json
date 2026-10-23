@@ -1,0 +1,100 @@
+{
+  "name": "Glass",
+  "full_name": "Стекло",
+  "standard": "ГОСТ 19277-2023",
+  "type": "Стекло",
+  "category": "стекловолокно",
+  "parameters": {
+    "material_id": "GLASS",
+    "material_description": "Стекло",
+    "material_type": 0,
+    "material_type_description": "Стекло",
+    "young_modulus": {
+      "value": 70000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "70 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.23,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 29000,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "29 ГПа"
+    },
+    "mass_density": {
+      "value": 2500,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "2500 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 9e-6,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "9e-6 1/°C"
+    },
+    "thermal_conductivity": {
+      "value": 1.1,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "1.1 W/mK"
+    },
+    "specific_heat": {
+      "value": 840,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "840 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 70,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "70 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 50,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 50 MPa"
+    },
+    "hardness": {
+      "value": 700,
+      "unit": "Mohs",
+      "canonical": "HARDNESS",
+      "note": "700 Mohs"
+    },
+    "hardness_type": {
+      "value": "Mohs",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "Annealed",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Стекло",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 80,
+    "note": "Полнота: 80%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Стекло"
+  ]
+}

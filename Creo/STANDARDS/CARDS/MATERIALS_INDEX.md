@@ -124,6 +124,23 @@
 - PTC_TENSILE_YIELD_STRESS
 - PTC_HARDNESS
 - PTC_HARDNESS_TYPE
+### БРОНЗА (Bronze)
+- **Bronze** (`Bronze.json`) — Бронза, ГОСТ 859-2005
+
+### ЛАТУНЬ (Brass)
+- **Brass** (`Brass.json`) — Латунь, ГОСТ 585-2006
+
+### МЕДЬ (Copper)
+- **Copper** (`Copper.json`) — Медь, ГОСТ 18377-2001
+
+### ТИТАН (Titanium)
+- **Titanium** (`Titanium.json`) — Титан, ГОСТ 5632-2002
+
+### ФТОРОПЛАСТ (PTFE)
+- **PTFE** (`PTFE.json`) — Фторопласт, ГОСТ 17330-2001
+
+### ГРАФИТ (Graphite)
+- **Graphite** (`Graphite.json`) — Графит, ГОСТ 24243-2018
 - PTC_CONDITION
 - PTC_MATERIAL_DESCRIPTION
 - PTC_MATERIAL_TYPE (legacy, не recommended)

@@ -1,0 +1,100 @@
+{
+  "name": "GlassFilled",
+  "full_name": "Стеклотекстолит",
+  "standard": "ГОСТ 23898-2023",
+  "type": "Пластмасса",
+  "category": "композиционное",
+  "parameters": {
+    "material_id": "GLASSFILLED",
+    "material_description": "Стеклотекстолит",
+    "material_type": 0,
+    "material_type_description": "Стеклотекстолит",
+    "young_modulus": {
+      "value": 12000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "12 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.3,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 4500,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "4.5 ГПа"
+    },
+    "mass_density": {
+      "value": 1800,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "1800 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 50e-6,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "50e-6 1/°C"
+    },
+    "thermal_conductivity": {
+      "value": 0.35,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "0.35 W/mK"
+    },
+    "specific_heat": {
+      "value": 900,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "900 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 80,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "80 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 50,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 50 MPa"
+    },
+    "hardness": {
+      "value": 90,
+      "unit": "Shore D",
+      "canonical": "HARDNESS",
+      "note": "90 Shore D"
+    },
+    "hardness_type": {
+      "value": "Shore D",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "Injection Molded",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Стеклотекстолит",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 75,
+    "note": "Полнота: 75%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Стеклотекстолит"
+  ]
+}

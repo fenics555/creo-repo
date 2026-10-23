@@ -1,0 +1,100 @@
+{
+  "name": "Concrete",
+  "full_name": "Бетон",
+  "standard": "ГОСТ 22393-2023",
+  "type": "Бетон",
+  "category": "кирпич",
+  "parameters": {
+    "material_id": "CONCRETE",
+    "material_description": "Бетон",
+    "material_type": 0,
+    "material_type_description": "Бетон",
+    "young_modulus": {
+      "value": 25000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "25 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.2,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 10000,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "10 ГПа"
+    },
+    "mass_density": {
+      "value": 2400,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "2400 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 10e-6,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "10e-6 1/°C"
+    },
+    "thermal_conductivity": {
+      "value": 1.7,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "1.7 W/mK"
+    },
+    "specific_heat": {
+      "value": 880,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "880 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 3,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "3 MPa (требует отделки)"
+    },
+    "tensile_yield_stress": {
+      "value": 2,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 2 MPa"
+    },
+    "hardness": {
+      "value": 25,
+      "unit": "HB",
+      "canonical": "HARDNESS",
+      "note": "25 HB"
+    },
+    "hardness_type": {
+      "value": "HB",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "C20/25",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Бетон",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 70,
+    "note": "Полнота: 70%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Бетон"
+  ]
+}

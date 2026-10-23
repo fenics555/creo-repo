@@ -1,0 +1,100 @@
+{
+  "name": "PTFE",
+  "full_name": "Фторопласт",
+  "standard": "ГОСТ 17330-2001",
+  "type": "Пластмасса",
+  "category": "полимер",
+  "parameters": {
+    "material_id": "PTFE",
+    "material_description": "Фторопласт",
+    "material_type": 0,
+    "material_type_description": "Фторопласт",
+    "young_modulus": {
+      "value": 500,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "0.5 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.45,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 200,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "0.2 ГПа"
+    },
+    "mass_density": {
+      "value": 2.2,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "2200 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 130e-6,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "130e-6 1/°C"
+    },
+    "thermal_conductivity": {
+      "value": 0.25,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "0.25 W/mK"
+    },
+    "specific_heat": {
+      "value": 1000,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "1000 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 30,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "30 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 20,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 20 MPa"
+    },
+    "hardness": {
+      "value": 50,
+      "unit": "Shore D",
+      "canonical": "HARDNESS",
+      "note": "50 Shore D"
+    },
+    "hardness_type": {
+      "value": "Shore D",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "Molded",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Фторопласт",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 85,
+    "note": "Полнота: 85%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Фторопласт"
+  ]
+}

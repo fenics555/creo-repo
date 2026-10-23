@@ -1,0 +1,100 @@
+{
+  "name": "Titanium",
+  "full_name": "Титан",
+  "standard": "ГОСТ 5632-2002",
+  "type": "Титан",
+  "category": "металл",
+  "parameters": {
+    "material_id": "TITANIUM",
+    "material_description": "Титан",
+    "material_type": 0,
+    "material_type_description": "Титан",
+    "young_modulus": {
+      "value": 110000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "110 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.34,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 41000,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "41 ГПа"
+    },
+    "mass_density": {
+      "value": 4.5,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "4500 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 8.6e-6,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "при 20°C"
+    },
+    "thermal_conductivity": {
+      "value": 22,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "22 W/mK"
+    },
+    "specific_heat": {
+      "value": 520,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "520 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 430,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "430 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 380,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 380 MPa"
+    },
+    "hardness": {
+      "value": 130,
+      "unit": "HRB",
+      "canonical": "HARDNESS",
+      "note": "130 HRB"
+    },
+    "hardness_type": {
+      "value": "HRB",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "Annealed",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Титан",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 75,
+    "note": "Полнота: 75%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Титан и титановые сплавы"
+  ]
+}

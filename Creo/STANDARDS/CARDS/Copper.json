@@ -1,0 +1,100 @@
+{
+  "name": "Copper",
+  "full_name": "Медь",
+  "standard": "ГОСТ 18377-2001",
+  "type": "Медь",
+  "category": "металл",
+  "parameters": {
+    "material_id": "COPPER",
+    "material_description": "Медь",
+    "material_type": 0,
+    "material_type_description": "Медь",
+    "young_modulus": {
+      "value": 110000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "110 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.34,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 40000,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "40 ГПа"
+    },
+    "mass_density": {
+      "value": 8.96,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "8960 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 1.7e-5,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "при 20°C"
+    },
+    "thermal_conductivity": {
+      "value": 400,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "400 W/mK"
+    },
+    "specific_heat": {
+      "value": 385,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "385 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 220,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "220 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 80,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 80 MPa"
+    },
+    "hardness": {
+      "value": 80,
+      "unit": "HB",
+      "canonical": "HARDNESS",
+      "note": "80 HB"
+    },
+    "hardness_type": {
+      "value": "HB",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "T4",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Медь",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 85,
+    "note": "Полнота: 85%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Медь"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "name": "Graphite",
+  "full_name": "Графит",
+  "standard": "ГОСТ 24243-2018",
+  "type": "Графит",
+  "category": "порошковое волокно",
+  "parameters": {
+    "material_id": "GRAPHITE",
+    "material_description": "Графит",
+    "material_type": 0,
+    "material_type_description": "Графит",
+    "young_modulus": {
+      "value": 10000,
+      "unit": "MPa",
+      "canonical": "YOUNG_MODULUS",
+      "note": "10 ГПа"
+    },
+    "poisson_ratio": {
+      "value": 0.2,
+      "unit": "",
+      "canonical": "POISSON_RATIO",
+      "note": ""
+    },
+    "shear_modulus": {
+      "value": 4000,
+      "unit": "MPa",
+      "canonical": "SHEAR_MODULUS",
+      "note": "4 ГПа"
+    },
+    "mass_density": {
+      "value": 1.8,
+      "unit": "g/cm³",
+      "canonical": "MASS_DENSITY",
+      "note": "1800 kg/m³"
+    },
+    "thermal_expansion_coefficient": {
+      "value": 7e-6,
+      "unit": "1/°C",
+      "canonical": "THERMAL_EXPANSION_COEFFICIENT",
+      "note": "при 20°C"
+    },
+    "thermal_conductivity": {
+      "value": 120,
+      "unit": "W/(m·K)",
+      "canonical": "THERMAL_CONDUCTIVITY",
+      "note": "120 W/mK"
+    },
+    "specific_heat": {
+      "value": 710,
+      "unit": "J/(kg·K)",
+      "canonical": "SPECIFIC_HEAT",
+      "note": "710 J/kgK"
+    },
+    "tensile_ultimate_stress": {
+      "value": 70,
+      "unit": "MPa",
+      "canonical": "TENSILE_ULTIMATE_STRESS",
+      "note": "70 MPa"
+    },
+    "tensile_yield_stress": {
+      "value": 50,
+      "unit": "MPa",
+      "canonical": "TENSILE_YIELD_STRESS",
+      "note": "Прочность с усадкой 50 MPa"
+    },
+    "hardness": {
+      "value": 100,
+      "unit": "Mohs",
+      "canonical": "HARDNESS",
+      "note": "100 Mohs"
+    },
+    "hardness_type": {
+      "value": "Mohs",
+      "unit": "",
+      "canonical": "HARDNESS_TYPE",
+      "note": ""
+    },
+    "condition": {
+      "value": "Billet",
+      "unit": "",
+      "canonical": "CONDITION",
+      "note": "Состояние"
+    },
+    "material_description": {
+      "value": "Графит",
+      "unit": "",
+      "canonical": "MATERIAL_DESCRIPTION",
+      "note": "Полное описание"
+    }
+  },
+  "weight": {
+    "embryo": 10,
+    "data": 75,
+    "note": "Полнота: 75%"
+  },
+  "audit_date": "2026-10-21",
+  "source_files": [
+    "Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Материалы общего вида\\Графит"
+  ]
+}
