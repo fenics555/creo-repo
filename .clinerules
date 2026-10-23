@@ -67,7 +67,9 @@
 4.3. СКИЛЛЫ ДОМА = `D:\AI\repo` (память дома + карта `SKILL_index.md`).
      ТРИГГЕРЫ (читать скилл ДО действия): git -> `SKILL_parallel_legs.md` · model= -> `OLAMA\SKILL_ollama_index.md`
      · факт без источника -> `SKILL_anti_hallucination.md` · куда файл -> `CORE\CULTURE_files.md`
-     · REVIVE -> `SKILL_local_agent_cline.md`. Полный список триггеров -> `repo\AGENT_index.md`.
+     · REVIVE -> `SKILL_local_agent_cline.md` · «эстафета/handover/сдай смену/передача ноги» ->
+       `SKILL_handover.md` (файл эстафеты ЖИВЁТ ТОЛЬКО в `D:\AI\ЭСТАФЕТЫ\<ТЕМА>.md`; ОБЯЗАН
+       содержать перечень файлов и скиллов для изучения следующей ногой). Полный список -> `repo\AGENT_index.md`.
 4.4. ПОИСК ИНСТРУМЕНТА: (1) карта `SKILL_index.md`; (2) реестр `tools\agent\README.md`; (3) README/settings.
      Не нашёл -> глубже по корням. Имя НЕ выдумывать.
 
