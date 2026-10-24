@@ -19,7 +19,7 @@ date: 22.09.2026
 * Подробности: `SKILL_creo_file_reading.md` §0.
 
 ## 📌 СОСТОЯНИЕ НА 03.10.2026 (живая проверка, не пересказ)
-* Инструмент чтения «в лоб» — `D:\AI\tools\agent\plm_reader\`, версия **V114** (24.10.2026; `PARSER_TAG="p23"`),
+* Инструмент чтения «в лоб» — `D:\AI\tools\agent\plm_reader\`, версия **V115** (24.10.2026; `PARSER_TAG="p23"`),
   база — `db\plm_reader_<дата>.db`. Дорожная карта инструмента и канон дома (переносимость, автообновление
   через GitHub, правило дисков) — `D:\AI\tools\agent\plm_reader\STRATEGY_PLM.md`
   (читается свежайший), настройки — `settings\settings.json`. Creo не нужен.
