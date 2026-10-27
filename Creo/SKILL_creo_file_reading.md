@@ -546,10 +546,106 @@ pin_split-*.xpr                 ~2 МБ × 20+   ← .xpr = ЗЕРКАЛА/эк�
 **Вывод:** Creo **перебирает параметры КАЖДОГО исполнения** — значит и ПЛМ должен хранить
 **параметры исполнений**, а не только генерика (владелец говорил это же).
 
-**4) ИСПОЛНЕНИЯ — НЕ ОТДЕЛЬНЫЕ ФАЙЛЫ (проверено):** в базе 11 моделей `DIN912-*`, а **на диске в
-библиотеке только ОДИН файл `din912.prt.1`** — исполнения живут **внутри генерика** (таблица
-семейства), Creo создаёт их на лету. **Значения колонок** лежат в `values_xar`:
-`objname` (имя параметра) → `param_val` (значение) → `value(s_val)._<ИМЯ-ИСПОЛНЕНИЯ>`.
+### 8.7.5. ИСТОЧНИКИ ДАННЫХ СКЛАДА: XML-параметры, каталог, config.pro (V127, разведка)
+
+**Владелец:** «есть два варианта про библиотеку: либо читать из `config.pro` параметр пути
+библиотеки, либо в настройках добавлять пути к библиотеке (может и не одной)»; «**`search.pro`
+может быть битый + сканирует по всем папкам без исключений**»; «`config.pro` можно и нужно
+поизучать»; «в самом Creo есть HTML-настройки/шаблоны».
+
+#### А. XML-ПАРАМЕТРЫ (`CreoParamSet`) — 16 файлов, «как в Creo» с ТИПАМИ и ОПИСАНИЯМИ
+
+**Ключ: `config.pro` → `auto_xml_on_retrieve yes` + `auto_xml_on_save yes`** — Creo **сам**
+читает/пишет XML-параметры рядом с моделью.
+
+```
+Libraries\...\ПАРАМЕТРЫ ДЛЯ БИБЛИОТЕКИ И ДР\БОЛТЫ.xml      41 параметр
+                                          \g5915_par.xml   43
+НАСТРОЙКИ\ШАБЛОНЫ\TEMPLATE\param_prt.xml                   42  ← шаблон ДЕТАЛИ
+                          \param_asm.xml                   31  ← шаблон СБОРКИ
+                          \param_prt_name_1/2, obozn_1/2, primech_1/2, vid_dokum_*
+НАСТРОЙКИ\Уравнения\ДЛЯ ЛИТЬЯ\староепараметры_литниковой_par.xml  101  ← литьё!
+```
+Формат:
+```xml
+<Parameter Name="НАИМЕНОВАНИЕ">
+    <DataType>String</DataType>
+    <Value>пробка коническая</Value>
+    <Description>имя детали</Description>
+</Parameter>
+<Parameter Name="DENSITY"><Value>0.0000078</Value><Access>Locked</Access></Parameter>
+```
+**Типы:** `String` · `Integer` · `Boolean` · (пусто = число). **`Access`: Locked.**
+**Полезные описания:** «имя детали», «если длинное», «очень длинное», «формат чертежа»,
+«Масса заготовки детали (используется в ведомости материалов)», «-01, -02, ... в табличных чертежах».
+
+**Параметры-заготовки (из `param_prt.xml`):** `ДИАМ_НАР_ЗАГ`, `ДИАМ_ВНУТР_ЗАГ`, `ДЛИНА_ЗАГ`,
+`ВЫСОТА_ЗАГ`, `ТОЛЩ_СТЕНКИ_ТРУБЫ_ЗАГ`, `ПРОЦЕНТ_ПРИПУСКА`, `MASSA_ZAG`.
+**Спецификация:** `MATERIAL_S`, `OBOZNACHENIE`, `ВЗАИМОЗАМЕНА`, `ГРАФА_ОБОЗНАЧЕНИЕ_СП`.
+**ЕСКД:** `РАЗРАБОТАЛ`, `ПРОВЕРИЛ`, `ТЕХ_КОНТРОЛЬ`, `НОРМО_КОНТРОЛЬ`, `УТВЕРДИЛ`,
+`ПЕРВ_ПРИМЕН`, `СПРАВ_№`, `ДОЛЖНОСТЬ_НАЧАЛЬНИКА`.
+**Табличные:** `ТАБЛ_ВАРИАНТ` («-01, -02, ... в табличных чертежах»), `СКРЫТОЕ_ОБОЗНАЧЕНИЕ`.
+
+#### Б. КАТАЛОГ (`НАСТРОЙКИ\catalog`) — стандартный Creo Catalog, **2150 `.lay`**
+
+```
+index.mnu → CATALOG: /ejpin /workpiece /bolt /screw /nut /hobnail /ring_rubber /washer /screw-nail
+bolt\gost\<НОМЕР>\[SIZE|DIR_THREAD\TOL_THREAD\STRENGTH\MATERIAL\COV\SIZE]\*.lay
+screw\gost\11738\DIR_THREAD\TOL_THREAD\STRENGTH\MATERIAL\PTC_MATERIAL_NAME.txt
+bolt\bolt_universal.prt.1 (317 КБ) · bolt_main.lay.1 (16 КБ)
+```
+**Иерархия папок = иерархия выбора параметров** (7 уровней у `bolt\gost\7796`).
+`.lay` = таблица выбора (layout). Путь каталога: `config.pro → pro_catalog_dir`.
+
+#### В. `config.pro` (242 опции) — ПУТИ И НАСТРОЙКИ СКЛАДА
+
+```
+pro_library_dir   Z:\PTC\CREO-START\Libraries\          ← БИБЛИОТЕКА
+pro_catalog_dir   ...\НАСТРОЙКИ\catalog\                ← КАТАЛОГ
+pro_format_dir    ...\НАСТРОЙКИ\ФОРМАТЫ\                ← ФОРМАТЫ
+pro_material_dir  ...\НАСТРОЙКИ\МАТЕРИАЛЫ\              ← МАТЕРИАЛЫ
+pro_symbol_dir    ...\НАСТРОЙКИ\СИМВОЛЫ\ · pro_group_dir ...\udf\ · pro_note_dir ...\ЗАМЕТКИ\
+pro_mdb_dir       ...\ПРОЗИВОДСТВЕННЫЕ_НАСТРОЙКИ\mdb\   ← БАЗА ЗНАНИЙ (mdb)
+mfg_template_dir  ...\ШАБЛОНЫ\ТЕХПРОЦЕССЫ\ · pro_mf_workcell_dir ...\СТАНКИ\
+pro_mf_tprm_dir   ...\ИНСТРУМЕНТ\ · gpostpp_dir ...\ПОСТПРОЦЕССОРЫ\
+hole_parameter_file_path ...\ТАБЛИЦА_ОТВЕРСТИЙ\
+tolerance_table_dir ...\ТАБЛИЦА_ДОПУСКОВ\gost\
+★ restricted_val_definition ...\ФАЙЛЫ_ОГРАНИЧЕНИЙ_ПАРАМЕТРОВ\list.lst
+★ auto_xml_on_retrieve yes · auto_xml_on_save yes
+pro_unit_sys mmks · pro_unit_length unit_mm · pro_unit_mass unit_kilogram
+mold_inheritance yes
+template_solidpart ...\mm_part.prt · template_designasm ...\sborka_mm.asm
+template_mfgnc sborka_mfg.asm · template_mfgmold pressforma-mm_mold.asm
+browser_favorite Z:\PTC\CREO-START\Libraries
+```
+**Владелец: `search_path` НЕ использовать** — он может быть **битый** и **сканирует всё без исключений**.
+
+#### Г. ОГРАНИЧЕНИЯ ПАРАМЕТРОВ (`list.lst` / `DLYA_DISKOV.lst`) — `ND_ParamDefArr`
+
+```
+ND_ParamDefArr_K01 = {
+  { Name = ТИП     Type = string  Default = 'Деталь'
+    Enum = { ' ', 'Деталь', 'Сборка', 'Стандарт', 'Прочие', 'Документация', 'Материал', 'Производство'} },
+  { Name = ТИП2    Enum = { ' ', 'Комплекты', 'Технология'} },
+  { Name = ФОРМАТ  Default = 'А3'  Enum = { ' ', '-', 'А0', 'А2', 'А3', 'А4', 'БЧ'} },
+  { Name = РОЛЬ_В_ЛИТЕЙНОЙ_СИСТЕМЕ  Enum = { 'Литниковая_система', 'Модель', 'Сборка_ящика',
+                                             'Стержень', 'Формовочный_объем', 'Ящик'} }
+}
+```
+**ГРАБЛЯ КОДИРОВКИ:** в ОДНОЙ папке `list.lst` = **cp1251**, а `DLYA_DISKOV.lst` = **UTF-8 с BOM**
+(`utf-8-sig`). Читать оба варианта!
+
+#### Д. Creo Common Files (`D:\PTC\CREO13\<версия>\Common Files`) — шаблоны и подсказки
+
+```
+templates\  a0..a4_drawing.drw · direct_part_solid_mmks_*.prt · direct_asm_solid_*.asm
+formats\    форматы листов
+creo_standards\ · text\  (*.dtl — настройки чертежа, *.sec — сечения инструмента)
+applications\gdt_home\text\resource\html\russian\   ← ★ HTML-ПОДСКАЗКИ CREO НА РУССКОМ (GD&T)
+```
+**Полезно:** `text\3d_metric.dtl` / `3d_inch.dtl` — настройки чертежа; в `gdt_home\...\russian\`
+лежат **тексты ошибок/подсказок GD&T по-русски** (можно использовать для понятных сообщений).
+
 
 
 
