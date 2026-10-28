@@ -102,7 +102,7 @@ SHA-256; тяжёлые ветки — **zlib level=9** (1,7×). Провере�
 |---|---|
 | Паспорт/скан/дерево/входимость/изменения | `D:\AI\tools\agent\plm_reader\` (V37, база в `db\`, настройки в `settings\`) |
 | Таблица семейств из файла | `D:\AI\ИЗУЧИТЬ\ДАВЫДОВКА\creoJS\creo_bom_js\family_table_file.py` |
-| Проба операций построения | `D:\AI\PROBA\feat_probe\feat_read.py`, `D:\AI\PROBA\deep\*.py` |
+| Проба операций построения | `D:\AI\PROBA\feat_probe\feat_read.py` (**есть**); ссылки на `D:\AI\PROBA\deep\*.py` — **история проб**, папка временная и удалена (28.10.2026) |
 | Эталон дерева из живого Creo (JLINK) | `D:\AI\PROBA\feat_probe\FeatDump.java` (скомпилирован) |
 | Пишущие операции в Creo | CREOSON / JLINK — `..\SKILL_creo_jlink_direct.md`, `..\CREOSON\SKILL_creoson_write_rules.md` |
 
