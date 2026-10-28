@@ -12,6 +12,18 @@
 | St40x | `St40x.json` | Сталь | ГОСТ 1577-93 | ✅ Полная |
 | St60H | `St60H.json` | Сталь | ГОСТ 1577-93 | ✅ Полная |
 | St65G | `St65G.json` | Сталь | ГОСТ 1577-93 | ✅ Полная |
+| Bronze | `Bronze.json` | Бронза | ГОСТ 859-2005 | ✅ Полная |
+| Brass | `Brass.json` | Латунь | ГОСТ 585-2006 | ✅ Полная |
+| Copper | `Copper.json` | Медь | ГОСТ 18377-2001 | ✅ Полная |
+| Titanium | `Titanium.json` | Титан | ГОСТ 5632-2002 | ✅ Полная |
+| PTFE | `PTFE.json` | Фторопласт | ГОСТ 17330-2001 | ✅ Полная |
+| Graphite | `Graphite.json` | Графит | ГОСТ 24243-2018 | ✅ Полная |
+| Concrete | `Concrete.json` | Бетон | ГОСТ 22393-2023 | ✅ Полная |
+| Wood | `Wood.json` | Дерево | ГОСТ 5916-2022 | ✅ Полная |
+| Plastic | `Plastic.json` | Пластмасса | ГОСТ 23000-2023 | ✅ Полная |
+| Rubber | `Rubber.json` | Резина | ГОСТ 22539-2014 | ✅ Полная |
+| Glass | `Glass.json` | Стекло | ГОСТ 19277-2023 | ✅ Полная |
+| GlassFilled | `GlassFilled.json` | Стеклотекстолит | ГОСТ 23898-2023 | ✅ Полная |
 
 ## Консолидация словаря PTC_ → CANONICAL
 
@@ -141,6 +153,24 @@
 
 ### ГРАФИТ (Graphite)
 - **Graphite** (`Graphite.json`) — Графит, ГОСТ 24243-2018
+
+### БЕТОН (Concrete)
+- **Concrete** (`Concrete.json`) — Бетон, ГОСТ 22393-2023
+
+### ДЕРЕВО (Wood)
+- **Wood** (`Wood.json`) — Дерево, ГОСТ 5916-2022
+
+### ПЛАСТМАССА (Plastic)
+- **Plastic** (`Plastic.json`) — Пластмасса, ГОСТ 23000-2023
+
+### РЕЗИНА (Rubber)
+- **Rubber** (`Rubber.json`) — Резина, ГОСТ 22539-2014
+
+### СТЕКЛО (Glass)
+- **Glass** (`Glass.json`) — Стекло, ГОСТ 19277-2023
+
+### СТЕКЛОТЕКСТОЛИТ (GlassFilled)
+- **GlassFilled** (`GlassFilled.json`) — Стеклотекстолит, ГОСТ 23898-2023
 - PTC_CONDITION
 - PTC_MATERIAL_DESCRIPTION
 - PTC_MATERIAL_TYPE (legacy, не recommended)
