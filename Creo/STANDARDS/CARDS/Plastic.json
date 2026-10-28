@@ -90,6 +90,27 @@
   },
   "weight": {
     "embryo": 10,
+  "parameters": {
+    "impact_energy": {
+      "value": 50,
+      "unit": "J",
+      "canonical": "IMPACT_ENERGY",
+      "note": "Энергия удара при 20°C"
+    },
+    "fatigue_strength": {
+      "value": 80,
+      "unit": "MPa",
+      "canonical": "FATIGUE_STRENGTH",
+      "note": "Крейтенсий при 10^6 циклов"
+    },
+    "s_n_curve": {
+      "value": "unknown",
+      "unit": "unknown",
+      "canonical": "S_N_CURVE",
+      "note": "Неизвестно, требуется исследование"
+    }
+  },
+  "audit_date": "2026-10-21",
     "data": 85,
     "note": "Полнота: 85%"
   },
