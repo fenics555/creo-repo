@@ -1310,4 +1310,53 @@ open(p, "wb").write(nl.join(out))     # ← СМЕРТЕЛЬНО
 **и** убедись, что диалог жив (грабля: `full_var`/`_scan_start` — **не те** имена; реальные —
 `var_full`, `go()`, и все они внутри `run_gui`).
 
+## 94. 🔴 ПРИЧИНА «НАСТРОЙКА НЕ СОХРАНЯЕТСЯ» — В ОКНЕ ДВА ПОЛЯ ОДНОГО КЛЮЧА (28.10.2026, V138)
+
+**Симптом (эстафета V137, БАГ A):** в `settings.json` ключа `config_pro` **нет**, владелец вписывал
+путь, «Сохранить» — и настройка пропадала. Плюс: **окно настроек вообще не открывалось**.
+
+**Как искали (и как надо искать):** НЕ глазами по коду, а **пробой**, которая вызывает `save()`
+на **ВРЕМЕННОМ** файле настроек и печатает, что уходит на запись:
+
+```python
+real = plm_settings.save_settings_file
+plm_settings.save_settings_file = lambda s, path=None: real(s, TMP)     # TMP = %TEMP%\...
+plm_paths_window.save_settings_file = plm_settings.save_settings_file   # окно берёт имя ИМПОРТОМ
+win = plm_paths_window.PathsWindow(root, dict(settings), tk, ttk, filedialog)
+win.e_cfgpro.insert(0, r"Z:\PTC\CREO-START\config.pro")
+win.save()
+```
+**Живые факты пробы (по шагам, каждая строка — диагноз):**
+1. `PathsWindow(root, on_save=None)` → `TypeError: missing 4 required positional arguments` —
+   сигнатура: `(parent, settings, tk, ttk, filedialog, on_save=None)`;
+2. после первой правки → `KeyError: 'template_folders'` — **окно падало на ОТКРЫТИИ**: строка
+   осталась в `__init__`, а ключа в `self.rows` уже нет (наследие удаления блока «ШАБЛОНЫ»);
+3. `save()` → `NameError: name '_ps' is not defined` — `import plm_settings as _ps` был **локальным
+   в `__init__`**, а `save()` его не видит. Лечение: `self.spec = list(_ps.SETTINGS_SPEC)` в `__init__`;
+4. `save()` прошёл, но во времянке `config_pro = ''` — **самое важное**: `config_pro` лежит в
+   **едином реестре** `SETTINGS_SPEC` (тип `text`), и цикл «все настройки из реестра» брал его из поля
+   раздела ПАРАМЕТРЫ (всегда пустого) и **затирал реальный путь из `e_cfgpro` пустой строкой**.
+
+**ПРИЧИНА (корень):** **два поля на один ключ**. Раздел «CONFIG.PRO» пишет `e_cfgpro`, а раздел
+«ПАРАМЕТРЫ» (автосборка из реестра) — своё поле того же ключа; кто последний, тот и прав.
+
+**ЛЕЧЕНИЕ:** поле-хозяин пишется **ПОСЛЕ** цикла реестра:
+```python
+_cp = self.e_cfgpro.get().strip().replace("/", "\\")
+...
+# цикл по gbools/gchoice/gvars из SETTINGS_SPEC
+self.settings["config_pro"] = _cp        # 🔴 ПОСЛЕ цикла — хозяин главнее
+save_settings_file(self.settings)
+```
+**Правило дома:** если ключ есть и в отдельном поле, и в автосборке из реестра — **сначала цикл,
+потом хозяин**. Иначе настройка «исчезает» без ошибки.
+
+**Второе правило (тип `list`):** ветка `else` рисует **числовую** крутилку; тип `list` надо ловить
+явно (`elif typ == "list"` → `Entry` + разбор `split_list`), иначе ввод вроде `4орлорпро` падает
+в `int(float(...))` → `except: pass` → **ключ теряется молча** (грабля 83).
+
+**Замер приёмки этой ноги:** `COMPILE OK` · `SMOKE OK` · проба B/C: `ШАБЛОНЫ в папках сканирования:
+False` (и до, и после повторного открытия), `param_pick = ['НАИМЕНОВАНИЕ','ОБОЗНАЧЕНИЕ']` в файле.
+Пробы писали в `%TEMP%` — живые настройки НЕ тронуты (грабля 18).
+
 === END ===
