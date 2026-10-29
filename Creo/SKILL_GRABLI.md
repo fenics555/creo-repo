@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿# SKILL_GRABLI: Lessons Learned
+﻿﻿﻿﻿﻿﻿﻿﻿﻿# SKILL_GRABLI: Lessons Learned
 
 ## Python Regex & Binary Data
 - **Problem**: `re.PatternError: incomplete escape \x0 at position N`.
@@ -2422,4 +2422,160 @@ PAIR = re.compile(rb"\xe0\nfrom_mdl_name\x00.{1,2}?([^\x00]{2,60})\x00"
 **Ложные срабатывания (проверено):** `MIN` ⊂ `MIN_ACCEPTABLE_TOOL_LENGTH` · `NORM` ⊂ `USE_SURF_NORMS` ·
 `CYCLE` ⊂ `CUSTOM_CYCLE_NAME` — **НЕ норма/время!** Искать **кириллицей**, там ложных нет.
 
+## 137. 🔴 МАШИННЫЕ ДАННЫЕ ЧПУ В ФАЙЛЕ (важнее ручной карточки) — замер 29.10.2026
+
+**Слово владельца:** «эти параметры (`НОРМОЧАС`/`ПАРТИЯ`) я ВСТАВИЛ, они устарели.
+**Creo сам считает время**».
+
+**⇒ Правильный источник времени — НЕ ручные параметры, а МАШИННЫЕ данные ЧПУ.**
+**Проверено: 116 файлов `.asm`/`.mfg`.** Java-API `MFG` = **только `GetSolid()`** (времени нет).
+
+### 1. ✅ ЧТО ЛЕЖИТ В ФАЙЛЕ (машинные данные)
+
+| Ключ | Вхождений | Файлов | Что это |
+|---|---:|---:|---|
+| **`CL_`** | 8 127 | **101** | **CL-данные** (cutter location = траектория) |
+| **`traj`** | 327 | 104 | траектория |
+| **`OPERATION`** | 309 | 86 | **операции** |
+| **`NC_SEQ`** | 258 | 86 | **последовательность ЧПУ** |
+| **`tool_id`** | 203 | 102 | **инструмент** |
+| **`CL_DATA`** | 131 | 99 | данные траектории |
+
+### 2. 🔴 ЖИВЫЕ ПОЛЯ (полный набор для маршрута)
+
+```
+mfg_ptr → tool_array → { type · tool_id="SVERLO_D18" · tool_params[18] → value(i_val)… }
+                                                          ↑ ПОДАЧА/ОБОРОТЫ/ДИАМЕТР
+OPERATION_NAME · OPERATION_COMMENTS · OPERATION_CSYS_NAME
+NC_SEQUENCE_NAME · NC_SEQUENCE_CSYS_NAME · NC_SEQUENCE_COMMENTS
+CL_DATA_MODE = MULTAX_DATA · OPERATION_OUTPUT = MAIN_SPINDLE_CSYS
+custom_cl_text · cl_info_ptr · ancpp_data / ancpp_aux_data / ancpp_params   ← постпроцессор, CL-текст
+MACH_ASSEM_NAME · MACH_ID
+```
+**⇒ Время получается РАСЧЁТОМ** (длина траектории ÷ подача), а не готовым числом —
+поэтому ручные `НОРМОЧАС`/`ПАРТИЯ` и были надстройкой.
+
+### 3. ⚠️ ГДЕ ИСКАТЬ ВРЕМЯ (порядок)
+
+1. **`tool_params`** (подача/обороты) + **`traj`** (длина) → **считать**;
+2. **`custom_cl_text`** — CL-текст (если Creo его сохранил, там траектория целиком);
+3. **Creo (J-Link/C API)** — расчёт времени постпроцессором; в Java-API `MFG` методов нет;
+4. **❌ НЕ** ручные `НОРМОЧАС`/`ПАРТИЯ`/`СТОИМОСТЬ_*` — **устарели** (вставил владелец).
+
+### 4. 📌 ЧТО ДАЁТ ПЛМ
+
+| Тип данных | Ключи | Покрытие |
+|---|---|---|
+| **Инструмент** | `tool_id` + `tool_params` | **102 файла** |
+| **Операции** | `OPERATION_NAME`, `NC_SEQ*` | **86 файлов** |
+| **Траектория** | `CL_`, `traj`, `CL_DATA_MODE` | **101 файл** |
+| **Постпроцессор** | `ancpp_data`, `custom_cl_text` | есть в структуре |
+
+**⇒ Маршрут обработки (операции + инструмент + траектория) ЧИТАЕТСЯ из файла.**
+
+### 5. 🚩 ФЛАГИ
+
+1. **Ручные техпараметры (`НОРМОЧАС`/`ПАРТИЯ`/`СТОИМОСТЬ_*`) — УСТАРЕЛИ** (слово владельца). Не строить на них планирование.
+2. **Java-API `MFG` пуст** (`GetSolid()`), CL-инструкции — пустые интерфейсы ⇒ времени в J-Link нет.
+3. **`FullMData` = 108 КБ** (живой замер) — секция мануфактуринга, там машинные данные.
+
 === END ===
+
+## 138. 🏆 КАРТА ПОЛЕЙ ЛЕЖИТ В САМОМ ФАЙЛЕ — Creo пишет САМООПИСАНИЕ (замер 29.10.2026, фаза 15)
+
+**Владелец: «ищи шире — должна быть КАРТА мануфактуринга, делай ПАРАЛЛЕЛИ с деревом». Совет сработал.**
+
+**Формат записи поля структуры (найдено байтами):**
+```
+<ЗНАЧЕНИЕ ПРЕДЫДУЩЕГО> E0 <ТИП> <ИМЯ ПОЛЯ> 00
+пример: F6 E0 01 "appl_id" 00 | E3 E0 01 "ref_id_user" 00 | F8 02 C8 00 06 00 E0 09 "ref_id_coll_flags" 00
+```
+**Тип поля:** `01` = простой, `09` = с доп. данными (массив/флаги), `0A` = строка.
+
+**Полная карта полей МОДЕЛИ (в порядке следования в файле):**
+```
+revnum_ptr · geom_revnum · cosm_revnum · insert_layer_id · layer_count
+rel_part_eps · model_eps · fixed_model_eps · part_type · first_ent_id · outline
+attrib_array · max_part_size · gr_creo_src_ver · ref_part_tabs · ref_part_tab
+objname · object_type · name · simpl_rep · inherit_rep · p_foreign_source · ext
+long_name · revnum
+--- далее структура ФИЧЕРА ---
+dep_id · attributes · feat_id · appl_id · ref_id_user · ref_id · ref_id_coll_flags
+ref_id_strength · use_feats_tab · id · type · coll_flags · strength
+```
+**⇒ ПОЛЕ `type` СУЩЕСТВУЕТ** (искали его в фазах 6–8!). **Поле `parent` тоже есть.**
+
+**Заголовок модели читается ОДНОЗНАЧНО:**
+```
+003CF0  01 "object_type" 00  01  E0 0A "name" 00 "CTKD_015_23_001_MILL_TURN"
+        └─ object_type = 01 (= MFG-модель)
+```
+
+**ПРАВИЛО:** **прежде чем искать «где лежит X» — искать в файле КАРТУ ПОЛЕЙ.**
+Файл Creo **сам содержит список имён всех своих полей** ⇒ карта даёт ответ о структуре **без Creo**.
+→ §139 (карта MFG), `SKILL_creo_tree_jlink_etalon.md` ФАЗА 15.
+
+## 139. 🏆 МАНУФАКТУРИНГ В ФАЙЛЕ: КАРТА ОПЕРАЦИЙ + ПАРАМЕТРЫ CL (замер 29.10.2026, фаза 15)
+
+**Владелец: «есть Таблица производственного процесса + график времени» ⇒ проверил: ДА, ЛЕЖИТ В ФАЙЛЕ.**
+
+**Префиксы меток MFG-файла ОТЛИЧАЮТСЯ от детали (замер `_mill_turn.asm` vs `.prt`):**
+```
+MFG: 01 F6 E3 (×51) · E1 00 E3 (×44) · 00 F6 E3 (×42) · E3 F7 17 (×22)
+PRT: 01 01 E3 (×41) · E3 F6 F6 (×33) · E6 E0 00 (×7)
+```
+
+**Имена только в ЧПУ:** `PTC_MFG_PRM_CL_FILE` (×38) · `PTC_TOOLPATH_REV_NUM` (×18) ·
+`mpoint` (×14) · `mp_source` · `mp_struct_attr` · `mp_checksum` · `mp_calc_count` ·
+`NC_ASM_FRONT`/`RIGHT`/`TOP`/`DEF_CSYS` · `PRO_MP_ALT_*` (MASS/VOLUME/AREA/COGX..IZZ).
+**⇒ имена канала СОВПАДАЮТ с C API (`ProMfgproctable`/`ProMfgprocitem`) — та же логика, что `ProFeatureTypeGet`→`TYPENAME`.**
+
+**Точка входа блока параметров операции: `F8 <КОД> F7 16 FB E3 F7 17` — 22 шт в файле.**
+```
+F8 0E F7 16 FB E3 F7 17 | PTC_MFG_PRM_CL_FILE | 27 EB 03 18 ...
+F8 09 F7 16 FB E3 F7 17 | "НОРМОЧАС" (UTF-8 кириллица!)
+F8 ?? ... | "НОРМА_НАЛАДКИ" · "ПАРТИЯ" · "value(i_val)"
+```
+**⇒ `F8 <КОД>` = ИДЕНТИФИКАТОР ПАРАМЕТРА (индекс в таблице описаний).**
+
+**Формат пары «параметр = значение»:**
+```
+<ИМЯ> 00 <len/тип> E3 32 <8 БАЙТ> F7 1D E3 32 <те же 8 БАЙТ> F7 1E 04 F6 00
+                                    └── дубль значения ──┘
+```
+
+**Имена параметров CL (в каждом из 19 блоков):**
+`DESCRIPTION` · **`MACHINING_TIME`** · **`SPINDLE_SPEED`** · **`CUTTER_DIAM`** ·
+**`CUT_FEED`** · **`STEP_DEPTH`** · **`CLEAR_DIST`** · `TOOL_WIDTH` · `NOSE_RADIUS` ·
+`NUMBER_OF_TEETH` · `POINT_ANGLE` · `SHANK_DIAMETER` · `PLUNGE_FEEDRATE_&_UNITS` ·
+`SCAN_TYPE` · `RETRACT_HEIGHT` · `HOLDER_NAME` · `MFG_CRITERIA` · `HEAD_NO`.
+**⇒ ЭТО И ЕСТЬ КОЛОНКИ ТАБЛИЦЫ ПРОЦЕССА (`CUTTER_DIAM`, `Инструмент`, тип).**
+
+**🔴 ГРАБЛЯ (встреча №4 ловушки ±1, §118/§126/§128):** **8 байт после `E3 32` — НЕ double.**
+```
+MACHINING_TIME → double = 6.02554e-08  ❌ мусор   (f7 40 5f d2 b7 2c 70 3e)
+```
+**Почему все сбиваются:** 8 байт всегda начинаются с **`F7 40`** = **код упакованного числа**
+(полином вида `x·2^k`), а **НЕ IEEE-754**. **Байты IEEE лежат СЛЕВА от кода** (младший-вперёд):
+`2d 3f 48 e1 aa 74` → вероятно `0.234546` и т.п.
+
+**Текстовые (вычислимые) значения — РЯДОМ, читаются ЛЕГКО (окно 0x008A00..0x009300):**
+```
+0x008B5B  "1000"   0x008BF2  "30.3"   0x008C17  "0.8"    0x008C98  "0.045"
+0x008CCF  "0.45"   0x008CF4  "0.8"    0x008D6E  "((200"  0x008D7D  "1000"
+0x008DDC  "0.34"   0x008E12  "30.3"   0x008EB8  "0.045"  0x008EEF  "0.45"
+0x008C31  "FLOOR"  + "value(i_val)" / "node_val(const_val)" — ОПИСАТЕЛИ ТИПА
+```
+**⇒ Creo хранит значения ДВАЖДЫ: текстом (для расчёта/показа) + упакованным `F7 40`.**
+**Читать надо ТЕКСТ (§М.1в: не нашёл здесь — ищи дальше; но и проверяй, что якорь верный).**
+
+**ПРАВИЛО:**
+1. **Файл MFG содержит карту операций** — искать `PTC_MFG_PRM_CL_FILE` + `F8 <код> F7 16`.
+2. **8 байт после `E3 32` НЕ парсить как double** — это `F7 40`-упаковка (грабля ±1, встреча №4).
+3. **`F8 <КОД>` — точка входа**; полный блок = до следующего `F8`.
+4. **C API (только для справки, компилятора нет):** `ProMfgProctableVisit` ·
+   `ProMfgprocitemPropertyGet(item, PRO_MFGPROP_ACTUAL_MACHINING_TIME, ...)` ·
+   `ProMfgprocitemElemtreeGet` (ИНСТРУМЕНТ) · `ProMfgprocitemSubtype`
+   `{STEP, OPERATION, WORKCELL}` · `PROMFGDBCAT_TECHNOLOGY_DATA/OPERATION/STEP` ·
+   справка дома: `D:\PTC\CREO13\...\protoolkit\online_help\creo_toolkit\api\dita\promfgproctable_h.html`.
+
