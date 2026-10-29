@@ -827,4 +827,64 @@ GetFeatType      <- ЧИСЛО: порядковый ID Creo (167, 240, 310) —
 `status=4` — **параметрика через Pro/Program** (475), а не таблица семейства;
 `РАЗГИБ`/`РАСПРЯМЛЕНИЕ` — **листовая штамповка**; `Гравировка` — подтип обработки.
 
+## 🔴🔴 КАНАЛ СВЯЗИ: `GetPattern` / `GetGroup` — РОДИТЕЛЬ В МАССИВЕ И ГРУППЕ (29.10.2026)
+
+**Мысль владельца:** «`Get Pattern` — и **даёт связь**!» — **подтверждено живым API.**
+
+### Что есть в `pfcasync.jar` (точные классы и методы)
+```
+FeaturePattern:   GetPatternLeader   ← РОДИТЕЛЬ МАССИВА (лидер)
+                  ListMembers        ← СПИСОК ЧЛЕНОВ (Features) — то есть ДЕТИ
+                  Delete
+PatternStatus:    PATTERN_NONE · PATTERN_LEADER · PATTERN_MEMBER · PATTERN_HEADER
+PatternType:      PATTERN_FEAT (массив элементов) · PATTERN_GROUP (массив групп)
+Feature  методы:  GetPattern · GetGroup · GetGroupPattern · GetGroupDirectHeader ·
+                  GetIsGroupMember · GetIsEmbedded · GetNumber · GetVersionStamp ·
+                  GetPatternByType · GetIsVisible · GetIsReadonly
+Enums копий:      FeatureCopyType: FEATCOPY_NEWREFS · FEATCOPY_SAMEREFS · FEATCOPY_MIRROR · FEATCOPY_MOVE
+```
+
+### 🔴 ЧТО ЭТО ДАЁТ (связь в ОБА конца!)
+| Что | Как даёт связь |
+|---|---|
+| **`GetPatternLeader`** | **РОДИТЕЛЬ** для всех членов массива |
+| **`PATTERN_LEADER` / `PATTERN_MEMBER`** | **ГОТОВЫЕ РОЛИ**: кто родитель, кто потомок |
+| **`ListMembers`** | **ДЕТИ** (все члены) — связь **вниз читается сразу** |
+| **`GetGroupDirectHeader`** | **РОДИТЕЛЬ ГРУППЫ** (заголовок) |
+| `GetIsGroupMember` · `GetIsEmbedded` | член группы / вложенный элемент |
+| **`FEATCOPY_MIRROR`** | **зеркало** = наследование-отражение |
+
+**ГЛАВНОЕ:** массив **сам знает лидера И членов** (`GetPatternLeader` + `ListMembers`) — значит связь
+родитель↔потомок **читается в ОБА конца без достройки**. Это **пятый канал связей** (после
+наследования, производной, копии, слияния) — и он **самый «двусторонний»**.
+
+**Правило:** для связи «родитель ↔ потомок» проверять **все пять каналов**:
+`MERGE_BASE_PART` · `ref_part_tab` · `from_mdl_name` · `merge` · **`GetPattern`/`GetGroup`**.
+
+### 🔴 МАССИВЫ И ГРУППЫ НАЙДЕНЫ ЖИВЬЁМ (замер 29.10.2026)
+
+**Дерево `disk-parametric.prt.1`:**
+```
+TYPENAME=ЗАГОЛОВОК ГРУППЫ     <- РОДИТЕЛЬ ГРУППЫ (GetGroupDirectHeader / PATTERN_HEADER)
+TYPENAME=МАССИВ  SUB=МАССИВ   <- ЧЛЕН массива (PATTERN_MEMBER) — и таких 10
+```
+
+**Признаки в байтах файлов:**
+| Файл | `pattern` | `array` | `group` | **`group_info_ptr`** | **`header_id`** | `created_groups` |
+|---|---:|---:|---:|---:|---:|---:|
+| `170meta-1-02-ящик-низ-форма.prt` | 1 | 23 | 4 | **2** | **2** | — |
+| `disk-parametric.prt` | 2 | 19 | 5 | **3** | **4** | — |
+| `ctkd_015_23_001.prt` | — | 18 | 5 | **2** | **2** | **1** |
+
+**ПОЛЯ ДЛЯ ПОИСКА РОДИТЕЛЯ В БАЙТАХ (найдены):**
+- **`header_id`** — идентификатор **заголовка группы/массива** = **РОДИТЕЛЬ**;
+- **`group_info_ptr`** — **указатель на информацию группы** (родитель группы);
+- **`created_groups`** — список созданных групп;
+- `pattern` / `patt` / `array` — признаки массива.
+
+**ВЫВОД:** связь «родитель ↔ потомок» для **массивов/групп** лежит в файле через
+`header_id` + `group_info_ptr`, и читается в **оба конца**: `GetPatternLeader` даёт родителя,
+`ListMembers` — детей. **Это шестой канал связей** (после наследования, производной, копии,
+слияния и `GetGroup`).
+
 === END ===
