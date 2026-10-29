@@ -76,6 +76,27 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | `STANDARDS\` | `SKILL_creo_company.md`, `SKILL_company_config.md`, `SKILL_naming_spec.md`, `SKILL_drawings_eskd.md`, `SKILL_creo_templates.md`, `SKILL_creo_model_nature.md` (природа модели: деталь/сборка/производство), `SKILL_parameters_guide.md`, `SKILL_reference_limits.md`, `SKILL_creo_cards.md` |
 | `RELATIONS\` | `SKILL_creo_relations.md`, `SKILL_relations_constitution.md`, `SKILL_relations_basics.md`, `SKILL_relations_examples.md`, `SKILL_curves_from_equation.md`, `SKILL_curves_examples.md`, `SKILL_spring_compression_generator.md`, `SKILL_spring_tension_master.md` |
 
+## 🔴🔴 НОГА 30.10.2026 — ЗАКОН МЕТОДА + СВЯЗИ + ТИПЫ (ГЛАВНОЕ ЗА 4 ДНЯ)
+
+| Тема | Где | Суть |
+|---|---|---|
+| **🔴 ЗАКОН МЕТОДА: читать ЛЮБОЙ файл ТОЛЬКО через `#UGC_TOC`** | `..\Creo\SKILL_GRABLI.md` **§147** | адрес любой секции — ИЗ КАРТЫ, а не перебором файла. Порядок: заголовок `#UGC:2 <ТИП> <ВЕРСИЯ>` → карта → `NEXT_TOC_ENTRY` → чтение по адресу |
+| **🔴 КАРТ `#UGC_TOC` — ОТ 2 ДО 3 у каждого файла** | `SKILL_GRABLI.md` **§152** | парсить РАЗДЕЛЬНО; адрес `< размера файла`; **ДЕДУП по (имя, offset)** — иначе `SldRegenRevInfo` считается дважды |
+| **🏆 КОДЫ ТИПОВ ЭЛЕМЕНТОВ: `feat_defs_<N> − 910 = pfcFEATTYPE`** | `SKILL_GRABLI.md` **§154/§156** | `911→HOLE` · `913→ROUND` · `916→CUT` · `923→DATUM_PLANE` · `927→DRAFT` · `1007→WORKCELL`. Типы = `911…1031`; `1232+` = **`id` записи**, НЕ тип (§157) |
+| **СЛОВАРЬ: `pfcFeature.h` (живой)** | `D:\PTC\CREO13\...\otk\otk_cpp\include\pfcFeature.h` | 20 038 Б, enum `pfcFeatureType` = 314 имён (FEATTYPE = 280). **Три шкалы:** API 0…279 · файл 911…1031 (−910) · `TYPENUM` Creo 10…100 |
+| **НАЙДЕНО: связи и статус В ФАЙЛЕ (C API не нужен)** | `SKILL_GRABLI.md` **§152** | `num_parents`/`parents_checksum` — в **`VisibGeom`** (литейка = **11 родителей**); `is_item_alive` = `01`; `ref_models_data` = ссылка (`e1`) |
+| **ФОРМАТ ЧИСЕЛ: `F8 <len> <байты>` / `F4` / `F1`; `e1/e2/e3/f6` = ССЫЛКИ** | `SKILL_GRABLI.md` **§155** | значение читать **ПЕРЕД** `E0` (`<знач> E0 <тип> <ИМЯ> 00`); `f8 14` = массив 14 байт (хеш) |
+| **ТИП ФАЙЛА — В ЗАГОЛОВКЕ `#UGC:2`, НЕ в расширении** | `SKILL_GRABLI.md` **§149** | `PART` · `PART/SKEL_MODEL` (скелетон) · `PART/BULK` («BLK») · `ASSEMBLY/ASSEM_MFG` · `MFG_TOOL_PATH` (`.tph`) · `INST_PART` (`.xpr`) · `DRAWING` |
+| **`.tp` = `Pro/CLfile` — ЧИТАЕТСЯ ТЕКСТОМ** | `SKILL_GRABLI.md` **§149** | `MFGNO` · `OPERATION NAME` · `NC SEQUENCE NAME` · `TOOL_TYPE` · `CUTTER DIAMETER` · `SPINDL RPM` · `FEDRAT` · `GOTO/CIRCLE` |
+| **ТИПЫ ЭЛЕМЕНТОВ МАНУФАКТУРИНГА (19 блоков)** | `SKILL_GRABLI.md` **§138–§144** | `DESCRIPTION` · `MACHINING_TIME` (читается!) · `SPINDLE_SPEED` · `CUTTER_DIAM` · `CUT_FEED` · `usage` · `TOOL_ID` |
+| **`MACHINING_TIME` — ЧИТАЕТСЯ ИЗ ФАЙЛА** | `SKILL_GRABLI.md` **§141** | `struct.unpack('>f', байты[1:5])` → минуты (2.63…3.50); 8 байт начинаются с `F7 40` = заголовок, не double |
+| **АРХИВ ФАЗ 7–14 (журнал)** | `READ\ARCHIVE\FASY_7_14_29.10.2026.md` | вынесено из `SKILL_creo_tree_jlink_etalon.md` для читаемости; итоги — сводкой в конце скилла |
+| **`cadmpeg` для Creo бесполезен** | `SKILL_GRABLI.md` **§142** | Creo у него уровень `L1` (SolidWorks `L3`, Fusion `L5`); «cadmpeg» = «FFmpeg для CAD», НЕ картинки |
+
+**⚠️ ГРАБЛИ НОГИ (не повторять):** `#FeatDefs` (раздел) ≠ `feat_defs_<N>` (запись); перебор баз — метод ложных
+ответов (истина = совпадение со СМЫСЛОМ); `editor` с `old_text` = заголовок соседней секции ТЕРЯЕТ её
+(лечение: `insert_line` + проверка `Select-String '^## '`).
+
 ## 🔴 Нога 29.10.2026 — плотность/масса и карточка материала (ЗАКРЫТО)
 
 | Тема | Где | Суть |
