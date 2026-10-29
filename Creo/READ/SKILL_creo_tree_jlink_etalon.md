@@ -1357,6 +1357,54 @@ names_table\x00 \xf8\x12 \xf7\x02\xfb \xe3
 **ПРАВИЛО:** расшифровку сокращения БЕРУ у владельца / Creo / документации PTC — **НЕ выдумываю по букве.**
 **Собранный словарь — ниже (пополнять замером и подсказками владельца).**
 
+### 7. 🔴 ВИДИМОСТЬ — РАЗГАДАНА СТРУКТУРНО (замер 29.10.2026)
+
+**Полная TOC-карта `.prt` (28 секций, offset+len — ЖИВЫЕ):**
+```
+FeatDefsIndex    @0x000025DC  len=69        SolidPersistTable @0x000017C7 len=2982
+BasicData        @0x00002912  len=33697     SolidPrimdata    @0x0000236F len=619
+Geomlists        @0x0000B20F  len=99        BasBasData       @0x00002623 len=749
+DispCntrl        @0x0000B42A  len=584       BasicText        @0x0000ACB5 len=1368
+GeomDepen        @0x0000B274  len=436       LargeText        @0x0000B674 len=11567
+Notes            @0x0000E3A5  len=2530      FamilyInf        @0x0000ED89 len=45
+VisibGeom        @0x0000EDB8  len=40418  ←  ВИДИМАЯ геометрия
+NovisGeom        @0x00018B9C  len=59378  ←  НЕВИДИМАЯ (БОЛЬШЕ видимой!)
+ActEntity        @0x00027390  len=2435      AllFeatur        @0x00027D15 len=35107
+BasFullData      @0x0003063A  len=5195      FullMData        @0x00031A87 len=6766
+NeuPrtSld        @0x000334F7  len=2767      NeuAsmSld        @0x00033FC8 len=43
+MdlStatus        @0x00033FF5  len=17989     PipeInfos        @0x0003863C len=43
+Xsections        @0x00038669  len=55        FeatDefs         @0x000386A2 len=28920
+DwgData          @0x0003F79C  len=389       MdlRefInfo       @0x0003F923 len=5049
+IdsGenInfoDb     @0x00040CDE  len=7066      Hatching         @0x0004287A len=50
+```
+
+**🔴 ПРИЗНАК ВИДИМОСТИ НАЙДЕН — ИМЯ КЛЮЧА `Sld_VisGeom`:**
+```
+поиск «disp|vis|hid» внутри VisibGeom  →  'Sld_VisGeom'
+```
+**⇒ `Sld_VisGeom` = «**S**o**ld** … **Vis**ibility **Geom**etry» = видимость ТВЁРДОГО ТЕЛА.**
+**⇒ Тот же префикс `sld`, что у `dma_sld_freeze` (найдено ранее в `_mill_turn`) — модель сборки и детали.**
+
+**ПОЛЯ УПРАВЛЕНИЯ ОТОБРАЖЕНИЕМ (замер по всему файлу, уникальные):**
+```
+cosm_disp_ents · first_disp_ent · ref_dim_disp · view_disp_ptr · view_disp_attr
+gtol_disp_ptr · surffin_disp_ptr · surffin_disp_style · note_disp_ptr
+bool_param_disp · ref_des_display · balloon_display · tol_display
+dtm_disp_style · fcs_disp_style · sym_disp_ptr · blank_zero_tol
+```
+**⇒ `dtm_disp_style` — стиль ОТОБРАЖЕНИЯ ДАТУМОВ · `fcs_disp_style` — стиль поверхностей ·
+`view_disp_attr` — атрибут отображения вида. Всё это — секция `DispCntrl`.**
+
+**СОДЕРЖИМОЕ `Notes` (живое):**
+```
+layerstate_type · lay_state(Annot_data) · LayerStateBase_Meta · subType · isActive · revnum
+```
+**⇒ в `Notes` лежат СЛОИ и их СОСТОЯНИЕ (`layerstate`, `isActive`) — тоже управление показом.**
+
+**ВЫВОД ДЛЯ ПЛМ:** видимость элемента — **не одно поле**, а комбинация:
+**секция (`VisibGeom`/`NovisGeom`) + ключ `Sld_VisGeom` + стиль (`dtm_disp_style`) + слой (`Notes`)**.
+
+
 ## 🗂️ КАРТА ФАЙЛА Creo — ПОЛНАЯ (живой замер + подсказка владельца, 29.10.2026)
 
 ### 1. ТРИ ЧАСТИ ФАЙЛА
