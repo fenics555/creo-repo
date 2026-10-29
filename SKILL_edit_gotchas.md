@@ -1,3 +1,15 @@
+Пример замера EOL-регресса (нога 30.10.2026, фаза 32, GRABLI §160):
+```
+# ПРАВИЛЬНО: читать байты напрямую ИЗ ФАЙЛА
+$p='D:\AI\repo\Creo\SKILL_creo_index.md'; $b=[IO.File]::ReadAllBytes($p)
+$s=[IO.File]::ReadAllText($p)
+"BOM=$(($b[0] -eq 239)) CRLF=$([regex]::Matches($s,\"`r`n\").Count) LF0=$([regex]::Matches($s,\"(?<!`r)`n\").Count)"
+# НЕВЕРНО: git show ... | Out-File — Out-File ДОБАВЛЯЕТ CRLF → ложный 'регресс EOL'
+```
+🔴 ГРАБЛЯ №11: `Out-File`/`>` для проверки EOL **сам вставляет CRLF** ⇒ файл кажется переведённым.
+Проверять EOL ТОЛЬКО чтением байт исходного файла. Признак НАСТОЯЩЕГО регресса: `git diff --numstat`
+показывает ВЕСЬ файл (несколько сотен строк), а не 1 строку.
+
 ---
 name: edit-gotchas
 system: Программирование

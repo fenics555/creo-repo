@@ -76,7 +76,7 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | `STANDARDS\` | `SKILL_creo_company.md`, `SKILL_company_config.md`, `SKILL_naming_spec.md`, `SKILL_drawings_eskd.md`, `SKILL_creo_templates.md`, `SKILL_creo_model_nature.md` (природа модели: деталь/сборка/производство), `SKILL_parameters_guide.md`, `SKILL_reference_limits.md`, `SKILL_creo_cards.md` |
 | `RELATIONS\` | `SKILL_creo_relations.md`, `SKILL_relations_constitution.md`, `SKILL_relations_basics.md`, `SKILL_relations_examples.md`, `SKILL_curves_from_equation.md`, `SKILL_curves_examples.md`, `SKILL_spring_compression_generator.md`, `SKILL_spring_tension_master.md` |
 
-## 🔴🔴 НОГА 30.10.2026 — ЗАКОН МЕТОДА + СВЯЗИ + ТИПЫ (ГЛАВНОЕ ЗА 4 ДНЯ)
+## 🔴🔴 НОГА 30.10.2026 (продолжение — приоритеты эстафеты закрыты) — ЗАКОН МЕТОДА + СВЯЗИ + ТИПЫ (ГЛАВНОЕ ЗА 4 ДНЯ)
 
 | Тема | Где | Суть |
 |---|---|---|
@@ -93,7 +93,10 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | **АРХИВ ФАЗ 7–14 (журнал)** | `READ\ARCHIVE\FASY_7_14_29.10.2026.md` | вынесено из `SKILL_creo_tree_jlink_etalon.md` для читаемости; итоги — сводкой в конце скилла |
 | **`cadmpeg` для Creo бесполезен** | `SKILL_GRABLI.md` **§142** | Creo у него уровень `L1` (SolidWorks `L3`, Fusion `L5`); «cadmpeg» = «FFmpeg для CAD», НЕ картинки |
 | **ИСТОЧНИКИ ГЕОМЕТРИИ** | **`READ\SKILL_creo_geometry_sources.md`** | `SolidPrimdata` = **тесселяция** (для показа, НЕ точные размеры); точная геометрия — `VisibGeom`/`NovisGeom` (прототипы) |
-| **`srf_array` — МОСТ «элемент ↔ геометрия»** | `SKILL_GRABLI.md` **§159** | `VisibGeom.active_geom` (58) · `NovisGeom.inactive_geom` (115) · `ActDatums.act_datum_geoms` (12); поля `geom_id · geom_type · feat_id` |
+| **`srf_array` — МОСТ «элемент ↔ геометрия»** | `SKILL_GRABLI.md` **§159** | `VisibGeom.active_geom` (58) · `NovisGeom.inactive_geom` (115) · `ActDatums.act_datum_geoms` (12); поля `geom_id · geom_type · feat_id`. Схема объявлена ОДИН раз (`fb`=структура), записи — потоком (**не считать записи по числу полей**) |
+| **🔴 МОСТ `feat_id` = `symbol_key` НАЙДЕН; ТЕКСТА ИМЕНИ В ФАЙЛЕ НЕТ** | `SKILL_GRABLI.md` **§160** | `srf_array.feat_id` (`00 63`) **=** `feat_defs_917.symbol_key` (`00 63`); `id` в `FeatDefs` = `fb e3` — **ссылка**; `table_id` ПУСТ; `#FeatDefsIndex` = список кодов (`f8 06`, слова по 2 байта). Имена (EXTRUDE/ROUND/«ВЫТЯГИВАНИЕ») = **0 вхождений** ⇒ **текст только J-Link** |
+| **🔴 `parent_feats` = МАССИВ ID РОДИТЕЛЕЙ (литейка)** | `SKILL_GRABLI.md` **§161** | `f8 <N>` → **N СЛОВ по 2 байта** (не N байт!): `@0x28272 f8 03 → 0xA029·0x9EAA·0xA068` · `@0xADDC4 f8 02 → 0xA029·0x9F2F` · `@0x1DFA79 f8 01 → 0xA029`; `GeomOwn_feat_id_arr` → владелец `0xA029`; `owner_feat_revnum`=22. Диапазон = с `feat_id` ⇒ **шкала одна**. ⚠️ 11≠найденные 6 — нужен J-Link |
+| **ГРАБЛЯ №12: СДВИГ НА 1 БАЙТ при чтении массива** | `SKILL_GRABLI.md` **§161** | данные начинаются с `m.start() + len(name) + 3` (имя+NUL+`f8`+`N`). Сдвиг дал `0x299E` вместо `0xA029` — **правдоподобная ложь**; проверять на смысл (диапазон `feat_id`) |
 | **ВОССТАНОВЛЕНИЕ ДВОЙНОЙ КОДИРОВКИ** | `SKILL_GRABLI.md` **§158** | формула `chr(cp1251(байт))`, 5 шагов; **НЕ применять декод дважды** |
 
 **⚠️ ГРАБЛИ НОГИ (не повторять):** `#FeatDefs` (раздел) ≠ `feat_defs_<N>` (запись); перебор баз — метод ложных
