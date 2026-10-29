@@ -2144,6 +2144,12 @@ feat_id=51  → b=247  '\x1c_ПТР-401-МТ-01-01'   ← ложная '\x1c_'
 ```
 **⇒ `b` = 144/192/196/224/247 — **НЕ код вида**, а **съеденный служебный байт** (сдвиг ±1).**
 
+**⚠️ ИСПРАВЛЕНО 29.10.2026 (фаза 17, указание владельца):** **ЭТО НЕ «съеденный байт»!**
+Владелец: «**да это наверно параметры мануфактуринг, только опять ты Б1 Б25 Б43**».
+**Замер подтвердил:** в блоках параметров CL **`0x10`=16 (`STEP_DEPTH`) · `0x0F`=15 (`CLEAR_DIST`)** —
+это **истинные ЧИСЛОВЫЕ ЗНАЧЕНИЯ**, а не мусор. **`b` = 1 / 25 / 43 — законные значения.**
+**⇒ Смотреть §143: `b` — это ЗНАЧЕНИЕ параметра, «съеденным» его объявлять ЗАПРЕЩЕНО.**
+
 **ПРАВИЛО:**
 1. **`b` вне диапазона `1..~140` → ЛОЖНАЯ запись (сдвиг).** **Отбрасывать, искать заново**, не трактовать.
 2. **Служебные строки в `names_table` отсекать** по признаку: `node_val(...)`, `value(d_val)`, `value(i_val)`,
@@ -2578,4 +2584,315 @@ MACHINING_TIME → double = 6.02554e-08  ❌ мусор   (f7 40 5f d2 b7 2c 70 
    `ProMfgprocitemElemtreeGet` (ИНСТРУМЕНТ) · `ProMfgprocitemSubtype`
    `{STEP, OPERATION, WORKCELL}` · `PROMFGDBCAT_TECHNOLOGY_DATA/OPERATION/STEP` ·
    справка дома: `D:\PTC\CREO13\...\protoolkit\online_help\creo_toolkit\api\dita\promfgproctable_h.html`.
+
+
+## 140. 🏆 ПОЛЕ `type` И `parent` — КАРТА БЛОКА ФИЧЕРА РАЗОБРАНА (замер 29.10.2026, фаза 16)
+
+**Карта полей найдена в фазе 15 (§138). Здесь — ПОЛНЫЙ разбор блока фичера.**
+
+**Формат поля:** `<значение прошлого> E0 <ТИП> <ИМЯ> 00`
+
+| # | Смещение | ТИП | Поле |
+|---|---|---|---|
+| 1 | `0x003D63` | `01` | `revnum` |
+| 2 | `0x003D6E` | `01` | `dep_id` |
+| 3 | `0x003D78` | `01` | `attributes` |
+| 4 | `0x003D86` | `01` | **`feat_id`** |
+| 5 | `0x003D91` | `01` | **`appl_id`** |
+| 6 | `0x003D9C` | **`00`** | `ref_id_user` |
+| 7 | `0x003DAB` | `01` | **`ref_id`** |
+| 8 | `0x003DB5` | **`09`** | `ref_id_coll_flags` |
+| 9 | `0x003DCF` | **`09`** | `ref_id_strength` |
+| 10 | `0x003DE2` | **`00`** | `use_feats_tab` |
+| 11 | `0x003DF8` | `01` | **`id`** |
+| 12 | `0x003DFE` | `01` | **`type`** ← КОД ВИДА! |
+| 13 | `0x003E06` | **`09`** | `coll_flags` |
+| 14 | `0x003E19` | **`09`** | `strength` |
+
+**Значение ТИПА поля:**
+```
+01 = простой скаляр      (перед след. E0 -- 1 байт значения)
+09 = поле со СТРУКТУРОЙ  (перед ним стоит F8 <N> C8 00 <M> 00 = описание массива)
+00 = ссылочное/флаговое
+```
+**⇒ `type` (поле №12) — ЭТО КОД ВИДА, который искали фазы 6–8. Поле `parent` — рядом (в блоке 0x0041FE).**
+**НЕ СВЕРЕНО с `TYPENUM` от Creo** — следующий шаг (шаблон сверки: `#FEAT <n> <id> TYPENUM=TYPE_<N>`).
+
+## 141. 🏆 `MACHINING_TIME` ЧИТАЕТСЯ ИЗ ФАЙЛА — 10 из 10 (замер 29.10.2026, фаза 16)
+
+**Структура параметра операции (доказана байтами):**
+```
+<ИМЯ> 00 <36 88 XX> E3 32 <ЗНАЧЕНИЕ 8 байт> F7 1D E3 32 <ЗНАЧЕНИЕ> F7 1E 04 F6 00
+                    └─ экспонента?      └────── ДУБЛЬ значения ──────┘
+```
+
+**РАБОЧЕЕ ПРАВИЛО ЧТЕНИЯ (доказано 10/10 на `MACHINING_TIME`):**
+```python
+b = raw[i:i+8]          # 8 байт сразу после 'E3 32'
+val = struct.unpack('>f', b[1:5])[0]     # ← float32 BIG-ENDIAN, байты 1..5
+```
+**Результат (минуты):** `3.497 · 2.636 · 3.224 · 2.707 · 3.349 · 3.349 · 2.635 · 2.636 · 2.636 · 2.634`
+**⇒ ВСЕ в диапазоне 2.6–3.5 — ОСМЫСЛЕННЫЕ. Порядок величины совпадает с графиком на экране (0.1…7.4 мин).**
+
+**🔴 ГРАБЛЯ №5 (сдвиг сигнатуры):** 8 байт начинаются с **`F7 40`** ⇒ все парсят их **как double → 6.02e-08 (мусор)**.
+**Правильно:** `F7 40` — заголовок, значение — **float32 BE из байт 1..5**.
+
+**⚠️ НЕ ЗАКРЫТО (честно, 3 промаха — метод сменён):**
+`SPINDLE_SPEED` · `CUT_FEED` · `CUTTER_DIAM` · `NOSE_RADIUS` · `STEP_DEPTH` · `CLEAR_DIST` — у них
+структура **`E3 32 <3 байта> F7 1D E3 32 <те же 3 байта> F7 1E`** (без `F7 40`, **значение 3 байта, а не 8**).
+Перебор 5 вариантов сборки float32 **не дал попадания** ⇒ **формула иная, подбор ЗАПРЕЩЁН (§5.1).**
+**Следующей ноге:** взять файл, где **известны** значения (например, `23-16508.asm` с экрана:
+`FR50 CUTTER_DIAM=30.7 & время=4.2`) и **решать обратную задачу от известного числа**.
+
+**🔴 ДОГАДКА ВЛАДЕЛЬЦА ПРО «ВРЕМЯ НЕ СРЕГЕНЕРИРОВАНО» — ОПРОВЕРГНУТА замером:**
+9 разных значений из 10 ⇒ **не заглушка**, числа реальные, дело было в сдвиге чтения.
+
+## 142. 🚫 `cadmpeg` ДЛЯ CREO БЕСПОЛЕЗЕН (проверено 29.10.2026, фаза 11)
+
+`cadmpeg/cadmpeg` (238 ⭐, Apache-2.0) = «FFmpeg для CAD» (CAD+mpeg = конвертер, **НЕ картинки**).
+**НО:** уровни поддержки `L1…L9` ⇒ **Creo Parametric `.prt` = `L1` (низший)**; SolidWorks `L3`, Fusion `L5`, IGES `L9`.
+⇒ **Creo почти не разобран, пользы нет.** Своя кросс-проверка карты секций (46 vs 44) — достаточна.
+
+
+## 143. 🔴 ИСПРАВЛЕНИЕ §128: `b` = ЗНАЧЕНИЕ ПАРАМЕТРА, А НЕ «СЪЕДЕННЫЙ БАЙТ» (29.10.2026, фаза 17)
+
+**Владелец (дословно):** «**да это наверно параметры мануфактуринг, только опять ты Б1 Б25 Б43**».
+
+**Замер (2 файла, `_mill_turn.asm` / `.prt`) — таблица `b`:**
+```
+mill_turn:  b=2 ×12 · b=3 ×9 · b=1 ×6 · b=29 ×5 · b=25 ×5 · b=5 ×3
+prt:        b=20 ×5 · b=5 ×1 · b=25 ×1
+```
+**ЖИВЫЕ ПРИМЕРЫ (что стоит за `b`):**
+```
+b=25  →  NC_ASM_DEF_CSYS · OTV_18 · OTV_M16 · OTV_M8
+b=1   →  FRONT · RIGHT · BOTTOM
+```
+**⇒ `b` = ЧИСЛОВОЕ ЗНАЧЕНИЕ / ПАРАМЕТР, «съеденным байтом» его объявлять ЗАПРЕЩЕНО (§128 ОТМЕНЁН).**
+**Контрольный факт:** в блоке CL `STEP_DEPTH` = `0x10`=**16**, `CLEAR_DIST` = `0x0F`=**15** — настоящие числа.
+**ПРАВИЛО:** не нашёл число → **искать дальше по дому (§М.1в)**, а не объявлять «мусором».
+
+## 144. 🏆 КАРТА МАНУФАКТУРИНГА ПОЛНОСТЬЮ — СТАНОК→УСТАНОВКА→ПЕРЕХОД→ИНСТРУМЕНТ (29.10.2026, фазы 19)
+
+**Владелец дал архитектуру:** «**сначала СТАНОК — в нём наборы инструментов (можно перекидывать, как
+карточки материала). Станков много, у каждого тип и свой парк. Далее УСТАНОВКА: приспособления +
+выбранный станок + последовательности с настройками. Инструмент ищется по СТАНОК + №/ID**».
+
+**ЗАМЕР ПОДТВЕРДИЛ — блоки РАЗНЕСЕНЫ по файлу:**
+
+| Блок | Смещения | Поля |
+|---|---|---|
+| **СТАНОК + ПАРК** | `0x026E81`…`0x02903C` | `mfg_ptr` · `mfg_info` · **`tool_array`** · `tool_id` · `tool_params` · `tool_data` · `tool_rec` · **`tool_ref_id`** · `TOOL_TABLE` · `MACH_ID` · `MACH_ASSEM_NAME` · `CL_DATA_MODE` |
+| **УСТАНОВКА** | `0x004B13` (`setup_ptr`) · `output_sets` · `set_name` · `table_array` · `oper_type` · `num_of_items` | |
+| **ПЕРЕХОДЫ (19 шт)** | `0x02D890`…`0x02E002` | `TOOL_ID`(19) · `PRE_MACHINING_FILE`(19) · `POST_MACHINING_FILE`(19) · `MACH_COLLISION_STATUS`(18) · `MACHINE_CSYS`(18) · `PTC_TOOLPATH_REV_NUM`(18) · `CONSIDER_TOOL_LENGTH`(10) |
+| **ЭКЗЕМПЛЯР ИНСТРУМЕНТА** | `0x034793`…`0x0370BD` | `TOOL_CENTER` · `HOLDER_DIAMETER` · `HOLDER_LENGTH` · `FLASH_TOOL` |
+| **ПАРАМЕТРЫ CL (11 шт)** | `0x008905`…`0x00B136` | `MACHINING_TIME` · `SPINDLE_SPEED` · `CUTTER_DIAM` · `CUT_FEED` · `STEP_DEPTH` · `CLEAR_DIST` · `NOSE_RADIUS` · `TOOL_WIDTH` |
+
+**🔴 ЖИВАЯ СВЯЗЬ НАЙДЕНА (замер байтами):**
+```
+0x026E81  tool_array → F8 0B F7 36 FB E3 → type=0D · tool_id="SVERLO_D18" · tool_params
+0x026EA9  tool_params → data_type · type · un_value(i_val) · bk_un_value(i_val) · attr · un_value(d_val)
+```
+**⇒ `tool_array` — ЭТО ПАРК ИНСТРУМЕНТОВ СТАНКА, имена ПРЯМЫМ ТЕКСТОМ:**
+`SVERLO_D18` · `SVERLO_D14_5` · `ZENKOVKA` · `METCHIK_M16` · `METCHIK_M8` · `REZBOFREZA-M8` ·
+`REZBOFREZA-M16` · `SVERLO_D7_4` · `CNMG-80-TOK-R04` · `T0001` · `T0003` · `T0013`
+
+**✅ ВСЁ ЭТО ЛЕЖИТ В ОДНОЙ СЕКЦИИ `FullMData` (`0x267DC`, 26 706 Б) — см. §145 (карта файла).**
+
+**🔴 ПОРЯДОК ПОЛЕЙ В `FullMData` = СТРУКТУРА (замер, 605 имён по порядку):**
+```
+sel_vis_info · active_id · active_opt · dbkey_delta_info · delta · date
+  → mfg_info · mfg_ptr                                  ← ВЕРХНИЙ УРОВЕНЬ (ПАРК)
+  → tool_array → type · tool_id("SVERLO_D18") · tool_params(un_value/bk_un_value/attr)
+  → model_info · section_ptr · custom_cl_text · cl_text
+  → tool_ref_id → adapter_ref_id (SVERLO_D14_5 · ZENKOVKA · METCHIK_M16/M8 · REZBOFREZA · T0001/0003)
+  → smt_data · p_smmp_data · stn_un · tool_un · perm_disp
+  → table_array · oper_type · num_of_items · name · PRINT_DEF
+  → record_arr · item_arr · item_type · allow_empty · value
+  → PART_NAME · DATE_TIME · SCALE · TRANSLATE · ROTATE
+  → SET_NAME                                            ← УСТАНОВКА
+  → OPERATION_NAME · OPERATION_COMMENTS · LAYER_NAME · UDF_NAME
+  → TOOL_TABLE · ONLY_OUTPUT_USED_TOOLS · CUTCOM_GEOMETRY_TYPE
+  → OPERATION_CSYS_NAME · NC_SEQUENCE_NAME · NC_SEQUENCE_CSYS_NAME   ← ПЕРЕХОД
+  → FEATURE_ID · SEQUENCE_TYPE · CUSTOM_CYCLE_NAME · CUTCOM_REGISTER
+  → SPINDLE_SPEED · CUT_FEEDRATE · PLUNGE_FEEDRATE · SCAN_TYPE · RETRACT_HEIGHT  ← РЕЖИМЫ
+  → MACHINING_TIME · MACHINING_DISTANCE · FLASH_TOOL                  ← ВРЕМЯ
+  → TOOL_NAME · TOOL_TYPE · TOOL_POSITION_NUMBER · TOOL_PARAMETERS     ← ИНСТРУМЕНТ
+  → CUTTER_DIAM · DRILL_DIAMETER · NOSE_RADIUS · SHANK_DIAMETER        ← ГЕОМЕТРИЯ
+```
+**⇒ ИЕРАРХИЯ ВЛАДЕЛЬЦА ПОДТВЕРЖДЕНА ЗАМЕРОМ:** ПАРК(станок+инструменты) → УСТАНОВКА → ПЕРЕХОД → РЕЖИМЫ.
+
+
+
+## 145. 🏆🏆 КОРНЕВАЯ КАРТА ВСЕГО ФАЙЛА — `#UGC_TOC` (29.10.2026, фаза 20) — ГЛАВНОЕ ОТКРЫТИЕ
+
+**Владелец: «по логике должна быть и самая верхняя карта всего файла, а уж потом все парк/установки/время».**
+**⇒ ВЕРНО. `#UGC_TOC` — оглавление файла с АДРЕСАМИ и РАЗМЕРАМИ каждой секции.**
+
+**ЗАГОЛОВОК ФАЙЛА (замер `_mill_turn.asm`):**
+```
+#UGC:2 ASSEMBLY/ASSEM_MFG 2350 1960 804 1 1 15 4200 2024273 000002da
+        └── ТИП ──┘
+#UGC_TOC = 2 записи · NEXT_TOC_ENTRY = 1
+```
+
+**ФОРМАТ ЗАПИСИ TOC (раскрыт байтами):**
+```
+<ИМЯ> <offset_hex> <len_hex> <len-10_hex> 2350 <flag> <-1> <a4hex> <b4hex>
+пример:  Model_L05_PX:1      ab6    6a8   937   2350  a  1  c49d 490f
+         SimpRepArray_L05:1  1160   175   1a5   2350  a  1  8f08 a842
+         IdsGenInfoDb        670eb  36    28    2350  9 -1  106f 4170
+         NEXT_TOC_ENTRY      7d5df  1440  0     2350  1 -1  0000 0000  ← КОНЕЦ ЦЕПОЧКИ
+```
+**⇒ `#UGC_TOC` = «указатели по байтово, где и что есть» — ровно то, что просил владелец.**
+**Цепочка продолжается через `NEXT_TOC_ENTRY <offset> <len>` (терминатора `#END_OF_TOC` НЕТ, §1514).**
+
+**ПОЛНАЯ КАРТА (52 записи, замер 29.10.2026) — ключевые секции:**
+
+| Секция | Offset | Len | Что |
+|---|---|---|---|
+| `Model_L05_PX:1` | `0x00AB6` | `0x6A8` | модель |
+| `SolidPrimdata` | `0x027A1` | `0x1006` | **тесселяция** (не точная геометрия) |
+| `BasicData` | `0x0408C` | `0x1A05` | базовые данные |
+| `BasicText` | `0x05A93` | `0x732` | тексты |
+| `Geomlists` | `0x061C7` | `0x23D` | списки геометрии |
+| `DispCntrl` | `0x0660E` | `0x2AE` | управление отображением |
+| **`LargeText`** | **`0x068BE`** | **`0x7977`** | **БОЛЬШИЕ ТЕКСТЫ/ВЫРАЖЕНИЯ (31 095 Б)** |
+| `VisibGeom` | `0x0E85D` | `0x1A90` | видимая геометрия |
+| `NovisGeom` | `0x102EF` | `0x117B` | невидимая |
+| **`AllFeatur`** | **`0x120B6`** | **`0x10483`** | **ВСЕ ЭЛЕМЕНТЫ (66 691 Б)** |
+| `BasFullData` | `0x2253B` | `0x429F` | полные базовые данные |
+| **`FullMData`** | **`0x267DC`** | **`0x6852`** | **★ ВЕСЬ МАНУФАКТУРИНГ (26 706 Б)** |
+| `NeuAsmSld` | `0x2D05B` | `0xA793` | сборка |
+| `MdlStatus` | `0x377F0` | `0x7F7E` | статус модели (32 638 Б) |
+| **`FeatDefs`** | **`0x3F80E`** | **`0x22AC8`** | определения элементов (141 512 Б) |
+| `MdlRefInfo` | `0x62445` | `0x4CA4` | ссылки модели |
+| `FeatDefsDtm` · `FeatDefsCmp` | `0x67E02` · `0x69938` | | датумы · компоненты |
+
+**🔑 РАЗГАДКА АДРЕСА `MACHINING_TIME` @ `0x008905`:**
+```
+0x68BE (LargeText) + 0x7977 = 0xE235  ⇒  0x8905 ВНУТРИ LargeText ✅
+```
+**⇒ Параметры CL лежат в `LargeText` — потому что они ТЕКСТ/ВЫРАЖЕНИЯ (`((200`, `FLOOR`, `value(i_val)`).**
+**⇒ `tool_array` @ `0x026E81` лежит внутри `FullMData` (`0x267DC`+`0x6852`=`0x2D02E`) ✅**
+
+**ПРАВИЛО:** **адрес искать НЕ поиском строки, а ЧЕРЕЗ `#UGC_TOC`: определить секцию → читать внутри неё.**
+**Искать секцию по имени в TOC — быстрее и надёжнее перебора всего файла.**
+
+## 146. 🚦 РЕГИСТР ИМЕНИ ЗНАЧИМ — ДВА УРОВНЯ ПОЛЕЙ (замер 29.10.2026, фаза 19)
+
+```
+ВЕРХНИЙ регистр  = СПРАВОЧНИК/список:  TOOL_ID(19) · TOOL_TABLE · MACH_COLLISION_STATUS · STEP(28)
+нижний регистр   = СТРУКТУРА:          tool_id(2) · tool_ref_id(2) · tool_rec · tool_data · setup_ptr · mach_id
+```
+**⇒ Искать «TOOL_ID» и «tool_id» — РАЗНЫЕ вещи** (как `MACHINING_TIME` vs `machining_time`).
+**Проверять ОБА написания при поиске поля.**
+
+## 147. 🔴🔴 ЗАКОН МЕТОДА: ЧИТАТЬ ФАЙЛ **ТОЛЬКО ЧЕРЕЗ `#UGC_TOC`** — ЭТО ВЕРХНЯЯ КАРТА (29.10.2026, фаза 21)
+
+**УКАЗАНИЕ ВЛАДЕЛЬЦА (дословно):** «**отлично. Пока не забыл, укажи где-нибудь что вот также
+с верхней главной карты нужно и всё другое прочитать/разобрать!!! Строение скорее всего примерно одинаковое.**»
+
+**⇒ ОБЯЗАТЕЛЬНО К ИСПОЛНЕНИЮ.** Это НЕ «ещё одна находка», а **ОСНОВНОЙ МЕТОД ЧТЕНИЯ ФАЙЛОВ CREO.**
+
+### Почему это главное
+1. **`#UGC_TOC` — ВЕРХНЯЯ КАРТА ВСЕГО ФАЙЛА** (адрес + длина каждой секции).
+2. **Адрес любой сущности берётся ИЗ КАРТЫ**, а не перебором 500 КБ (`_mill_turn.asm` доказал: `MACHINING_TIME` в `LargeText`, `tool_array` в `FullMData` — в РАЗНЫХ секциях, поиском это не связано).
+3. **Строение ОДИНАКОВО у всех типов** (замер 3 файлов).
+
+### ЗАМЕР: один формат, меняется только ВЕРСИЯ (фаза 21)
+```
+#UGC:2 PART 1873 1260 804 ...            ← заголовок: СВОЯ версия (1873 = PRT)
+#UGC_TOC → запись: <ИМЯ> <off> <len> <len-10> <ВЕРСИЯ> <flag> <-1> <a4> <b4>
+
+PRT  ctkd_015_23_001.prt.1         #UGC:2 PART            версия 1873 · TOC=3 · 54 записи
+PRT  38x108_2x168_18-psb.prt.1     #UGC:2 PART            версия 1873 · TOC=2
+MFG  ctkd_015_23_001_mill_turn.asm #UGC:2 ASSEMBLY/ASSEM_MFG  версия 2350 · TOC=2 · 54 записи
+
+примеры записей .prt:   Model_L05_PX:1  ab1 6db b13 1873 a  1 f27a f22f
+                        ActDatums      428ae 5ea 5df 1873 9 -1 4e24 a133
+                        FeatRefData    49e1e 9d  90  1873 b -1 4623 dcc7
+                        NEXT_TOC_ENTRY 49ebd 747 0   1873 1 -1 0000 0000
+                        SldRegenRevInfo 4a604 2f9 4a0 2149 a  1 3fb9 ba7b   ← своя версия
+```
+
+**🔴 ГРАБЛЯ ФАЗЫ 21 (моя):** я **зашил `2350` в шаблон** → на `.prt` получил **0 записей** и почти
+сделал ложный вывод «в `.prt` TOC другой». **НЕ хардкодить число версии** — брать **из заголовка файла**.
+
+### ПОРЯДОК ЧТЕНИЯ ЛЮБОГО ФАЙЛА CREO (обязательный)
+```
+1) Прочитать заголовок `#UGC:2 <ТИП> <ВЕРСИЯ> <...>` — узнать ТИП и ВЕРСИЮ.
+2) Найти `#UGC_TOC` → парсить записи `<ИМЯ> <off> <len> <len-10> <ВЕРСИЯ из шага 1> ...`.
+3) Продолжать цепочку `NEXT_TOC_ENTRY <off> <len>` ПЕРВОЙ ВЕРСИИ до терминатора
+   (терминатора `#END_OF_TOC` НЕТ — в `.prt` цепочка кончается `#END_OF_UGC`).
+4) Получить ПОЛНУЮ КАРТУ: имя секции → offset → len.
+5) Читать нужную секцию ПО АДРЕСУ. Внутри — структура полей (§138, §144).
+```
+**ЗАПРЕЩЕНО:** искать данные «по всему файлу» (медленно, путает секции) вместо адреса из TOC.
+
+### ЧТО ОБЯЗАТЕЛЬНО РАЗОБРАТЬ ТАКИМ ЖЕ ОБРАЗОМ (поручение владельца)
+| Секция | Статус | Что внутри |
+|---|---|---|
+| `FullMData` | ✅ разобрана (§144) | ПАРК · УСТАНОВКИ · ПЕРЕХОДЫ · РЕЖИМЫ · ВРЕМЯ |
+| `LargeText` | ⚠️ найдена | параметры CL (ВРЕМЯ/режимы) — ЧИТАТЬ |
+| `AllFeatur` | ❌ не разобрана | ВСЕ ЭЛЕМЕНТЫ (66 691 Б) |
+| `FeatDefs` | ⚠️ частично (§FeatDefs) | определения элементов (141 512 Б) |
+| `MdlStatus` | ❌ не разобрана | статус модели (32 638 Б) |
+| `NeuAsmSld` | ❌ не разобрана | сборка |
+| `VisibGeom`/`NovisGeom` | ⚠️ (§7-скилл) | геометрия |
+| `SolidPrimdata` | ✅ ясно | тесселяция, НЕ точная геометрия |
+| `SolidPersistTable` · `BasicData` · `BasicText` · `Geomlists` · `GeomDepen` · `DispCntrl` | ❌ | по TOC |
+| `MdlRefInfo` · `FeatRefData` · `FeatDefsDtm` · `FeatDefsCmp` | ❌ | ссылки/датумы/компоненты |
+| `ModelView#N` · `ActDatums` · `Hatching` · `IdsGenInfoDb` | ❌ | виды/датумы/штриховка |
+| `FamilyInf` · `SldRegenRevInfo` · `DwgData` | ❌ | семейство/реген/чертёж |
+| `*AltIdMgr0` (серия) | ❌ | альтернативные менеджеры ID |
+
+
+```
+ВЕРХНИЙ регистр  = СПРАВОЧНИК/список:  TOOL_ID(19) · TOOL_TABLE · MACH_COLLISION_STATUS · STEP(28)
+нижний регистр   = СТРУКТУРА:          tool_id(2) · tool_ref_id(2) · tool_rec · tool_data · setup_ptr · mach_id
+```
+**⇒ Искать «TOOL_ID» и «tool_id» — РАЗНЫЕ вещи** (как `MACHINING_TIME` vs `machining_time`).
+**Проверять ОБА написания при поиске поля.**
+
+
+**🚦 ГРАБЛЯ (опять ±1, встреча №5):** сверил **регистр** — в файле ДВА уровня:
+```
+ВЕРХНИЙ регистр  = СПРАВОЧНИК/список:  TOOL_ID(19) · TOOL_TABLE · MACH_COLLISION_STATUS · STEP(28)
+нижний регистр   = СТРУКТУРА:          tool_id(2) · tool_ref_id(2) · tool_rec · tool_data · setup_ptr · mach_id
+```
+**Регистр — значим!** Искать «TOOL_ID» и «tool_id» — **РАЗНЫЕ вещи** (как `MACHINING_TIME` vs `machining_time`).
+
+**⇒ КОЛОНКИ ТАБЛИЦЫ ПРОЦЕССА (с экрана) ↔ ПОЛЯ ФАЙЛА:**
+```
+Наименование     → NC_SEQUENCE_NAME · OPERATION_NAME · NAME
+Инструмент       → TOOL_NAME · tool_id · TOOL_TABLE
+Номер инструм.   → TOOL_POSITION_NUMBER · TOOL_OFFSET_NUMBER
+Тип              → TOOL_TYPE · SEQUENCE_TYPE · oper_type
+Тип цикла        → CUSTOM_CYCLE_NAME
+Время            → MACHINING_TIME (10/10 читается, §141) · MACHINING_DISTANCE
+CUTTER_DIAM      → CUTTER_DIAM · DRILL_DIAMETER · NOSE_RADIUS · SHANK_DIAMETER
+Проверка         → MACH_COLLISION_STATUS
+До/После         → PRE_MACHINING_FILE · POST_MACHINING_FILE
+```
+**Полный список имён блока (замер, 200+):** `sel_vis_info · active_id · dbkey_delta_info · mfg_info ·
+tool_array · tool_params · tool_ref_id · adapter_ref_id · stn_un · tool_un · perm_disp · table_array ·
+oper_type · num_of_items · record_arr · item_arr · PART_NAME · SET_NAME · OPERATION_NAME ·
+OPERATION_COMMENTS · NC_SEQUENCE_NAME · NC_SEQUENCE_CSYS_NAME · SUBR_INST_CSYS_NAME ·
+MIN_ACCEPTABLE_TOOL_LENGTH · FEATURE_ID · SEQUENCE_TYPE · CUSTOM_CYCLE_NAME · CUTCOM_REGISTER ·
+SPINDLE_SPEED · RETRACT_HEIGHT · HOLDER_NAME · MFG_CRITERIA · HEAD_NO · TEMPLATE_PARAM ·
+Z_MINIMUM_TOOL_TRAVEL · Z_MAXIMUM_TOOL_TRAVEL · MACHINING_TIME · MACHINING_DISTANCE · FLASH_TOOL ·
+TOOL_NAME · TOOL_TYPE · TOOL_POSITION_NUMBER · TOOL_COMMENTS · TOOL_PARAMETERS · TOOL_OFFSET_NUMBER ·
+CHAMFER_LENGTH · CORNER_RADIUS · CSINK_ANGLE · CUTTER_DIAM · DRILL_DIAMETER · DRILL_LENGTH · END_ANGLE ·
+GAUGE_Z_LENGTH · HOLDER_TYPE · INSERT_LENGTH · LENGTH · NOSE_RADIUS · NUM_OF_TEETH · POINT_ANGLE ·
+SHANK_DIAMETER · POINT_DIAMETER · SIDE_ANGLE · SIDE_WIDTH · TOOL_MATERIAL · TOOL_ORIENTATION ·
+FLUTE_LENGTH · TIP_CONTROL_POINT · unit_conv_factor · ref_csys_id · mfg_table_data · ancpp_data ·
+ancpp_aux_data · mesh_data · mfg_process_info · fail_ids · moquz · spin_num · key_num · step_arr ·
+table_id · feattype_key · form · placement · intersection · blend_choice · depth_choice · angle_choice ·
+misc_choice · assoc_type · misc_attr · param_arr · ref_feat_id · cl_info_ptr · cl_attr · feat_type ·
+tool_data · pocket_number · backup_prev_tool · backup_tool · ancpp_params · ae_extract_info ·
+templ_info · sect_name · place_rec_ptr · local_sys · own_ref_id · orient`
+
+**ПРАВИЛО:** 1) инструмент НЕ рядом с `CUTTER_DIAM` — он в **`tool_array` (парк станка)**, связь по `tool_ref_id`;
+2) **регистр имени значим**; 3) `setup_ptr` — вход в блок УСТАНОВКИ.
 
