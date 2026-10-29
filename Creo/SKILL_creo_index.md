@@ -75,6 +75,18 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | `COPY\` | `SKILL_copy_assembly_project.md` (умная копия проекта), `SKILL_copy_rename.md` (методика копии/переименования) |
 | `STANDARDS\` | `SKILL_creo_company.md`, `SKILL_company_config.md`, `SKILL_naming_spec.md`, `SKILL_drawings_eskd.md`, `SKILL_creo_templates.md`, `SKILL_creo_model_nature.md` (природа модели: деталь/сборка/производство), `SKILL_parameters_guide.md`, `SKILL_reference_limits.md`, `SKILL_creo_cards.md` |
 | `RELATIONS\` | `SKILL_creo_relations.md`, `SKILL_relations_constitution.md`, `SKILL_relations_basics.md`, `SKILL_relations_examples.md`, `SKILL_curves_from_equation.md`, `SKILL_curves_examples.md`, `SKILL_spring_compression_generator.md`, `SKILL_spring_tension_master.md` |
+
+## 🔴 Нога 29.10.2026 — плотность/масса и карточка материала (ЗАКРЫТО)
+
+| Тема | Где | Суть |
+|---|---|---|
+| **Плотность/масса/объём из `.prt`** | `READ\SKILL_creo_read_mass_double.md` + код `TOOLS\ftype_probe\creo_full.py::mass_properties` | схема `E3 32` + 7 байт + перебор ведущего байта `0x30..0x4F`; плотность = `MASS/VOLUME` |
+| **Правка кода 29.10.2026** | `creo_full.py` строки 79–84 | снята ЖЁСТКАЯ граница `6e-6…9.5e-6` («металл») → окно `1e-9…1e-2`; она отбрасывала верный ответ (чугун `10.3 г/см³` → `None`) |
+| **Сверка** | J-Link `mass_probe.bat` | `din912` → файл `0.02894438244 кг / 3618.0478 мм³` = **8.0 г/см³**; J-Link `0,0289444 / 3618,05` — совпадение до 10 знаков |
+| **Карточка материала В ДЕТАЛИ** | `READ\SKILL_creo_tree_jlink_etalon.md` | 30+ полей: `PTC_MASS_DENSITY`, `_YOUNG_MODULUS`, `_POISSON_RATIO`, `_HARDNESS`, `_CONDITION=STEEL`, `_MATERIAL_SOURCE`, `_MATERIAL_ID`, `PTC_UNITS_*` |
+| **Наследование материала** | там же | каналы `PTC_MASTER_MATERIAL` / `_REPORTED_` / `_ASSIGNED_` ⇒ у потомка (`ctkd.prt`) карточки НЕТ — брать у родителя |
+| **Имя материала** | там же | `\xe3\x33 <строка>` → `V-CH_50` (русский алиас `ВЧ-СБ-50` — отображение Creo) |
+| **Грабли ноги** | `..\Creo\SKILL_GRABLI.md` §107–§112 | «мусор» запрещён (это `PRO_MP_*` = массовые свойства); вид не подписывать по интуиции (`A_1` = ОСЬ); искать готовый код в репо; «правдоподобное число» опаснее `None` |
 | `DAVYDOVKA\` | `SKILL_davydovka_creoson_map.md` (карта Давыдовка ↔ CREOSON) |
 | `INFRA\` | `SKILL_creostart_fleet.md` (флот, старт машин), `SKILL_object_creoson_tests-01_asm.md` (объектные пробы) |
 | корень | этот индекс + `cards\` (карты моделей, сырые близнецы) + `SKILL_creo_file_reading.md` (чтение файлов «в лоб»: история, упакованные числа, оглавление, параметры и отношения; §8.70–8.81 от 28–29.09.2026; инструмент `plm_reader` V24) + `CREO_MAP.md`, `SKILLS_MAP.md` |
