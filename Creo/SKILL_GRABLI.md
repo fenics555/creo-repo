@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿# SKILL_GRABLI: Lessons Learned
+﻿﻿﻿﻿﻿﻿# SKILL_GRABLI: Lessons Learned
 
 ## Python Regex & Binary Data
 - **Problem**: `re.PatternError: incomplete escape \x0 at position N`.
@@ -2294,5 +2294,52 @@ number=null — 20 записей, из них:
 другого фичера). У базовых датумов и CNC-операций списки пусты **законно**.
 **⇒ Проверять на модели, где фичер построен НА другом фичере** (отверстие на поверхности,
 скругление на кромке). Без такого файла — «связей в API нет», а не «не читается».
+
+## 134. 🔴 `XToolkitAmbiguous` — ЭТО ДВА CREO, А НЕ «CREO НЕ НАЙДЕН» (замер 29.10.2026)
+
+**Симптом:** `#ERR fatal: com.ptc.pfc.Implementation.pfcExceptions$XToolkitAmbiguous`
+**Замер процессов:** `xtop 12352` (28.10, 1 296 МБ) + `xtop 2720` (29.10, 763 МБ) — **ДВА Creo одновременно.**
+
+**ПРИЧИНА:** `tree_probe.bat` поднимает Creo (`AsyncConnection_Start`) и делает `Disconnect`,
+**но Creo ОСТАЁТСЯ ЖИТЬ** (так задумано). Второй прогон при **двух живых Creo** получает `Ambiguous`.
+
+**ЛЕЧЕНИЕ (проверено):**
+1. **Закрыть ЛИШНИЙ Creo** (свой, от прошлого прогона) → прогон проходит (проверено).
+2. **Один прогон = много файлов:** `tree_probe.bat FILE1 FILE2 …` — Creo поднимается **один раз**
+   (проверено: 2 модели за прогон, `#MODEL` = 2, `#ERR` = 0).
+3. **Чужой Creo (владельца) не трогать** — попросить закрыть.
+
+**ЧЕГО НЕ ДЕЛАТЬ:** «поставить подключение в начало кода» — **не поможет**: Creo не «не найден»,
+а **занят**. Правильно — переиспользовать живую сессию либо закрыть лишнюю.
+
+## 134.1 🔴 C API ДАЁТ СВЯЗИ, КОТОРЫХ НЕ ДАЁТ J-LINK (первоисточник, 29.10.2026)
+
+**Живой заголовок:** `D:\PTC\CREO13\Creo 13.4.1.0\Common Files\protoolkit\includes\ProFeature.h:1014`
+```c
+extern ProError ProFeatureParentsGet (ProFeature *p_feat_handle, int **p_parents, ...);
+Purpose: Collects and returns all the parents of the specified feature.
+p_parents — An array of feature ids of parent features.
+```
+
+**ЗАМЕР (Java/J-Link): `ListParents()` / `ListChildren()` — ПУСТО на 4 файлах / 143 элементах:**
+| Файл | Элементов | `parents` непусто |
+|---|---:|---:|
+| `ctkd_015_23_001_mill_turn.asm.1` | 53 | 0 |
+| `052401-model-master.prt.1` (литейка) | 20 | 0 |
+| `170meta-1-master.prt.1` (литейка) | 62 | 0 |
+| `38x108_2x168_18-psb.prt.1` (PSB, серьги) | 8 | **0** |
+
+**⇒ J-Link-обёртка НЕПОЛНА**, а не «связей в модели нет». Связи — **C-приложением (Pro/TOOLKIT)**.
+
+**ПЛЮС: флаги C API, которых НЕТ в Java-статусах:**
+```c
+#define PRO_FEAT_STAT_CHILD_OF_FAILED      (1<<8)   /* Child of failed feature */
+#define PRO_FEAT_STAT_CHILD_OF_EXT_FAILED  (1<<9)   /* ребёнок внешнего упавшего */
+PRO_TK_SUPP_PARENTS                              /* найдены ПОДАВЛЕННЫЕ РОДИТЕЛИ */
+```
+**⇒ «ребёнок упавшего/подавленного фичера» — читается ТОЛЬКО через C API.**
+
+**СТАТУС:** C-проба **НЕ СОБРАНА** — `cl.exe` (MSVC) в доме **отсутствует**.
+**Нужно:** Visual Studio / MSVC либо готовый `ptc_*`-каркас. **Путь задокументирован, работа открыта.**
 
 === END ===
