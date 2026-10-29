@@ -92,6 +92,9 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | **`MACHINING_TIME` — ЧИТАЕТСЯ ИЗ ФАЙЛА** | `SKILL_GRABLI.md` **§141** | `struct.unpack('>f', байты[1:5])` → минуты (2.63…3.50); 8 байт начинаются с `F7 40` = заголовок, не double |
 | **АРХИВ ФАЗ 7–14 (журнал)** | `READ\ARCHIVE\FASY_7_14_29.10.2026.md` | вынесено из `SKILL_creo_tree_jlink_etalon.md` для читаемости; итоги — сводкой в конце скилла |
 | **`cadmpeg` для Creo бесполезен** | `SKILL_GRABLI.md` **§142** | Creo у него уровень `L1` (SolidWorks `L3`, Fusion `L5`); «cadmpeg» = «FFmpeg для CAD», НЕ картинки |
+| **ИСТОЧНИКИ ГЕОМЕТРИИ** | **`READ\SKILL_creo_geometry_sources.md`** | `SolidPrimdata` = **тесселяция** (для показа, НЕ точные размеры); точная геометрия — `VisibGeom`/`NovisGeom` (прототипы) |
+| **`srf_array` — МОСТ «элемент ↔ геометрия»** | `SKILL_GRABLI.md` **§159** | `VisibGeom.active_geom` (58) · `NovisGeom.inactive_geom` (115) · `ActDatums.act_datum_geoms` (12); поля `geom_id · geom_type · feat_id` |
+| **ВОССТАНОВЛЕНИЕ ДВОЙНОЙ КОДИРОВКИ** | `SKILL_GRABLI.md` **§158** | формула `chr(cp1251(байт))`, 5 шагов; **НЕ применять декод дважды** |
 
 **⚠️ ГРАБЛИ НОГИ (не повторять):** `#FeatDefs` (раздел) ≠ `feat_defs_<N>` (запись); перебор баз — метод ложных
 ответов (истина = совпадение со СМЫСЛОМ); `editor` с `old_text` = заголовок соседней секции ТЕРЯЕТ её
