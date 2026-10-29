@@ -210,9 +210,9 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 | SKILL_materials_reference | справочник материалов (канон) |
 | SKILL_engineering_mechanics | сопромат, динамика, усталость |
 | SKILL_heat_hydraulics | тепло, гидравлика, пневматика |
-| SKILL_casting_hts_master | литьё в ХТ� |
+| SKILL_casting_hts_master | литьё в ХТС |
 
-## ДОМЕН 4: Производство (зеркало срезов 1�)
+## ДОМЕН 4: Производство (зеркало срезов 1С)
 | СКИЛЛ | Назначение |
 |---|---|
 | SKILL_production_mirror | производственный контур: склад, входящие, запуск, отгрузки, якорь, время цикла |
