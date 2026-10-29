@@ -1357,7 +1357,114 @@ names_table\x00 \xf8\x12 \xf7\x02\xfb \xe3
 **ПРАВИЛО:** расшифровку сокращения БЕРУ у владельца / Creo / документации PTC — **НЕ выдумываю по букве.**
 **Собранный словарь — ниже (пополнять замером и подсказками владельца).**
 
-## 🔴🔴🔴 КАК ЧИТАЮТСЯ СТРОКОВЫЕ ЗНАЧЕНИЯ: ЦЕПОЧКА ПЕРЕБОРОВ `\xf7 <NN>` (замер 29.10.2026)
+## 🔴🔴🔴 `feat_defs_<N>` → КЛЮЧ `id` — СВЯЗЬ С `names_table` НАЙДЕНА (замер 29.10.2026)
+
+**Владелец: «в `FeatDefs` для каждого фичера указан его `type`; сопоставь `b` с `type` по `feat_id`.»**
+**Поля `type` в определении НЕТ — но найден `id`, и он ЧИТАЕТСЯ.**
+
+### 1. ЖИВОЙ HEX: `feat_defs_1008`
+```
+feat_defs_1008 │ 00 f8 01 f7 02 fb │ e3 │ e0\x01 "id"          00 │ 1b │ e0\x01 "symbol_key" 00 │ f6 │ e0\x01 "model_type" 00 │ 01
+                                     ↑    └──── КЛЮЧ ────┘      └── 0x1b = 27!
+```
+**⇒ у каждого `feat_defs_<N>` есть ключ `id` — ВНУТРЕННИЙ НОМЕР ОПРЕДЕЛЕНИЯ.**
+**⇒ Сверка: `names_table`: `feat_id=27 → b=3 → 'MILL01'`.** **⇒ связь «определение ↔ элемент» ЧЕРЕЗ `id` ЕСТЬ.**
+
+### 2. ПОЛЯ ОПРЕДЕЛЕНИЯ (живой замер)
+```
+feat_defs_<N>:  id · symbol_key · model_type · group_info_ptr · place_rec_ptr
+                · local_sys · own_ref_id · orient
+symbol_key → \xf6 (=0, ПУСТО!)      ← не код вида
+model_type → 01                      ← тип модели (деталь/сборка?)
+```
+**⚠️ `symbol_key` = `\xf6` (пусто) ⇒ КОД ВИДА В ОПРЕДЕЛЕНИИ НЕ ЛЕЖИТ.** **Подтверждено.**
+
+### 3. 🔴 ВСЕ `feat_defs_<N>` ИДУТ СО ССЫЛКАМИ `\xf7 <NN>` (как цепочки строк!)
+```
+feat_defs_1008 → … f7 02 fb …          feat_defs_1077 → f7 4e fb
+feat_defs_949  → f7 65 fb              feat_defs_1104 → f7 82 08 fb
+feat_defs_917  → f7 82 15 fb           feat_defs_941  → f7 82 5f fb
+feat_defs_974  → f7 82 60 fb           feat_defs_1234 → f7 82 61 fb
+```
+**⇒ `feat_defs_<N>` связаны ссылками `\xf7` — тот же механизм, что у строк.** **⇒ ИСКАТЬ ЗНАЧЕНИЯ ЗДЕСЬ.**
+
+### 4. ⚠️ ГЛАВНАЯ ГРАБЛЯ: МОЙ `names_table` ЛОВИТ ЛОЖНЫЕ ЗАПИСИ (замер!)
+```
+feat_id=0   → b=196  ' \x10'                   ← НЕ имя
+feat_id=1   → b=196  '٤'                       ← НЕ имя
+feat_id=5   → b=144  '\x01'                    ← НЕ имя
+feat_id=15  → b=192  'BiSTEEL_45'              ← ⚠️ ЛОЖНАЯ ведущая 'B' (байт съеден!)
+feat_id=32  → b=224  '\x01node_val(op_code)'   ← служебное
+feat_id=50  → b=224  '\x02value(d_val)'
+feat_id=51  → b=247  '\x1c_ПТР-401-МТ-01-01'   ← ⚠️ ложная '\x1c_'
+feat_id=52  → b=224  '\x01value(i_val)'
+```
+**⇒ `b` = 144/192/196/224/247 — это СЪЕДЕННЫЙ служебный байт, а НЕ код вида.** **Та же ловушка ±1 байт (§118/§126).**
+**⇒ ПРАВИЛО: `b` ВНЕ диапазона `1..~140` = ЛОЖНАЯ запись (сдвиг).** **Отбрасывать и искать заново.**
+**⇒ В `names_table` попадают СЛУЖЕБНЫЕ строки** (`node_val(op_code)`, `value(d_val)`, `value(i_val)`) —
+**их надо ОТЛИЧАТЬ по скобкам/префиксу.**
+
+### 5. ✅ ЧТО ЭТО ДАЁТ ДЛЯ КОДА ВИДА
+```
+Код вида НЕ найден ни в: b (MdlStatus) · obj_type (item_names) · symbol_key (FeatDefs)
+КАНДИДАТЫ (проверить замером):  model_type · orient · own_ref_id · group_info_ptr
+                                + geom_type (в VisibGeom — уже найден!, =34)
+```
+**⇒ Задача ОТКРЫТА, но круг сужен: `geom_type` (в `VisibGeom`) — САМЫЙ сильный кандидат.**
+
+
+**Владелец просил проверить схему `\xf7 <len> → \xf7 <ref> → строка` на ВСЕХ строках `MdlStatus`.**
+
+**ЧЕСТНЫЙ ЗАМЕР (турновер, полный файл):**
+```
+полный шаблон  (f7 <len> e2 xx xx f3 f7 <ref> e2 xx xx f7 <ref> fb e2 f7 <len> ... f7 <ref> <UTF8>)
+   → совпадений: 0        ❌ НЕ ПОДТВЕРЖДЁН как универсальный
+упрощённый шаблон  (\xf7 <ref> + UTF-8 + \x00)
+   → совпадений: 1        → ref=0x17  строка='ОБОЗНАЧЕНИЕ'   ⚠️ ОДИН случай
+```
+**⇒ СХЕМА НЕ УНИВЕРСАЛЬНА. Это НЕ правило, а наблюдение на 1 строке.**
+**⇒ ПРАВИЛО §121 СРАБОТАЛО: не записываю как закон.** **Следующей ноге: искать схему ЗАМЕРОМ на массиве.**
+
+**ЧТО ИЗВЕСТНО ТОЧНО:** одна живая строка достигнута как `\xf7\x17` + `"ОБОЗНАЧЕНИЕ"` (UTF-8).
+**Остальные 112 строк читаются ИНАЧЕ** (прямым UTF-8-поиском — что тоже работает).
+
+## 🔴 `FeatDefs` (682 482 Б) — РАЗОБРАН (замер 29.10.2026, турновер)
+
+**Владелец: «FeatDefs огромна — начни со структуры: заголовки, списки фичеров и типы».**
+
+**TOC:** `FeatDefs @0x126097 len=682482`
+**Живое содержимое (первые 2400 Б — ключи):**
+```
+p_link_db · p_bolt_db · p_crack_db · p_mesh_settings · fem
+   mesh_type · set_by_user · shell_elem_type · mesh_opt_steps · solid_shell_links
+mech · char_thickness · automatic_thin_solid · p_topopt_data_db
+   p_user_study_db · merged_solid_ref_data · cut_plane_data · csys_trf
+   p_internal_fem_data · are_femfts_deleted · is_mat_asgn_removed
+   use_datum_points · use_datum_curves · anls_suppr_type_removed
+   has_pre_l05_bolts · springs_2d_removed · p10_obj_angdim_conv
+   cont_within_comp_reset · femdb_attrs
+
+Sld_Xsections → xsec_data → xsec_geom                          ← СЕЧЕНИЯ (Xsections!)
+Sld_FeatDefs  → feat_defs_1008 → symbol_key · model_type · group_info_ptr
+                                 · place_rec_ptr · local_sys · own_ref_id · orient
+```
+
+### 🔴 ЧТО ЭТО ЗНАЧИТ
+1. **`FeatDefs` СОДЕРЖИТ НЕ ТОЛЬКО ФИЧЕРЫ:** там **данные Механики/FEM** (`fem`, `mech`, `mesh_*`,
+   `p_bolt_db`, `p_crack_db`, `p_topoff*`, `char_thickness`) — **расчётная часть Creo!**
+2. **`Sld_FeatDefs` → `feat_defs_<N>`** — как я и находил ранее (`feat_defs_917`, `_1008`).
+3. **У `feat_defs_<N>` — ПОЛЯ ОПРЕДЕЛЕНИЯ:** `symbol_key` · `model_type` · `group_info_ptr` ·
+   `place_rec_ptr` · `local_sys` · `own_ref_id` · `orient`.
+   **⚠️ ПОЛЯ «ТИП» (`type`) ЗДЕСЬ НЕТ!** ⇒ **код вида в определении НЕ лежит** (подтверждает прошлый вывод).
+4. **`Sld_Xsections` → `xsec_data` → `xsec_geom`** — **сечения** внутри `FeatDefs`, не в своей секции.
+
+### ⚠️ ЧЕСТНО ПРО `b` — КОД ВИДА ВСЁ ЕЩЁ НЕ НАЙДЕН
+**Владелец: «`b` — внутренние коды файла, не константы API (`PRO_FEAT_PROTRUSION=917`, `PRO_FEAT_DATUM=923`);
+сопоставляй `b` из `MdlStatus` с `type` из `FeatDefs` по `feat_id`.»**
+**ЗАМЕР:** **у `feat_defs_<N>` поля `type` НЕТ** ⇒ **сопоставлять не с чем.** **Путь через `FeatDefs` — ЗАКРЫТ.**
+**Кандидаты для кода вида (не проверены):** `symbol_key`, `model_type`, `orient`, `own_ref_id` — **проверять замером.**
+**⇒ Задача «код вида» переносится следующей ноге как ОТКРЫТАЯ (не закрыта, не выдумана).**
+
 
 **Подсказка владельца (идти по ссылке от `item_name`) — СРАБОТАЛА.**
 
