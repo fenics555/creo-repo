@@ -51,6 +51,24 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | Подраздел | Что внутри |
 |---|---|
 | **`READ\`** | **чтение и правка файлов «в лоб» по частям** (03.10.2026): `SKILL_creo_read_core` (ядро формата), `_part`, `_asm`, `_drw`, `_mfg`, `_family` (семейства + библиотека `Libraries`), `_feat` (операции построения), `SKILL_creo_write_raw` (правка в лоб), `SKILL_creo_new_file` (создание файла — подготовка); карта — `READ\_INDEX.md`. Вход: `SKILL_creo_file_reading.md` (исторический конспект 1910 строк, номера §) |
+
+### 🔴🔴 ДЕРЕВО ПОСТРОЕНИЯ И РАЗМЕРЫ — ЧИТАЙ ЭТО ПЕРВЫМ (28.10.2026)
+
+**Порядок:** `READ\SKILL_creo_tree_jlink_etalon.md` → `READ\SKILL_creo_read_feature_types.md`
+→ `READ\SKILL_creo_feature_tree.md` → `READ\SKILL_creo_feat_defs_deep_dive.md`
+→ `Creo\SKILL_creo_bit_level_anatomy.md`. **Только потом лезть в байты** (грабля §86).
+
+- **`READ\SKILL_creo_tree_jlink_etalon.md`** (новый, 28.10.2026) — **ЭТАЛОН из живого Creo**:
+  `D:\AI\tools\agent\creo_export\tree_probe.bat` даёт `#FEAT <n> <feat_id> TYPE_<код> <имя>`,
+  `#DIM feat=… sym=dN dimid=… val=…`, `#PARAM`. Живые эталоны: `g22033` — **9 элементов/8 размеров**,
+  `ctkd_015_23_001` — **19/40**. Грабли: Creo не запущен → `XToolkitNotFound`; имя с версией →
+  `XUnknownModelExtension` (подавать `x.prt`); enum `FeatureType` — номер через `getValue()`.
+- **`READ\SKILL_creo_read_feature_types.md`** — типы фич: в Creo 13 **русские имена** (`ВЫТЯГИВАНИЕ` 9,
+  `СКРУГЛЕНИЕ` 4, `ВРАЩЕНИЕ` 1, `ОПОРНАЯ ПЛОСКОСТЬ` 31), английские коды (`cutextrude`) — **0**.
+- **`READ\SKILL_creo_feat_defs_deep_dive.md`** — 🔴 делимитер `FB E3 F7 80` **ОПРОВЕРГНУТ**
+  (97 частей против 19 элементов) — `split` по нему НЕ режет фичи.
+- **`Creo\SKILL_creo_bit_level_anatomy.md`** — «**KEYS OVER WINDOWS**»: искать КЛЮЧИ
+  (`type\0`, `ref_id\0`, `sub_feat_id\0`), а не окна.
 | `API\` | `SKILL_creojs_api.md` (Creo.JS/`pfc*`), `SKILL_creo_api_ecosystem.md` (каналы: OTK/JLINK/VB/Web.Link/CREOSON) |
 | `DOCS\` | `SKILL_creo_docs_map.md` (где хелпы/PDF/API-руководства в `D:\PTC\CREO12`) |
 | `CREOSON\` | `SKILL_creoson_workflow.md` (цикл, переключение папок), `SKILL_creoson_complete.md` (карта API), `SKILL_creoson_sessions_workdirs.md` (сессии/папки), `SKILL_creo_commands.md` (подбор команды), `SKILL_creoson_write_rules.md` (пишущие), `SKILL_creoson_rename_mechanism.md` (rename), `SKILL_creoson_probe_method.md` (пробы), `SKILL_creoson_inbox_deepseek.md` (долги темы) |
