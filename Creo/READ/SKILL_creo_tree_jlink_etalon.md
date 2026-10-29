@@ -422,4 +422,55 @@ g22033 : MdlStatus abb71 4aaf3 4aae8 1934 9 -1 e689 19a4 ...
 `GetFeatStatus`/`IsSuppressed`), сопоставить с байтами `MdlStatus`, найти файл **с подавленным
 элементом** (в Creo статус ≠ `ACTIVE`) и подтвердить канал. **Пока канал НЕ подтверждён — не внедрять.**
 
+## 🔴🔴 СТАТУС ЭЛЕМЕНТА — ПОДАВЛЕНИЕ ПОДТВЕРЖДЕНО ЖИВЫМ ЗАМЕРОМ (29.10.2026)
+
+**Найдено:** в `ctkd_015_23_001_mill_turn.asm.1` (мануфактуринг ЦТКД, **53 элемента**) **8 элементов
+имеют `status=FeatureStatus(5)`** — остальные 45 `FeatureStatus(0)`.
+
+```
+#FEAT 22 id=119 TYPE_13 Глубина_зенковки_М8      status=FeatureStatus(5)   ← ПОДАВЛЕН
+#FEAT 23 id=117 TYPE_30 1_ZENKOVKA_M8            status=FeatureStatus(5)
+#FEAT 28 id=124 TYPE_13 Глубина_зенковки_Ф18-зад status=FeatureStatus(5)
+#FEAT 29 id=122 TYPE_30 2_ZENKOVKA_D18_ZAD       status=FeatureStatus(5)
+#FEAT 30 id=128 TYPE_13 Глубина_зенковки_М16     status=FeatureStatus(5)
+#FEAT 31 id=126 TYPE_30 3_ZENKOVKA_M16           status=FeatureStatus(5)
+#FEAT 32 id=132 TYPE_13 Глубина_зенковки_Ф18     status=FeatureStatus(5)
+#FEAT 33 id=130 TYPE_30 4_ZENKOVKA_D18           status=FeatureStatus(5)
+```
+**Смысл:** все подавленные — **зенковки и их глубины** (в этом техпроцессе они отключены).
+
+### ТАБЛИЦА КОДОВ СТАТУСА (из `pfcFeature.h`, порядок сверен замером)
+
+| Код | Имя | Смысл |
+|---:|---|---|
+| **0** | `FEAT_ACTIVE` | элемент есть (норма) |
+| 1 | `FEAT_INACTIVE` | неактивен |
+| 2 | **`FEAT_FAMILY_TABLE_SUPPRESSED`** | **подавлен ТАБЛИЦЕЙ СЕМЕЙСТВА** |
+| 3 | `FEAT_SIMP_REP_SUPPRESSED` | подавлен в упрощённом представлении |
+| 4 | `FEAT_PROGRAM_SUPPRESSED` | подавлен Pro/Program |
+| **5** | **`FEAT_SUPPRESSED`** | **подавлен вручную** ✅ **подтверждено замером** |
+| 6 | `FEAT_UNREGENERATED` | **НЕ ПЕРЕСЧИТАН** (здоровье файла) |
+| — | `FEAT_CUSTOM` | пользовательский |
+
+**Плюс читаемые поля:** `GetIsVisible` (`visible=true/false` — **различается**, скрытые плоскости),
+`GetIsReadonly`, `GetGroupStatus`, `GetGroupPatternStatus`, `GetPatternStatus`.
+
+**Инструмент:** `tree_probe.bat` (`#FEAT <n> <feat_id> TYPE_<ид> <имя> status=… visible=…`).
+
+## 🧱 ТИПЫ ЭЛЕМЕНТОВ МАНУФАКТУРИНГА (замер, два файла)
+
+| `TYPE` | Что | Живые имена |
+|---|---|---|
+| **`97`** | **фрезерование / токарка** | `MILL01`, `MILLTURN01` |
+| **`96`** | **операция (Setup)** | `OP010`, `CTKD_015_23_001` |
+| **`30`** | **инструмент** (сверло, метчик, зенковка) | `SV31_5`, `SV_D14_5-TV-POD-METCHIK-M16X1_5`, `M16`, `1_ZENKOVKA_M8` |
+| **`29`** | **фреза / фаска** | `FR16`, `FR12`, `FASKA-M8`, `FASKA-D18` |
+| **`137`** | **СВАРКА** | `СВАРКА` (турновер) |
+| `13` · `68` | плоскости · СК/оси | `NC_ASM_RIGHT`, `NC_ASM_DEF_CSYS`, `ACS0`, `ОСНОВНАЯ` |
+| `21` · `28` · `39` · `63` · `89` · `104` · `138` · `233` | прочие (ещё не названы) | `TOREC` |
+
+**Файлы-эталоны для мануфактуринга:**
+`Z:\PTC\Work\001_15 ЦТКД Электон\ЦТКД 015.23.001 клемма32\ctkd_015_23_001_mill_turn.asm.1` (**53 элемента, 8 подавленных**)
+· `Z:\PTC\Work\000_200 Инспекционное оборудование\00_100 Диски параметрические\disk-parametric_psb-mfg.asm.1` (25 элементов).
+
 === END ===
