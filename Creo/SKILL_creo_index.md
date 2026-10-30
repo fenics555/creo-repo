@@ -134,6 +134,7 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | Тема | Где | Суть |
 |---|---|---|
 | **Плотность/масса/объём из `.prt`** | `READ\SKILL_creo_read_mass_double.md` + код `TOOLS\ftype_probe\creo_full.py::mass_properties` | схема `E3 32` + 7 байт + перебор ведущего байта `0x30..0x4F`; плотность = `MASS/VOLUME` |
+| **🏆 МАССА/ОБЪЁМ/ПЛОЩАДЬ — СЕКЦИЯ `mass_prop` (НЕ `PRO_MP_MASS`!)** | `READ\SKILL_creo_mass_prop.md` **+ §175** | Секция `mass_prop_data→p_mp_report_data→mass_prop`: `volume`/`surfarea` = `00 2D <7 байт>` lead **0x40**; `density` = `00 23 <7 байт>` lead **0x3E** (=7.85e-06 кг/мм³ СТАЛЬ). **МАССА = volume × density** (НЕ хранится!). **СВЕРЕНО С J-Link: 0.0234408764602364 — 16/16** ✅. ⚠️ `PRO_MP_MASS` — «схемное», НЕ масса. Файлы `-z` без `mass_prop` — законно |
 | **Правка кода 29.10.2026** | `creo_full.py` строки 79–84 | снята ЖЁСТКАЯ граница `6e-6…9.5e-6` («металл») → окно `1e-9…1e-2`; она отбрасывала верный ответ (чугун `10.3 г/см³` → `None`) |
 | **Сверка** | J-Link `mass_probe.bat` | `din912` → файл `0.02894438244 кг / 3618.0478 мм³` = **8.0 г/см³**; J-Link `0,0289444 / 3618,05` — совпадение до 10 знаков |
 | **Карточка материала В ДЕТАЛИ** | `READ\SKILL_creo_tree_jlink_etalon.md` | 30+ полей: `PTC_MASS_DENSITY`, `_YOUNG_MODULUS`, `_POISSON_RATIO`, `_HARDNESS`, `_CONDITION=STEEL`, `_MATERIAL_SOURCE`, `_MATERIAL_ID`, `PTC_UNITS_*` |
