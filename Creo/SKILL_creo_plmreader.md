@@ -257,3 +257,20 @@ plm_reader/settings/settings.json    ← ВСЁ, что зависит от МА
    `SKILL_creo_internal_props.md` · `SKILL_creo_read_mass_double.md` · `SKILL_creo_scanner_engine.md`.
 7. **ЗАКОН:** `Powershell\SKILL_plm_reader_sync.md` — **шару `Z:` не трогать**.
 
+### 6.8. 🔴 ПОДНИМАТЬ ВЕРСИЮ ПРИ ЛЮБОМ ИЗМЕНЕНИИ КОДА! (30.10.2026)
+
+**ЖИВОЙ БАГ:** после 8 скиллов + сканера + Database **забыл поднять `APP_VERSION`**
+⇒ на шаре «**обновлений нет (версия V140)**» (сравнение V140 == V140).
+
+**ПРАВИЛО (обязательное после ЛЮБОГО изменения кода):**
+```
+1. `plm_reader.py`: APP_VERSION = "V141"  (поднять!)
+2. `python make_version_json.py`  (пересчитать хеши 22 файлов)
+3. ВОССТАНОВИТЬ `notes` в version.json (скрипт их СТИРАЕТ!)
+4. git commit + push
+```
+
+**Проверка:** `git show HEAD:agent/plm_reader/version.json | Select-String version`
+⇒ должна быть НОВАЯ версия (не та, что была).
+
+**ГРАБЛЯ:** `make_version_json.py` **стирает `notes`** — восстанавливать вручную!
