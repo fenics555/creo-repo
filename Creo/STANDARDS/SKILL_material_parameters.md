@@ -1,59 +1,84 @@
-﻿# SKILL_material_parameters
+# SKILL_material_parameters
 
 - name: material-parameters
 - system: Creo
-- description: РџРђР РђРњР•РўР Р« РњРђРўР•Р РРђР›РћР’ РЎР Р•Р”РЎРўР’РћРњ Creo - РєР°РЅРѕРЅРёС‡РЅС‹Р№ СЃР»РѕРІР°СЂСЊ (HELP) + РґРѕРјР°С€РЅРёРµ PTC_* Рё РїСЂРѕРІРµСЂРєР° РІРµСЂРЅРѕ/РЅРµС‚.
-- when: РїР°СЂР°РјРµС‚СЂС‹ РјР°С‚РµСЂРёР°Р»РѕРІ, РјР°С‚РµСЂРёР°Р»С‹, PTC_
-- source: crero_help_pma + Р§СѓРіСѓРЅ VCh*.mat + OGV *.mtl
+- description: ПАРАМЕТРЫ МАТЕРИАЛОВ СРЕДСТВОМ Creo - каноничный словарь (HELP) + домашние PTC_* и проверка верно/нет.
+- when: параметры материалов, материалы, PTC_
+- source: crero_help_pma + Чугун VCh*.mat + OGV *.mtl
 
-## 1. Р”РІР° РїРѕРєРѕР»РµРЅРёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ
+## 1. Два поколения параметров
 
-- РљР°РЅРѕРЅРёС‡РЅС‹Рµ (HELP .mat): YOUNG_MODULUS, POISSON_RATIO, SHEAR_MODULUS, THERMAL_EXPANSION_COEFFICIENT, THERMAL_EXPANSION_REF_TEMPERATURE, STRUCTURAL_DAMPING_COEFFICIENT, STRESS_LIMIT_FOR_TENSION, STRESS_LIMIT_FOR_COMPRESSION, STRESS_LIMIT_FOR_SHEAR, THERMAL_CONDUCTIVITY, EMISSIVITY, SPECIFIC_HEAT, HARDNESS, CONDITION, INITIAL_BEND_Y_FACTOR, BEND_TABLE, PRO_UNIT_MASS, PRO_UNIT_LENGTH, PRO_UNIT_SYS.
-- Р”РѕРјР°С€РЅРёРµ: *.mtl РІ materials-library / РЎРѕСЂС‚Р°РјРµРЅС‚ / OGV РёСЃРїРѕР»СЊР·СѓСЋС‚ PTC_* (PTC_YOUNG_MODULUS, PTC_MATERIAL_DESCRIPTION, PTC_HARDNESS_TYPE).
-- РџСЂР°РІРёР»Рѕ: PTC_ РґРѕРјР°С€РЅРёР№ РїСЂРµС„РёРєСЃ, РЅРµ РєР°РЅРѕРЅРёС‡РЅС‹Р№. РљР°РЅРѕРЅРёС‡РЅС‹Р№ - Р±РµР· PTC_.
+- Каноничные (HELP .mat): YOUNG_MODULUS, POISSON_RATIO, SHEAR_MODULUS, THERMAL_EXPANSION_COEFFICIENT, THERMAL_EXPANSION_REF_TEMPERATURE, STRUCTURAL_DAMPING_COEFFICIENT, STRESS_LIMIT_FOR_TENSION, STRESS_LIMIT_FOR_COMPRESSION, STRESS_LIMIT_FOR_SHEAR, THERMAL_CONDUCTIVITY, EMISSIVITY, SPECIFIC_HEAT, HARDNESS, CONDITION, INITIAL_BEND_Y_FACTOR, BEND_TABLE, PRO_UNIT_MASS, PRO_UNIT_LENGTH, PRO_UNIT_SYS.
+- Домашние: *.mtl в materials-library / Сортамент / OGV используют PTC_* (PTC_YOUNG_MODULUS, PTC_MATERIAL_DESCRIPTION, PTC_HARDNESS_TYPE).
+- Правило: PTC_ домашний префикс, не каноничный. Каноничный - без PTC_.
 
-## 2. РљР°РЅРѕРЅРёС‡РЅС‹Р№ СЃР»РѕРІР°СЂСЊ (HELP .mat)
+## 2. Каноничный словарь (HELP .mat)
 
-| РџР°СЂР°РјРµС‚СЂ | РўРёРї | Р•РґРёРЅРёС†С‹ | РќР°Р·РЅР°С‡РµРЅРёРµ |
+| Параметр | Тип | Единицы | Назначение |
 |---|---|---|---|
-| YOUNG_MODULUS | Real | MPa mmks | РјРѕРґСѓР»СЊ СѓРїСЂСѓРіРѕСЃС‚Рё |
-| POISSON_RATIO | Real | Р±РµР·СЂР°Р·РјРµСЂ | РѕС‚РЅРѕС€РµРЅРёРµ РїРѕРїРµСЂРµС‡РЅРѕР№ РґРµС„РѕСЂРјР°С†РёРё |
-| SHEAR_MODULUS | Real | MPa | РјРѕРґСѓР»СЊ СЃРґРІРёРіР° |
-| THERMAL_EXPANSION_REF_TEMPERATURE | K | СЃСЃС‹Р»РєР° РґР»СЏ РўРљР­ | С‚РµРјРїРµСЂР°С‚СѓСЂРЅР°СЏ С‚РѕС‡РєР° РѕС‚СЃС‡С‘С‚Р° РєРѕСЌС„С„РёС†РёРµРЅС‚Р° С‚РµРїР»РѕРІРѕРіРѕ СЂР°СЃС€РёСЂРµРЅРёСЏ |
-| STRUCTURAL_DAMPING_COEFFICIENT | Р±РµР·СЂР°Р·РјРµСЂ | РґРµРјРїС„РёРЅРі | РїРѕРєР°Р·Р°С‚РµР»СЊ Р·Р°С‚СѓС…Р°РЅРёСЏ СѓРїСЂСѓРіРёС… РєРѕР»РµР±Р°РЅРёР№ |
-| STRESS_LIMIT_FOR_TENSION | MPa | РїСЂРµРґРµР» СЂР°СЃС‚СЏР¶РµРЅРёСЏ | РїСЂРµРґРµР» РїСЂРѕС‡РЅРѕСЃС‚Рё РїСЂРё СЂР°СЃС‚СЏР¶РµРЅРёРё |
-| STRESS_LIMIT_FOR_COMPRESSION | MPa | РїСЂРµРґРµР» СЃР¶Р°С‚РёСЏ | РїСЂРµРґРµР» РїСЂРѕС‡РЅРѕСЃС‚Рё РїСЂРё СЃР¶Р°С‚РёРё |
-| STRESS_LIMIT_FOR_SHEAR | MPa | РїСЂРµРґРµР» СЃРґРІРёРіР° | РїСЂРµРґРµР» РїСЂРѕС‡РЅРѕСЃС‚Рё РїСЂРё СЃРґРІРёРіРµ |
-| THERMAL_CONDUCTIVITY | W/mK | С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ | С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ РјР°С‚РµСЂРёР°Р»Р° РїСЂРё 20 В°C |
-| EMISSIVITY | Р±РµР·СЂР°Р·РјРµСЂ | РєРѕСЌС„С„РёС†РёРµРЅС‚ РёР·Р»СѓС‡РµРЅРёСЏ | РєРѕСЌС„С„РёС†РёРµРЅС‚ С‚РµРїР»РѕРІРѕРіРѕ РёР·Р»СѓС‡РµРЅРёСЏ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё (0-1) |
-| SPECIFIC_HEAT | J/kgK | С‚РµРїР»РѕС‘РјРєРѕСЃС‚СЊ | СѓРґРµР»СЊРЅР°СЏ С‚РµРїР»РѕС‘РјРєРѕСЃС‚СЊ РїСЂРё 20 В°C |
-| HARDNESS | HB/HRC | С‚РІС‘СЂРґРѕСЃС‚СЊ | С‚РІРµСЂРґРѕСЃС‚СЊ РїРѕ С€РєР°Р»Рµ HB (Р±СЂСѓСЃРµРЅСЊ) РёР»Рё HRC (Р¶РµСЃС‚РєРѕРµ РїСЂРёСЃРїРѕСЃРѕР±Р»РµРЅРёРµ) |
-| CONDITION | String | СЃРѕСЃС‚РѕСЏРЅРёРµ/СЂР°Р·РјРµСЂ | СЃРѕСЃС‚РѕСЏРЅРёРµ, С‚РѕР»С‰РёРЅР° РёР»Рё СЂР°Р·РјРµСЂ Р·Р°РіРѕС‚РѕРІРєРё |
-| INITIAL_BEND_Y_FACTOR | - | РїРѕРїСЂР°РІРѕС‡РЅС‹Р№ РјРЅРѕР¶РёС‚РµР»СЊ РёР·РіРёР±Р° | РЅР°С‡Р°Р»СЊРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚ РёР·РіРёР±Р° РїРѕ РѕСЃРё Y |
-| BEND_TABLE | String | С‚Р°Р±Р»РёС†Р° РёР·РіРёР±Р° | С‚Р°Р±Р»РёС†Р° РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ РёР·РіРёР±Р° РґР»СЏ РїР»Р°СЃС‚РёРЅ |
-| PRO_UNIT_MASS | String | РµРґ. РјР°СЃСЃС‹ | РµРґРёРЅРёС†Р° РјР°СЃСЃС‹ РІ Creo (kg, lb, etc.) |
-| PRO_UNIT_LENGTH | String | РµРґ. РґР»РёРЅС‹ | РµРґРёРЅРёС†Р° РґР»РёРЅС‹ РІ Creo (mm, in, etc.) |
-| PRO_UNIT_SYS | String | mm kg sec | РѕСЃРЅРѕРІРЅР°СЏ СЃРёСЃС‚РµРјР° РµРґРёРЅРёС† Creo (mm, kg, sec) |
+| YOUNG_MODULUS | Real | MPa mmks | модуль упругости |
+| POISSON_RATIO | Real | безразмер | отношение поперечной деформации |
+| SHEAR_MODULUS | Real | MPa | модуль сдвига |
+| THERMAL_EXPANSION_REF_TEMPERATURE | K | ссылка для ТКЭ | температурная точка отсчёта коэффициента теплового расширения |
+| STRUCTURAL_DAMPING_COEFFICIENT | безразмер | демпфинг | показатель затухания упругих колебаний |
+| STRESS_LIMIT_FOR_TENSION | MPa | предел растяжения | предел прочности при растяжении |
+| STRESS_LIMIT_FOR_COMPRESSION | MPa | предел сжатия | предел прочности при сжатии |
+| STRESS_LIMIT_FOR_SHEAR | MPa | предел сдвига | предел прочности при сдвиге |
+| THERMAL_CONDUCTIVITY | W/mK | теплопроводность | теплопроводность материала при 20 °C |
+| EMISSIVITY | безразмер | коэффициент излучения | коэффициент теплового излучения поверхности (0-1) |
+| SPECIFIC_HEAT | J/kgK | теплоёмкость | удельная теплоёмкость при 20 °C |
+| HARDNESS | HB/HRC | твёрдость | твёрдость по шкале HB (брусень) или HRC (жесткое приспособление) |
+| CONDITION | String | состояние/размер | состояние, толщина или размер заготовки |
+| INITIAL_BEND_Y_FACTOR | - | поправочный множитель изгиба | начальный коэффициент изгиба по оси Y |
+| BEND_TABLE | String | таблица изгиба | таблица коэффициентов изгиба для пластин |
+| PRO_UNIT_MASS | String | ед. массы | единица массы в Creo (kg, lb, etc.) |
+| PRO_UNIT_LENGTH | String | ед. длины | единица длины в Creo (mm, in, etc.) |
+| PRO_UNIT_SYS | String | mm kg sec | основная система единиц Creo (mm, kg, sec) |
 
-## 3. РџСЂРѕРІРµСЂРєР° РґРѕРјРµРЅРЅС‹С… С„Р°Р№Р»РѕРІ
+## 3. Проверка доменных файлов
 
-- Р§СѓРіСѓРЅ VCh100: РёРјРµРЅР° РµСЃС‚СЊ, Р·РЅР°С‡РµРЅРёСЏ РїСѓСЃС‚С‹Рµ (РўР­, С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ, С‚РµРїР»РѕС‘РјРєРѕСЃС‚СЊ, С‚РІС‘СЂРґРѕСЃС‚СЊ, РґРµРјРїС„РёРЅРі). Р­С‚Рѕ вЂ” РќР•Рў Р”РђРќРќР«РҐ, РЅРµ РѕС€РёР±РѕС‡РЅС‹Рµ РёРјРµРЅР°.
-- РЎС‚Р°Р»СЊ OGV 08x18h10: РїР°СЂР°РјРµС‚СЂС‹ РµСЃС‚СЊ Рё Р·Р°РїРѕР»РЅРµРЅС‹ (E, nu, G, РїР»РѕС‚РЅРѕСЃС‚СЊ, РўР­, С‚РµРїР»РѕРїСЂРѕРІРѕРґРЅРѕСЃС‚СЊ, С‚РµРїР»РѕС‘РјРєРѕСЃС‚СЊ, С‚РІС‘СЂРґРѕСЃС‚СЊ HRC) + PTC_MATERIAL_ID, PTC_MATERIAL_SOURCE.
-- РќР°СЃР»РµРґСѓРµРјС‹Рµ *.mtl (Legacy): СѓРїСЂРѕС‰С‘РЅРЅС‹Рµ, PTC_MATERIAL_TYPE=9, FAILURE=NONE, FATIGUE=NONE вЂ” Р·Р°РіР»СѓС€РєРё, РЅРµ РІ РїСЂРѕРґР°РєС€РЅ.
+- Чугун VCh100: имена есть, значения пустые (ТЭ, теплопроводность, теплоёмкость, твёрдость, демпфинг). Это — НЕТ ДАННЫХ, не ошибочные имена.
+- Сталь OGV 08x18h10: параметры есть и заполнены (E, nu, G, плотность, ТЭ, теплопроводность, теплоёмкость, твёрдость HRC) + PTC_MATERIAL_ID, PTC_MATERIAL_SOURCE.
+- Наследуемые *.mtl (Legacy): упрощённые, PTC_MATERIAL_TYPE=9, FAILURE=NONE, FATIGUE=NONE — заглушки, не в продакшн.
 
-## 4. РџРѕСЂСЏРґРѕРє РґРµР№СЃС‚РІРёР№
+## 4. Консолидация PTC_ -> CANONICAL (по аудиту 21.10.2026)
 
-- РџСЂРѕРІРµСЂСЏС‚СЊ С„Р°Р№Р»: РёРјРµРЅР° РїРѕ РєР°РЅРѕРЅРёС‡РЅРѕРјСѓ СЃР»РѕРІР°СЂСЋ, Р·РЅР°С‡РµРЅРёСЏ Рё РµРґРёРЅРёС†С‹ РЅРµ РїСѓСЃС‚С‹Рµ.
-- Р”РѕР±Р°РІР»СЏС‚СЊ РїР°СЂР°РјРµС‚СЂ: РІ РєР°СЂС‚РѕС‡РєСѓ (cards) + РґРѕРјРµРЅРЅС‹Р№ СЃР»РѕРІР°СЂСЊ + Р±СЌРєР°Рї РІ РЎС‚Р°СЂС‹Рµ РїСЂР°РІРёР»Р° + СѓРєР°Р·Р°С‚РµР»СЊ РІ SKILL_index.md.
-- РќРµ РєРѕРїРёСЂРѕРІР°С‚СЊ РЅР°СЃР»РµРґСѓРµРјС‹Рµ Р·Р°РіР»СѓС€РєРё (Default=9, NONE) РІ СЂРµР°Р»СЊРЅС‹Рµ РјРѕРґСѓР»Рё.
+| PTC_* (дом. префикс) | CANONICAL (HELP .mat) | Замечание |
+|---|---|---|
+| PTC_YOUNG_MODULUS | YOUNG_MODULUS | OK |
+| PTC_POISSON_RATIO | POISSON_RATIO | OK |
+| PTC_MASS_DENSITY | - | Дом. замена |
+| PTC_THERMAL_EXPANSION_COEF | THERMAL_EXPANSION_COEFFICIENT | OK |
+| PTC_THERMAL_CONDUCTIVITY | THERMAL_CONDUCTIVITY | OK |
+| PTC_SPECIFIC_HEAT | SPECIFIC_HEAT | OK |
+| PTC_HARDNESS | HARDNESS | OK |
+| PTC_CONDITION | CONDITION | OK |
+| PTC_INITIAL_BEND_Y_FACTOR | INITIAL_BEND_Y_FACTOR | OK |
+| PTC_BEND_TABLE | BEND_TABLE | OK |
+| PTC_MATERIAL_TYPE | - | Legacy, не каноничный |
+| PTC_MATERIAL_SOURCE | - | Legacy, не каноничный |
+| PTC_MATERIAL_ID | - | Legacy, не каноничный |
 
-## 5. РСЃС‚РѕС‡РЅРёРєРё
+## 5. Порядок действий
 
-- D:\\AI\\repo\\Creo\\STANDARDS\\SKILL_material_parameters.md вЂ” СЌС‚РѕС‚ СЃРїРµki.
-- D:\\AI\\repo\\Creo\\CREO_MAP.md, SKILLS_MAP.md вЂ” РєР°СЂС‚С‹ РІРµС‚РєРё Creo.
-- Z:\\PTC\\CREO-START\\РќРђРЎРўР РћР™РљР\\РњРђРўР•Р РРђР›Р«\\materials-library вЂ” Р±РёР±Р»РёРѕС‚РµРєР° РјР°С‚РµСЂРёР°Р»РѕРІ.
-- Z:\\PTC\\CREO-START\\РќРђРЎРўР РћР™РљР\\РњРђРўР•Р РРђР›Р«\\РЎРѕСЂС‚Р°РјРµРЅС‚, OGV, РґР»СЏ С„СЂРµР· вЂ” РєР°С‚Р°Р»РѕРіРё РјР°С‚РµСЂРёР°Р»РѕРІ.
-- D:\\PTC\\CREO12\\Creo 12.4.2.0\\Common Files\\creo_help_pma вЂ” **РїРѕР»РЅР°СЏ СЃРїСЂР°РІРєР° Creo** (HTML + РєР°СЂС‚РёРЅРєРё, 1115 РњР‘, 97 192 С„Р°Р№Р»Р°).
-- D:\\PTC\\CREO12\\Creo 12.4.2.0\\Common Files\\creo_help_pma\\russian вЂ” **СЂСѓСЃСЃРєР°СЏ СЃРїСЂР°РІРєР°** (15 678 HTML, 569 РњР‘, 48 456 С„Р°Р№Р»РѕРІ, 35 РјРѕРґСѓР»РµР№).
-  - РћСЃРЅРѕРІРЅС‹Рµ РјРѕРґСѓР»Рё, СЃРІСЏР·Р°РЅРЅС‹Рµ СЃ РјР°С‚РµСЂРёР°Р»Р°РјРё: undamentals, part_modeling, model_analysis, configuration_options, detail, manufacturing.
-- crero_help_pma (D:\\PTC\\CREO13\\Creo 13.4.1.0\\creo_help_pma) вЂ” СЃРїСЂР°РІРѕС‡РЅРёРє Creo.
+- Проверять файл: имена по каноничному словарю, значения и единицы не пустые.
+- Добавлять параметр: в карточку (cards) + доменный словарь + бэкап в Старые правила + указатель в SKILL_index.md.
+- Не копировать наследуемые заглушки (Default=9, NONE) в реальные модули.
+
+## 6. Источники
+
+- D:\\AI\\repo\\Creo\\STANDARDS\\SKILL_material_parameters.md — этот спеki.
+- D:\\AI\\repo\\Creo\\CREO_MAP.md, SKILLS_MAP.md — карты ветки Creo.
+- Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\materials-library — библиотека материалов.
+- Z:\\PTC\\CREO-START\\НАСТРОЙКИ\\МАТЕРИАЛЫ\\Сортамент, OGV, для фрез — каталоги материалов.
+- D:\\PTC\\CREO12\\Creo 12.4.2.0\\Common Files\\creo_help_pma — **Полная справка Creo** (HTML + картинки, 1115 МБ, 97 192 файла).
+- D:\\PTC\\CREO12\\Creo 12.4.2.0\\Common Files\\creo_help_pma\\russian — **Русская справка** (15 678 HTML, 569 МБ, 48 456 файлов, 35 модулей).
+  - Основные модули, связанные с материалами:
+    - `fundamentals` — основные концепции и определения материалов
+    - `model_analysis` — анализ моделей с параметрами материалов
+    - `configuration_options` — опции конфигурации материалов
+    - `part_modeling` — работа с материалами при конструировании деталей
+    - `detail` — параметры материалов для деталей
+    - `manufacturing` — материалы в контексте производства
+- crero_help_pma (D:\\PTC\\CREO13\\Creo 13.4.1.0\\creo_help_pma) — справочник Creo.
+- D:\\AI\\repo\\Creo\\STANDARDS\\SKILL_creo_cards_audit_2026-10-21.md — **аудит материалов** (21.10.2026), консолидация PTC_ -> CANONICAL, статус карточек по маркам
