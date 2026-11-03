@@ -17,3 +17,4 @@ priority: medium
 - `SKILL_parameters_guide.md` — параметры и массовые MP_
 - `SKILL_reference_limits.md` — лимиты и синтаксис
 - `SKILL_creo_cards.md` — карточки моделей, сырые близнецы
+- `SKILL_material_parameters.md` — параметры материалов, canonical словарь HELP + домашние PTC_*, проверка верно/нет
