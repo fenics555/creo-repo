@@ -83,15 +83,50 @@ priority: critical
 | `drawingModel.Rename()` | Model Operations p.65 + Drawings p.71 | `file:rename` + `drawing:regenerate` |
 | Мануфактуринг (`creoRenameManufacturingInfo`, fixture) | в руководстве раздел Manufacturing/NC | в CREOSON **отсутствует** |
 
-## Что важно помнить при сверке
-- Родное API и CREOSON — два канала к **одной** сессии Creo; имена моделей/папок у них общие.
-- Объект из `CurrentModel` может прийти базовым прокси без методов — перевзять
-  `session.GetModelFromFileName(имя)` (ERR 2.5, урок Давыдовки).
-- Методы возвращают pfc-коллекции: длину даёт `getarraysize()`/`Count`, элемент — по индексу.
-- Ошибки создания чертежа у Давыдовки перечислены как `DWGCREATE_ERR_*` (p.69-70) —
-  их удобно сопоставлять с ответом `drawing:create` в CREOSON.
-- Web.Link и VB API (`weblinkug.pdf`, `vbug.pdf`) — родственные API того же pfc-слоя:
-  полезны, когда Creo.JS молчит, но в доме канал один — CREOSON.
+## Quick Start: Первое обращение к Creo.JS (апдейт: 22.09.2026)
+
+1. **Подключить скрипт** в Creo:
+   ```html
+   <script type="text/creojs" src="creojs.js"></script>
+   ```
+   Или через `CreoJS` глобальный объект после загрузки страницы.
+
+2. **Получить сессию** (стр.40 TOC):
+   ```javascript
+   // Способ А — через совместимость
+   var session = pfcGetCurrentSessionWithCompatibility();
+   
+   // Способ Б — прямой
+   var session = pfcGetCurrentSession();
+   
+   // Способ В — через CREOSON (уже подключен)
+   var session = creoson_getSession(); // из SKILL_davydovka_creoson_map.md
+   ```
+
+3. **Загрузить модель** (стр.61 TOC):
+   ```javascript
+   var model = session.RetrieveModel("D:\\PROBA\\part.prt");
+   // Или через CREOSON: file:open {file:"D:\\PROBA\\part.prt"}
+   ```
+
+4. **Прочитать параметр** (стр.187 TOC):
+   ```javascript
+   var param = model.GetParam("MY_PARAMETER");
+   var value = param.Value;       // REAL или STRING
+   var type = param.Type;         // 0=STRING, 1=REAL, 2=INTEGER, 3=LOGICAL
+   ```
+
+5. **Изменить параметр** и сохранить:
+   ```javascript
+   param.Value = 42.5;
+   model.Save();
+   ```
+
+6. **Массовые свойства** (стр.126 TOC):
+   ```javascript
+   var props = model.GetMassProperty();
+   // props.mass, props.volume, props.center_of_mass, props.inertia_tensor
+   ```
 
 ## Трёхслойное устройство SDK (разбор 22.09.2026, из `D:\PTC\CREO12\…\apps\creojs\creojsweb`)
 Движок — **Chrome V8 внутри процесса Creo**, ECMAScript 2018. Слои:
