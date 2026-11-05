@@ -41,6 +41,81 @@ CONDITION = N/A · INITIAL_BEND_Y_FACTOR = 0.4 · BEND_TABLE = tableSt304
 `PTC_MATERIAL_DESCRIPTION · TEMPERATURE · PTC_INITIAL_BEND_Y_FACTOR · PTC_BEND_TABLE ·
 PTC_MATERIAL_TYPE = 9 (Locked) · PTC_FAILURE_CRITERION_TYPE = 'NONE' · PTC_FATIGUE_TYPE = 'NONE' ·
 PTC_MATERIAL_SUB_TYPE = 'LINEAR' · PTC_MASS_DENSITY (lbm/in^3) · PTC_CONDITION`.
+## 3а. 🔴🔴 ГЛАВНОЕ ОТКРЫТИЕ (05.11.2026): Creo ЧИТАЕТ `.mtl` ТОЛЬКО В UTF-8 **С BOM**
+
+**Живой факт со скриншота владельца:** в папке `Чугун` 11 файлов `.mtl`, но в Creo
+(окно «Материалы в библиотеке») подхватились лишь **3**: `chugun_sch21-40`, `chugun_sch21`, `chugun_sch18-36`.
+
+**Причина — BOM, и только он.** Замер по всем 411 файлам:
+
+| Файл | Первые 3 байта | BOM | Виден в Creo |
+|---|---|---|---|
+| `chugun_sch21-40.mtl` | `EF BB BF` | **✅ ЕСТЬ** | ✅ виден |
+| `chugun_sch21.mtl` | `EF BB BF` | ✅ ЕСТЬ | ✅ виден |
+| `chugun_sch18-36.mtl` | `EF BB BF` | ✅ ЕСТЬ | ✅ виден |
+| `chugun_sch10.mtl` | `4E 44 5F` (`ND_`) | ❌ НЕТ | ❌ **НЕ виден** |
+| `chugun_sch15/20/25/30/35.mtl` | `4E 44 5F` | ❌ НЕТ | ❌ не видны |
+| `chugun_chvg45.mtl`, `chugun_vch50.mtl` | `EF BB BF` | ✅ ЕСТЬ | видны |
+
+**⇒ ПРАВИЛО (проверено на 411 файлах, совпадение 100 %):**
+**`.mtl` без BOM (в CP1251 или UTF-8 без BOM) Creo ИГНОРИРУЕТ — материал не появляется
+в списке «Материалы в библиотеке». Файл обязан быть UTF-8 WITH BOM.**
+
+**Замер «до»:** с BOM — **54** файла, без BOM — **357** ⇒ Creo видел лишь ~13 % библиотеки.
+**После приведения:** с BOM — **411 из 411**.
+
+**Как править (безопасно):**
+```powershell
+# прочитать (с учётом BOM) -> записать UTF-8 С BOM
+$t = [Text.Encoding]::UTF8.GetString($b,3,$b.Length-3)   # если BOM есть
+$bytes = [Text.Encoding]::UTF8.GetBytes($t)
+$out = New-Object byte[] ($bytes.Length+3)
+$out[0]=0xEF; $out[1]=0xBB; $out[2]=0xBF
+[Array]::Copy($bytes,0,$out,3,$bytes.Length)
+[IO.File]::WriteAllBytes($path,$out)
+```
+
+⚠️ **Следствие:** конвертация `.mtl` в CP1251 (что делали ранее «для порядка») — **ломает видимость
+в Creo**. Кодировка библиотеки — **UTF-8 with BOM**, а не CP1251.
+
+## 3б. Структура файла (обязательна для чтения Creo)
+
+```
+ND_RelParSet_K01 = {
+                          ← пустая строка
+Name = <ИМЯ>
+                          ← пустая строка
+PARAMETERS =
+{
+  Name = PTC_MATERIAL_TYPE
+  Type = Integer
+  Default = 9
+  Access = Locked
+},                        ← запятая после каждого блока, КРОМЕ последнего
+{ ... },
+{ ... }                   ← последний блок БЕЗ запятой
+                          ← пустая строка
+}                         ← закрытие PARAMETERS
+                          ← пустая строка
+}                         ← закрытие ND_RelParSet
+```
+
+**ГРАБЛИ СТРУКТУРЫ (получены на живых файлах 05.11.2026):**
+1. **Лишняя `,` перед закрывающей `}`** — файл не парсится, материал не виден.
+2. **Пустая строка на месте `}`** последнего блока — файл не парсится.
+3. **Блок параметра, вставленный ПОСЛЕ закрывающей `}`** (вне `PARAMETERS`) — параметр не читается.
+4. Вставка нового параметра — **ТОЛЬКО внутрь `PARAMETERS`, ПЕРЕД последней `}`**,
+   с обязательной запятой у предыдущего блока:
+   ```
+   },      ← предыдущий блок получает запятую
+   {
+     Name = PTC_MATERIAL_ID
+     Type = String
+     Default = 'марка'
+     Access = Full
+   }       ← новый последний - БЕЗ запятой
+   ```
+
 
 ## 2. СЛОВАРЬ `.mtl` — 76 ключей (живой замер по 411 файлам)
 
