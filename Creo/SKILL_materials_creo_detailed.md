@@ -1,6 +1,9 @@
 # CREO MATERIALS SKILLS - DETAILED CURRICULUM
 # Repository: D:\AI\repo\Creo
 # Version: 1.0 (based on updated .mtl files for Creo 12.4.2.0)
+# ⚠️ 05.11.2026: проверено замером — этот конспект описывает РАБОЧИЙ формат `.mtl` (PTC_* — верно),
+#    но НЕ описывает `.mat` (словарь без PTC_ — ДРУГОЙ формат). Полная картина, числа заполнения
+#    и грабли: Creo\STANDARDS\SKILL_material_parameters.md
 
 # ==============================================================
 # LEVEL 1: BASIC MATERIAL IDENTIFICATION

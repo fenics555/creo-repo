@@ -17,4 +17,4 @@ priority: medium
 - `SKILL_parameters_guide.md` — параметры и массовые MP_
 - `SKILL_reference_limits.md` — лимиты и синтаксис
 - `SKILL_creo_cards.md` — карточки моделей, сырые близнецы
-- `SKILL_material_parameters.md` — параметры материалов, canonical словарь HELP + домашние PTC_*, проверка верно/нет
+- `SKILL_material_parameters.md` — **материалы Creo: `.mtl` (рабочий, `PTC_*`, 76 ключей) / `.mat` (старый, без `PTC_`, 20 ключей, 8/20 заполнено) / `.dmt` (палитра)**, полнота заполнения, единицы, чек-лист (замер 05.11.2026)
