@@ -108,15 +108,18 @@ MODULES = {
   - Aluminum: 0.33
   - Cast Iron: 0.22-0.25
 - **Location**: PARAMETERS section
+- **🔴 Правило PTC (reserved_matl_param.html)**: допустимый диапазон **−0.9999 … 0.4999**.
+  Значение **0.5 НЕДОПУСТИМО** — карточка с ним не читается. Для жидкостей/газов ставить **0.499**.
 
 ### PTC_MASS_DENSITY
 - **Type**: Real
-- **Units**: tonna/mm³ or kg/m³
+- **Units**: `kg/mm^3` (живой эталон 06.11.2026; в `.mat` — `g / cm^3`)
 - **Typical Values**:
-  - Steel: 7.82e-09 tonna/mm³ (7820 kg/m³)
-  - Aluminum: 2.71e-09 tonna/mm³ (2710 kg/m³)
-  - Cast Iron: ~7.8e-09 tonna/mm³
+  - Steel: 7.85e-06 kg/mm³ (7850 kg/m³)
+  - Aluminum: 2.78e-06 kg/mm³ (2780 kg/m³)
+  - Cast Iron: ~7.80e-06 kg/mm³
 - **Location**: PARAMETERS section
+- **Правило PTC**: только ПОЛОЖИТЕЛЬНЫЕ значения
 
 ## 2.2 Impact and Fatigue Properties
 

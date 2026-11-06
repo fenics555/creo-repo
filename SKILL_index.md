@@ -208,6 +208,10 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 | СКИЛЛ | Назначение |
 |---|---|
 | SKILL_materials_reference | справочник материалов (канон) |
+| `Creo\STANDARDS\SKILL_material_parameters` | **материалы Creo: `.mtl`/`.mat`/`.dmt`, ПРАВИЛА PTC о допустимых значениях (§12 — почему карточка НЕ ЧИТАЕТСЯ), полнота, эталон единиц, краски/композиты** |
+| `Creo\STANDARDS\SKILL_creo_material_designation` | МАТЕРИАЛ в чертёж (ЕСКД) + §12 правила PTC по читаемости карточки |
+| `Creo\SKILL_materials_creo_detailed` | конспект Simulate-параметров (модули STATIC/PLASTICITY/FATIGUE/DESTRUCTION) |
+| `Creo\STANDARDS\SKILL_creo_crosshatch_material_link` | связь материал ↔ штриховка |
 | SKILL_engineering_mechanics | сопромат, динамика, усталость |
 | SKILL_heat_hydraulics | тепло, гидравлика, пневматика |
 | SKILL_casting_hts_master | литьё в ХТС |
