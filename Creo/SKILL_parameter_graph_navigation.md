@@ -1,39 +1,39 @@
-# SKILL: Creo Parameter Graph Navigation
+# СКИЛЛ: Навигация по графу параметров Creo
 
-## The "Chain of Command" Pattern
-Manufacturing data in Creo is not a flat list; it is a **linked list of parameter blocks**. A parameter often acts as a pointer to the next logical piece of metadata.
+## Паттерн «Цепочка команд»
+Данные производства в Creo не являются плоским списком; это **связанный список блоков параметров**. Параметр часто выступает в роли указателя на следующий логический фрагмент метаданных.
 
-## The Navigation Chain
-Based on deep inspection of `setup_data`, the hierarchy follows this sequence:
-1.  **`setup_type`**: Identifies the block type.
-2.  **`setup_id`**: Acts as a pointer/key to the attribute block.
-3.  **`attr`**: Indicates the existence of an attribute set.
-4.  **`appl_id`**: The Application ID (e.g., `05`), defining the context (Manufacturing/Setup).
-5.  **`id_map_info_ptr`**: **CRITICAL**. This is a memory-style pointer/offset to a mapping table that connects the setup to a specific Tool, Fixture, or Process ID.
-6.  **`setup_data(...)`**: The payload containing the actual geometry or process offsets.
+## Цепочка навигации
+На основе глубокого анализа `setup_data` иерархия имеет следующую последовательность:
+1.  **`setup_type`**: идентифицирует тип блока.
+2.  **`setup_id`**: выступает в роли указателя/ключа к блоку атрибутов.
+3.  **`attr`**: указывает на существование набора атрибутов.
+4.  **`appl_id`**: Идентификатор приложения (например, `05`), определяющий контекст (Производство/Настройка).
+5.  **`id_map_info_ptr`**: **КРИТИЧНО**. Это указатель/смещение в стиле памяти на таблицу отображения, которая соединяет настройку с конкретным ID Инструмента, Оснастки или Процесса.
+6.  **`setup_data(...)`**: полезная нагрузка, содержащая фактические геометрические или процессные смещения.
 
-## Extraction Logic for "The Jump"
-To link a Part to a Fixture:
-1.  **Locate** `setup_data` block.
-2.  **Extract** `id_map_info_ptr` and `appl_id`.
-3.  **Follow the Pointer**: Navigate to the offset indicated by `id_map_info_ptr` (or use it as a key in a search).
-4.  **Identify the Entity**: The mapping table will contain the **Unique Identifier** (String or Integer) of the Fixture/Tool.
-5.  **Global Search**: Use the extracted Unique Identifier to perform a recursive search across the entire PLM directory structure (`Z:\PTC\Work\...`).
+## Логика извлечения «Перепрыгивания»
+Для связи Детали с Оснасткой:
+1.  **Найдите** блок `setup_data`.
+2.  **Извлеките** `id_map_info_ptr` и `appl_id`.
+3.  **Следуйте за Указателем**: перейдите к смещению, указанному в `id_map_info_ptr` (или используйте его как ключ в поиске).
+4.  **Идентифицируйте Сущность**: таблица отображения будет содержать **Уникальный Идентификатор** (Строку или Целое число) Оснастки/Инструмента.
+5.  **Глобальный поиск**: используйте извлечённый Уникальный Идентификатор для рекурсивного поиска по всей структуре каталогов PLM (`Z:\PTC\Work\...`).
 
-## Troubleshooting
-- If `setup_id` returns `'attr'`, do not stop. This is a sign that you must follow the chain to the `appl_id` and `id_map_info_ptr`.
-- Always treat `id_map` as a **navigator**, not a value.
+## Устранение неполадок
+- Если `setup_id` возвращает `'attr'`, не останавливайтесь. Это признак того, что нужно следовать по цепочке к `appl_id` и `id_map_info_ptr`.
+- Всегда трактуйте `id_map` как **навигатор**, а не как значение.
 
-## Mapping Table Navigation
+## Навигация по таблице отображения
 
-Based on the discovery of the `id_map_info_ptr` mechanism:
+На основе обнаружения механизма `id_map_info_ptr`:
 
-1.  **Identify `setup_data`**: Locate the `setup_data` block via TOC or search.
-2.  **Extract `id_map_info_ptr`**: Find the 16-bit relative offset within the `setup_data` block.
-3.  **Calculate Table Address**: `Table_Start = setup_data_offset + (ptr_value & 0xFFFF)`.
-4.  **Traverse the Table**: The table is a cyclic pool of entries:
-    - **Type `e3` / `f7`**: Marks the start of a **Name/ID** (String).
-    - **Type `e2`**: Marks a **Numeric Value** (associated with the previous name).
-    - **Separator `f7`**: Often used to terminate a field.
-5.  **Goal**: Use this structure to programmatically extract all Fixture/Tool IDs without blind searching.
+1.  **Определите `setup_data`**: найдите блок `setup_data` через TOC или поиск.
+2.  **Извлеките `id_map_info_ptr`**: найдите 16-битное относительное смещение внутри блока `setup_data`.
+3.  **Вычислите адрес таблицы**: `Table_Start = setup_data_offset + (ptr_value & 0xFFFF)`.
+4.  **Пройдите по Таблице**: таблица — это циклический пул записей:
+    - **Тип `e3` / `f7`**: помечает начало **Имени/ID** (Строка).
+    - **Тип `e2`**: помечает **Числовое Значение** (связанное с предыдущим именем).
+    - **Разделитель `f7`**: часто используется для завершения поля.
+5.  **Цель**: использовать эту структуру для программного извлечения всех ID Оснастки/Инструмента без слепого поиска.
 

@@ -310,3 +310,23 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 
 ## ИДЕЯ: SKILL_architect_reviewer
 Предложение: создание специализированного скилла для аудита соответствия новых скиллов и планов "Золотому стандарту" и "Закону трёх линий".
+
+## АУДИТ И ПЕРЕВОД СКИЛЛОВ (12.11.2026)
+
+Проведён аудит всех `SKILL_*.md` в `D:\AI\repo` (счётчик с диска):
+- **Всего скиллов:** 222 (без папок `backup/`).
+- **Направлений:** 26 (agents, AUDIT, B&W, CORE, crash, Creo, data, dialogs, GUIDE, OLAMA, PDF, Powershell, PROBA, Prog, PROGRESS, PROMPT, Python, Vericut, Web, Ветерок, ИЗУЧЕНО, Инженерные, ОКНА, Ошибки, Трейлы + корень репо).
+- **На русском:** 219 скиллов.
+- **Переведено на русский (Этап 4):** 3 файла из Creo:
+  - `Creo\SKILL_creo_bit_level_anatomy.md` — Анатомия на уровне битов Creo и Reverse Engineering.
+  - `Creo\SKILL_mfg_parameter_blocks.md` — Блоки параметров производства Creo.
+  - `Creo\SKILL_parameter_graph_navigation.md` — Навигация по графу параметров Creo.
+- **Не на русском:** 0 (все скиллы теперь на русском).
+
+**Crash-скиллы (папка crash):** 55 экземпляров + `SKILL_crash_constitution.md` + `SKILL_crash_index.md`. Добавлены группы навигации (editor, runcommands/PowerShell, ollama, creoson/Creo API, git/параллельная нога, циклы/петли, контекст/окно Cline, агент, поиск, протокол/REVIVE, сессия, PDF/Creo бинарник/прочее). В constitución уточнено правило: при любом крахе нога sama смотрит в `SKILL_crash_index.md`, находит подпись, и либо дописывает существующий скилл, либо создаёт новый.
+
+**Указатели (1 строка, дублирование тела запрещено):** 4 валидных — `crash\SKILL_crash_reasoning-loop.md`, `Prog\SKILL_agent_protocol.md`, `Prog\SKILL_editor_too_large.md`, `Prog\SKILL_prog_local_agent_cline.md`. Все цели существуют.
+
+**Мёртвые ссылки в карте:** не обнаружены. `SKILL_models_stack.md` — ссылка на внешний навык Cline (`skills\`). `SKILL_parallel_local_leg.md` — удалено по слову пользователя 23.09.2026 (уже отмечено в карте).
+
+**Исключение из аудита:** `D:\AI\AI_AGENT_SETTINGS` — отдельный стенд поведения ИИ, не входит в репо скиллов.

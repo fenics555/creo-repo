@@ -1,18 +1,18 @@
-# SKILL: Creo Manufacturing Parameter Blocks
+# СКИЛЛ: Блоки параметров производства Creo
 
-## Pattern Discovery
-Manufacturing metadata in Creo files is not stored as simple key-value pairs, but in structured, linked blocks of parameters.
+## Обнаружение паттерна
+Метаданные производства в файлах Creo хранятся не как простые пары «ключ-значение», а в структурированных связанных блоках параметров.
 
-## Block Structure
-The typical sequence found in a manufacturing context is:
-1. **Type Indicator** (e.g., `setup_type`): Points to the existence of a setup block.
-2. **ID Indicator** (e.g., `setup_id`): Points to the unique identifier or the start of the ID block.
-3. **Attribute Pointer** (e.g., `attr`): Indicates that the next segment contains metadata attributes.
-4. **Application ID** (e.g., `appl_id`): A numeric/hex identifier (e.g., `05`) that defines the context or the specific manufacturing application.
-5. **Data Payload** (e.g., `setup_data`): The actual binary or string payload containing the specifics of the setup/fixture.
+## Структура блока
+ Типичная последовательность в контексте производства:
+1. **Индикатор типа** (например, `setup_type`): указывает на существование блока настройки.
+2. **Индикатор ID** (например, `setup_id`): указывает на уникальный идентификатор или начало блока ID.
+3. **Указатель атрибута** (например, `attr`): указывает, что следующий сегмент содержит метаданные атрибутов.
+4. **Идентификатор приложения** (например, `appl_id`): числовой/шестнадцатеричный идентификатор (например, `05`), определяющий контекст или конкретное приложение производства.
+5. **Полезная нагрузка данных** (например, `setup_data`): фактическая бинарная или строковая нагрузка, содержащая специфику настройки/оснастки.
 
-## Extraction Strategy
-- **DO NOT** use complex regex patterns that include raw escape sequences like `\x0`.
-- **USE** direct byte searching (`data.find(key_bytes)`).
-- **USE** "Context Windows": Search for the key, then look for null-terminated strings (`\x00 ... \x00`) or printable ASCII within a defined byte window after the key.
-- **HEX Analysis**: If no string is found, extract the subsequent 8-16 bytes in HEX to manually identify if it's a binary float, integer, or offset.
+## Стратегия извлечения
+- **НЕ** используйте сложные регулярные выражения с сырыми escape-последовательностями типа `\x0`.
+- **ИСПОЛЬЗУЙТЕ** прямой байтовый поиск (`data.find(key_bytes)`).
+- **ИСПОЛЬЗУЙТЕ** «Контекстные окна»: найдите ключ, затем ищите строки, завершённые нулевым терминатором (`\x00 ... \x00`), или печатаемые ASCII в определенном байтовом окне после ключа.
+- **HEX-анализ**: если строка не найдена, извлеките последующие 8–16 байт в HEX для ручной идентификации — бинарное число с плавающей точкой, целое или смещение.

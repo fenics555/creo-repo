@@ -87,4 +87,23 @@ date: 22.09.2026
 - `SKILL_crash_agent_loops` — Use when: нога утомилась и пошли ПЕТЛИ (промахи якоря `editor` подряд, повтор запуска прогона тем же способом, ложная тревога «прогон умер»/«файл устарел»). Разбор ноги 17.10.2026: 8 граблей (петли якоря · запуск через родителя · no-op правки · «сводка застыла» ≠ процесс мёртв · эталон поехал mid-run · `Start-Sleep >30 с` = timeout · ложные подозрения без счётчика · no-op «сама в себя»). Файл: `crash\SKILL_crash_agent_loops_17.10.2026.md`.
 
 
+## ГРУППЫ КРАХ-СКИЛЛОВ (навигация при крахе)
+
+При любом крахе/вылете нога ОБЯЗАНА сначала посмотреть сюда, найти свою подпись, и либо дописать существующий скилл (увеличить `ПОВТОРЫ`), либо создать новый `SKILL_crash_<подпись>.md` по шаблону из `SKILL_crash_constitution.md`.
+
+| Группа | Входящие скиллы (кратко) |
+|---|---|
+| **editor** | `SKILL_crash-editor-mismatch`, `SKILL_crash_editor-text-not-found`, `SKILL_crash_editor_context_mismatch`, `SKILL_crash_editor_too_large_and_non_unique_anchors`, `SKILL_crash_editor-split-loses-indent`, `SKILL_crash_editor-insert-line-splits-function`, `SKILL_crash_editor-studycheck-halfedit-undefined-name`, `SKILL_crash_editor-create-overwrote`, `SKILL_editor_too_large` |
+| **runcommands / PowerShell** | `SKILL_crash_command-30s-timeout`, `SKILL_crash_ctl-inline-stderr-truncated`, `SKILL_crash_runcommands-copy-race-fake-parameter`, `SKILL_crash_runcommands_kill-by-name-house-services`, `SKILL_crash_quoted-escape-parse-failure`, `crash_command_timeout_kills_process_tree` |
+| **ollama** | `SKILL_crash_ollama-ansi-stderr-falseexit` |
+| **creoson / Creo API** | `SKILL_crash_creoson-open-keeps-other-model`, `SKILL_crash_creoson-search-pro-visibility`, `SKILL_crash_creoson-open-prt1-extension` |
+| **git / параллельная нога** | `SKILL_crash_git_commit-sweeps-foreign-staged`, `SKILL_crash_git_parallel-leg-rebase-reverts-worktree`, `crash_git-push-says-up-to-date-but-ahead` |
+| **циклы / петли / зацикливание** | `SKILL_crash_agent_loops` (файл `SKILL_crash_agent_loops_17.10.2026.md`), `SKILL_crash_execution-loop`, `SKILL_crash_loop_economy_failure`, `SKILL_crash_plan-loop-replan-no-exec`, `SKILL_crash_reasoning-loop` (указатель), `crash_reasoning-loop`, `crash_loop_perception`, `SKILL_crash_sleep-poll-loop-after-timeout`, `SKILL_crash_readfiles_outdated_loop` |
+| **контекст / окно Cline** | `SKILL_crash_cline_longsession_context_death`, `SKILL_crash_context-limit-interruption` |
+| **агент (порт 8765, рестарт, молчание)** | `SKILL_agent-frozen`, `SKILL_crash_agent-duplicate-restart-race`, `SKILL_crash_agent_corruption`, `SKILL_crash_agent_silence`, `SKILL_crash_agent_silent-death_noport-8765`, `SKILL_crash_login-stale-memory` |
+| **поиск (search_codebase)** | `SKILL_crash_analysis_search_codebase`, `SKILL_crash_searchcodebase-any-pattern-migration-marker`, `SKILL_crash_searchcodebase-multipattern-migration-marker`, `SKILL_crash_searchcodebase-timeout` |
+| **протокол / REVIVE / отчёт** | `SKILL_crash_omission_of_revive_protocol`, `SKILL_crash_protocol_omission` |
+| **сессия / временные артефакты** | `SKILL_crash_session-interruption`, `SKILL_crash_missing-temp-artifacts`, `SKILL_crash_destructive-probe-rerun` |
+| **PDF / Creo бинарник / прочее** | `SKILL_crash_pdf-roots-two-lists`, `SKILL_crash_creo-text-not-binary`, `SKILL_crash_chatloop_reports-inventwork-not-pettles`, `SKILL_crash_gui-helper-returns-wrong-type`, `SKILL_crash_probe-buffer-swallows-output`, `SKILL_crash_probe-dialog-hang-and-pollutes-settings`, `SKILL_crash_strict_test-stamp-missing`, `SKILL_crash_sys-stdout-closed-on-import`, `SKILL_crash_handling`, `SKILL_crash_scheduler-fire-skip`, `SKILL_crash_update-version-mismatch`, `crash_appjs-syntaxerror-no-uicheck`, `crash_deleted-house-file-without-word`, `crash_bat_no_dry_run_flag`, `crash_python_open-number-invalid-handle`, `crash_update-test-self-overwrite` |
+
 Всего крах-скиллов: 55 (без учёта конституции и этого списка; сверено пересчётом файлов `SKILL_crash_*.md` на диске 17.10.2026 = 55; ранее стояло 54 — добавлен `SKILL_crash_agent_loops`).
