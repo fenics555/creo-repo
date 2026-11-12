@@ -36,10 +36,9 @@ priority: critical
 - **НОГА (01.10.2026):** здоровье ноги и самопередача. Тело вЂ” `D:\AI\AGENT_SETTINGS\NOGA\SKILL_noga_health.md`.
   Суть: (1) счётчика токенов у модели нет вЂ” измерять последствия (счётчик вызовов + 3 признака деградации);
   (2) два признака из трёх вЂ” НЕ чинить, а передать ногу; объявление вЂ” ОДНОЙ строкой (не абзац).
-- **OLAMA (новое, 08.10.2026):** OLAMA\SKILL_ollama_index.md вЂ” **critical**, вход направления
-  локальных моделей Ollama: раннер, `num_predict` для рассуждающих моделей, ответ vs размышление,
-  стоп/rm/create и грабли ANSI в stderr. Тела: `OLAMA\SKILL_num_predict_for_reasoning_models.md`,
-  `OLAMA\SKILL_answer_vs_thinking.md`; живые замеры стека вЂ” в `AGENT_SETTINGS\checks\`.
+| **OLAMA (обновлено, 12.11.2026):** `OLAMA\SKILL_ollama_index.md` ⸻ **critical**, вход направления
+|   локальных моделей Ollama: раннер, `num_predict` и `content`/`thinking` измерение (см. `OLAMA\SKILL_llm_answer_measurement.md`),
+|   стоп/rm/create и грабли ANSI в stderr. Живые замеры стека ⸻ в `AGENT_SETTINGS\checks\` .
 - **НАСТРОЙКИ (новое, 08.10.2026):** Prog\SKILL_settings_audit.md вЂ” **critical**, аудит настроек
   дома: `config.json`, `REGISTRY`, `set_values`, куда программа пишет и откуда читает.
   Родня: `Prog\SKILL_repo_mapping.md`.
@@ -330,3 +329,5 @@ Pro-TOOLKIT / VB / Web.Link), **CREOSON = JSON-сервер поверх JLINK**
 **Мёртвые ссылки в карте:** не обнаружены. `SKILL_models_stack.md` — ссылка на внешний навык Cline (`skills\`). `SKILL_parallel_local_leg.md` — удалено по слову пользователя 23.09.2026 (уже отмечено в карте).
 
 **Исключение из аудита:** `D:\AI\AI_AGENT_SETTINGS` — отдельный стенд поведения ИИ, не входит в репо скиллов.
+
+
