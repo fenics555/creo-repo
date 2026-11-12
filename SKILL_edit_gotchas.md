@@ -454,3 +454,28 @@ Get-ChildItem -LiteralPath $p -Recurse -Filter '*.mtl' -File |
 ```
 **Бэкап делать ВНЕ рабочего дерева** (например `Z:\PTC\CREO-START\_БЭКАП_...`, не внутри `МАТЕРИАЛЫ`).
 
+## 26. 🔴 ТРАНСПОРТ run_commands: ТАЙМАУТЫ, ДЕТАЖ, Test-Path (перенесено из SKILL_local_agent_cline §2)
+
+**Связанные крахи:** `crash_command-30s-timeout`, `crash_ctl-inline-stderr-truncated`, `crash_runcommands-copy-race`, `crash_sleep-poll-loop-after-timeout`.
+
+### 26.1. Одна команда ≤ 25 секунд
+Таймаут инструмента `run_commands` — 30 с. `Start-Sleep` съедает этот таймаут. Ожидание — чанками по 20–25 с; длинное выполнение детачить в лог.
+
+### 26.2. Python живёт только в .py-файле
+Запуск: `cmd /c "python -X utf8 file.py > out 2>&1"`, чтение: `Get-Content -Path out -Encoding utf8`. Инлайн `-c` через PowerShell обрезает `stderr` и врёт (crash_ctl-inline-stderr-truncated).
+
+### 26.3. Кавычки — без обратных слэшей
+Сложные строки выносить в `.py`/`.ps1` (crash_quoted-escape-parse-failure).
+
+### 26.4. Не читать файл в той же пачке, где его создали
+После `Copy-Item` сначала `Test-Path`, потом чтение (crash_runcommands-copy-race).
+
+### 26.5. Параметры командлетов — из живой цитаты
+`Get-Help`/`Get-Command`, не из памяти. У `Get-Content` нет `-LineNumber` (есть `-TotalCount`, `-Tail`; номера строк — `Select-String`).
+
+### 26.6. Кириллицу консоль не несёт
+Verbatim-русский входит в файлы только через редактор; ASCII-скрипты — с эскейпами `\uXXXX`.
+
+### 26.7. Протокол ожидания детач-процесса
+Запустил детаж → **один** контрольный опрос через 20–25 с. Результата нет → стоп-отчёт («запущено, PID, где будет результат, приёмка в следующей ноге»). Второй опрос того же файла ЗАПРЕЩЁН (crash_sleep-poll-loop-after-timeout). Тяжёлые приёмки гонять на изолированном тестовом корне, не по живым сетевым дискам.
+

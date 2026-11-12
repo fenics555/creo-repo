@@ -1,8 +1,8 @@
 ---
-name: num-predict-for-reasoning-models
+name: llm-answer-measurement
 system: PROMPT
-description: reasoning-модели съедают num_predict размышлением и не успевают ответить — при 260 токенах стенд меряет отсутствие ответа, а не качество. Живой замер 02.10.2026: gpt-oss 8/15 → 11/15 при лимите 2000.
-when: замер моделей на loop_revive_test.py; модель отвечает пустым content; done_reason=length; reasoning-модели (gpt-oss, deepseek-r1, qwen с thinking); решение "какой num_predict ставить"; балл модели ниже ожидания и падает при смене лимита
+description: Измерение ответов локальных моделей: content = ответ, thinking = размышление, пустой content при непустом thinking = класс провала T; num_predict ограничивает суммарную генерацию размышления с ответом; гибридный режим think/num_predict. Объединено из SKILL_num_predict_for_reasoning_models.md + SKILL_answer_vs_thinking.md.
+when: замер моделей на loop_revive_test.py; модель отвечает пустым content; done_reason=length; reasoning-модели (gpt-oss, deepseek-r1, qwen с thinking); решение "какой num_predict ставить"; балл модели ниже ожидания и падает при смене лимита; content vs thinking; подмена полей измерения
 priority: critical
 executor: Cline
 date: 02.10.2026
@@ -148,7 +148,58 @@ Ollama же умеет просить **«думать НЕДОЛГО»** — `t
 
 ---
 
-## 8. Проба
+## 8. ПРАВИЛО CONTENT ≠ THINKING (перенесено из SKILL_answer_vs_thinking.md)
+
+**`content` — это ответ модели пользователю. `thinking` — это её рассуждение. Измерять можно только `content`.**
+Если `content` пуст, а `thinking` есть — это **провал класса T** («рассудил, но не ответил»), а не повод молча подставить размышление и продолжить замер.
+
+### 8.1. Как это выглядело (факт, база 09:19)
+
+`loop_revive_test.py:766-770` (до правки):
+
+```python
+ans = msg.get("content") or ""
+src = "content"
+if not ans.strip() and (msg.get("thinking") or "").strip():
+    ans = msg.get("thinking")      # <-- размышление становится «ответом»
+    src = "thinking"
+```
+
+Распределение `answer_source` на официальной базе (9 моделей × 15 предметов):
+
+| модель | house: content | house: thinking | plain: content | plain: thinking |
+|---|---|---|---|---|
+| **gpt-oss:20b** | 2 | **13** | 5 | 10 |
+| **deepseek-r1:14b** | 4 | **11** | 6 | 8 (+1 error) |
+| остальные 7 модели | 15 | 0 | 15 | 0 |
+
+Симптом, по которому узнаётся без json: в поле ответа английский разбор от первого лица («We have a user question…», «Okay, so I need to figure out…») вместо ответа по-русски.
+
+**Цена ошибки:** house 8/15 и 4/15 у этих двух моделей — не качество, а нижняя граница. Их записи в паспортах, матрице применимости и рекомендациях «не применять» были недостоверны.
+
+### 8.2. Правило для всех будущих замеров
+
+1. **`answer = msg["content"]` всегда. `thinking` пишется в отдельное поле и никогда не подставляется в `answer`.**
+2. **`content` пуст + `thinking` непуст → вердикт FAIL, класс `T`**, note: `T: content пуст, есть только thinking — ответ не дан`.
+3. **`content` пуст + `thinking` пуст → вердикт FAIL, класс `?`**, источник `empty` — модель не ответила ничем (часто `HTTP 500`, это сбой сервера, не провал модели).
+4. **`num_predict` фиксируется в отчёте рядом с `chars=`.** Без него цифра нечитаема.
+5. **Проверка после любого прогона:** `Counter(answer_source)` по всем моделям. Если у кого-то `content` < половины записей — прогон врёт, баллы читать нельзя.
+6. **Reasoning-модели в доме меряются отдельно** (сейчас `predict=800` для gpt-oss и deepseek), их house нельзя ставить в один столбец с `predict=260` остальных семи.
+
+### 8.3. Порядок диагностики «модель набирает низкий балл»
+
+1. `answer_source` — мерили ответ или размышление? (`dump_fails.py`, 3 строки)
+2. `content_len == 0` → `done_reason`: `length` = съеден лимит (чинить `num_predict`), иначе модель не ответила в принципе.
+3. Только после этого судить о качестве модели.
+
+### 8.4. Чего НЕ делать
+
+- **Не подставлять `thinking` в `answer` «чтобы замер был не пустым».** Это подмена предмета.
+- **Не переносить вывод про reasoning-модели на модели без reasoning** (7 моделей базы дают `content` в 15 из 15 — там подмены не было).
+- **Не считать `HTTP 500` провалом модели** — это сбой Ollama; запись идёт как `ERR` (в прогоне 14:30 это оборвало deepseek на `l5b_house_task`).
+- **Не сравнивать баллы, снятые при разном `num_predict`.** Это разные шкалы.
+
+## 8.5. Проба
 
 - `D:\AI\log\urn\cline\probe_predict_thinking.py` — живая проба 260/800/2000 на gpt-oss.
 - `D:\AI\log\urn\cline\ct_compare.py` — сравнение прогонов до/после фикса полей.
