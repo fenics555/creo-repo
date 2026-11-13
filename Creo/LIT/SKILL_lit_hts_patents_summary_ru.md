@@ -1,7 +1,7 @@
 ---
 name: lit-hts-patents-summary-ru
 system: Creo
-description: 🇯🇵🇮🇹🇫🇷🇨🇳🇺🇸 Свод патентов HTS по странам
+description: Япония, Италия, Франция, Китай, США Свод патентов HTS по странам
 when: hts, литьё, hts, patents, summary, ru
 priority: high
 date: 13.11.2026
