@@ -12,7 +12,7 @@ executor: Cline
 
 **Закон и шаблоны темы:** `SKILL_crash_constitution.md` (порядок фиксации, шаблон экземпляра, шаблон передачи, правило именования).
 **Порядок работы при сбое:** найди свою подпись в группах ниже → прочитай файл → если подпись совпала, увеличь `ПОВТОРЫ` и примени профилактику; если подпись новая — создай новый файл по шаблону из конституции.
-**Актуальный состав папки (на 13.11.2026):** 69 файлов (`SKILL_crash_constitution.md` + `SKILL_crash_index.md` + 67 экземпляров). Точный пересчет — только счетчиком с диска.
+**Актуальный состав папки (на 13.11.2026):** 70 файлов (`SKILL_crash_constitution.md` + `SKILL_crash_index.md` + 68 экземпляров). Точный пересчет — только счетчиком с диска.
 
 ---
 
@@ -39,6 +39,7 @@ executor: Cline
 *   `SKILL_crash_runcommands_kill-by-name-house-services` — остановка процесса по имени (`Stop-Process -Name` / `taskkill /IM`) сносит чужие сервисы дома.
 *   `crash_python_open-number-invalid-handle` — `open()` в Python получает число вместо пути (`OSError: Invalid argument` / `TypeError`).
 *   `SKILL_crash_sys-stdout-closed-on-import` — проба падает с `ValueError: I/O operation on closed file` после переопределения `sys.stdout` при импорте.
+*   `SKILL_crash_mass-replace-swapped-pairs` — инверсия пар при массовой замене скриптом без dry-run (п. 4.9).
 
 ---
 
