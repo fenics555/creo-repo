@@ -12,11 +12,11 @@ executor: Cline
 
 **Закон и шаблоны темы:** `SKILL_crash_constitution.md` (порядок фиксации, шаблон экземпляра, шаблон передачи, правило именования).
 **Порядок работы при сбое:** найди свою подпись в группах ниже → прочитай файл → если подпись совпала, увеличь `ПОВТОРЫ` и примени профилактику; если подпись новая — создай новый файл по шаблону из конституции.
-**Актуальный состав папки (на 13.11.2026):** 70 файлов (`SKILL_crash_constitution.md` + `SKILL_crash_index.md` + 68 экземпляров). Точный пересчет — только счетчиком с диска.
+**Актуальный состав папки (на 13.11.2026):** 71 файл (`SKILL_crash_constitution.md` + `SKILL_crash_index.md` + 69 экземпляров). Точный пересчет — только счетчиком с диска.
 
 ---
 
-## 1. Редактор файлов (`editor` / `write_file`) — 9 шт.
+## 1. Редактор файлов (`editor` / `write_file`) — 10 шт.
 *   `SKILL_crash-editor-mismatch` — `editor` падает с `text not found` из-за расхождения `old_text` после частичной правки или смены контекста.
 *   `SKILL_crash_editor-text-not-found` — `editor` не находит точный `old_text`, хотя при чтении текст совпадает.
 *   `SKILL_crash_editor_context_mismatch` — `editor` падает из-за несовпадения текста или лимита размера при крупных правках.
@@ -26,6 +26,7 @@ executor: Cline
 *   `SKILL_crash_editor-insert-line-splits-function` — вставка по номерам строк попадает внутрь функции и ломает отступы.
 *   `SKILL_crash_editor-studycheck-halfedit-undefined-name` — правка оборвана до объявления имени (`NameError`) или вывод с эмодзи роняет консоль cp1251 (`UnicodeEncodeError`).
 *   `SKILL_crash_editor-create-overwrote` — полная перезапись существующего файла уничтожила его тело (файл усох).
+*   `SKILL_crash_editor-triple-quotes-loop` — петля в `Thinking` перед вызовом `editor` при попытке завернуть длинный Markdown-текст в Python-сборщик с тройными кавычками `'''...'''`.
 
 ---
 
