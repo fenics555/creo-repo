@@ -1,109 +1,120 @@
 ---
 name: crash-index
 system: CRASH
-description: Список всех крах-скиллов папки crash (навигация); вход в тему — SKILL_crash_constitution.md
-when: крах, crash, список крахов, какой скилл, навигация по крахам
+description: Навигатор по всем крах-скиллам папки D:\AI\repo\crash по группам; вход и закон темы — SKILL_crash_constitution.md
+when: крах, crash, список крахов, какой скилл, навигация по крахам, подпись краха
 priority: high
-date: 22.09.2026
+date: 13.11.2026
+executor: Cline
 ---
+
 # СПИСОК КРАХ-СКИЛЛОВ (D:\AI\repo\crash)
-Вход/закон темы — `SKILL_crash_constitution.md` (правило, шаблон экземпляра, шаблон передачи, блок имён).
-Ниже — все экземпляры с кратким «когда применять». Счётчик повторов (`ПОВТОРЫ`) — внутри каждого скилла.
 
-- `SKILL_agent-frozen` — Use when: Агент (HTTP-сервис) «застыл» — порт 8765 слушает (LISTENING), но curl/requests возвращают «Connection closed without response» или «Timeout»; процесс есть, но не реагирует на запросы.
-- `SKILL_crash-editor-mismatch` — Use when: editor падает с «text not found» из-за расхождения old_text после частичной правки или смены контекста
-- `SKILL_crash_agent-duplicate-restart-race` — Use when: после рестарта агента живы ДВА python agent.py и на порту два LISTENING — рестарт среагировал в гонке со сторожем ctl --watch
-- `SKILL_crash_agent_corruption` — Use when: агент после рестарта молчит/отвечает старым кодом, `py_compile` правленого `agent.py` падает (SyntaxError)
-- `SKILL_crash_agent_silence` — Use when: исполнитель «завис» — сообщение кончилось рассуждением без вызова инструмента, IDE видит простой, пользователь спрашивает «что случилось» или «ты стоял»
-- `SKILL_crash_analysis_search_codebase` — Use when: search_codebase падает с ошибкой миграции контекста или повторяется
-- `SKILL_crash_cline_longsession_context_death` — Use when: окно Cline умирает молча после длинной сессии на шаге генерации длинного ответа
-- `SKILL_crash_command-30s-timeout` — Use when: run_commands падает с "Command timed out after 30000ms" — таймаут
-- `SKILL_crash_constitution` — ЗАКОН темы (не экземпляр): правило, шаблон экземпляра, шаблон передачи, блок имён.
-- `SKILL_crash_context-limit-interruption` — Use when: задача прерывается из-за лимитов инструментов (search_codebase, контекст) или таймаутов
-- `SKILL_crash_ctl-inline-stderr-truncated` — Use when: рестарт или проба агента через инлайн python -c в PowerShell гибнет
-- `SKILL_crash_destructive-probe-rerun` — Use when: разрушительная проба (kill_creo, delete, erase, перезапись) исполнена ПОВТОРНО из оставшегося в tmp скрипта
-- `SKILL_crash_editor-text-not-found` — Use when: editor не находит точный old_text, хотя при чтении текст совпадает
-- `SKILL_crash_editor_context_mismatch` — Use when: editor падает из-за несовпадения текста или лимита размера при крупных правках
-- `SKILL_crash_editor_too_large_and_non_unique_anchors` — Use when: editor падает из-за размера файла > 6 КБ или нескольких совпадений old_text
-- `SKILL_crash_editor-split-loses-indent` — Use when: файл собран несколькими вставками блоками по 5-6 КБ и падает с IndentationError «unindent does not match any outer indentation level» на шве между частями
-- `SKILL_crash_editor-insert-line-splits-function` — Use when: новый или правимый .py собирается вставками по номерам строк — вставка попадает внутрь функции и ломает отступы
-- `SKILL_crash_agent_silent-death_noport-8765` — Use when: агент молча умер — порт 8765 не слушает, процесса нет, в журнале нет строки ошибки
-- `SKILL_crash_chatloop_reports-inventwork-not-pettles` — Use when: владелец говорит «доделывай», а реальной работы нет — и нога начинает придумывать мелкие дела, чтобы не сказать «делать нечего»
-- `SKILL_crash_creo-text-not-binary` — Use when: в .prt/.asm ищешь фичи или компоненты бинарным поиском сигнатур — заголовок UGC на самом деле открытый текст с тегами, а записи полей имеют вид E0 <len> <поле>\0 <len> <значение>\0
-- `SKILL_crash_creoson-open-keeps-other-model` — Use when: CREOSON file:open по полному пути не переключает окно — запись уходит в модель с тем же стемом (копия vs боевая)
-- `SKILL_crash_gui-helper-returns-wrong-type` — Use when: окно на tkinter зависает намертво (App() не возвращает) после подключения к общему каркасу ui_common или другому помощнику GUI
-- `SKILL_crash_ollama-ansi-stderr-falseexit` — Use when: команда ollama (stop/rm/create/ps) печатает ANSI-спиннер в stderr — PowerShell даёт ложный NativeCommandError/exit1 и рвёт цепочку команд через «;», хотя команда выполнена
-- `SKILL_crash_probe-buffer-swallows-output` — Use when: фоновый/детач-прогон python не даёт вывода при таймауте — файл перенаправления пуст, и неясно, где завис процесс
-- `SKILL_crash_probe-dialog-hang-and-pollutes-settings` — Use when: автопрогон окна зависает на messagebox (диалог ждёт человека) или проба портит боевые настройки окна (записала битый путь)
-- `SKILL_crash_strict_test_stamp-missing` — Use when: проверка strict_test.py проходит все вопросы, но отчёт не пишется — NameError 'STAMP' is not defined
-- `SKILL_crash_sys-stdout-closed-on-import` — Use when: проба падает с «ValueError: I/O operation on closed file» — модуль при импорте переназначил sys.stdout обёрткой TextIOWrapper
-- `SKILL_crash_execution-loop` — Use when: агент зацикливается в попытках исправить ошибку, повторяя одну и ту же неудачную команду или используя несоответствующий инструмент (например, слишком сложный python -c в PowerShell).
-- `SKILL_crash_handling` — Use when: петля или зависание из-за лимитов инструментов (editor too large, длинные цепочки run_commands, editor без old_text)
-- `SKILL_crash_login-stale-memory` — Use when: вход в агента не проходит при верном пароле — три источника правды
-- `SKILL_crash_missing-temp-artifacts` — Use when: временные артефакты tmp потеряны к моменту, когда нужны следующему шагу
-- `SKILL_crash_omission_of_revive_protocol` — Use when: пропуск обязательных шагов ритуала (чтение скилла и строка-доказательство) при REVIVE или крахе
-- `SKILL_crash_pdf-roots-two-lists` — Поиск PDF пуст при живых парах в базе знаний (сравнение scan_roots и kb_roots)
-- `SKILL_crash_plan-loop-replan-no-exec` — один и тот же план три и более раз в рассуждениях без исполнения
-- `SKILL_crash_protocol_omission` — Use when: пропуск обязательной записи крах-скилла — ритуал краха выполнен частично
-- `SKILL_crash_quoted-escape-parse-failure` — ParseException «Отсутствует имя типа после знака "["» на \" внутри массива run_commands
-- `SKILL_crash_readfiles_outdated_loop` — Use when: `read_files` в цикле возвращает `[outdated - see the latest file content]`
-- `SKILL_crash_reasoning-loop` — указатель: закон и профилактика в `SKILL_crash_plan-loop-replan-no-exec.md` (дублирование запрещено)
-- `SKILL_crash_regex_extraction_triple_quote_loop` — Use when: бесконечный цикл при regex-извлечении блоков кода в тройных кавычках (agent.py)
-- `SKILL_crash_runcommands-copy-race-fake-parameter` — Use when: после Copy-Item мгновенный Get-Content падает PathNotFound (гонка
-- `SKILL_crash_runcommands_kill-by-name-house-services` — Use when: остановка процесса по ИМЕНИ (Stop-Process -Name / taskkill /IM) в доме — сносит ЧУЖИЕ сервисы дома
-- `SKILL_crash_scheduler-fire-skip` — Use when: задача планировщика с триггером повторения не стартует в расчётный
-- `SKILL_crash_searchcodebase-any-pattern-migration-marker` — Use when: search_codebase возвращает маркер миграции
-- `SKILL_crash_searchcodebase-multipattern-migration-marker` — Use when: search_codebase с 3+ regex-паттернами возвращает маркер миграции
-- `SKILL_crash_searchcodebase-timeout` — Use when: search_codebase зависает/таймаут или возвращает маркер миграции вместо результатов
-- `SKILL_crash_session-interruption` — Use when: потеря сессии, обрыв связи, генерация оборвана на полуслове
-- `SKILL_crash_sleep-poll-loop-after-timeout` — Use when: исполнитель после таймаута run_commands (30 с) ждёт детач-процесс повторными опросами «Start-Sleep 25 + проверка файла» — и зацикливается на 5+ одинаковых ходах вместо смены метода и отчёта. Закон дома — MANIFEST.md (М7, М10).
-- `SKILL_editor_too_large` — Use when: editor отказывает «Editor input too large» — блок new_text выше лимита (~6000 символов)
-- `crash_appjs-syntaxerror-no-uicheck` — Use when: правка app.js/index.html ушла без пробы консоли — синтаксическая ошибка живёт до первой проверки
-- `crash_deleted-house-file-without-word` — Use when: домовой файл (напр. harvest_gui.py) удалён вне data	mp и dataackup без прямого слова пользователя
-- `crash_loop_perception` — Use when: исполнитель принимает череду мелких нужных шагов (инвентаризация, Select-String, проверки путей) за цикл и встаёт в REVIVE без реального зависания
-- `crash_reasoning-loop` — Use when: исполнитель зацикливается на повторяющихся неудачных вызовах/рассуждениях без продвижения
-- `SKILL_crash_editor-create-overwrote` — Use when: create/полная перезапись существующего файла убила тело (файл усох, 4256 → 1100 байт)
-- `SKILL_crash_git_commit-sweeps-foreign-staged` — Use when: git commit без pathspec подметает чужой staged параллельной ноги
-- `SKILL_crash_git_parallel-leg-rebase-reverts-worktree` — Use when: параллельная нога сделала rebase — рабочее дерево откатилось, своя работа в stash
-- `SKILL_crash_loop_economy_failure` — Use when: исполнитель зацикливается из-за попыток «оптимизировать» (экономить) токены вместо полноценного чтения скиллов или соблюдения лимитов инструментов (например, editor too large), что приводит к ложным выводам и краху сессии.
-- `SKILL_crash_editor-studycheck-halfedit-undefined-name` — Use when: файл после правки ссылается на необъявленное имя (NameError) — правка оборвана до объявления имени и до прогона проверки; и сопутствующее: вывод проверки с эмодзи роняет консоль cp1251 (UnicodeEncodeError 'charmap').
-- `SKILL_crash_update-version-mismatch` — Use when: после обновления шапка новая, а «есть обновление» не гаснет — версия живёт в двух местах (`engine.VERSION` рядом с `APP_VERSION`), и/или манифест тянется по кэшируемому raw вместо GitHub API.
+**Закон и шаблоны темы:** `SKILL_crash_constitution.md` (порядок фиксации, шаблон экземпляра, шаблон передачи, правило именования).
+**Порядок работы при сбое:** найди свою подпись в группах ниже → прочитай файл → если подпись совпала, увеличь `ПОВТОРЫ` и примени профилактику; если подпись новая — создай новый файл по шаблону из конституции.
+**Актуальный состав папки (на 13.11.2026):** 69 файлов (`SKILL_crash_constitution.md` + `SKILL_crash_index.md` + 67 экземпляров). Точный пересчет — только счетчиком с диска.
 
-- `crash_git-push-says-up-to-date-but-ahead` — Use when: `git push` пишет «Everything up-to-date», но `git rev-list --left-right --count origin/master...HEAD` показывает ahead — пуш НЕ состоялся; приёмка только по `ls-remote` + нулям.
-- `crash_shell-mixed-cmd-and-powershell` — Use when: `cmd /c '... && git ... 2>&1 | Select-Object ...'` падает с «'Select-Object' is not recognized» — PowerShell-командлет внутри cmd.exe; пуш при этом НЕ выполнился, а exit 1 выглядит как провал git.
-- `SKILL_crash_strict_test_stamp-missing` — Use when: проверка `strict_test.py` проходит все вопросы, но отчёт не пишется — `NameError: name 'STAMP' is not defined` в разделе отчёта.
-- `crash_path-guessed-by-analogy` — Use when: путь к папке назван по аналогии с соседней (`tools\agent` рядом есть и тоже «про агента»), и `cd` падает `PathNotFound`, хотя папка живёт в другом месте — `Test-Path` до команды, адрес брать из `CULTURE_files.md` §1.
-- `SKILL_crash_ollama-ansi-stderr-falseexit` — Use when: `ollama stop/rm/create/ps` даёт ложный `NativeCommandError`/exit1 из-за ANSI-спиннера в stderr и рвёт цепочку `;` — успех проверять по `ollama list`/HTTP, а не по exit-коду PowerShell.
+---
 
-- `crash_bat_no_dry_run_flag` — Use when: лаунчер `.bat` запускается без ключа пробы/`--dry` и сразу делает необратимое действие (в индексе отсутствовал, внесён 02.10.2026).
+## 1. Редактор файлов (`editor` / `write_file`) — 9 шт.
+*   `SKILL_crash-editor-mismatch` — `editor` падает с `text not found` из-за расхождения `old_text` после частичной правки или смены контекста.
+*   `SKILL_crash_editor-text-not-found` — `editor` не находит точный `old_text`, хотя при чтении текст совпадает.
+*   `SKILL_crash_editor_context_mismatch` — `editor` падает из-за несовпадения текста или лимита размера при крупных правках.
+*   `SKILL_crash_editor_too_large_and_non_unique_anchors` — `editor` падает из-за размера блока > 6 КБ или нескольких совпадений `old_text`.
+*   `SKILL_editor_too_large` — `editor` отказывает с `Editor input too large` (блок `new_text` выше лимита ~6000 символов).
+*   `SKILL_crash_editor-split-loses-indent` — файл собран вставками по 5–6 КБ и падает с `IndentationError` на шве между частями.
+*   `SKILL_crash_editor-insert-line-splits-function` — вставка по номерам строк попадает внутрь функции и ломает отступы.
+*   `SKILL_crash_editor-studycheck-halfedit-undefined-name` — правка оборвана до объявления имени (`NameError`) или вывод с эмодзи роняет консоль cp1251 (`UnicodeEncodeError`).
+*   `SKILL_crash_editor-create-overwrote` — полная перезапись существующего файла уничтожила его тело (файл усох).
 
-- `SKILL_crash_creoson-search-pro-visibility` — Use when: CREOSON отказывает в открытии модели (`Unknown Model Extension`) при верном существующем пути; причина — папки нет в списке `Z:\PTC\Work\search.pro` (4109 папок), а не «видимость START-STD» и не «2 уровня» (оба утверждения опровергнуты).
-- `SKILL_crash_creoson-open-prt1-extension` — Use when: `file:open` отвечает `Unknown Model Extension` при верном пути — чаще всего передан `имя.prt.1` вместо `имя.prt`; для чтения байтов путь с `.1` нужен, для API — без.
-- `SKILL_crash_creo-text-not-binary` — Use when: в `.prt`/`.asm` ищешь фичи или компоненты по бинарным сигнатурам — заголовок UGC на самом деле открытый текст (`#UGC:2`, `@тег N L`, `E0 <len> поле\0`); сначала напечатать 2 КБ как текст, потом искать по ИМЕНАМ полей (`to_name`, `comp_ids`), а не по маркерам.
-- `crash_command_timeout_kills_process_tree` — Use when: `Start-Process cmd /c <лаунчер>` и таймаут рвёт всё дерево процессов вместе с результатом.
-- `crash_python_open-number-invalid-handle` — Use when: `open()` в Python получает номер как дескриптор (`OSError: Invalid argument` / `TypeError`).
-- `crash_update-test-self-overwrite` — Use when: проверка обновления пишет поверх сравниваемого файла и «проходит» сама у себя.
+---
 
-- `SKILL_crash_agent_loops` — Use when: нога утомилась и пошли ПЕТЛИ (промахи якоря `editor` подряд, повтор запуска прогона тем же способом, ложная тревога «прогон умер»/«файл устарел»). Разбор ноги 17.10.2026: 8 граблей (петли якоря · запуск через родителя · no-op правки · «сводка застыла» ≠ процесс мёртв · эталон поехал mid-run · `Start-Sleep >30 с` = timeout · ложные подозрения без счётчика · no-op «сама в себя»). Файл: `crash\SKILL_crash_agent_loops_17.10.2026.md`.
+## 2. Консоль и процессы (`run_commands` / PowerShell / Python) — 9 шт.
+*   `SKILL_crash_command-30s-timeout` — `run_commands` падает с `Command timed out after 30000ms`.
+*   `crash_command_timeout_kills_process_tree` — `Start-Process cmd /c` и таймаут рвут всё дерево процессов вместе с результатом.
+*   `SKILL_crash_ctl-inline-stderr-truncated` — рестарт или проба через инлайн `python -c` в PowerShell гибнет с обрезанным stderr.
+*   `SKILL_crash_quoted-escape-parse-failure` — `ParseException` на кавычках `\"` внутри `run_commands`.
+*   `crash_shell-mixed-cmd-and-powershell` — PowerShell-командлет (`Select-Object`) запущен внутри `cmd /c` и падает без исполнения команды.
+*   `SKILL_crash_runcommands-copy-race-fake-parameter` — после `Copy-Item` мгновенный `Get-Content` в той же пачке падает с `PathNotFound` (гонка).
+*   `SKILL_crash_runcommands_kill-by-name-house-services` — остановка процесса по имени (`Stop-Process -Name` / `taskkill /IM`) сносит чужие сервисы дома.
+*   `crash_python_open-number-invalid-handle` — `open()` в Python получает число вместо пути (`OSError: Invalid argument` / `TypeError`).
+*   `SKILL_crash_sys-stdout-closed-on-import` — проба падает с `ValueError: I/O operation on closed file` после переопределения `sys.stdout` при импорте.
 
+---
 
-## ГРУППЫ КРАХ-СКИЛЛОВ (навигация при крахе)
+## 3. Циклы, петли и зацикливание — 9 шт.
+*   `SKILL_crash_agent_loops_17.10.2026` — разбор усталости ноги и серии петель (промахи якорей подряд, повтор запуска тем же методом, ложная тревога).
+*   `SKILL_crash_execution-loop` — зацикливание на повторе одной и той же неудачной команды или неподходящего инструмента.
+*   `SKILL_crash_loop_economy_failure` — петля из-за попыток «экономить» токены вместо чтения скиллов или соблюдения лимитов инструментов.
+*   `SKILL_crash_plan-loop-replan-no-exec` — один и тот же план 3+ раза в рассуждениях без вызова инструментов.
+*   `SKILL_crash_reasoning-loop` — указатель на `SKILL_crash_plan-loop-replan-no-exec.md` (дублирование запрещено).
+*   `crash_reasoning-loop` — зацикливание на повторяющихся неудачных вызовах и рассуждениях без продвижения.
+*   `crash_loop_perception` — исполнитель принимает череду нужных мелких проверок за цикл и встаёт в `REVIVE` без реального зависания.
+*   `SKILL_crash_sleep-poll-loop-after-timeout` — после таймаута 30 с исполнитель зацикливается на опросах `Start-Sleep 25 + проверка файла` вместо отчёта.
+*   `SKILL_crash_readfiles_outdated_loop` — `read_files` в цикле возвращает `[outdated - see the latest file content]`.
 
-При любом крахе/вылете нога ОБЯЗАНА сначала посмотреть сюда, найти свою подпись, и либо дописать существующий скилл (увеличить `ПОВТОРЫ`), либо создать новый `SKILL_crash_<подпись>.md` по шаблону из `SKILL_crash_constitution.md`.
+---
 
-| Группа | Входящие скиллы (кратко) |
-|---|---|
-| **editor** | `SKILL_crash-editor-mismatch`, `SKILL_crash_editor-text-not-found`, `SKILL_crash_editor_context_mismatch`, `SKILL_crash_editor_too_large_and_non_unique_anchors`, `SKILL_crash_editor-split-loses-indent`, `SKILL_crash_editor-insert-line-splits-function`, `SKILL_crash_editor-studycheck-halfedit-undefined-name`, `SKILL_crash_editor-create-overwrote`, `SKILL_editor_too_large` |
-| **runcommands / PowerShell** | `SKILL_crash_command-30s-timeout`, `SKILL_crash_ctl-inline-stderr-truncated`, `SKILL_crash_runcommands-copy-race-fake-parameter`, `SKILL_crash_runcommands_kill-by-name-house-services`, `SKILL_crash_quoted-escape-parse-failure`, `crash_command_timeout_kills_process_tree` |
-| **ollama** | `SKILL_crash_ollama-ansi-stderr-falseexit` |
-| **creoson / Creo API** | `SKILL_crash_creoson-open-keeps-other-model`, `SKILL_crash_creoson-search-pro-visibility`, `SKILL_crash_creoson-open-prt1-extension` |
-| **git / параллельная нога** | `SKILL_crash_git_commit-sweeps-foreign-staged`, `SKILL_crash_git_parallel-leg-rebase-reverts-worktree`, `crash_git-push-says-up-to-date-but-ahead` |
-| **циклы / петли / зацикливание** | `SKILL_crash_agent_loops` (файл `SKILL_crash_agent_loops_17.10.2026.md`), `SKILL_crash_execution-loop`, `SKILL_crash_loop_economy_failure`, `SKILL_crash_plan-loop-replan-no-exec`, `SKILL_crash_reasoning-loop` (указатель), `crash_reasoning-loop`, `crash_loop_perception`, `SKILL_crash_sleep-poll-loop-after-timeout`, `SKILL_crash_readfiles_outdated_loop` |
-| **контекст / окно Cline** | `SKILL_crash_cline_longsession_context_death`, `SKILL_crash_context-limit-interruption` |
-| **агент (порт 8765, рестарт, молчание)** | `SKILL_agent-frozen`, `SKILL_crash_agent-duplicate-restart-race`, `SKILL_crash_agent_corruption`, `SKILL_crash_agent_silence`, `SKILL_crash_agent_silent-death_noport-8765`, `SKILL_crash_login-stale-memory` |
-| **поиск (search_codebase)** | `SKILL_crash_analysis_search_codebase`, `SKILL_crash_searchcodebase-any-pattern-migration-marker`, `SKILL_crash_searchcodebase-multipattern-migration-marker`, `SKILL_crash_searchcodebase-timeout` |
-| **протокол / REVIVE / отчёт** | `SKILL_crash_omission_of_revive_protocol`, `SKILL_crash_protocol_omission` |
-| **сессия / временные артефакты** | `SKILL_crash_session-interruption`, `SKILL_crash_missing-temp-artifacts`, `SKILL_crash_destructive-probe-rerun` |
-| **PDF / Creo бинарник / прочее** | `SKILL_crash_pdf-roots-two-lists`, `SKILL_crash_creo-text-not-binary`, `SKILL_crash_chatloop_reports-inventwork-not-pettles`, `SKILL_crash_gui-helper-returns-wrong-type`, `SKILL_crash_probe-buffer-swallows-output`, `SKILL_crash_probe-dialog-hang-and-pollutes-settings`, `SKILL_crash_strict_test-stamp-missing`, `SKILL_crash_sys-stdout-closed-on-import`, `SKILL_crash_handling`, `SKILL_crash_scheduler-fire-skip`, `SKILL_crash_update-version-mismatch`, `crash_appjs-syntaxerror-no-uicheck`, `crash_deleted-house-file-without-word`, `crash_bat_no_dry_run_flag`, `crash_python_open-number-invalid-handle`, `crash_update-test-self-overwrite` |
+## 4. Поиск по кодовой базе (`search_codebase`) — 4 шт.
+*   `SKILL_crash_analysis_search_codebase` — `search_codebase` падает с `[migration] Tool result missing` в длинной сессии.
+*   `SKILL_crash_searchcodebase-any-pattern-migration-marker` — `search_codebase` при любом числе паттернов возвращает маркер миграции (индекс нестабилен).
+*   `SKILL_crash_searchcodebase-multipattern-migration-marker` — `search_codebase` с 3+ regex-паттернами (или в большой пачке вызовов) обрезает ответ маркером миграции.
+*   `SKILL_crash_searchcodebase-timeout` — `search_codebase` зависает по таймауту или возвращает пустоту.
 
-Всего крах-скиллов: 55 (без учёта конституции и этого списка; сверено пересчётом файлов `SKILL_crash_*.md` на диске 17.10.2026 = 55; ранее стояло 54 — добавлен `SKILL_crash_agent_loops`).
+---
+
+## 5. Git и параллельная работа — 3 шт.
+*   `SKILL_crash_git_commit-sweeps-foreign-staged` — `git commit` без pathspec подметает чужой staged параллельной ноги.
+*   `SKILL_crash_git_parallel-leg-rebase-reverts-worktree` — параллельная нога сделала rebase, рабочее дерево откатилось, своя работа ушла в stash.
+*   `crash_git-push-says-up-to-date-but-ahead` — `git push` пишет `Everything up-to-date`, но ветка всё ещё `ahead` от `origin/master`.
+
+---
+
+## 6. Creo, CREOSON и чтение моделей — 5 шт.
+*   `SKILL_crash_creoson-open-keeps-other-model` — `file:open` по полному пути не переключает окно, запись уходит в открытую модель с тем же именем.
+*   `SKILL_crash_creoson-search-pro-visibility` — `Unknown Model Extension` при верном пути: папки нет в списке `Z:\PTC\Work\search.pro`.
+*   `SKILL_crash_creoson-open-prt1-extension` — `file:open` падает, если передано имя с версией `.prt.1` вместо `.prt`.
+*   `SKILL_crash_creo-text-not-binary` — поиск фич и компонентов бинарными сигнатурами вместо чтения текстового заголовка `#UGC:2` и имён полей.
+*   `SKILL_crash_pdf-roots-two-lists` — поиск PDF пуст при живых парах в базе знаний (расхождение `scan_roots` и `kb_roots`).
+
+---
+
+## 7. Автономный Python-агент (порт 8765) и Ollama — 7 шт.
+*   `SKILL_agent-frozen` — HTTP-сервис на порту 8765 слушает (`LISTENING`), но не отвечает на запросы (`Timeout` / `Connection closed`).
+*   `SKILL_crash_agent-duplicate-restart-race` — после рестарта запущены два процесса `python agent.py` в гонке со сторожем `ctl --watch`.
+*   `SKILL_crash_agent_corruption` — после рестарта агент отвечает старым кодом или падает с `SyntaxError`.
+*   `SKILL_crash_agent_silence` — исполнитель закончил ход рассуждением без вызова инструмента и встал в простой.
+*   `SKILL_crash_agent_silent-death_noport-8765` — процесс агента молча завершился без записи ошибки в журнал, порт 8765 закрыт.
+*   `SKILL_crash_login-stale-memory` — вход в агента не проходит при верном пароле из-за рассинхрона источников.
+*   `SKILL_crash_ollama-ansi-stderr-falseexit` — `ollama stop/rm/create/ps` печатает ANSI-спиннер в stderr, вызывая ложный `NativeCommandError` в PowerShell.
+
+---
+
+## 8. Контекст Cline, сессии и протокол — 8 шт.
+*   `SKILL_crash_cline_longsession_context_death` — окно Cline молча обрывается после длинной сессии при генерации большого ответа.
+*   `SKILL_crash_context-limit-interruption` — задача прерывается из-за переполнения контекста или лимитов инструментов.
+*   `SKILL_crash_session-interruption` — внезапный обрыв связи или генерации на полуслове.
+*   `SKILL_crash_omission_of_revive_protocol` — пропуск обязательных шагов диагностики при получении сигнала `REVIVE` или крахе.
+*   `SKILL_crash_protocol_omission` — пропуск обязательной записи или обновления счётчика в базе крахов.
+*   `SKILL_crash_chatloop_reports-inventwork-not-pettles` — исполнитель выдумывает лишнюю работу вместо честного отчёта «задача завершена».
+*   `crash_path-guessed-by-analogy` — путь к папке придуман по аналогии с соседней и падает с `PathNotFound`.
+*   `crash_deleted-house-file-without-word` — домовой файл удалён вне `tmp` и `backup` без прямого слова пользователя.
+
+---
+
+## 9. Пробы, тесты, GUI и обновления — 13 шт.
+*   `SKILL_crash_destructive-probe-rerun` — разрушительная проба (`kill_creo`, `delete`, перезапись) запущена повторно из старого скрипта в `tmp`.
+*   `SKILL_crash_missing-temp-artifacts` — временные файлы в `tmp` потеряны к моменту следующего шага.
+*   `SKILL_crash_probe-buffer-swallows-output` — фоновый прогон Python при таймауте оставляет пустой файл перенаправления из-за буферизации вывода.
+*   `SKILL_crash_probe-dialog-hang-and-pollutes-settings` — автопрогон окна зависает на модальном `messagebox` или портит боевые настройки программы.
+*   `SKILL_crash_gui-helper-returns-wrong-type` — окно `tkinter` зависает после подключения к общему каркасу `ui_common`.
+*   `SKILL_crash_strict_test_stamp-missing` — проверка `strict_test.py` падает при записи отчёта с `NameError: name 'STAMP' is not defined`.
+*   `SKILL_crash_regex_extraction_triple_quote_loop` — бесконечный цикл при извлечении блоков кода в тройных кавычках регулярным выражением.
+*   `SKILL_crash_handling` — петля из-за превышения лимитов инструментов или длинных цепочек команд.
+*   `SKILL_crash_scheduler-fire-skip` — задача планировщика с триггером повторения не стартует в расчётное время.
+*   `SKILL_crash_update-version-mismatch` — версия обновления не гаснет из-за расхождения `engine.VERSION` и `APP_VERSION` или кэша GitHub.
+*   `crash_appjs-syntaxerror-no-uicheck` — синтаксическая ошибка в `app.js`/`index.html` ушла без проверки в headless-браузере.
+*   `crash_bat_no_dry_run_flag` — лаунчер `.bat` запущен без ключа пробы и сразу выполнил необратимое действие.
+*   `crash_update-test-self-overwrite` — проверка обновления перезаписывает эталонный файл сама собой.
+
+=== END ===
