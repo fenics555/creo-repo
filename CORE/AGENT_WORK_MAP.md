@@ -69,7 +69,7 @@
   `Ошибки\SKILL_errors.md`, `PROMPT\SKILL_prompt_index.md`.
 - Прецеденты — `repo\crash\`; долги — `*\SKILL_*_inbox_*.md`; код дома — `D:\AI\tools\agent\`;
   аудиты — `AUDIT_rules_*.md`, `AUDIT\SKILL_audit_protocol.md` (read-only).
-- Образовательный контур: здоровье ноги (порог 55+/70+) — тело `D:\AI\AGENT_SETTINGS\NOGA\SKILL_noga_health.md`,
+- Образовательный контур: здоровье ноги (порог 55+/70+) — тело `D:\AI\repo\SKILL_noga_health.md`,
   указатель — `SKILL_index.md`, раздел «НОГА».
 
 ## 5. Библиотека
