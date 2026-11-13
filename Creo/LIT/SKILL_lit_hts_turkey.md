@@ -36,7 +36,7 @@ USADKA_P = 0.85–1.00% для углеродистой стали, может �
 
 ### HOT_FACTOR:
 ```
-HOT_FACTOR = 1 - (USADKA_P / 100)
+HOT_FACTOR = 1 + (USADKA_P / 100)
 ```
 Стандартная формула, но с Turkish material properties.
 
@@ -46,7 +46,7 @@ HOT_FACTOR = 1 - (USADKA_P / 100)
 |----------|----------|--------|
 | Коэффициент k (рисер/ moulage) | 1.3–1.6 | 1.3 (low C steel), 1.4–1.5 (mid C steel), 1.5–1.6 (high C steel,tool steel) |
 | Модуль охлаждения (B) | Расчет с турецкими коэффициентами коррекции | B = V/A с коэффициентом коррекции per steel grade per furnace type |
-| HOT_FACTOR | 1 - (USADKA_P/100), USADKA_P адаптирован под Turkish steel | USADKA_P: 0.85–1.00% (угл.), 0.90–1.05% (легк.), 0.95–1.10% (тяжел.) |
+| HOT_FACTOR | 1 + (USADKA_P/100), USADKA_P адаптирован под Turkish steel | USADKA_P: 0.85–1.00% (угл.), 0.90–1.05% (легк.), 0.95–1.10% (тяжел.) |
 | Изоляция рисеров | 50–120 mm (в зависимости от типа печи и стали) | 50–70 mm (BOF, EAF), 70–120 mm (open hearth), зависит от стали |
 | Допуски на размеры | Адаптация ГОСТа 14953-80 под Turkish foundry practices | tighter tolerances per steel grade per furnace type |
 | Коэффициент возврата металла (MRR) | > 88% (малые), > 85% (средние), > 82% (большие) | per Turkish foundry practice per steel grade per furnace type |
@@ -57,7 +57,7 @@ HOT_FACTOR = 1 - (USADKA_P / 100)
 
 Для средней сталей отливки (пример для стали 40X23G2HSDGU):
 1. Адаптация коэффициента усадки под Turkish steel grade (USADKA_P ≈ 0.9–1.1%)
-2. Расчет HOT_FACTOR = 1 - (0.95/100) = 0.9905
+2. Расчет HOT_FACTOR = 1 + (0.95/100) = 1.0095
 3. Модуль рисера: M_feeder ≥ 1.45 × M_casting (безопасный коэффициент для Turkish conditions)
 4. Диаметр рисера: расчет с учетом шага standing 5–12 mm
 5. Изоляция: 60–100 mm для большинства приложений

@@ -1,12 +1,13 @@
 ---
----
 name: creoson-probe-method
-system: Creo/CREOSON
-description: Use when: проба живого CREOSON — как строить запрос, три грабли подключения, что из команд существует
-when: creoson, проба, probe, sessionId, connection/connect, feature/list, живой порт 8080, метод пробы направления
-priority: critical
-date: 03.10.2026
+system: Creo
+description: Use when: живая проба механики CREOSON перед правкой кода или миграцией (гейт механизма)
+when: проба, probe, гейт, CREOSON, сессия, копия, tmp, толькоsession, протокол, грабли
+priority: high
+date: 13.11.2026
+executor: Cline
 ---
+
 ## 📡 ПРОТОКОЛ CREOSON — ВСКРЫТ ЭМПИРИЧЕСКИ (03.10.2026, живой порт 8080)
 
 **Формат:** `POST http://127.0.0.1:8080/creoson`, тело JSON.
@@ -44,16 +45,6 @@ CREOSON сидит в каталоге `Z:\PTC\CREO-START\START-STD\`, и мод
 **Дальше:** либо открыть модель через `file:open` с относительным именем в этом каталоге,
 либо запустить CREOSON (`ctl.py up`) так, чтобы его рабочий каталог указывал на `D:\AI\PROBA`.
 
----
----
-name: creoson_probe_method
-system: Creo
-description: Use when: живая проба механики CREOSON перед правкой кода или миграцией (гейт механизма)
-when: проба, probe, гейт, CREOSON, сессия, копия, tmp, толькоsession
-priority: high
----
-# Проба в CREOSON: как не испортить рабочие модели (урок 16.09.2026)
-
 ## Источник правды о функциях
 Локальная справка CREOSON: `D:\PTC\CREO-LOCAL-SETUP\creoson\web\`
 - `functions.html` — браузер спецификаций всех функций (гарантированный пример запроса/ответа);
@@ -84,7 +75,7 @@ priority: high
 1. Чистая сессия: `file:erase_not_displayed` + цикл `file:erase` по `file:list` →
    печатать `sess_start: []`. Одного `erase_not_displayed` НЕ хватает.
 2. Проба идёт на КОПИИ **С ДРУГИМ ИМЕНЕМ** или в отдельной папке, но с проверкой:
-   `file:open` по имени, уже загруженному в сессию, отдаёт модель **из памяти**;
+   `file:open` по имени, уже загруженному в сессии, отдаёт модель **из памяти**;
    одноимённая копия в tmp не защищает — работа уйдёт в оригинал.
 3. Сразу после `file:open` — `file:get_fileinfo` и сверка `dirname` с ожидаемой папкой.
 4. Фиксировать до/после: список файлов папки, `file:list`, дословные ответы каждого вызова.

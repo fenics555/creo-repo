@@ -4,6 +4,8 @@ system: Creo
 description: Use when: быстрый подбор команды CREOSON под задачу
 when: creoson, команда, что вызвать, rename, regenerate, pdf, параметры
 priority: high
+date: 13.11.2026
+executor: Cline
 ---
 
 # БЫСТРЫЙ ВЫБОР КОМАНДЫ CREOSON
@@ -21,7 +23,7 @@ priority: high
 
 - Открыть -> file:open {"file","dirname","display"}
 - Сохранить -> file:save
-- Переименовать -> file:rename {"file","new_name","rename_dependencies":true}
+- Переименовать -> file:rename {"file","new_name", "onlysession": true} + file:save {"file"}
 - Регенерировать -> file:regenerate
 - Активная модель -> file:get_active
 - Список в сессии -> file:list
@@ -70,8 +72,8 @@ priority: high
 
 Умное переименование:
     file:open деталь+чертёж+сборки
-    file:rename деталь (rename_dependencies:true)
-    file:rename чертёж (rename_dependencies:true)
+    file:rename деталь (onlysession: true)
+    file:rename чертёж (onlysession: true)
     drawing:regenerate чертёж
     file:regenerate + file:save по каждой сборке
     file:save деталь и чертёж

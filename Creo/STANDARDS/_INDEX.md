@@ -18,3 +18,6 @@ priority: medium
 - `SKILL_reference_limits.md` — лимиты и синтаксис
 - `SKILL_creo_cards.md` — карточки моделей, сырые близнецы
 - `SKILL_material_parameters.md` — **материалы Creo: `.mtl` (рабочий, `PTC_*`, 76 ключей) / `.mat` (старый, без `PTC_`, 20 ключей, 8/20 заполнено) / `.dmt` (палитра)**, полнота заполнения, единицы, чек-лист (замер 05.11.2026)
+- `SKILL_parameters.md` — описание параметров моделей, связь с отношениями и штампом
+- `SKILL_creo_crosshatch_material_link.md` — связь материалов и штриховки
+

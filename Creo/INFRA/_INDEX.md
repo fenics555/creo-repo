@@ -10,3 +10,5 @@ priority: medium
 Скиллы:
 - `SKILL_creostart_fleet.md` — флот КБ: старт машин, логи, трейлы, сеть
 - `SKILL_object_creoson_tests-01_asm.md` — объектные пробы CREOSON на сборках
+- `SKILL_creo_z_drive.md` — карта диска Z:\PTC (только чтение)
+

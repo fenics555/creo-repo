@@ -9,6 +9,8 @@ description: Use when: любая работа с Creo через CREOSON — и
 when: creoson, creo, автоматизация, JSON API, rename, regenerate, pdf, параметры, спецификация
 
 priority: critical
+date: 13.11.2026
+executor: Cline
 
 ---
 
@@ -20,7 +22,7 @@ priority: critical
 
 - Расширения .cre НЕ СУЩЕСТВУЕТ — не выдумывать. Команды «CREOSON RENAME» в bash НЕ СУЩЕСТВУЕТ.
 
-- Переименование: команда file:rename, data {"file": "old.prt", "new_name": "new", "rename_dependencies": true}; чертёж отдельно: file:rename {"file": "old.drw", "new_name": "new"}.
+- Переименование: команда file:rename {"file": "old.prt", "new_name": "new", "onlysession": true} + file:save {"file": "new.prt"}; чертёж отдельно: file:rename {"file": "old.drw", "new_name": "new", "onlysession": true} + file:save {"file": "new.drw"}.
 
 # CREOSON — ПОЛНАЯ КАРТА API (сервер 3.0, JSON поверх JLINK)
 

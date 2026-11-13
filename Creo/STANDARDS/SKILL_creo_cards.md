@@ -1,9 +1,11 @@
 ---
-name: creo_cards
+name: creo-cards
 system: Creo
 description: Use when: карточка модели Creo (D:\AI\repo\Creo\cards) — аудит отношений, параметры, massprops, сырой близнец
-when: карточка, cards, аудит, liteika, параметры модели, сырой близнец, crc32, massprops
+when: карточка, cards, аудит, liteika, параметры модели, сырай близнец, crc32, massprops
 priority: high
+date: 13.11.2026
+executor: Cline
 ---
 # КАРТОЧКИ МОДЕЛЕЙ CREO (D:\AI\repo\Creo\cards\)
 
@@ -50,19 +52,6 @@ priority: high
 ЧТЕНИЕ на модели, открытой в сессии инженера, РАЗРЕШЕНО: `file:list`, `parameter:list`,
 `file:massprops`, `file:relations_get`, `bom:get_paths` — они не меняют ни память модели,
 ни диск (диска касается только save). ЗАПРЕЩЕНЫ изменяющие вызовы: `parameter:set`,
-`file:relations_set`, `file:regenerate`, `file:erase`, `file:save`, `file:rename`, `file:backup`.
+`file:relations_set`, `file:regenerate`, `file:erase`, `file:save`, `file:rename`, `file:backup`
 Перед любой пробой — `file:list` и фиксация списка. Изменяющие пробы на модели в сессии
-инженера = фаза ОТЛОЖЕНА с причиной «модель в сессии инженера» (правило 16.5); скрытый
-## Аудит материалов (21.10.2026) - новая спеки
-
-| МАРКА | ПОЛОЖЕНИЕ | СТАТУС |
-|---|---|---|
-| AD31 (Al) | Legacy 85% - заглушки PTC_MATERIAL_TYPE=9 |
-| D16 (Al) | Legacy 80% - заглушки |
-| St0 (Ст) | Legacy 80% |
-| 08x18h10 (Ст) | Legacy 85% - полнота данных высокая |
-| VCh50 (Чуг) | OK 90% |
-| VCh100 (Чуг) | НЕТ ДАННЫХ |
-
-Файл аудита: SKILL_creo_cards_audit_2026-10-21.md - полный отчёт по аудиту.
-фоновый Creo изоляцией не считается. У читающих проб записей на диск ноль.
+инженера = фаза ОТЛОЖЕНА с причиной «модель в сессии инженера» (правило 16.5); скрытый фоновый Creo изоляцией не считается. У читающих проб записей на диск ноль.

@@ -4,6 +4,8 @@ system: Creo
 description: ЭТАЛОН: Пружина растяжения (Tension Spring). ГОСТ 13766.
 when: пружина растяжения, крючки, начальное натяжение, tension
 priority: critical
+date: 13.11.2026
+executor: Cline
 ---
 
 # ЭТАЛОН: ПРУЖИНА РАСТЯЖЕНИЯ (TENSION SPRING)
@@ -128,13 +130,13 @@ P_CALC_TAU = LOAD_TAU_WORK
 P_CALC_N_WORK = GEOMETRY_N_WORK
 
 /* Вердикты */
-IF GEOMETRY_ERR_C == 1
+IF GEOMETRY_ERR_C == YES
   P_VERDICT_TEXT = "ОШИБКА: Индекс навивки вне диапазона 4..12"
 ELSE
-  IF LOAD_ERR_STRENGTH == 1
+  IF LOAD_ERR_STRENGTH == YES
     P_VERDICT_TEXT = "ОШИБКА: Превышено напряжение среза"
   ELSE
-    IF HOOK_ERR_BEND == 1
+    IF HOOK_ERR_BEND == YES
       P_VERDICT_TEXT = "ОШИБКА: Превышено напряжение в крючке"
     ELSE
       P_VERDICT_TEXT = "ОК: Пружина проходит проверку"
@@ -143,4 +145,4 @@ ELSE
 ENDIF
 
 /* Отладочный вывод */
-REL_MODEL_NAME = "SPRING_TENSION_CALC"
+Обозначение = rel_model_name

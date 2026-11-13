@@ -1,13 +1,12 @@
 ---
 name: creostart-fleet
-system: FLEET
-description: Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы,
-when: вопросы про старт машин КБ, CREO-START, логи, трейлы,
----
-
-  сетевую диагностику, локальные и сетевые папки, развертывание creoson
+system: Creo
+description: Use when: вопросы про старт машин КБ, CREO-START, логи, трейлы, сетевую диагностику, локальные и сетевые папки, развертывание creoson
 when: CREO-START, флот, трейлы, netdiag, логи, creoson, лицензия, config.pro
 priority: high
+date: 13.11.2026
+executor: Cline
+---
 
 # Архитектура флота КБ: что локально, что на сети и почему
 
