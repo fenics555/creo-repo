@@ -167,3 +167,5 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 Временная папка разбора `D:\AI\ИЗУЧИТЬ\CREO` разбирается и удаляется пользователем — на неё
 в скиллах не опираться.# Creo Binary Analysis Skills
 - [Matrix Extraction](D:\AI\repo\Creo\READ\SKILL_creo_read_asm_matrix.md)
+-   * * R E A D \ \ S K I L L _ c r e o _ r e a d _ r e l a t i o n s _ f a m i l y . m d * *   |   R e l a t i o n s ,   F a m i l y   T a b l e ,   L i n k s   ( S t a g e   4 )  
+ 
