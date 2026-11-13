@@ -169,3 +169,6 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 - [Matrix Extraction](D:\AI\repo\Creo\READ\SKILL_creo_read_asm_matrix.md)
 -   * * R E A D \ \ S K I L L _ c r e o _ r e a d _ r e l a t i o n s _ f a m i l y . m d * *   |   R e l a t i o n s ,   F a m i l y   T a b l e ,   L i n k s   ( S t a g e   4 )  
  
+- [ ] **`creo-reverse-diff`** (D:\AI\repo\Creo\READ\SKILL_creo_reverse_diff.md) | Реверс-инжиниринг секций через эталонный diff.
+| - [ ] **creo-read-drw** (D:\AI\repo\Creo\READ\SKILL_creo_read_drw.md) | ������ �������� .drw (Stage 5) |
+| - [ ] **creo-read-mfg** (D:\AI\repo\Creo\READ\SKILL_creo_read_mfg.md) | ������ ��� .mfg (Stage 5) |
