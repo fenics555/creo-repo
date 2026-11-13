@@ -45,6 +45,6 @@ CREOSON, из-за которых это ломается. Сделано по �
 (`pfcModel.DeletePostRegenerationRelations`).
 
 ## СВЯЗЬ С ДРУГИМИ НАПРАВЛЕНИЯМИ
-Закон — `MANIFEST.md`. Creo-API и спеки CREOSON — `Creo\SKILL_creo_index.md`,
+Закон — `D:\AI\repo\SKILL_noga_health.md`. Creo-API и спеки CREOSON — `Creo\SKILL_creo_index.md`,
 `Creo\CREOSON\SKILL_creoson_write_rules.md`, `Creo\RELATIONS\SKILL_creo_relations.md`.
 Окна дома — `ОКНА\SKILL_WINDOWS_GUI.md`. Аудит программы — `AUDIT\SKILL_audit_program.md`.

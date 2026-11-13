@@ -127,7 +127,7 @@ IMPORTANT: Always includes tool calls in your response until the task is complet
 | # | блок | живая цитата / источник |
 |---|---|---|
 | 1 | режим 2 = «собеседник» | «Ты — собеседник и помощник по любым темам… нет доступа к Creo, файлам и базам» |
-| 2 | **ПРАВИЛА в промпт** | `load_skill("MANIFEST.md") + SKILL_agent_protocol.md` |
+| 2 | **ПРАВИЛА в промпт** | `load_skill("D:\AI\repo\SKILL_noga_health.md") + SKILL_agent_protocol.md` |
 | 3 | заряд знаний | `SKILL_CHARGE.md` (карта скиллов) + `SKILL_CHARGE_START.md` (Creo-старт) |
 | 4 | **ИНСТРУМЕНТЫ в промпт** | `TR.TOOLS` → `--- ТВОИ ИНСТРУМЕНТЫ ---` + `--- ПРОЧИЕ ИНСТРУМЕНТЫ ---` |
 | 5 | размышления | `think_mode` 0 (запрещены) / 1 (4 строки) / 2 (полно, до N строк) |

@@ -17,7 +17,7 @@ executor: Cline
 **Когда читать:** как только в задаче или в ответе появляется номер стандарта / путь /
 имя функции / имя переменной / ссылка БЕЗ живой цитаты из файла/команды.
 
-**Живые источники:** прогоны v4/v5/v6 (11.10.2026), `MANIFEST.md` ч.1 п.1–3,
+**Живые источники:** прогоны v4/v5/v6 (11.10.2026), `D:\AI\repo\SKILL_noga_health.md` ч.1 п.1–3,
 `PROMPT\SKILL_fewshot_as_template.md`, `SKILL_local_agent_cline.md` §9.
 
 ## TL;DR (30 секунд)
@@ -146,7 +146,7 @@ executor: Cline
 - ❌ Не REVIVE-ить на отсутствие источника — это не краш.
 
 ## 15. Ссылки на источники
-- `D:\AI\repo\MANIFEST.md` ч.1 п.1–3 (цитата, сырой близнец, бекап).
+- `D:\AI\repo\D:\AI\repo\SKILL_noga_health.md` ч.1 п.1–3 (цитата, сырой близнец, бекап).
 - `D:\AI\repo\SKILL_local_agent_cline.md` §9 (анти-петля и детские ошибки).
 - `D:\AI\AGENT_SETTINGS\PROMPT\SKILL_fewshot_as_template.md` (few-shot как шаблон).
 - `D:\AI\AGENT_SETTINGS\PROMPT\SKILL_prompt_index.md` (указатель).

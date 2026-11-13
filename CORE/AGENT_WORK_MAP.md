@@ -62,7 +62,7 @@
 
 ## 4. Карта дома
 
-- Закон — `MANIFEST.md`; дельта Cline — `.clinerules`; выживание —
+- Закон — `D:\AI\repo\SKILL_noga_health.md`; дельта Cline — `.clinerules`; выживание —
   `repo\SKILL_local_agent_cline.md`; карта скиллов — `repo\SKILL_index.md`.
 - Направления: `Creo\SKILL_creo_index.md`, `PDF\SKILL_pdf_index.md`, `Web\SKILL_web_index.md`,
   `Инженерные\SKILL_engineering_index.md`, `Трейлы\SKILL_trails_index.md`,

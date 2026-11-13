@@ -34,7 +34,7 @@ agent.py  (тонкий вход: pid, 3 потока — HTTP 8765, ночь, �
 | `core.py` | пути (`BASE`, `DB`, `CONFIG_FILE`, `REPO`), `log`/`log_tail`, `trace`, `alert(s)`, `db()`, `post()` к Ollama, факты (`save_fact`/`get_facts`/`mark_facts_stale`), `boot_report` |
 | `settings.py` | **единственный хозяин** `data\config.json`; `REGISTRY` настроек (пространство/ключ/тип/дефолт/описание/UI), `get/set_val/show_all/list_ui`, персональные (`chat_mode`) |
 | `tools_registry.py` | `load_all()` — импорт всех `*_tools.py`, сбор `TOOLS`, `get`, `execute` (с проверкой роли), `describe` |
-| `loop.py` | системный промпт (`MANIFEST.md` + `SKILL_agent_protocol.md` + список инструментов), `_clean`, стриминг токенов, `parse_model`, `run_loop` (ходы), `ask` (режимы, прямой вызов, согласование) |
+| `loop.py` | системный промпт (`D:\AI\repo\SKILL_noga_health.md` + `SKILL_agent_protocol.md` + список инструментов), `_clean`, стриминг токенов, `parse_model`, `run_loop` (ходы), `ask` (режимы, прямой вызов, согласование) |
 | `http_handlers.py` | маршруты GET/POST, выдача витрины `ui/`, токены, щит согласования, превью мастеров (rename/copy/pdf/purge) |
 | `agent_sched.py` | `_scheduler` (ночь по `night_hour:minute`, задачи `scan,index,usage,backup,drafts,check`) и `_watchdog` (порт-сторож Ollama/CREOSON с рестартом) |
 | `users.py` | пользователи (`data\users.json`), PBKDF2-хэш, роли, токены (TTL 24 ч), `role_deny` (в БД), админ из `secrets.json` |
@@ -100,7 +100,7 @@ agent.py  (тонкий вход: pid, 3 потока — HTTP 8765, ночь, �
 `backup_20260907_0828.sqlite` и `backup_pre_orphan_20260904.sqlite` (619 МБ) не убираются никогда.
 
 ## 5. ПРОТОКОЛ И ПОВЕДЕНИЕ ГОЛОВЫ (`loop.py`)
-- **Системный промпт** = `MANIFEST.md` + `SKILL_agent_protocol.md` (или встроенный `DEFAULT_PROTO`) +
+- **Системный промпт** = `D:\AI\repo\SKILL_noga_health.md` + `SKILL_agent_protocol.md` (или встроенный `DEFAULT_PROTO`) +
   «основные инструменты» (полные описания) + «прочие» (имена) + правила размышлений по `think_mode`.
 - **Режимы:** `1` — инженер (Creo/файлы/база; свободный чат отключён), `2` — собеседник (без данных).
   Переключается префиксом `chat ` / `agent ` или персональной настройкой `chat_mode`.
