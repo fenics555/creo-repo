@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: calc_script_architecture
 system: общее
 description: Use when: Ниже представлен готовый **System Skill / Instruction File** для размещения в репозитории (`.cursorrules`, `.github/copi
 when: standard engineering calculation script architecture
 priority: normal
----
+executor: Cline---
 Ниже представлен готовый **System Skill / Instruction File** для размещения в репозитории (`.cursorrules`, `.github/copilot-instructions.md`, `AGENTS.md` или системный промпт). Этот документ формализует стандарт разработки инженерных расчетных скриптов для ИИ.
 
 ---

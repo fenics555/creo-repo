@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: unit-testing
 system: Программирование
 description: ## КОНЦЕПЦИЯ
 when: test, jest, unit-test, coverage, mock, matcher, assertion, suite, describe, beforeEach, afterEach, async-test, spy
 priority: critical
----
+executor: Cline---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 

@@ -5,8 +5,7 @@ description: Измерение ответов локальных моделей
 when: замер моделей на loop_revive_test.py; модель отвечает пустым content; done_reason=length; reasoning-модели (gpt-oss, deepseek-r1, qwen с thinking); решение "какой num_predict ставить"; балл модели ниже ожидания и падает при смене лимита; content vs thinking; подмена полей измерения
 priority: critical
 executor: Cline
-date: 12.11.2026
----
+date: 13.11.2026---
 
 # LLM ANSWER MEASUREMENT: ЛИМИТ ОТВЕТА И ПРЕДМЕТ ИЗМЕРЕНИЯ
 

@@ -4,9 +4,8 @@ system: Программирование
 description: Use when: проверка настроек агента, вопрос «работает ли настройка», «что куда пишет и что откуда читается», dead_settings, audit_settings, io_map, таблицы-призраки
 when: настройки, config.json, REGISTRY, set_val, model_for, get_for, PERSONAL_KEYS, audit_settings, io_map, dead_settings, таблица-призраки
 priority: critical
-date: 04.10.2026
-executor: Cline
----
+date: 13.11.2026
+executor: Cline---
 
 # АУДИТ НАСТРОЕК ДОМА: КАК ПРОВЕРЯТЬ ЧЕСТНО
 

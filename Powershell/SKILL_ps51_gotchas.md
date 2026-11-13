@@ -3,9 +3,9 @@ name: ps51-gotchas
 system: Команды
 description: Use when: PowerShell-скрипт падает с ошибкой парсинга, не запускается или ломается на кириллице
 when: powershell, ps1, кириллица, UTF-8, encoding, кодировка, ExecutionPolicy, Bypass, NoProfile, парсинг, ошибка скрипта, policy
-date: 14.10.2026
+date: 13.11.2026
 priority: high
----
+executor: Cline---
 
 # ГРАБЛИ POWERSHELL 5.1 ДОМА
 

@@ -4,8 +4,8 @@ system: PDF
 description: Use when: нужно вывести или ОБНОВИТЬ PDF чертежа Creo (главная рутина дома) — правила, конфиг оформления, инструмент creo_pdf
 when: pdf, чертёж, drw, вывод pdf, обновить pdf, перепечать, форматки, MY_ESKD, table.pnt, creo_pdf
 priority: critical
-date: 23.09.2026
----
+date: 13.11.2026
+executor: Cline---
 # РУТИНА ДОМА: ВЫВОД И ОБНОВЛЕНИЕ PDF ЧЕРТЕЖЕЙ CREO
 
 ## 1. ПРАВИЛО

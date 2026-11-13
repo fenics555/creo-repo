@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: automated-validation
 system: Программирование
 description: ## КОНЦЕПЦИЯ
 when: lint, format, check, validate, verify, clean, type-check, static-analysis, pre-commit, anti-overengineering
 priority: critical
----
+executor: Cline---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 

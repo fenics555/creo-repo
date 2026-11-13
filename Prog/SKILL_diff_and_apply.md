@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: diff-and-apply
 system: Программирование
 description: ## КОНЦЕПЦИЯ
 when: diff, patch, apply, edit, update, unified-diff, hunk, context, precision, robustness, surgical
 priority: critical
----
+executor: Cline---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 

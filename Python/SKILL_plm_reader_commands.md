@@ -3,9 +3,9 @@ name: plm-reader-commands
 system: Команды
 description: Use when: работа с PLM Reader (D:\AI\tools\agent\plm_reader): запуск, самопроверка, выпуск версии, CLI движка, грабли импорта
 when: plm_reader, smoke, самопроверка, make_version_json, version.json, выпуск версии, APP_VERSION, манифест, engine.py, count, check, tree, changes, rename-plan, load_settings_file, circular import, folders, settings.json
-date: 23.10.2026
+date: 13.11.2026
 priority: high
----
+executor: Cline---
 
 # PLM READER: ПОЛЕЗНЫЕ PYTHON-КОМАНДЫ
 

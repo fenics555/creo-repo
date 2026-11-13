@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: repo-mapping
 system: Программирование
 description: ## КОНЦЕПЦИЯ
 when: repo_map, structure, skeleton, map, codebase, hierarchy, grep_ast, overview
 priority: critical
----
+executor: Cline---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2)
 

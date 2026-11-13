@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: code-parsing
 system: Программирование
 description: ## КОНЦЕПЦИЯ
 when: ast, tree-sitter, parse, structure, syntax, query, grammar, bounds, precision
 priority: critical
----
+executor: Cline---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 2 + НОВЫЕ ПРАВИЛА)
 

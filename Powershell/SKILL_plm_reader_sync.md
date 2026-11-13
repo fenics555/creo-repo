@@ -3,9 +3,9 @@ name: plm-reader-share-rule
 system: Команды
 description: Use when: PLM Reader и шара Z: — КТО имеет право трогать шару (закон владельца 14.10.2026)
 when: plm_reader, шара, Z:, CREO-START, sync_to_share, sync_check, синхронизация на шару, обновление шары, копия на шаре, PTС
-date: 14.10.2026
+date: 13.11.2026
 priority: critical
----
+executor: Cline---
 
 # PLM Reader: ПРАВИЛО ШАРЫ (закон владельца, 14.10.2026)
 

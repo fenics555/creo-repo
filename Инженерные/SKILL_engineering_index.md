@@ -3,8 +3,8 @@ name: engineering-index
 system: INDEX
 description: Use when: задача с темой Инженерные
 when: engineering, materials, mechanics, hydraulics, casting
-date: 17.09.2026
----
+date: 13.11.2026
+executor: Cline---
 
 ЧТО ЗДЕСЬ: SKILL_casting_hts_master.md, SKILL_engineering_mechanics.md, SKILL_heat_hydraulics.md, SKILL_materials_reference.md
 КОГДА ОТКРЫВАТЬ: теги [ENG], [MECHANICS]
@@ -12,4 +12,4 @@ date: 17.09.2026
 КАРТА (критичные — в SKILL_index.md): SKILL_casting_hts_master = литейка/спеки HTS (критичный);
   SKILL_materials_reference = материалы; SKILL_engineering_mechanics = механика;
   SKILL_heat_hydraulics = тепло/гидравлика. Маршрут входа: SKILL_index.md -> [ENG].
-универсальный закон — MANIFEST.md, специфика среды — в адаптерах
+универсальный закон — D:\AI\.clinerules, специфика среды — в адаптерах

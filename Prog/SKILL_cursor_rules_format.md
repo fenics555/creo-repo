@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: cursor-rules-format
 system: Программирование
 description: ## КОНЦЕПЦИЯ
 when: cursor, rules, mdc, format, guidelines, awesome, .mdc
 priority: normal
----
+executor: Cline---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 1 + НОВЫЕ ПРАВИЛА)
 

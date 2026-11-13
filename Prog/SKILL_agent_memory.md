@@ -1,10 +1,11 @@
----
+---date: 13.11.2026
+
 name: agent-memory
 system: Программирование
 description: ## КОНЦЕПЦИЯ
 when: memory, context, long-term, agent, state, management, letta, memgpt, stateful
 priority: critical
----
+executor: Cline---
 
 ## СТАТУС: ЗАВЕРШЕНО (ЭТАП 1)
 
