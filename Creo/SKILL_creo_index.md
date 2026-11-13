@@ -165,4 +165,5 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 `SKILL_creo_docs_map.md`; разбор каналов — `SKILL_creo_api_ecosystem.md`).
 Копии-дубли PTC в репо удалены словом пользователя 22.09 (в гит не возвращать); справка — в установке `D:\PTC\CREO12` (карта: `SKILL_creo_docs_map.md`).
 Временная папка разбора `D:\AI\ИЗУЧИТЬ\CREO` разбирается и удаляется пользователем — на неё
-в скиллах не опираться.
+в скиллах не опираться.# Creo Binary Analysis Skills
+- [Matrix Extraction](D:\AI\repo\Creo\READ\SKILL_creo_read_asm_matrix.md)
