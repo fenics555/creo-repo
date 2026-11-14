@@ -172,3 +172,5 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 - [ ] **`creo-reverse-diff`** (D:\AI\repo\Creo\READ\SKILL_creo_reverse_diff.md) | Реверс-инжиниринг секций через эталонный diff.
 | - [ ] **creo-read-drw** (D:\AI\repo\Creo\READ\SKILL_creo_read_drw.md) | ������ �������� .drw (Stage 5) |
 | - [ ] **creo-read-mfg** (D:\AI\repo\Creo\READ\SKILL_creo_read_mfg.md) | ������ ��� .mfg (Stage 5) |
+
+- [ ] **creo-tree-unpacker** (D:\\AI\\repo\\Creo\\READ\\SKILL_creo_tree_unpacker.md) | Изолированная распаковка 100% байтов в JSON-дерево.
