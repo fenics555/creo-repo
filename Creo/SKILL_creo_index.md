@@ -50,7 +50,7 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 ## ПОДРАЗДЕЛЫ И КАРТА СКИЛЛОВ
 | Подраздел | Что внутри |
 |---|---|
-| **`READ\`** |**чтение и правка файлов «в лоб» по частям** (03.10.2026): `SKILL_creo_read_core` (ядро формата), `_part`, `_asm`, `_drw`, `_mfg`, `_family` (семейства + библиотека `Libraries`), `_feat` (операции построения), `SKILL_creo_write_raw` (правка в лоб), `SKILL_creo_new_file` (создание файла — подготовка); карта — `READ\_INDEX.md`. Вход: `SKILL_creo_file_reading.md` (исторический конспект 1910 строк, номера §)
+| **`READ\`** |**чтение и правка файлов «в лоб» по частям** (03.10.2026): `SKILL_creo_read_core` (ядро формата), `_part`, `_asm`, `_drw`, `_mfg`, `_family` (семейства + библиотека `Libraries`), `_meta_records` (мета-записи e1 f1), `_feat` (операции построения), `SKILL_creo_write_raw` (правка в лоб), `SKILL_creo_new_file` (создание файла — подготовка); карта — `READ\_INDEX.md`. Вход: `SKILL_creo_file_reading.md` (исторический конспект 1910 строк, номера §)
 * **`SKILL_creo_read_feat.md`** — декодирование графа фич, истории и габаритов (Bounding Box).|
 
 ### 🔴🔴 ДЕРЕВО ПОСТРОЕНИЯ И РАЗМЕРЫ — ЧИТАЙ ЭТО ПЕРВЫМ (28.10.2026)
@@ -170,5 +170,5 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 -   * * R E A D \ \ S K I L L _ c r e o _ r e a d _ r e l a t i o n s _ f a m i l y . m d * *   |   R e l a t i o n s ,   F a m i l y   T a b l e ,   L i n k s   ( S t a g e   4 )  
  
 - [ ] **`creo-reverse-diff`** (D:\AI\repo\Creo\READ\SKILL_creo_reverse_diff.md) | Реверс-инжиниринг секций через эталонный diff.
-| - [ ] **creo-read-drw** (D:\AI\repo\Creo\READ\SKILL_creo_read_drw.md) | ������ �������� .drw (Stage 5) |
-| - [ ] **creo-read-mfg** (D:\AI\repo\Creo\READ\SKILL_creo_read_mfg.md) | ������ ��� .mfg (Stage 5) |
+| - [ ] **creo-read-drw** (D:\AI\repo\Creo\READ\SKILL_creo_read_drw.md) | ������ �������� .drw (Stage 5) |
+| - [ ] **creo-read-mfg** (D:\AI\repo\Creo\READ\SKILL_creo_read_mfg.md) | ������ ��� .mfg (Stage 5) |
