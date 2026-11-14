@@ -75,6 +75,21 @@ date: 14.11.2026
 **Пример цепочки:** `e1 e0 (dict) $\to$ e1 f1 (boundary) $\to$ f7 (idx) + e3 (val) $\to$ e1 e1 (end)`.
 
 
+## 7. ЖИВОЙ ПРИМЕР (LIVE DECODE)
+
+На основе работы `creo_raw_inspector.py` (V2 Law), в секции `FamilyInf` файла `00080-03.prt` обнаружены следующие декодированные таблицы:
+
+**[Block at 0000653b] (drv_tbl_ptr context):**
+- `table_name` = `PRO_MP_ALT_MASS`
+- `table_name` = `PRO_MP_ALT_VOLUME`
+- `table_name` = `PRO_MP_ALT_AREA`
+- `table_name` = `PRO_MP_ALT_COGX`
+- `table_name` = `PRO_MP_ALT_COGY`
+- `table_name` = `PRO_MP_ALT_COGZ`
+
+*(Примечание: В дампе видно, что разные значения могут использовать одно и то же имя поля в рамках одного блока, если они представлены как разные записи в потоке.)*
+
+
 ## 9. БАЙТНЫЕ ПРАВИЛА РАЗМЕТКИ
 
 На основе бинарного анализа файлов `00080-03.prt` и `base-with-4holes.prt` проверены следующие байтовые контракты:
