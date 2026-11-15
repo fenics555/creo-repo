@@ -95,7 +95,9 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 
 | Тема | Где | Суть |
 |---|---|---|
-| **🔴 ЗАКОН МЕТОДА: читать ЛЮБОЙ файл ТОЛЬКО через `#UGC_TOC`** | `..\Creo\SKILL_GRABLI.md` **§147** | адрес любой секции — ИЗ КАРТЫ, а не перебором файла. Порядок: заголовок `#UGC:2 <ТИП> <ВЕРСИЯ>` → карта → `NEXT_TOC_ENTRY` → чтение по адресу |
+| **Грабли (General)** | `SKILL_grabli_general.md` | общие инженерные грабли агента |
+| **Грабли PLM** | `Creo\PLM\SKILL_creo_plm_grabli.md` | грабли и догмы PLM Reader |
+| **Грабли Creo** | `Creo\SKILL_creo_grabli.md` | грабли и открытия формата Creo |
 | **🔴 КАРТ `#UGC_TOC` — ОТ 2 ДО 3 у каждого файла** | `SKILL_GRABLI.md` **§152** | парсить РАЗДЕЛЬНО; адрес `< размера файла`; **ДЕДУП по (имя, offset)** — иначе `SldRegenRevInfo` считается дважды |
 | **🏆 КОДЫ ТИПОВ ЭЛЕМЕНТОВ: `feat_defs_<N> − 910 = pfcFEATTYPE`** | `SKILL_GRABLI.md` **§154/§156** | `911→HOLE` · `913→ROUND` · `916→CUT` · `923→DATUM_PLANE` · `927→DRAFT` · `1007→WORKCELL`. Типы = `911…1031`; `1232+` = **`id` записи**, НЕ тип (§157) |
 | **🏆 НОМИНАЛ РАЗМЕРА ЧИТАЕТСЯ ИЗ ФАЙЛА — `2F B1 B2`** | `READ\SKILL_creo_dim_nominal.md` **+ §173** | Формат: в файле `2F <B1> <B2>` → double `40 <B1> <B2> 00 00 00 00 00` (B1<0x40 → lead 0x3F). **Подтверждено:** `2F 4A 00`=**52.0** (=J-Link `d9 val=52.0`) · 32.0 · 18.0 · 14.5 · 360.0 · 8.0 · **1.3975/224.75/381.0** (литейка). Секция `#BasFullData→dim_array`; **`feat_id` = привязка размера к элементу**; **`tol_class` = КВАЛИТЕТ**. Число ТОЧНОЕ (§165) |
@@ -141,13 +143,17 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 | **Карточка материала В ДЕТАЛИ** | `READ\SKILL_creo_tree_jlink_etalon.md` | 30+ полей: `PTC_MASS_DENSITY`, `_YOUNG_MODULUS`, `_POISSON_RATIO`, `_HARDNESS`, `_CONDITION=STEEL`, `_MATERIAL_SOURCE`, `_MATERIAL_ID`, `PTC_UNITS_*` |
 | **Наследование материала** | там же | каналы `PTC_MASTER_MATERIAL` / `_REPORTED_` / `_ASSIGNED_` ⇒ у потомка (`ctkd.prt`) карточки НЕТ — брать у родителя |
 | **Имя материала** | там же | `\xe3\x33 <строка>` → `V-CH_50` (русский алиас `ВЧ-СБ-50` — отображение Creo) |
-| **Грабли ноги** | `..\Creo\SKILL_GRABLI.md` §107–§112 | «мусор» запрещён (это `PRO_MP_*` = массовые свойства); вид не подписывать по интуиции (`A_1` = ОСЬ); искать готовый код в репо; «правдоподобное число» опаснее `None` |
+| **Грабли (General)** | `SKILL_grabli_general.md` | общие инженерные грабли агента |
+| **Грабли PLM** | `Creo\PLM\SKILL_creo_plm_grabli.md` | грабли и догмы PLM Reader |
+| **Грабли Creo** | `Creo\SKILL_creo_grabli.md` | грабли и открытия формата Creo |
 | **ПОКРЫТИЕ ПАРСЕРА** | `READ\SKILL_creo_tree_jlink_etalon.md` | папка Электон: **324 файла → читаются 302 (93 %)**; **21 «нулевых» — ВСЕ с суффиксом `_z`/`-z`** = заготовки без дерева (парсер прав) |
 | **КОДЫ `b` ПО ФАЙЛАМ + ПАРЫ** | там же | `3`=фичеры · `5`=плоскости · `21`=ОСИ · `25`=РАЗМЕР · `2`=компонент; **5 пар «фичер↔размер»: `id=N` фичер + `id=N+1` `b=25` — имя совпадает** |
 | **`names_table` — ПОЛЕ ВНУТРИ `MdlStatus`** | там же | в TOC секции `names_table` **НЕТ**; есть `MdlStatus` ⇒ это поле схемы. **Мой парсер и `feat_records.py` читали одни байты** |
 | **`feat_records.py` — под ДРУГУЮ версию Creo** | `TOOLS\ftype_probe\feat_records.py` | требует `featssrf`/`cutextrude` — в файлах Электона **0 вхождений** ⇒ **0 записей**. Адаптировать под маркер `\xf6` |
 | **АРТЕФАКТ `\xe3` → ведущая `3`** | `READ\SKILL_creo_tree_jlink_etalon.md` | `'3M16x1.5'`=`M16x1.5` · `'3PRO_MP_CSYS'`=`PRO_MP_CSYS` · `'3GEOMETRY'`=`GEOMETRY` — потерянные имена `.prt` |
-| **Грабли §113–§118** | `..\Creo\SKILL_GRABLI.md` | `editor` не сохраняет EOL · двойная кодировка · число-маркер ≠ повод менять фильтр · «секция» может быть полем · инструмент под другую версию Creo · `\xe3` в тексте = ложная `3` |
+| **Грабли (General)** | `SKILL_grabli_general.md` | общие инженерные грабли агента |
+| **Грабли PLM** | `Creo\PLM\SKILL_creo_plm_grabli.md` | грабли и догмы PLM Reader |
+| **Грабли Creo** | `Creo\SKILL_creo_grabli.md` | грабли и открытия формата Creo |
 | `DAVYDOVKA\` | `SKILL_davydovka_creoson_map.md` (карта Давыдовка ↔ CREOSON) |
 | `INFRA\` | `SKILL_creostart_fleet.md` (флот, старт машин), `SKILL_object_creoson_tests-01_asm.md` (объектные пробы) |
 | корень | этот индекс + `cards\` (карты моделей, сырые близнецы) + `SKILL_creo_file_reading.md` (чтение файлов «в лоб»: история, упакованные числа, оглавление, параметры и отношения; §8.70–8.81 от 28–29.09.2026; инструмент `plm_reader` V24) + `CREO_MAP.md`, `SKILLS_MAP.md` |
@@ -167,7 +173,8 @@ Python-сервер на 8000 (не CREOSON и не JLINK) — `SKILL_davydovka_
 Временная папка разбора `D:\AI\ИЗУЧИТЬ\CREO` разбирается и удаляется пользователем — на неё
 в скиллах не опираться.# Creo Binary Analysis Skills
 - [Matrix Extraction](D:\AI\repo\Creo\READ\SKILL_creo_read_asm_matrix.md)
--   * * R E A D \ \ S K I L L _ c r e o _ r e a d _ r e l a t i o n s _ f a m i l y . m d * *   |   R e l a t i o n s ,   F a m i l y   T a b l e ,   L i n k s   ( S t a g e   4 )  
+-   * * R E A D \ \ S K I L L _ c r e o _ r e a d _ r e l a t i o n s _ f a m i l y . m d * *   |   R e l a t i o n s ,   F a m i l y   T a b l e ,   L i n k s   ( S t a g e   4 ) 
+ 
  
 - [ ] **`creo-reverse-diff`** (D:\AI\repo\Creo\READ\SKILL_creo_reverse_diff.md) | Реверс-инжиниринг секций через эталонный diff.
 | - [ ] **creo-read-drw** (D:\AI\repo\Creo\READ\SKILL_creo_read_drw.md) | ������ �������� .drw (Stage 5) |

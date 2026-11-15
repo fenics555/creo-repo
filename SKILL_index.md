@@ -28,7 +28,9 @@ date: 13.11.2026
 - **Крахи и сбои:** `crash\SKILL_crash_constitution.md` (закон, шаблоны экземпляра и передачи) + `crash\SKILL_crash_index.md` (список всех крах-скиллов по группам).
 - **Подсчет файлов и строк:** `Prog\SKILL_count_files_template.md` — **critical**, счет только программным счетчиком с диска.
 - **Закон шары `Z:` (PLM Reader):** `Powershell\SKILL_plm_reader_sync.md` — **critical**, шару `Z:\PTC\CREO-START\plm_reader` агенты не трогают ни в каком виде.
-- **Правила и грабли PLM Reader:** `Creo\SKILL_GRABLI.md` (догма единой правды, архитектура конвейера, роли моделей, форматы, приёмка на тестовом сете `STRATEGY_PLM.md`).
+| - **Общие грабли:** `SKILL_grabli_general.md` |
+| - **Грабли PLM:** `Creo\PLM\SKILL_creo_plm_grabli.md` |
+| - **Грабли Creo:** `Creo\SKILL_creo_grabli.md` |
 
 ---
 
@@ -37,6 +39,7 @@ date: 13.11.2026
 Управление Creo идет через объектный слой `pfc*` (Creo.JS, OTK/JLINK, Pro/TOOLKIT, VB API, Web.Link) или JSON-сервер CREOSON поверх JLINK.
 
 Подразделы `Creo\` (в каждом есть свой `_INDEX.md`):
+| - **PLM Core & Archives:** `Creo\PLM\SKILL_creo_plm_core.md`, `Creo\PLM\SKILL_creo_plm_archives.md` |
 - **`API\`:** `SKILL_creojs_api.md` (Creo.JS / `pfc*`), `SKILL_creo_api_ecosystem.md` (каналы API: OTK, JLINK, VB, Web.Link, CREOSON) — **critical**.
 - **`DOCS\`:** `SKILL_creo_docs_map.md` (карта документации, хелпов и PDF в установке Creo) — **high**.
 - **`CREOSON\`:** `SKILL_creoson_workflow.md`, `SKILL_creoson_complete.md`, `SKILL_creoson_sessions_workdirs.md`, `SKILL_creo_commands.md`, `SKILL_creoson_write_rules.md`, `SKILL_creoson_rename_mechanism.md`, `SKILL_creoson_probe_method.md`, `SKILL_creoson_routine.md`, `SKILL_creoson_pfc_map.md`, `SKILL_creoson_inbox_deepseek.md` — **critical**.
