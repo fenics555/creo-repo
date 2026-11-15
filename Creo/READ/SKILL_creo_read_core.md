@@ -235,3 +235,13 @@ re.compile(rb"([\xe0-\xff][\x00-\x0f])([A-Za-z][A-Za-z0-9_/\.\-]{1,60})\x00")
 - **31-символьные GUID ревизий (#SldRegenRevInfo):** Шестнадцатеричные строки вида <31_hex>.DRW / .PRT являются внутренними идентификаторами регенерации/ревизий и хранятся отдельно от списка конструкторских ссылок (eferences).
 - **Импортные модели (SOLIDWORKS_PART / STEP):** Модели, импортированные из сторонних САПР (8087 секций), содержат в #LargeText поля CAD_SYSTEM, DEX_MASTER, MODEL_DATE, REF_LINK (исходный путь к .sldprt), TIM_STATUS и PTC_VAL_IMP_SCORE.
 - **Эталонный парсер:** Готовая реализация всех правил находится в D:\AI\tools\agent\plm_reader\creo_full_parser.py (parse_creo_file).
+## 10. АДРЕСНОЕ ЧТЕНИЕ ЧЕРЕЗ ВЕРХНЮЮ КАРТУ #UGC_TOC (ЭТАЛОННЫЙ МЕТОД)
+- **Опровержение старой гипотезы:** Оглавление #UGC_TOC полностью достоверно. Прежние ошибки смещений возникали из-за склейки нескольких карт (K1, K2, K3) или жёсткой привязки к одной версии файла.
+- **Формат записи #UGC_TOC:** Читаемый ASCII-блок в формате:
+  <NAME> <OFF_HEX> <LEN_HEX> <LEN_M10_HEX> <VER_DEC> <FLAG> <EXTRA> <A4_HEX> <B4_HEX>
+  Цепочка продолжается по записи NEXT_TOC_ENTRY <off_hex> <len_hex> до #END_OF_UGC.
+- **Извлечение структуры в лоб без Creo/J-Link (проверено на 23-1017GRI-01.prt.1):**
+  1. **Типы элементов (FeatDefs / FeatDefsDtm):** маркеры eat_defs_<N> (911..1031), где N - 910 даёт индекс в pfcFEATTYPE (1=HOLE, 3=ROUND, 6=CUT, 7=PROTRUSION, 13=DATUM_PLANE, 17=DRAFT, 39=CURVE, 97=WORKCELL).
+  2. **Геометрия и родители (VisibGeom):** массив srf_array (8 <N>) связывает поверхности с eat_id, а parent_feats (8 <N> -> N слов uint16 BE) хранит ID родительских фичеров.
+  3. **Номиналы размеров (BasFullData):** трёхбайтовые записи 2F <B1> <B2> декодируются в точный IEEE-754 BE double подстановкой старшего байта  x40 (если B1 >= 0x40) или  x3F (если B1 < 0x40).
+- **Эталонный скрипт:** D:\AI\PROBA\toc_sections_reader.py.
