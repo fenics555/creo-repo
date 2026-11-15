@@ -22,3 +22,22 @@
 # - Если значение 'matrix_ptr' > размер_файла, это runtime-адрес (данные могут отсутствовать на диске).
 # - Если сырой скан не дал результатов, проверьте 'NeuAsmSld' на наличие данных о положении на основе свойств.
 
+
+## Proven: #FeatDefsCmp (Assembly Constraints)
+
+This section contains the assembly constraints (mates) between components.
+
+### 1. Structure
+The section follows the `#UGC_TOC` index. It contains several key sub-structures:
+- `trf_arr`: The transformation matrix for the component.
+  - **Format:** `\xe2\x32\xed` + 8 bytes (IEEE-754 double) for each element of the matrix.
+- `place_instruction_ptrs`: Pointers to placement instructions.
+- `geometry1_id` & `geometry2_id`: The IDs of the geometric entities (faces, axes, etc.) involved in the mate.
+- `memb_num1` & `memb_num2`: Count of members in the mate.
+- `memb_id_tab2`: A table of member IDs.
+
+### 2. Extraction Logic
+1. Locate `#FeatDefsCmp` in `#UGC_TOC`.
+2. Search for `trf_arr` to extract the component's position/orientation.
+3. Match `geometry_id`s to elements in the feature tree.
+
