@@ -1,3 +1,5 @@
+> **ВАЖНО ПЕРЕД КОДОМ:** При написании или правке парсеров > 5 КБ сначала прочитай D:\AI\repo\SKILL_edit_gotchas.md (9  сборка через части и copy /b, запрет old_text > 6 КБ).
+
 ---
 name: creo-index
 system: INDEX
