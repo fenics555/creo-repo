@@ -1,0 +1,86 @@
+erDiagram
+
+    snapshots {
+        string path
+        string model
+        string folder
+        string size
+        string mtime
+        string volume
+        string material
+        string name
+        string designation
+        string rev
+        string author
+        string revdate
+        string role
+        string seen
+        string hist
+        string creo
+        string created
+        string pdata
+    }
+
+    graph_nodes {
+        string model
+        string kind
+        string folder
+        string path
+        string size
+        string volume
+        string material
+        string creo
+        string rev
+        string n_down
+        string n_up
+        string has_media
+    }
+
+    graph_edges {
+        string from
+        string to
+        string kind
+        string dir
+        string origin
+        string qty
+        string channel
+    }
+
+    health {
+        string path
+        string model
+        string regen
+        string reg_status
+        string inactive
+        string geom_rev
+    }
+
+    dimensions {
+        string path
+        string model
+        string feat_id
+        string dim_type
+        string nominal
+        string tol_class
+        string tol_type
+        string bound
+        string dim_name
+    }
+
+    dim_all {
+        string path
+        string model
+        string feat_id
+        string nominal
+        string idx
+    }
+
+    snapshots ||--o{ dimensions : "model → model"
+    snapshots ||--o{ dimensions : "path → path"
+    snapshots ||--o{ dim_all : "model → model"
+    snapshots ||--o{ dim_all : "path → path"
+    snapshots ||--o{ health : "model → model"
+    snapshots ||--o{ health : "path → path"
+    snapshots ||--o{ graph_nodes : "model → model"
+    graph_edges ||--o{ graph_nodes : "from → model"
+    graph_edges ||--o{ graph_nodes : "to → model"

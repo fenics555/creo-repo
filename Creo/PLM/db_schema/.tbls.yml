@@ -11,12 +11,11 @@ dsn:
 docPath: "D:/AI/repo/Creo/PLM/db_schema/docs"
 
 relations:
-  # --- Связи от Snapshots (Core Model Relations) ---
   - table: snapshots
     columns: [model, path]
     parentTable: params
     parentColumns: [model, path]
-    def: "snapshots -> params (logical link by model/path)"
+    def: "snapshots -> params"
   - table: snapshots
     columns: [model, path]
     parentTable: bodies
@@ -78,27 +77,50 @@ relations:
     parentColumns: [model, path]
     def: "snapshots -> history"
   - table: snapshots
-    columns: [model, path]
+    columns: [model]
     parentTable: changes
-    parentColumns: [model, path]
-    def: "snapshots -> changes"
+    parentColumns: [item]
+    def: "snapshots -> changes (by model name)"
   - table: snapshots
-    columns: [model, path]
+    columns: [model]
     parentTable: family
-    parentColumns: [model, path]
-    def: "snapshots -> family"
+    parentColumns: [instance]
+    def: "snapshots -> family (by model name)"
   - table: snapshots
-    columns: [model, path]
+    columns: [model]
     parentTable: graph_nodes
-    parentColumns: [model, path]
-    def: "snapshots -> graph_nodes"
-
-  # --- Связи графа (Graph Relations) ---
+    parentColumns: [model]
+    def: "snapshots -> graph_nodes (by model only)"
   - table: graph_edges
-    columns: [from_node, to_node]
+    columns: [from]
     parentTable: graph_nodes
-    parentColumns: [id]
-    def: "graph_edges -> graph_nodes"
+    parentColumns: [model]
+    def: "graph_edges (from) -> graph_nodes"
+  - table: graph_edges
+    columns: [to]
+    parentTable: graph_nodes
+    parentColumns: [model]
+    def: "graph_edges (to) -> graph_nodes"
+  - table: links
+    columns: [parent]
+    parentTable: snapshots
+    parentColumns: [model]
+    def: "links (parent) -> snapshots"
+  - table: links
+    columns: [child]
+    parentTable: snapshots
+    parentColumns: [model]
+    def: "links (child) -> snapshots"
+  - table: derived
+    columns: [base]
+    parentTable: snapshots
+    parentColumns: [model]
+    def: "derived (base) -> snapshots"
+  - table: derived
+    columns: [child]
+    parentTable: snapshots
+    parentColumns: [model]
+    def: "derived (child) -> snapshots"
 
 comments:
   - table: snapshots
@@ -132,11 +154,15 @@ comments:
   - table: changes
     tableComment: "Журнал изменений: Кто/Когда/Что"
   - table: family
-    tableComment: "Семейный слой: Вариации моделей"
+    tableComment: "Семейный слой: Вариации модели"
   - table: graph_nodes
     tableComment: "Графовый слой: Узлы связей"
   - table: graph_edges
     tableComment: "Графовый слой: Ребра связей"
+  - table: links
+    tableComment: "Связи компонентов"
+  - table: derived
+    tableComment: "Производные модели"
 
 viewpoints:
   - name: "Паспорт и геометрия"

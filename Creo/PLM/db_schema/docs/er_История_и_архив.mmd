@@ -1,0 +1,61 @@
+erDiagram
+
+    snapshots {
+        string path
+        string model
+        string folder
+        string size
+        string mtime
+        string volume
+        string material
+        string name
+        string designation
+        string rev
+        string author
+        string revdate
+        string role
+        string seen
+        string hist
+        string creo
+        string created
+        string pdata
+    }
+
+    history {
+        string path
+        string model
+        string ts
+        string user
+        string computer
+        string creo
+        string rev
+        string action
+        string ts_int
+    }
+
+    changes {
+        string id
+        string item
+        string rev
+        string kind
+        string descr
+        string who
+        string ts
+    }
+
+    equations {
+        string path
+        string model
+        string kind
+        string name
+        string expression
+        string old_val
+        string new_val
+        string feat_id
+    }
+
+    snapshots ||--o{ equations : "model → model"
+    snapshots ||--o{ equations : "path → path"
+    snapshots ||--o{ history : "model → model"
+    snapshots ||--o{ history : "path → path"
+    snapshots ||--o{ changes : "model → item"

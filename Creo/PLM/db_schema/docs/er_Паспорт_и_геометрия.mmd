@@ -1,0 +1,82 @@
+erDiagram
+
+    snapshots {
+        string path
+        string model
+        string folder
+        string size
+        string mtime
+        string volume
+        string material
+        string name
+        string designation
+        string rev
+        string author
+        string revdate
+        string role
+        string seen
+        string hist
+        string creo
+        string created
+        string pdata
+    }
+
+    params {
+        string path
+        string model
+        string name
+        string type
+        string value
+    }
+
+    bodies {
+        string path
+        string model
+        string folder
+        string version
+        string body_id
+        string seq
+        string volume
+        string density
+        string surfarea
+        string mass
+    }
+
+    materials {
+        string path
+        string model
+        string name
+        string description
+        string mtype
+        string density
+        string n_props
+        string system
+    }
+
+    master_mat {
+        string path
+        string model
+        string current_material
+        string master_name
+        string reported_name
+        string has_master
+    }
+
+    matrices {
+        string path
+        string model
+        string field
+        string dims
+        string vals
+    }
+
+    snapshots ||--o{ params : "model → model"
+    snapshots ||--o{ params : "path → path"
+    snapshots ||--o{ bodies : "model → model"
+    snapshots ||--o{ bodies : "path → path"
+    snapshots ||--o{ materials : "model → model"
+    snapshots ||--o{ materials : "path → path"
+    snapshots ||--o{ master_mat : "model → model"
+    snapshots ||--o{ master_mat : "path → path"
+    snapshots ||--o{ matrices : "model → model"
+    snapshots ||--o{ matrices : "path → path"

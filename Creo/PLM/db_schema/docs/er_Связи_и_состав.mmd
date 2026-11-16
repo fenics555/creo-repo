@@ -1,0 +1,66 @@
+erDiagram
+
+    snapshots {
+        string path
+        string model
+        string folder
+        string size
+        string mtime
+        string volume
+        string material
+        string name
+        string designation
+        string rev
+        string author
+        string revdate
+        string role
+        string seen
+        string hist
+        string creo
+        string created
+        string pdata
+    }
+
+    components {
+        string path
+        string model
+        string comp
+        string count
+        string kind
+    }
+
+    features {
+        string path
+        string model
+        string feat_id
+        string defs
+        string typenum
+        string typename
+        string symbol_key
+        string parent_id
+        string seq
+    }
+
+    drawing {
+        string path
+        string model
+        string source_models
+        string states
+        string uniq_name
+        string sheet_size
+    }
+
+    family {
+        string generic
+        string instance
+        string params
+        string source
+    }
+
+    snapshots ||--o{ components : "model → model"
+    snapshots ||--o{ components : "path → path"
+    snapshots ||--o{ drawing : "model → model"
+    snapshots ||--o{ drawing : "path → path"
+    snapshots ||--o{ features : "model → model"
+    snapshots ||--o{ features : "path → path"
+    snapshots ||--o{ family : "model → instance"
