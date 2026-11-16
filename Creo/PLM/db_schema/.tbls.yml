@@ -1,0 +1,174 @@
+---
+desc: "PLM Reader Database Schema Documentation"
+labels:
+  - plm_reader
+  - schema
+  - sqlite
+
+dsn:
+  url: "sqlite://D:/AI/tools/agent/plm_reader/db/plm_reader.db"
+
+docPath: "D:/AI/repo/Creo/PLM/db_schema/docs"
+
+relations:
+  # --- Связи от Snapshots (Core Model Relations) ---
+  - table: snapshots
+    columns: [model, path]
+    parentTable: params
+    parentColumns: [model, path]
+    def: "snapshots -> params (logical link by model/path)"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: bodies
+    parentColumns: [model, path]
+    def: "snapshots -> bodies"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: materials
+    parentColumns: [model, path]
+    def: "snapshots -> materials"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: master_mat
+    parentColumns: [model, path]
+    def: "snapshots -> master_mat"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: matrices
+    parentColumns: [model, path]
+    def: "snapshots -> matrices"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: components
+    parentColumns: [model, path]
+    def: "snapshots -> components"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: drawing
+    parentColumns: [model, path]
+    def: "snapshots -> drawing"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: features
+    parentColumns: [model, path]
+    def: "snapshots -> features"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: dimensions
+    parentColumns: [model, path]
+    def: "snapshots -> dimensions"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: dim_all
+    parentColumns: [model, path]
+    def: "snapshots -> dim_all"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: equations
+    parentColumns: [model, path]
+    def: "snapshots -> equations"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: health
+    parentColumns: [model, path]
+    def: "snapshots -> health"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: history
+    parentColumns: [model, path]
+    def: "snapshots -> history"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: changes
+    parentColumns: [model, path]
+    def: "snapshots -> changes"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: family
+    parentColumns: [model, path]
+    def: "snapshots -> family"
+  - table: snapshots
+    columns: [model, path]
+    parentTable: graph_nodes
+    parentColumns: [model, path]
+    def: "snapshots -> graph_nodes"
+
+  # --- Связи графа (Graph Relations) ---
+  - table: graph_edges
+    columns: [from_node, to_node]
+    parentTable: graph_nodes
+    parentColumns: [id]
+    def: "graph_edges -> graph_nodes"
+
+comments:
+  - table: snapshots
+    tableComment: "Паспортный слой: Снапшоты состояний моделей (Core)"
+  - table: params
+    tableComment: "Параметрический слой: Значения параметров моделей"
+  - table: bodies
+    tableComment: "Геометрический слой: Массы и объемы тел"
+  - table: materials
+    tableComment: "Материальный слой: Свойства материалов"
+  - table: master_mat
+    tableComment: "Справочник материалов: Эталонные значения"
+  - table: matrices
+    tableComment: "Математический слой: Матрицы трансформации"
+  - table: components
+    tableComment: "Составной слой: Дерево сборки и компонентов"
+  - table: drawing
+    tableComment: "Документационный слой: Связи с чертежами"
+  - table: features
+    tableComment: "Конструктивный слой: Дерево фичеров"
+  - table: dimensions
+    tableComment: "Размерный слой: Геометрические размеры"
+  - table: dim_all
+    tableComment: "Агрегированный слой: Все размеры"
+  - table: equations
+    tableComment: "Математический слой: Уравнения и зависимости"
+  - table: health
+    tableComment: "Аналитический слой: Состояние здоровья моделей"
+  - table: history
+    tableComment: "Архивный слой: История версий"
+  - table: changes
+    tableComment: "Журнал изменений: Кто/Когда/Что"
+  - table: family
+    tableComment: "Семейный слой: Вариации моделей"
+  - table: graph_nodes
+    tableComment: "Графовый слой: Узлы связей"
+  - table: graph_edges
+    tableComment: "Графовый слой: Ребра связей"
+
+viewpoints:
+  - name: "Паспорт и геометрия"
+    desc: "Основные данные моделей и их физика"
+    tables:
+      - snapshots
+      - params
+      - bodies
+      - materials
+      - master_mat
+      - matrices
+  - name: "Связи и состав"
+    desc: "Структура сборок и фичеров"
+    tables:
+      - snapshots
+      - components
+      - features
+      - drawing
+      - family
+  - name: "История и архив"
+    desc: "Журналы и изменения"
+    tables:
+      - snapshots
+      - history
+      - changes
+      - equations
+  - name: "Граф и консоль"
+    desc: "Топология связей"
+    tables:
+      - snapshots
+      - graph_nodes
+      - graph_edges
+      - health
+      - dimensions
+      - dim_all
