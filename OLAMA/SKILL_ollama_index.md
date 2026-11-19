@@ -8,6 +8,8 @@ executor: Cline
 date: 02.10.2026
 ---
 
+> **Замер заполнения окна (любой провайдер)** — метод `SKILL_local_agent_cline.md` §8; `ollama ps` / `num_ctx` — только при `provider=ollama`.
+
 # РќРђРџР РђР’Р›Р•РќРР• OLAMA вЂ” Р›РћРљРђР›Р¬РќР«Р™ Р РђРќРќР•Р  РњРћР”Р•Р›Р•Р™
 
 **РЎ С‡РµРіРѕ РЅР°С‡РёРЅР°С‚СЊ РЅРѕРіРµ:** `ollama help` в†’ `ollama serve --help` в†’ `ollama run --help`
