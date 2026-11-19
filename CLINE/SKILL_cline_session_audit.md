@@ -36,6 +36,7 @@ Get-ChildItem -LiteralPath $root -Directory | Sort LastWriteTime -Descending | S
 ## 5. ЧТО ЛОВИМ (чек-лист аудита хода)
 - **Угадывания** (напр. `T_START` «по системной дате» вместо `Get-Date -Format HH:mm:ss`).
 - **Петли** — повтор того же запроса/команды (напр. gemma4: «Let's go. Thinking about the Group … files.» по кругу без действий — см. `crash\SKILL_crash_plan-loop-replan-no-exec.md`).
+- **Повтор упавшего вызова** (execution-loop) — тот же `tool+args` после ошибки без смены метода (напр. `team_run_task` дважды: teammate not found) — `crash\SKILL_crash_execution-loop.md`.
 - **Несоблюдение правил**: чтение `Z:` без разрешения; запрос разрешения через `run_commands` вместо обычного текста.
 - **Неиспользование субагентов** в режиме `ДИСПЕТЧЕР`.
 - Стоимость/темп: `metrics.inputTokens` / `outputTokens`.
