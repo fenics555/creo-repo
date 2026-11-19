@@ -131,6 +131,7 @@ $d = Get-Content "$($s.FullName)\$($s.Name).messages.json" -Raw | ConvertFrom-Js
 ```
 
 **Формула:** заполнение = `inputTokens` последнего ответа; `% = inputTokens / contextWindow`; стоп-порог = MAX × 0.70.
+**🔴 Знаменатель ≠ база:** для `provider=ollama` окно = **контекст модели** (`/api/ps` → `context_length`, напр. `262144`); для облачных — `contextWindow`; `DEFAULT_MAX_CTX = 131072` — только крайний fallback, НЕ подставлять вместо реального окна.
 
 **Правила:**
 * **Не** брать заполнение из `session.json → usage` — это КУМУЛЯТИВНАЯ сумма inputTokens по всем запросам, а не текущее окно (вдобавок она отстает).
