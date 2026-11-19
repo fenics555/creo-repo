@@ -17,7 +17,7 @@ executor: Cline
 
 ## 1. РАЗВЕДКА ФАЙЛА (перед `read_files`)
 1. **Размер в байтах:** `(Get-Item -LiteralPath <p>).Length`. Плюс число строк: `(Get-Content <p>).Count` или `Measure-Object -Line` (`Prog\SKILL_count_files_template.md` — счётчиком с диска).
-2. **Порог:** файл `> 40 КБ` / `> ~800 строк` — **целиком не читать**; читать диапазонами `start_line/end_line` (`SKILL_edit_gotchas.md` §11).
+2. **ВИЛКА (порог):** файл `≤ 40 КБ` **и** `≤ ~800` строк → можно читать **целиком** (но в пределах лимитов чтения — `.clinerules` §КРАСНЫЕ ЛИНИИ); файл `> 40 КБ` **или** `> ~800` строк → **целиком НЕ читать**, только **диапазонами** `start_line/end_line` по якорю (`SKILL_edit_gotchas.md` §11; карты/индексы вроде `SKILL_index.md` 28 КБ — `AGENT_index.md` L23/L38 — читать только `Select-String`).
 3. **Якорь, а не весь файл:** `Select-String -Pattern <латиница>` → читать только совпавшие строки (+контекст); для `.md` — карта заголовков `Select-String '^#{1,4} '`.
 4. **Кодировка/BOM:** при сомнении — первые байты (`Format-Hex` / `ReadAllBytes`), не «на глаз» (`SKILL_edit_gotchas.md` §2/§11/§15).
 
