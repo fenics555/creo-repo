@@ -52,9 +52,13 @@ python D:\AI\tools\agent\loop_watch.py [--session <id>]   # цикл ~4 с
 python D:\AI\tools\agent\loop_watch.py --once             # разовая проверка (новейшая сессия)
 ```
 
-**Тестовые ключи** (для прогонов на фикстурах, `D:\AI\PROBA\loop_watch_test\`): `--sess-dir <dir>`, `--log <file>`, `--alert <file>`, `--window N`, `--txt-window N`, `--txt-repeat N`.
+**Дополнительные детекторы (по умолчанию ВЫКЛЮЧЕНЫ — включаются флагами):**
+- `--stall` — **GENERATION_STALL**: файл сессии не растёт `STALL_SEC` (=110 с), но сессия была активна < `RECENT_SEC` (=300 с) и бэкенд отвечает → ALERT. Проба бэкендов: `llama.cpp:8080/health`, `vLLM:8000/health` (+ `/health/decode` 503 = застой), `Ollama:11434/api/ps`, `LM Studio:1234/v1/models`, `text-generation-webui:5000/v1/models`. Любой HTTP-ответ (даже 404/503) = бэкенд жив. Таймаут — `--probe-timeout`; форс без сети для тестов — `--probe-reachable yes|no`.
+- `--spike` — **CONTEXT_SPIKE**: файл сессии вырос на `≥ SPIKE_BYTES` (=64 КБ) за один тик → ALERT. В `--once` предыдущий размер задаётся `--prev-size N`; порог — `--spike-bytes N`.
 
-**Важно:** это чтение **локальных данных Cline** (не диск `Z:`) — разрешения владельца не требует. Пороги (`THRESHOLD/WINDOW/TXT_WINDOW/TXT_REPEAT/CYCLE_PAIRS/ERR_MAX_LEN/COOLDOWN_SEC`) и ключи ошибок (`error/not found/too large/no replacement/не найден/ошибк`) — в начале скрипта.
+**Тестовые ключи** (прогоны на фикстурах, `D:\AI\tools\agent\loop_watch_test.py`): `--sess-dir <dir>`, `--log <file>`, `--alert <file>`, `--window N`, `--txt-window N`, `--txt-repeat N`, `--stall-sec N`, `--recent-sec N`, `--spike-bytes N`, `--prev-size N`, `--probe-reachable yes|no`, `--probe-timeout F`.
+
+**Важно:** это чтение **локальных данных Cline** (не диск `Z:`) — разрешения владельца не требует. Пороги (`THRESHOLD/WINDOW/TXT_WINDOW/TXT_REPEAT/CYCLE_PAIRS/ERR_MAX_LEN/COOLDOWN_SEC/STALL_SEC/RECENT_SEC/SPIKE_BYTES`) и ключи ошибок (`error/not found/too large/no replacement/не найден/ошибк`) — в начале скрипта.
 
 ## 📂 Структура репозитория
 
