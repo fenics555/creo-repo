@@ -38,11 +38,12 @@
 **Зачем:** модель **в моменте не видит свою петлю** (каждый ход для неё «первый»). Сторож смотрит её историю **сбоку** и сигналит.
 
 **Схема работы:**
-1. Находит сессию: `--session <id>` или новейшую в `%USERPROFILE%\.cline\data\sessions\<id>\<id>.messages.json`.
+1. Находит сессию: `--session <id>` или **новейшую** папку в `%USERPROFILE%\.cline\data\sessions\` по `mtime` — с префиксом `session_` ИЛИ без него (папки `*__agent_*` пропускаются — они принадлежат субагентам).
 2. Разбирает историю как пары «вызов инструмента → результат».
-3. **Петля №1 (tool-loop):** один и тот же `инструмент+аргументы` упал **≥2 раз** (подряд ИЛИ в чередовании `editor→read→editor`) → **ALERT**.
-4. **Петля №2 (text-loop):** последний ход сессии в `%USERPROFILE%\.cline\data\logs\code.log` = `finishReason:"aborted"` → **ALERT**.
-5. Пишет сигнал в `D:\AI\log\urn\cline\LOOP_ALERT.txt` и пищит.
+3. **Петля №1 (tool-loop):** один и тот же `инструмент+аргументы` упал **≥2 раз** (`THRESHOLD`) — но только в **окне последних `WINDOW` (=12) вызовов**, чтобы старые ошибки не давали вечный ALERT.
+4. **Петля №2 (text-loop):** в последних `TXT_WINDOW` (=6) ответах ассистента `TXT_REPEAT` (=3) раза повторяется одинаковый текст (≥20 символов) → **ALERT даже без `aborted`**.
+5. **Петля №3 (fallback, aborted):** последний ход сессии в `%USERPROFILE%\.cline\data\logs\code.log` = `finishReason:"aborted"` → **ALERT**.
+6. Пишет сигнал в `D:\AI\log\urn\cline\LOOP_ALERT.txt` (с пометкой `kind=tool-loop|text-loop|aborted`) и пищит.
 
 **Запуск:**
 ```
@@ -50,7 +51,9 @@ python D:\AI\tools\agent\loop_watch.py [--session <id>]   # цикл ~4 с
 python D:\AI\tools\agent\loop_watch.py --once             # разовая проверка (новейшая сессия)
 ```
 
-**Важно:** это чтение **локальных данных Cline** (не диск `Z:`) — разрешения владельца не требует. Порог повторов и ключи ошибок (`error/not found/too large/no replacement/не найден/ошибк`) — в начале скрипта.
+**Тестовые ключи** (для прогонов на фикстурах, `D:\AI\PROBA\loop_watch_test\`): `--sess-dir <dir>`, `--log <file>`, `--alert <file>`, `--window N`, `--txt-window N`, `--txt-repeat N`.
+
+**Важно:** это чтение **локальных данных Cline** (не диск `Z:`) — разрешения владельца не требует. Пороги (`THRESHOLD/WINDOW/TXT_WINDOW/TXT_REPEAT`) и ключи ошибок (`error/not found/too large/no replacement/не найден/ошибк`) — в начале скрипта.
 
 ## 📂 Структура репозитория
 
