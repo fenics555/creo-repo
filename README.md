@@ -31,6 +31,27 @@
 
 Регламенты: `.clinerules` §2, `SKILL_local_agent_cline.md` §2, `SKILL_noga_health.md` §2.1, `SKILL_handover.md` §2–3, `SKILL_start_prompt.md`.
 
+## 🛰 Сторож петель ноги (`loop_watch.py`)
+
+**Что это:** внешняя программка — питон-скрипт `D:\AI\tools\agent\loop_watch.py`. Онлайн-детектор зацикливания ног Cline.
+
+**Зачем:** модель **в моменте не видит свою петлю** (каждый ход для неё «первый»). Сторож смотрит её историю **сбоку** и сигналит.
+
+**Схема работы:**
+1. Находит сессию: `--session <id>` или новейшую в `%USERPROFILE%\.cline\data\sessions\<id>\<id>.messages.json`.
+2. Разбирает историю как пары «вызов инструмента → результат».
+3. **Петля №1 (tool-loop):** один и тот же `инструмент+аргументы` упал **≥2 раз** (подряд ИЛИ в чередовании `editor→read→editor`) → **ALERT**.
+4. **Петля №2 (text-loop):** последний ход сессии в `%USERPROFILE%\.cline\data\logs\code.log` = `finishReason:"aborted"` → **ALERT**.
+5. Пишет сигнал в `D:\AI\log\urn\cline\LOOP_ALERT.txt` и пищит.
+
+**Запуск:**
+```
+python D:\AI\tools\agent\loop_watch.py [--session <id>]   # цикл ~4 с
+python D:\AI\tools\agent\loop_watch.py --once             # разовая проверка (новейшая сессия)
+```
+
+**Важно:** это чтение **локальных данных Cline** (не диск `Z:`) — разрешения владельца не требует. Порог повторов и ключи ошибок (`error/not found/too large/no replacement/не найден/ошибк`) — в начале скрипта.
+
 ## 📂 Структура репозитория
 
 | Путь | Содержимое и назначение |
