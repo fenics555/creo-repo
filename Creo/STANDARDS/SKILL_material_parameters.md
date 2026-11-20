@@ -291,7 +291,35 @@ PRO_UNIT_MASS · PRO_UNIT_LENGTH · PRO_UNIT_SYS
 
 > Введено автоматически по аудиту 19.11.2026; при необходимости владелец корректирует.
 
-## 7. СВЯЗАННЫЕ СКИЛЛЫ
+## 6б. КАРТОЧКА МАТЕРИАЛА: ОБЯЗАТЕЛЬНАЯ СХЕМА И ПРАВИЛО ЗНАЧЕНИЙ (замер 20.11.2026, папка `01_МЕТАЛЛЫ\Алюминий`, 24 карточки)
+
+**Скелет (канон §3б):** `ND_RelParSet_K01 = {`, `Name = <ИМЯ>`, `PARAMETERS = {` + блоки `{ Name=… / Type=… / Default=… / Access=… },` (последний — без запятой), закрытие. **Ключи — БЕЗ префикса** (`Name/Type/Default/Access`); `PTC_*` — это **значение** `Name`.
+
+**Обязательные 45 параметров (у всех 24 карточек Алюминия):**
+- *служебные Creo:* `PTC_MATERIAL_TYPE`, `PTC_FAILURE_CRITERION_TYPE`, `PTC_FATIGUE_TYPE`, `PTC_MATERIAL_SUB_TYPE`;
+- *идентификация:* `PTC_MATERIAL_DESCRIPTION`, `PTC_MATERIAL_ID`, `PTC_MATERIAL_SOURCE`, `PTC_CONDITION`;
+- *физика:* `PTC_MASS_DENSITY`, `PTC_YOUNG_MODULUS`, `SHEAR_MODULUS`, `PTC_POISSON_RATIO`, `PTC_THERMAL_EXPANSION_COEF`, `PTC_THERMAL_CONDUCTIVITY`, `PTC_SPECIFIC_HEAT`, `TEMPERATURE`;
+- *прочность/усталость:* `PTC_TENSILE_YIELD_STRESS`, `PTC_TENSILE_ULTIMATE_STRESS`, `PTC_COMPR_ULTIMATE_STRESS`, `PTC_HARDNESS`, `PTC_HARDNESS_TYPE`, `PTC_IMPACT_ENERGY`, `PTC_FATIGUE_STRENGTH`, `PTC_FATIGUE_MATERIAL_TYPE`, `PTC_FATIGUE_MATERIAL_FINISH`, `PTC_FATIGUE_STRNGTH_REDUCT_FCTR`, `PTC_MTRL_FABRIC_ARCHITECTURE`, `PTC_MTRL_MECHANISMS_DAMPING`, `PTC_S_N_CURVE`;
+- *лист:* `PTC_INITIAL_BEND_Y_FACTOR`, `PTC_BEND_TABLE`;
+- *оформление:* `PTC_XHATCH_FILE`, `PTC_DEFAULT_APPEARANCE`, `PTC_APPEARANCE_1`, `PTC_APPEARANCE_2`;
+- *пользовательские (в чертёж):* `МАТЕРИАЛ_МАРКА`, `МАТЕРИАЛ_СТАНДАРТ`, `МАТЕРИАЛ`, `ПРОКАТ`, `СОРТАМЕНТ_РАЗМЕР`, `СОРТАМЕНТ_СТАНДАРТ` (+легаси-дубль `Материал` — разобрать/убрать);
+- *единицы:* `PRO_UNIT_MASS`, `PRO_UNIT_LENGTH`, `PRO_UNIT_SYS`.
+
+**Значения пользовательских параметров (конвенция; примеры — как в данных):**
+| Параметр | Что писать | Пример (сортаментная карточка) |
+|---|---|---|
+| `МАТЕРИАЛ` | **<марка> <ГОСТ>** — идёт в рамку чертежа | `Ст0 ГОСТ 535-2005` |
+| `МАТЕРИАЛ_МАРКА` | <марка> (кратко) | `Ст0` (в Алюминии сейчас раздуто: `Алюминий Сплав Д16` — нормализовать) |
+| `МАТЕРИАЛ_СТАНДАРТ` | <ГОСТ марки> | `ГОСТ 4784-97` |
+| `ПРОКАТ` | тип проката; **у БРЕНДОВЫХ карточек — ПУСТО** | `Двутавр` |
+| `СОРТАМЕНТ_РАЗМЕР` | калибр/размер | `10` |
+| `СОРТАМЕНТ_СТАНДАРТ` | ГОСТ на сортамент | `ГОСТ 8239-89` |
+| `PTC_MATERIAL_DESCRIPTION` | «<вид проката> <ГОСТ сорт.> / <марка> <ГОСТ>»; у брендовых — текст марки | `Двутавр стальной горячекатаный ГОСТ 8239-89 / Ст0 ГОСТ 535-2005` |
+
+**Единицы (§12.6) — не смешивать.** mmKS и mmGSK в одной библиотеке запрещено (`§4`): масса `kg/mm^3`; `PTC_YOUNG_MODULUS/SHEAR_MODULUS/HARDNESS/FATIGUE_STRENGTH` — `MPa`; напряжения — `kPa`; теплопроводность — `mm kg/(sec^3 C)`; теплоёмкость — `mm^2/(sec^2 C)`; КТР — `1/C`.
+
+**Открытый вопрос (решить владельцу):** в Алюминии `МАТЕРИАЛ_МАРКА` содержит полную строку («Алюминий Сплав Д16»), а в `06_СОРТАМЕНТ` — краткую марку («Ст0»). Нужен единый вид.
+
 
 - `Creo\READ\SKILL_creo_materials.md` — что читается из файла МОДЕЛИ (`PTC_SYSTEM_MTRL_PROPS`, плотность, фильтры).
 - `Creo\SKILL_materials_creo_detailed.md` — конспект Simulate-параметров (модули STATIC/PLASTICITY/FATIGUE/DESTRUCTION).
