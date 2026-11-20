@@ -343,6 +343,26 @@ PRO_UNIT_MASS · PRO_UNIT_LENGTH · PRO_UNIT_SYS
 
 ---
 
+## 6г. КРИТЕРИИ ПРОЧНОСТИ Creo — ЭТАЛОН ЗНАЧЕНИЙ (замер 20.11.2026)
+
+Эталоны (все поля Creo заполнены корректно): `01_МЕТАЛЛЫ\Чугун\chugun_vch50.mtl` (сталь/чугун) и `01_МЕТАЛЛЫ\Алюминий\d_16.mtl` (алюминий).
+
+| параметр | сталь/чугун | **алюминий** |
+|---|---|---|
+| `PTC_FAILURE_CRITERION_TYPE` | `'MODIFIED MOHR'` | `'DISTORTION ENERGY (VON MISES)'` |
+| `PTC_FATIGUE_TYPE` | `'UNIFIED MATERIAL LAW (UML)'` | `'UNIFIED MATERIAL LAW (UML)'` |
+| `PTC_FATIGUE_MATERIAL_TYPE` | `'FERROUS'` | **`'ALUMINIUM'`** |
+| `PTC_FATIGUE_MATERIAL_FINISH` | `'GOOD MACHINED'` | `'GOOD MACHINED'` |
+| `PTC_FATIGUE_STRNGTH_REDUCT_FCTR` | `1.0` | `1.0` |
+| `PTC_MTRL_FABRIC_ARCHITECTURE` | `'UNIDIRECTIONAL'` | `'UNIDIRECTIONAL'` |
+| `PTC_MTRL_MECHANISMS_DAMPING` | `0.004 sec / mm` | `0.002…0.004` |
+| `PTC_S_N_CURVE` | `'unknown:2331'` | `'unknown:2331'` |
+
+**🔴 Дефект Алюминия (22 из 24 карточек):** `PTC_FAILURE_CRITERION_TYPE='NONE'`, `PTC_FATIGUE_TYPE='NONE'`, `PTC_FATIGUE_MATERIAL_TYPE='FERROUS'` (для АЛЮМИНИЯ неверно) + **одинаковые у всех** `PTC_TENSILE_YIELD_STRESS=113600`, `PTC_TENSILE_ULTIMATE_STRESS=177500`, `PTC_COMPR_ULTIMATE_STRESS=-284000`, `PTC_FATIGUE_STRENGTH=150`, `PTC_IMPACT_ENERGY=25` — это **заполнитель, не по ГОСТ**. Образец исправного — `d_16.mtl`/`d_16_t.mtl`.
+**Правило:** критерий Creo ОБЯЗАН быть задан (не `NONE`), `MATERIAL_TYPE` соответствует классу, а прочностные значения — **из ГОСТ по конкретной марке** (не копипаста по папке).
+
+---
+
 ## 7. СВЯЗАННЫЕ СКИЛЛЫ
 
 - `Creo\READ\SKILL_creo_materials.md` — что читается из файла МОДЕЛИ (`PTC_SYSTEM_MTRL_PROPS`, плотность, фильтры).
