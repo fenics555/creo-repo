@@ -303,7 +303,7 @@ PRO_UNIT_MASS · PRO_UNIT_LENGTH · PRO_UNIT_SYS
 - *прочность/усталость:* `PTC_TENSILE_YIELD_STRESS`, `PTC_TENSILE_ULTIMATE_STRESS`, `PTC_COMPR_ULTIMATE_STRESS`, `PTC_HARDNESS`, `PTC_HARDNESS_TYPE`, `PTC_IMPACT_ENERGY`, `PTC_FATIGUE_STRENGTH`, `PTC_FATIGUE_MATERIAL_TYPE`, `PTC_FATIGUE_MATERIAL_FINISH`, `PTC_FATIGUE_STRNGTH_REDUCT_FCTR`, `PTC_MTRL_FABRIC_ARCHITECTURE`, `PTC_MTRL_MECHANISMS_DAMPING`, `PTC_S_N_CURVE`;
 - *лист:* `PTC_INITIAL_BEND_Y_FACTOR`, `PTC_BEND_TABLE`;
 - *оформление:* `PTC_XHATCH_FILE`, `PTC_DEFAULT_APPEARANCE`, `PTC_APPEARANCE_1`, `PTC_APPEARANCE_2`;
-- *пользовательские (в чертёж):* `МАТЕРИАЛ_МАРКА`, `МАТЕРИАЛ_СТАНДАРТ`, `МАТЕРИАЛ`, `ПРОКАТ`, `СОРТАМЕНТ_РАЗМЕР`, `СОРТАМЕНТ_СТАНДАРТ` (+легаси-дубль `Материал` — разобрать/убрать);
+- *пользовательские (в чертёж):* `МАТЕРИАЛ_МАРКА`, `МАТЕРИАЛ_СТАНДАРТ`, `МАТЕРИАЛ`, `ПРОКАТ`, `СОРТАМЕНТ_РАЗМЕР`, `СОРТАМЕНТ_СТАНДАРТ`, **`Материал`** (**часть шаблона** — как в бронзе; владелец 20.11.2026: НЕ удалять — дублирует `МАТЕРИАЛ` для вывода в чертёж);
 - *единицы:* `PRO_UNIT_MASS`, `PRO_UNIT_LENGTH`, `PRO_UNIT_SYS`.
 
 **Значения пользовательских параметров (конвенция; примеры — как в данных):**
