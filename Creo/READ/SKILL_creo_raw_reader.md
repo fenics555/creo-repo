@@ -10,21 +10,45 @@
 > Правильный способ — **импорт**:
 
 ```powershell
-# ПРАВИЛЬНО: импорт библиотеки и вызов функции passport()
-python -c "import sys; sys.path.insert(0, r'D:\AI\tools\agent\plm_reader'); import creo_read; import pprint; pprint.pprint(creo_read.passport(r'D:\AI\PROBA\models\00080-03.prt'))"
-
-# или скриптом (надёжнее для длинных путей):
-#   creo_call.py:  import sys; sys.path.insert(0, r'D:\AI\tools\agent\plm_reader')
-#                  import creo_read, pprint; pprint.pprint(creo_read.passport(r'<файл>'))
-python -X utf8 creo_call.py
+# ПРАВИЛЬНО: вызов СКРИПТОМ-ФАЙЛОМ (закон дома §4.5 запрещает `python -c`).
+# 1) создать свой скрипт (в песочнице, напр. D:\AI\PROBA\creo_call.py):
+#      import sys, pprint
+#      sys.path.insert(0, r'D:\AI\tools\agent\plm_reader')
+#      import creo_read
+#      pprint.pprint(creo_read.passport(r'D:\AI\PROBA\models\00080-03.prt'))
+# 2) запустить:
+python -X utf8 "D:\AI\PROBA\creo_call.py"
 ```
 
-**ЗАПРЕЩЕНО:** `python creo_read.py <файл>` — молчаливый вывод = ложный «НЕТ ДАННЫХ».
+**ЗАПРЕЩЕНО:**
+- `python creo_read.py <файл>` — библиотека без `__main__`, вывод молчит = ложный «НЕТ ДАННЫХ»;
+- `python -c "..."` — закон дома §4.5 запрещает инлайн-запуск Python в консоли.
+  (23.11.2026: старая редакция этого скилла требовала именно `python -c` — прямая коллизия с законом; исправлено.)
 **Файл:** `D:\AI\tools\agent\plm_reader\creo_read.py` (общая библиотека дома; также вложена в `plm_reader`, `batch_params`).
 **Ключевые функции:** `passport(path)` — паспорт изделия (материал, размер, ревизия, автор, дата);
 `parse_toc`, `params`, `real`, `last_hist`, `names`, `role`.
 **Проверено 15.10.2026:** `passport('PROBA\models\00080-03.prt')` → `material=PTC_SYSTEM_MTRL_PROPS, size=61414, rev=114, author=KAMESH, revdate=05.01.24 10:15`.
 **Владелец:** способ вызова инструмента — **ВСЕГДА в скилле**, иначе модель вызывает его наугад.
+
+## 0б. ПРОВЕРКА ВЫПОЛНЕНИЯ (эталон) — добавлено 23.11.2026
+
+> 🔴 **Прочитал скилл ≠ выполнил задачу.** После вызова `passport()` сверь ВЫВОД с эталоном дома:
+
+| поле | эталон для `D:\AI\PROBA\models\00080-03.prt` |
+|---|---|
+| size | 61414 |
+| material | PTC_SYSTEM_MTRL_PROPS |
+| rev | 114 |
+| author | KAMESH |
+| revdate | 05.01.24 10:15 |
+
+- совпало **5/5** — задача выполнена, приведи значения;
+- не совпало — назови, что именно не совпало: `НЕТ ДАННЫХ: <поле>`, а не пересказывай метод;
+- **пересказ метода без вызова инструмента = задача НЕ выполнена** (стенд ставит за это `READ_ONLY`).
+
+Регресс инструмента после релизов `plm_reader`: запустить `python -X utf8 D:\AI\AGENT_SETTINGS\tmp\run_2026-11-23\selftest_creo.py`
+→ ожидается `CURRENT | ETALON match: {'rev': True, 'author': True, 'revdate': True, 'material': True, 'size': True}`.
+История: `passport()` был потерян в `f3fcfb4` (Release V181, 16.11.2026) и возвращён 23.11.2026.
 
 ## 1. Описание метода (The "How")
 Метод основан на прямом бинарном анализе файлов `.prt`, `.asm`, `.drw` с использованием регулярных выражений (`re`) и работы со структурами (`struct`). Это обеспечивает максимальную скорость и автономность.
