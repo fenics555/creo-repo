@@ -16,7 +16,8 @@ executor: Cline
 ссылается на:
 
 ```
-&material.param.PTC_MATERIAL_DESCRIPTION     ← ЭТО ГРАФА «МАТЕРИАЛ» (сейчас)
+&material.param.PTC_MATERIAL_DESCRIPTION     ← ГРАФА «МАТЕРИАЛ» (БЫЛО до 23.11.2026). ПОДТВЕРЖДЕНО владельцем 23.11.2026:
+   переключено на `&material.param.МАТЕРИАЛ` — выводит ВЕРНО (проверено в чертеже)
 ```
 
 **Владелец (05.11.2026):** «сейчас материал выводится параметром `&material.param.PTC_MATERIAL_DESCRIPTION`
