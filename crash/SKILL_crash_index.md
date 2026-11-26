@@ -14,6 +14,17 @@ executor: Cline
 **Порядок работы при сбое:** найди свою подпись в группах ниже → прочитай файл → если подпись совпала, увеличь `ПОВТОРЫ` и примени профилактику; если подпись новая — создай новый файл по шаблону из конституции.
 **Актуальный состав папки (на 20.11.2026):** 72 файла (`SKILL_crash_constitution.md` + `SKILL_crash_index.md` + 70 экземпляров). Точный пересчет — только счетчиком с диска.
 
+**🔴 ТОП ПО ПОВТОРЯЕМОСТИ (замер 26.11.2026, счётом с диска: 58 файлов, сумма ПОВТОРЫ = 100).** Самое дорогое читай первым:
+| ПОВТОРЫ | подпись |
+|---|---|
+**11** | `SKILL_crash_creo-text-not-binary` — искали фичи Creo байт-сигнатурами, а заголовок `#UGC` = ОТКРЫТЫЙ ТЕКСТ |
+**6** | `SKILL_crash_cline_longsession_context_death` — длинная нога молча обрывается; бумаги — СРАЗУ (см. `SKILL_local_agent_cline.md` §1 п.6) |
+**5** | `SKILL_editor_too_large` — `editor` отказывает при `new_text` > ~6000 симв |
+**4** | `SKILL_crash_editor_too_large_and_non_unique_anchors` — блок > 6 КБ или несколько совпадений `old_text` |
+**2** | серия по 2: `appjs-syntaxerror`, `bat_no_dry_run_flag`, `agent_silence`, `search_codebase`, `chatloop-reports`, `command-30s-timeout`, `editor_context_mismatch`, `editor-split`, `creoson-search-pro`, `session-interruption`, `sleep-poll`, `sys-stdout`, `execution-loop`, `editor-studycheck` |
+
+*Обновлять счётчики — плановым счётом (`select`/скрипт), не вручную; дубли в ТОПе не плодить.*
+
 ---
 
 ## 1. Редактор файлов (`editor` / `write_file`) — 10 шт.

@@ -10,7 +10,7 @@ date: 22.09.2026
 
 ЧТО ЗДЕСЬ: см. раздел «СТРУКТУРА И КАРТА СКИЛЛОВ» ниже — 8 подразделов (API, DOCS, CREOSON, COPY, STANDARDS, RELATIONS, DAVYDOVKA, INFRA).
 КОГДА ОТКРЫВАТЬ: теги [CREO], [PARAMETRIC]
-КОГДА ПИСАТЬ: CRASH триггеры: SKILL_creoson_probe_method, Ошибки\ERR_creoson_write_ops.md
+КОГДА ПИСАТЬ: CRASH триггеры: SKILL_creoson_probe_method, Ошибки\ERR_creoson_write_ops.md, D:\AI\repo\crash\SKILL_crash_creo-text-not-binary.md (ПОВТОРЫ 11 — искать по ТЕКСТУ заголовка `#UGC:2`, не по байтам-сигнатурам)
 универсальный закон — D:\AI\repo\SKILL_noga_health.md, специфика среды — в адаптерах
 
 ## ⚠️ ЗОНЫ РАБОТЫ С ФАЙЛАМИ (слово владельца, 03.10.2026) — ПЕРВОЕ, ЧТО ЧИТАТЬ
