@@ -32,6 +32,7 @@ date: 13.11.2026
 - **Подсчет файлов и строк:** `Prog\SKILL_count_files_template.md` — **critical**, счет только программным счетчиком с диска.
 - **Закон шары `Z:` (PLM Reader):** `Powershell\SKILL_plm_reader_sync.md` — **critical**, шару `Z:\PTC\CREO-START\plm_reader` агенты не трогают ни в каком виде.
 | - **Общие грабли:** `SKILL_grabli_general.md` |
+| - **Грабли СТЕНДА (журнал ошибок стенда):** `D:\AI\AGENT_SETTINGS\ГРАБЛИ\ГРАБЛИ.md` (вне git — отдельное направление) |
 | - **Грабли PLM:** `Creo\PLM\SKILL_creo_plm_grabli.md` |
 | - **Грабли Creo:** `Creo\SKILL_creo_grabli.md` |
 
