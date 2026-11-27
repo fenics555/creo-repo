@@ -10,6 +10,8 @@ executor: Cline
 
 # МЕХАНИЗМ CLINE: правила и скиллы (раскопано 15.10.2026)
 
+> **Индекс направления Cline:** `D:\AI\repo\CLINE\SKILL_cline_index.md` (карта всех скиллов о Cline).
+
 Источник: `C:\Users\<User>\.vscode\extensions\saoudrizwan.claude-dev-4.1.24\dist\extension.js` (26 МБ).
 
 ## 1. ЧТО И ГДЕ ИЩЕТ
@@ -57,46 +59,46 @@ getRegisteredMcpServers()
 // ВЫВОД: ПРАВИЛА подставляются в промпт ТЕКСТОМ, АВТОМАТИЧЕСКИ.
 ```
 
-## 3А. ТОЧНЫЙ ШАБЛОН ПРОМПТА CLINE (раскопано 15.10.2026, extension.js 4.1.24)
+## 3А. ТОЧНЫЙ ШАБЛОН ПРОМПТА CLINE (обновлено 27.11.2026, extension.js 4.1.28)
 
-Механизм (живая цитата кода):
+> **ПОЛНЫЙ ТЕКСТ ЭТАЛОНА:** `D:\AI\AGENT_SETTINGS\config\cline_template_reference.md`
+> (извлечён скриптом `D:\AI\log\urn\cline\extract_cline_template.py` из extension.js 4.1.28).
+
+**8 ПЛЕЙСХОЛДЕРОВ CLINE:** `{{PLATFORM_NAME}}` · `{{CURRENT_DATE}}` · `{{IDE_NAME}}` · `{{CWD}}` ·
+`{{CLINE_METADATA}}` · `{{CLINE_RULES}}` · `{{SKILL_NAME}}` · `{{USER_CURRENT_INPUT}}`
+
+**ПОРЯДОК БЛОКОВ (ACT / `rNu`) — что Cline пишет САМ (12 блоков):**
+```
+[1] РОЛЬ         "You are Cline, an AI coding agent... use the tools available"
+[2] КОНТЕКСТ     "Always gather all the necessary context before starting..." + "validate at the end"
+[3] ЧЕСТНОСТЬ    "If you need more information, use tools or ask for clarification instead of
+                  making assumptions or lies."
+[4] ОКРУЖЕНИЕ    "Environment you are running in:\n<env>\n1. Platform ... 4. Working Directory\n</env>"
+[5] REMEMBER     code conventions · confirmed libraries · no placeholders · assumptions ·
+                  planning process · absolute paths · ПАРАЛЛЕЛИЗМ инструментов · verify at end
+[6] ОБРЯД        "Begin by analyzing the user's input and gathering context. Then, present your
+                  plan at the start of your response along with tool calls before proceeding."
+[7] ПРОАКТИВНОСТЬ "REMEMBER, be helpful and proactive! Don't ask for permission to do something
+                  when you can do it! Do not indicate you will be using a tool unless you
+                  are actually going to use it."
+[8] ИНСТРУМЕНТЫ   "IMPORTANT: Always include tool calls in your response until the task is completed."
+[9] ФИНАЛ         "When you have completed the task... provide a summary... Always validate your answer"
+[10] ИСКЛЮЧЕНИЕ   "If user asked a simple question without any coding context, answer directly."
+[11] {{CLINE_RULES}}      ← ПРАВИЛА В САМОМ КОНЦЕ
+[12] {{CLINE_METADATA}}
+```
+
+**🔴 ГЛАВНОЕ — что Cline «подкидывает от себя» (мы упускали):**
+1. **ЧЕСТНОСТЬ** — «assumptions or **lies**» (не выдумывай);
+2. **ПАРАЛЛЕЛИЗМ инструментов** — «call multiple tools in a single response» + примеры;
+3. **ПРОАКТИВНОСТЬ** — «Don't ask for permission when you can do it!»;
+4. **«Always include tool calls until complete»**;
+5. **ИСКЛЮЧЕНИЕ** — «простой вопрос без кода → отвечай прямо, без инструментов».
+
+**Механизм (живая цитата кода):**
 ```javascript
-function fL(t){ ... let p = r==="yolo" ? whi.YOLO : whi.ACT, h=[rules, ...]; 
-  return p.replace("{{PLATFORM_NAME}}",i)... .replace("{{CLINE_RULES}}",h).trim() }
-whi = { ACT: rNu, YOLO: nNu }
-```
-
-### Дословный шаблон ACT (`rNu`) — что Cline пишет при старте
-```
-You are Cline, an AI coding agent. Your primary goal is to assist users with various
-coding tasks by leveraging your knowledge and the tools at your disposal. Given the
-user's prompt, you should use the tools available to you to answer user's question.
-
-Always gather all the necessary context before starting to work on a task. ...
-
-Environment you are running in:
-<env>
-1. Platform: {{PLATFORM_NAME}}
-2. Date: {{CURRENT_DATE}}
-3. IDE: {{IDE_NAME}}
-4. Working Directory: {{CWD}}
-</env>
-
-Remember:
-- Always adhere to existing code conventions and patterns.
-- Always show your planning process before executing any task.
-- Always use absolute paths when referring to files.
-- You can call multiple tools in a single response. ...
-- Always verify the files you have edited or created at the end of the task ...
-
-Begin by analyzing the user's input and gathering any necessary additional context.
-Then, present your plan at the start of your response along with tool calls ...
-
-REMEMBER, be helpful and proactive! ... 
-IMPORTANT: Always includes tool calls in your response until the task is complete
-
-{{CLINE_RULES}}
-{{CLINE_METADATA}}
+return p.replace("{{PLATFORM_NAME}}",i).replace("{{CWD}}",d).replace("{{CURRENT_DATE}}",...)
+  .replace("{{IDE_NAME}}",e).replace("{{CLINE_METADATA}}",...).replace("{{CLINE_RULES}}",h).trim()
 ```
 
 ### ЧТО ЭТО ЗНАЧИТ ДЛЯ НАС (выводы)
