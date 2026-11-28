@@ -107,7 +107,7 @@ date: 13.11.2026
 - **Ядро и управление (корень и `CORE\`):**
   - `SKILL_anti_hallucination.md`, `SKILL_edit_gotchas.md`, `SKILL_parallel_legs.md`, `SKILL_local_agent_cline.md`, `SKILL_noga_health.md`, `SKILL_handover.md` — **critical**.
   - `SKILL_CHARGE.md` и `SKILL_CHARGE_START.md` (автогенерируемая карта и стартовый набор).
-  - `CORE\CULTURE_files.md`, `CORE\company_conventions.md`, `CORE\strategy.md`, `CORE\PASSPORT.md`, `CORE\AGENT_MAP.md`, `CORE\AGENT_WORK_MAP.md`, `CORE\BACKLOG_tools.md`.
+  - `CORE\CULTURE_files.md`, `CORE\company_conventions.md`, `CORE\strategy.md`, `CORE\PASSPORT.md`, `CORE\AGENT_MAP.md`, `CORE\AGENT_WORK_MAP.md`, `CORE\BACKLOG_tools.md`, `CORE\SKILL_program_api.md` (API-слой подпрограмм: управление без скриптов через `api\in|out`; каркас свой у каждой программы).
 - **Аудит (`AUDIT\`):**
   - `AUDIT\SKILL_audit_protocol.md` (правила аудита репозитория).
   - `AUDIT\SKILL_audit_program.md` (аудит программ дома: одна база, одни настройки, проверка ручек).
