@@ -10,3 +10,7 @@ priority: medium
 Скиллы:
 - `SKILL_creojs_api.md` — Creo.JS — родной API `pfc*`, карта по страницам руководства
 - `SKILL_creo_api_ecosystem.md` — экосистема API: один `pfc*` у Creo.JS/OTK/VB/Web.Link/JLINK/CREOSON
+
+> 🔗 **Смежная тема — API дома (подпрограммы):** `D:\AI\repo\CORE\SKILL_api.md` — точка входа темы «API дома»
+> (управление подпрограммами без вспомогательных скриптов через `api\in|out`). Здесь — API **Creo** (`pfc*`),
+> там — API **программ дома**. Перекрёстные ссылки для быстрого поиска.

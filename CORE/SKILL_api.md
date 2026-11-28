@@ -1,15 +1,18 @@
 ---
-name: program-api
+name: api
 system: дом
-description: Use when: подключаешь API-слой (управление без вспомогательных скриптов) к подпрограмме дома; ИИ читает/меняет настройки, базу, логи, окно и операции программы через файловые JSON-команды api\in|out.
-when: API подпрограммы, program_api, plm_api, agent_api, файловый API, управление без скриптов, api/in api/out, вкладка API, schema команды, api-пульт инструмента, pult_api
+description: Use when: всё про API дома — API-слой подпрограмм (управление без вспомогательных скриптов через файловые JSON-команды api\in|out) и навигация на API Creo. Точка входа темы «API».
+when: API, API дома, API подпрограммы, program_api, plm_api, agent_api, файловый API, управление без скриптов, api/in api/out, вкладка API, schema команды, api-пульт инструмента, pult_api, каналы управления, API Creo, creojs, pfc, jlink, otk, creoson
 priority: high
 date: 28.11.2026
 executor: Cline
 ---
 
-# API-СЛОЙ ПОДПРОГРАММЫ ДОМА (управление без вспомогательных скриптов)
+# API ДОМА (точка входа темы; управление подпрограммами без вспомогательных скриптов)
 
+> 🔗 **Смежная тема — API Creo:** `D:\AI\repo\Creo\API\_INDEX.md` → `SKILL_creojs_api.md` (Creo.JS / `pfc*`),
+> `SKILL_creo_api_ecosystem.md` (OTK, JLINK, VB, Web.Link, CREOSON). Там — API **самого Creo** (`pfc*`);
+> здесь — API **подпрограмм дома** (как программа управляет собой). Разные предметы, перекрёстные ссылки для быстрого поиска.
 > Живой образец (боевой): `D:\AI\tools\agent\plm_reader\plm_api.py` + `plm_api_adapter.py` (V221, 21 команда).
 > Эталон-первоисточник: `D:\AI\AGENT_SETTINGS\checks\stand_gui_v2.py` (методы `_api_*`, строки ~2546–2760).
 > Дорожная карта и эстафета темы: `D:\AI\ЭСТАФЕТЫ\PLAN_AGENT_API.md`, `ESTAFETA_AGENT_API.md`.

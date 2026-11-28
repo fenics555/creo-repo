@@ -44,7 +44,7 @@ date: 13.11.2026
 
 Подразделы `Creo\` (в каждом есть свой `_INDEX.md`):
 | - **PLM Core & Archives:** `Creo\PLM\SKILL_creo_plm_core.md`, `Creo\PLM\SKILL_creo_plm_archives.md` |
-- **`API\`:** `SKILL_creojs_api.md` (Creo.JS / `pfc*`), `SKILL_creo_api_ecosystem.md` (каналы API: OTK, JLINK, VB, Web.Link, CREOSON) — **critical**.
+- **`API\`:** `SKILL_creojs_api.md` (Creo.JS / `pfc*`), `SKILL_creo_api_ecosystem.md` (каналы API: OTK, JLINK, VB, Web.Link, CREOSON) — **critical**. Смежная тема (API **программ дома**) — `CORE\SKILL_api.md`.
 - **`DOCS\`:** `SKILL_creo_docs_map.md` (карта документации, хелпов и PDF в установке Creo) — **high**.
 - **`CREOSON\`:** `SKILL_creoson_workflow.md`, `SKILL_creoson_complete.md`, `SKILL_creoson_sessions_workdirs.md`, `SKILL_creo_commands.md`, `SKILL_creoson_write_rules.md`, `SKILL_creoson_rename_mechanism.md`, `SKILL_creoson_probe_method.md`, `SKILL_creoson_routine.md`, `SKILL_creoson_pfc_map.md` — **critical**.
 - **`COPY\`:** `SKILL_copy_assembly_project.md` (умная копия проекта со спутниками и семействами), `SKILL_copy_rename.md` — **critical**.
@@ -107,7 +107,7 @@ date: 13.11.2026
 - **Ядро и управление (корень и `CORE\`):**
   - `SKILL_anti_hallucination.md`, `SKILL_edit_gotchas.md`, `SKILL_parallel_legs.md`, `SKILL_local_agent_cline.md`, `SKILL_noga_health.md`, `SKILL_handover.md` — **critical**.
   - `SKILL_CHARGE.md` и `SKILL_CHARGE_START.md` (автогенерируемая карта и стартовый набор).
-  - `CORE\CULTURE_files.md`, `CORE\company_conventions.md`, `CORE\strategy.md`, `CORE\PASSPORT.md`, `CORE\AGENT_MAP.md`, `CORE\AGENT_WORK_MAP.md`, `CORE\BACKLOG_tools.md`, `CORE\SKILL_program_api.md` (API-слой подпрограмм: управление без скриптов через `api\in|out`; каркас свой у каждой программы).
+  - `CORE\CULTURE_files.md`, `CORE\company_conventions.md`, `CORE\strategy.md`, `CORE\PASSPORT.md`, `CORE\AGENT_MAP.md`, `CORE\AGENT_WORK_MAP.md`, `CORE\BACKLOG_tools.md`, `CORE\SKILL_api.md` (**точка входа темы «API дома»**: API-слой подпрограмм — управление без скриптов через `api\in|out`, каркас свой у каждой программы; ссылка на API Creo — `Creo\API\`).
 - **Аудит (`AUDIT\`):**
   - `AUDIT\SKILL_audit_protocol.md` (правила аудита репозитория).
   - `AUDIT\SKILL_audit_program.md` (аудит программ дома: одна база, одни настройки, проверка ручек).
